@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "890695973745",
+    "project_id": "metrotrotter-589e1",
+    "storage_bucket": "metrotrotter-589e1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:890695973745:android:8292012179d5a6ea6f94d0",
+        "android_client_info": {
+          "package_name": "com.wooshir.metrotrot"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "890695973745-neri2kgnma9tot6ou0vdbunvhp1luuqp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUKo1-kTNssFd2SJUclCK_Er9YlN7nigY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "890695973745-neri2kgnma9tot6ou0vdbunvhp1luuqp.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "890695973745-f6un8uj4jjnu14qp3aomv2sh1sqpgsql.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
