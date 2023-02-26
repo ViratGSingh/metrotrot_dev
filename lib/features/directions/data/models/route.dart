@@ -44,15 +44,13 @@ class MetroRoute extends Equatable {
         direction = MetroDirection.fromJson(json.encode(route[i]));
 
         directions.add(direction);
-      }
-      // else if (route[i]["travel_mode"] == "WALKING" &&
-      //     i == route.length - 1) {
-      //   route[i]["arrival_station"] =
-      //       map["routes"][0]["legs"][0]["end_address"];
-      //   direction = MetroDirection.fromJson(json.encode(route[i]));
-      //   directions.add(direction);
-      // }
-      else if (route[i]["travel_mode"] == "WALKING" &&
+      } else if (route[i]["travel_mode"] == "WALKING" &&
+          i == route.length - 1) {
+        route[i]["arrival_station"] =
+            map["routes"][0]["legs"][0]["end_address"];
+        direction = MetroDirection.fromJson(json.encode(route[i]));
+        directions.add(direction);
+      } else if (route[i]["travel_mode"] == "WALKING" &&
           route[i - 1]["travel_mode"] == "TRANSIT" &&
           route[i == route.length - 1 ? i : i + 1]["travel_mode"] ==
               "TRANSIT") {

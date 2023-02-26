@@ -2,6 +2,7 @@
 import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
+import 'package:geolocator/geolocator.dart';
 
 class DestMetro extends Equatable {
   final String businessStatus;

@@ -119,8 +119,9 @@ class _MetroDirectionsState extends State<MetroDirections> {
       );
     }
     if (direction.travelMode == "WALKING" && step == 0) {
+      String firstStation = directions[1].departureName;
       return StartInstruction(
-        station: direction.departureName,
+        station: firstStation, //direction.departureName
         distance: widget.fromDistance,
         //bannerAd: bannerAd,
       );

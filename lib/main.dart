@@ -1,3 +1,4 @@
+import 'package:app/features/home/presentation/widgets/onboarding/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -20,14 +21,29 @@ import 'package:app/features/to_search/data/repositories/from_search_repository.
 import 'package:app/features/to_search/presentation/cubit/to_search_cubit.dart';
 import 'package:wiredash/wiredash.dart';
 import 'package:in_app_update/in_app_update.dart';
+import 'package:isar/isar.dart';
+import 'package:app/features/home/data/models/directions.dart';
 
 void main() async {
   await dotenv.load(fileName: '.env');
-  runApp(const MyApp());
+  bool isFirst;
+  Isar isar = Isar.getInstance() ?? await Isar.open([DirectionsSchema]);
+  int totalDirections = await isar.directions.count();
+  if (totalDirections == 0) {
+    isFirst = true;
+  } else {
+    isFirst = false;
+  }
+  runApp(
+    MyApp(
+      isFirst: isFirst,
+    ),
+  );
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+  bool isFirst;
+  MyApp({super.key, this.isFirst = false});
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -37,7 +53,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    _checkForUpdate();
+    // _checkForUpdate();
   }
 
   // Method to check for update
@@ -118,10 +134,12 @@ class _MyAppState extends State<MyApp> {
           projectId: 'metrotrot-arcxpzu',
           secret: 'I2U5sQGZWY7f6fGd8CJNOHBRwOwIWiAj',
           child: MaterialApp(
-            title: 'Flutter Demo',
+            title: 'MetroTrot',
             debugShowCheckedModeBanner: false,
             theme: ThemeData.light(),
-            home: const HomePage(),
+            home: widget.isFirst == false
+                ? const HomePage()
+                : const IntroScreen(),
           ),
         ),
       ),

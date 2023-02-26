@@ -150,6 +150,10 @@ flutter:
     - assets/images/transit.png
     - assets/images/metrotrot.png
     - assets/images/no_directions.png
+    - assets/images/onboarding_1.gif
+    - assets/images/onboarding_2.gif
+    - assets/images/onboarding_3.gif
+    - assets/images/location_permission.gif
 
     #data
     - assets/data/delhi_ncr.json

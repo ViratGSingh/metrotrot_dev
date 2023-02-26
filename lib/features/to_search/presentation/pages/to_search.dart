@@ -29,7 +29,11 @@ class _ToSearchPageState extends State<ToSearchPage> {
   @override
   void initState() {
     context.read<ToSearchCubit>().getSearchRecommendations(
-        toSearchController.text, widget.isOffline, widget.lat, widget.lng);
+        widget.fromMetro.placeId,
+        toSearchController.text,
+        widget.isOffline,
+        widget.lat,
+        widget.lng);
     super.initState();
   }
 
@@ -52,13 +56,15 @@ class _ToSearchPageState extends State<ToSearchPage> {
                     controller: toSearchController,
                     autofocus: true,
                     onChanged: (location) {
-                      if (location.isNotEmpty == true) {
-                        context.read<ToSearchCubit>().getSearchRecommendations(
-                            toSearchController.text,
-                            widget.isOffline,
-                            widget.lat,
-                            widget.lng);
-                      }
+                      context.read<ToSearchCubit>().getSearchRecommendations(
+                          widget.fromMetro.placeId,
+                          toSearchController.text,
+                          widget.isOffline,
+                          widget.lat,
+                          widget.lng);
+                      // if (location.isNotEmpty == true) {
+
+                      // }
                     },
                     decoration: InputDecoration(
                         hintStyle:

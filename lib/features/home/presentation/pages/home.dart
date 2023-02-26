@@ -1,3 +1,4 @@
+import 'package:app/features/home/presentation/widgets/onboarding/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:app/features/from_search/presentation/pages/from_search.dart';
@@ -200,7 +201,7 @@ class _HomePageState extends State<HomePage> {
                                   : false,
                             ),
                             InfoCard(
-                              title: "Reviews",
+                              title: "Users",
                               type: "reviews",
                               info: state.metro.userRatingsTotal.toString(),
                               isLoading: state.status ==

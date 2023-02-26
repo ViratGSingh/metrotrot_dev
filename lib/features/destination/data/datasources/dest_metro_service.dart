@@ -51,21 +51,21 @@ class DestMetroService {
 
     Map<String, dynamic> destCoord = responseBody["result"]["geometry"];
 
-    //Get Metro Nearby
-    final Uri placeReqUri = Uri(
-        scheme: 'https',
-        host: apiHost,
-        path: "/maps/api/place/details/json",
-        queryParameters: {
-          "place_id": placeId,
-          "key": apiKey,
-          "fields": "geometry"
-        });
-    final http.Response placeResp = await httpClient.get(placeReqUri);
-    final Map<String, dynamic> placeData = json.decode(placeResp.body);
-    if (placeData.containsKey("result") == true) {
-      location = placeData["result"]["geometry"]["location"];
-    }
+    // //Get Metro Nearby
+    // final Uri placeReqUri = Uri(
+    //     scheme: 'https',
+    //     host: apiHost,
+    //     path: "/maps/api/place/details/json",
+    //     queryParameters: {
+    //       "place_id": placeId,
+    //       "key": apiKey,
+    //       "fields": "geometry"
+    //     });
+    // final http.Response placeResp = await httpClient.get(placeReqUri);
+    // final Map<String, dynamic> placeData = json.decode(placeResp.body);
+    // if (placeData.containsKey("result") == true) {
+    //   location = placeData["result"]["geometry"]["location"];
+    // }
 
     //Find metro station nearby
     requestUri = Uri(
@@ -76,7 +76,7 @@ class DestMetroService {
           "key": apiKey,
           "keyword": "metro station",
           "location":
-              "${location["lat"].toString()},${location["lng"].toString()}",
+              "${destCoord["location"]["lat"].toString()},${destCoord["location"]["lng"].toString()}",
           "type": "subway_station",
           "rankby": "distance"
         });

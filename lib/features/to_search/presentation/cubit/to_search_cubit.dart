@@ -12,19 +12,42 @@ class ToSearchCubit extends Cubit<ToSearchState> {
   ToSearchCubit({required this.toSearchRepository})
       : super(ToSearchState.initial());
 
-  getSearchRecommendations(
-      String location, bool isOffline, double lat, double lng) async {
+  getSearchRecommendations(String fromPlaceId, String location, bool isOffline,
+      double lat, double lng) async {
     emit(state.copyWith(status: ToSearchStatus.loading));
     List<ToRecommendation> predictions = [];
+    var isar = Isar.getInstance() ?? await Isar.open([DirectionsSchema]);
+    List<Directions> recoms;
     if (isOffline == false) {
-      predictions =
-          await toSearchRepository.getSearchRecommendations(location, lat, lng);
-    } else {
-      var isar = Isar.getInstance() ?? await Isar.open([DirectionsSchema]);
-      var recoms;
       if (location.isEmpty == true) {
         recoms = await isar.directions
             .where()
+            .filter()
+            .fromIdEqualTo(fromPlaceId)
+            .sortByTimeDesc()
+            .distinctByDestContent()
+            .limit(5)
+            .findAll();
+        recoms.forEach((Directions recom) {
+          ToRecommendation dest = ToRecommendation.fromJson(
+            recom.toData.toString(),
+          );
+          dest.main = recom.destMain.toString();
+          dest.secondary = recom.destSecondary.toString();
+          predictions.add(dest);
+        });
+      } else {
+        predictions = await toSearchRepository.getSearchRecommendations(
+            location, lat, lng);
+      }
+    } else {
+      isar = Isar.getInstance() ?? await Isar.open([DirectionsSchema]);
+
+      if (location.isEmpty == true) {
+        recoms = await isar.directions
+            .where()
+            .filter()
+            .fromIdEqualTo(fromPlaceId)
             .sortByTimeDesc()
             .distinctByDestContent()
             .limit(5)
@@ -32,6 +55,8 @@ class ToSearchCubit extends Cubit<ToSearchState> {
       } else {
         recoms = await isar.directions
             .where()
+            .filter()
+            .fromIdEqualTo(fromPlaceId)
             .contentWordsElementStartsWith(location)
             .distinctByDestContent()
             .limit(5)

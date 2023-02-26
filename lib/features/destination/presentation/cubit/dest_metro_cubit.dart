@@ -2,6 +2,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:get/get.dart';
 import 'package:isar/isar.dart';
 import 'package:app/features/destination/data/models/dest_metro.dart';
 import 'package:app/features/destination/data/repositories/dest_metro_repository.dart';
@@ -21,7 +22,19 @@ class DestMetroCubit extends Cubit<DestMetroState> {
     String distance = "N/A";
     DestMetro info = DestMetro.initial();
     if (isOffline == false) {
-      info = await destMetroRepository.fetchDestNearestMetro(placeId);
+      var isar = Isar.getInstance() ?? await Isar.open([DirectionsSchema]);
+
+      Directions? recom = await isar.directions
+          .where()
+          .filter()
+          .toIdEqualTo(placeId)
+          .sortByTimeDesc()
+          .findFirst();
+      if (recom == null) {
+        info = await destMetroRepository.fetchDestNearestMetro(placeId);
+      } else {
+        info = DestMetro.fromJson(recom!.toData.toString());
+      }
 
       distance = Geolocator.distanceBetween(info.destLat, info.destLng,
               info.nearbyMetroLat, info.nearbyMetroLng)
@@ -36,6 +49,9 @@ class DestMetroCubit extends Cubit<DestMetroState> {
           .sortByTimeDesc()
           .findFirst();
       info = DestMetro.fromJson(recom!.toData.toString());
+      distance = Geolocator.distanceBetween(info.destLat, info.destLng,
+              info.nearbyMetroLat, info.nearbyMetroLng)
+          .toStringAsFixed(0);
     }
     emit(
       state.copyWith(

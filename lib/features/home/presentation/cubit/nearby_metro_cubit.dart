@@ -2,6 +2,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:get/get.dart';
 import 'package:isar/isar.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:app/features/from_search/data/models/from_metro.dart';
@@ -57,7 +58,7 @@ class NearbyMetroCubit extends Cubit<NearbyMetroState> {
     emit(state.copyWith(
         status: NearbyMetroStatus.loading, isOffline: isOffline));
     var status = await Permission.location.request();
-
+    print(status);
     if (status.isPermanentlyDenied) {
       emit(state.copyWith(
           status: NearbyMetroStatus.locPermDenied, isOffline: isOffline));
@@ -67,7 +68,7 @@ class NearbyMetroCubit extends Cubit<NearbyMetroState> {
           status: NearbyMetroStatus.locDenied, isOffline: isOffline));
     }
 
-    if (status.isGranted) {
+    if (status.isGranted || status.isLimited) {
       isOffline == false
           ? await getNearbyMetro()
           : await getOfflineFromStation();
