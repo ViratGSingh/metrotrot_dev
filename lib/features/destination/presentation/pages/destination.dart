@@ -82,7 +82,7 @@ class _LocationPageState extends State<LocationPage> {
               child: Center(
                 child: ListView(shrinkWrap: true, children: [
                   Container(
-                    padding: const EdgeInsets.fromLTRB(20, 15, 20, 10),
+                    padding: const EdgeInsets.fromLTRB(15, 15, 15, 10),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -91,20 +91,20 @@ class _LocationPageState extends State<LocationPage> {
                           style: GoogleFonts.notoSans(
                               color: Colors.black,
                               fontSize: 22,
-                              fontWeight: FontWeight.w500),
+                              fontWeight: FontWeight.w600),
                         ),
                         Text(
                           widget.address,
                           style: GoogleFonts.notoSans(
                               color: Colors.black,
                               fontSize: 14,
-                              fontWeight: FontWeight.w300),
+                              fontWeight: FontWeight.w400),
                         ),
                       ],
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
+                    padding: const EdgeInsets.fromLTRB(15, 5, 15, 5),
                     child: ElevatedButton(
                       style: ButtonStyle(
                         shape:
