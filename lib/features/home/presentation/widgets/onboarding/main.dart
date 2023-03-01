@@ -59,6 +59,7 @@ class _IntroScreenState extends State<IntroScreen> {
     return SafeArea(
       child: Scaffold(
         extendBodyBehindAppBar: true,
+        backgroundColor: Colors.white,
         // appBar: AppBar(
         //   automaticallyImplyLeading: false,
         //   backgroundColor: Colors.transparent,
@@ -76,39 +77,57 @@ class _IntroScreenState extends State<IntroScreen> {
         //   ),
         // ),
         body: Container(
-          padding: EdgeInsets.all(20),
           alignment: Alignment.center,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               SizedBox.shrink(),
-              CarouselSlider(
-                  items: [
-                    Intro1ScreenBody(),
-                    Intro2ScreenBody(),
-                    Intro3ScreenBody()
-                  ],
-                  options: CarouselOptions(
-                    height: 2 * MediaQuery.of(context).size.height / 3,
-                    viewportFraction: 1,
-                    initialPage: 0,
-                    enableInfiniteScroll: true,
-                    reverse: false,
-                    autoPlay: true,
-                    autoPlayInterval: Duration(seconds: 5),
-                    autoPlayAnimationDuration: Duration(milliseconds: 1000),
-                    autoPlayCurve: Curves.fastOutSlowIn,
-                    enlargeCenterPage: true,
-                    onPageChanged:
-                        (int page, CarouselPageChangedReason reason) {
-                      i.value = page;
-                      // slideNum.value = page;
-                      // if (page == 2) {
-                      //   isDone.value = true;
-                      // }
+              Column(
+                children: [
+                  CarouselSlider(
+                    items: [
+                      Intro1ScreenBody(),
+                      Intro2ScreenBody(),
+                      Intro3ScreenBody()
+                    ],
+                    options: CarouselOptions(
+                      height: MediaQuery.of(context).size.height / 2 + 100,
+                      viewportFraction: 1,
+                      initialPage: 0,
+                      enableInfiniteScroll: true,
+                      reverse: false,
+                      autoPlay: true,
+                      autoPlayInterval: Duration(seconds: 5),
+                      autoPlayAnimationDuration: Duration(milliseconds: 1000),
+                      autoPlayCurve: Curves.fastOutSlowIn,
+                      enlargeCenterPage: true,
+                      onPageChanged:
+                          (int page, CarouselPageChangedReason reason) {
+                        i.value = page;
+                        // slideNum.value = page;
+                        // if (page == 2) {
+                        //   isDone.value = true;
+                        // }
+                      },
+                      scrollDirection: Axis.horizontal,
+                    ),
+                  ),
+                  ValueListenableBuilder(
+                    valueListenable: i,
+                    builder:
+                        (BuildContext context, dynamic value, Widget? child) {
+                      return Padding(
+                        padding: EdgeInsets.only(top: 0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: getCarouselIcons(i.value, 3),
+                        ),
+                      );
                     },
-                    scrollDirection: Axis.horizontal,
-                  )),
+                  ),
+                ],
+              ),
+
               // Container(
               //   width: 2 * MediaQuery.of(context).size.width / 3 + 50,
               //   padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
@@ -139,18 +158,18 @@ class _IntroScreenState extends State<IntroScreen> {
               //     ],
               //   ),
               // ),
-              ValueListenableBuilder(
-                valueListenable: i,
-                builder: (BuildContext context, dynamic value, Widget? child) {
-                  return Padding(
-                    padding: EdgeInsets.only(top: 0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: getCarouselIcons(i.value, 3),
-                    ),
-                  );
-                },
-              ),
+              // ValueListenableBuilder(
+              //   valueListenable: i,
+              //   builder: (BuildContext context, dynamic value, Widget? child) {
+              //     return Padding(
+              //       padding: EdgeInsets.only(top: 0),
+              //       child: Row(
+              //         mainAxisAlignment: MainAxisAlignment.center,
+              //         children: getCarouselIcons(i.value, 3),
+              //       ),
+              //     );
+              //   },
+              // ),
 
               ValueListenableBuilder(
                   valueListenable: i,
@@ -158,6 +177,7 @@ class _IntroScreenState extends State<IntroScreen> {
                       (BuildContext context, dynamic value, Widget? child) {
                     return Container(
                       alignment: Alignment.centerRight,
+                      padding: EdgeInsets.only(right: 20),
                       height: 60,
                       child: i.value == 2
                           ? TextButton(

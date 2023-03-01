@@ -7,20 +7,20 @@ class Intro2ScreenBody extends GetView {
 
   @override
   Widget build(BuildContext context) {
-    return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-      Container(
-        width: 2 * MediaQuery.of(context).size.width / 3,
-        height: MediaQuery.of(context).size.height / 3,
-        child: Image.asset(
-          "assets/images/onboarding_2.gif",
-          fit: BoxFit.cover,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+        Container(
+          width: 2 * MediaQuery.of(context).size.width / 3,
+          height: MediaQuery.of(context).size.height / 3,
+          child: Image.asset(
+            "assets/images/onboarding_2.gif",
+            fit: BoxFit.cover,
+          ),
         ),
-      ),
-      Container(
-        child: Column(
+        Column(
           children: [
             Container(
-              width: 2 * MediaQuery.of(context).size.width / 3 + 50,
               padding: EdgeInsets.fromLTRB(0, 40, 0, 0),
               child: const Text(
                 "Say Goodbye to Commuting Woes",
@@ -33,7 +33,6 @@ class Intro2ScreenBody extends GetView {
               ),
             ),
             Container(
-              width: 2 * MediaQuery.of(context).size.width / 3 + 50,
               padding: EdgeInsets.fromLTRB(0, 10, 0, 30),
               child: const Text(
                 "Effortlessly find the nearest metro stations to you and your destination",
@@ -47,37 +46,38 @@ class Intro2ScreenBody extends GetView {
             ),
           ],
         ),
-      ),
-      // Container(
-      //   width: 2 * MediaQuery.of(context).size.width / 3 + 50,
-      //   padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-      //   child: Row(
-      //     mainAxisAlignment: MainAxisAlignment.center,
-      //     children: [
-      //       Icon(
-      //         Icons.circle,
-      //         color: Colors.grey,
-      //         size: 8,
-      //       ),
-      //       SizedBox(
-      //         width: 2,
-      //       ),
-      //       Icon(
-      //         Icons.circle,
-      //         color: Colors.white,
-      //         size: 10,
-      //       ),
-      //       SizedBox(
-      //         width: 2,
-      //       ),
-      //       Icon(
-      //         Icons.circle,
-      //         color: Colors.grey,
-      //         size: 8,
-      //       )
-      //     ],
-      //   ),
-      // ),
-    ]);
+
+        // Container(
+        //   width: 2 * MediaQuery.of(context).size.width / 3 + 50,
+        //   padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+        //   child: Row(
+        //     mainAxisAlignment: MainAxisAlignment.center,
+        //     children: [
+        //       Icon(
+        //         Icons.circle,
+        //         color: Colors.grey,
+        //         size: 8,
+        //       ),
+        //       SizedBox(
+        //         width: 2,
+        //       ),
+        //       Icon(
+        //         Icons.circle,
+        //         color: Colors.white,
+        //         size: 10,
+        //       ),
+        //       SizedBox(
+        //         width: 2,
+        //       ),
+        //       Icon(
+        //         Icons.circle,
+        //         color: Colors.grey,
+        //         size: 8,
+        //       )
+        //     ],
+        //   ),
+        // ),
+      ]),
+    );
   }
 }
