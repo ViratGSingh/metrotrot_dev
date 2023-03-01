@@ -45,10 +45,8 @@ class _FromSearchPageState extends State<FromSearchPage> {
                   controller: fromSearchController,
                   autofocus: true,
                   onChanged: (location) {
-                    if (location.isNotEmpty == true) {
-                      context.read<FromSearchCubit>().getSearchRecommendations(
-                          fromSearchController.text, widget.isOffline);
-                    }
+                    context.read<FromSearchCubit>().getSearchRecommendations(
+                        fromSearchController.text, widget.isOffline);
                   },
                   decoration: InputDecoration(
                       hintStyle:

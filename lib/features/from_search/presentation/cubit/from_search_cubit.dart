@@ -15,9 +15,28 @@ class FromSearchCubit extends Cubit<FromSearchState> {
   getSearchRecommendations(String location, bool isOffline) async {
     emit(state.copyWith(status: FromSearchStatus.loading));
     List<FromRecommendation> predictions = [];
+
     if (isOffline == false) {
-      predictions =
-          await fromSearchRepository.getSearchRecommendations(location);
+      if (location.isEmpty == true) {
+        var isar = Isar.getInstance() ?? await Isar.open([DirectionsSchema]);
+        var recoms = await isar.directions
+            .filter()
+            .timeLessThan(DateTime.now())
+            .sortByTimeDesc()
+            .distinctByFromId()
+            .limit(5)
+            .findAll();
+        recoms.forEach((recom) {
+          predictions.add(
+            FromRecommendation.fromJson(
+              recom.fromData.toString(),
+            ),
+          );
+        });
+      } else {
+        predictions =
+            await fromSearchRepository.getSearchRecommendations(location);
+      }
     } else {
       var isar = Isar.getInstance() ?? await Isar.open([DirectionsSchema]);
       if (location.isEmpty == false) {
