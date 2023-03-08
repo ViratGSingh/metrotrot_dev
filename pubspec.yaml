@@ -154,6 +154,7 @@ flutter:
     - assets/images/onboarding_2.gif
     - assets/images/onboarding_3.gif
     - assets/images/location_permission.gif
+    - assets/images/welcome.gif
 
     #data
     - assets/data/delhi_ncr.json
