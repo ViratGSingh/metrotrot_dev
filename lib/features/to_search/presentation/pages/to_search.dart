@@ -1,3 +1,4 @@
+import 'package:app/features/destination/presentation/cubit/dest_metro_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -6,6 +7,8 @@ import 'package:app/features/from_search/data/models/from_metro.dart';
 import 'package:app/features/to_search/presentation/cubit/to_search_cubit.dart';
 
 class ToSearchPage extends StatefulWidget {
+  final String userId;
+  final bool isGuest;
   final bool isOffline;
   final FromMetro fromMetro;
   final double lat;
@@ -14,6 +17,8 @@ class ToSearchPage extends StatefulWidget {
   ToSearchPage(
       {super.key,
       this.isOffline = false,
+      this.userId = "",
+      required this.isGuest,
       required this.distance,
       required this.fromMetro,
       required this.lat,
@@ -29,6 +34,7 @@ class _ToSearchPageState extends State<ToSearchPage> {
   @override
   void initState() {
     context.read<ToSearchCubit>().getSearchRecommendations(
+        widget.userId,
         widget.fromMetro.placeId,
         toSearchController.text,
         widget.isOffline,
@@ -57,6 +63,7 @@ class _ToSearchPageState extends State<ToSearchPage> {
                     autofocus: true,
                     onChanged: (location) {
                       context.read<ToSearchCubit>().getSearchRecommendations(
+                          widget.userId,
                           widget.fromMetro.placeId,
                           toSearchController.text,
                           widget.isOffline,
@@ -101,6 +108,15 @@ class _ToSearchPageState extends State<ToSearchPage> {
                         child: ListTile(
                           style: ListTileStyle.list,
                           onTap: () async {
+                            context.read<ToSearchCubit>().saveDestinationInfo(
+                                widget.userId,
+                                widget.isGuest,
+                                widget.fromMetro,
+                                destinationId,
+                                mainAddr,
+                                secondaryAddr,
+                                widget.lat,
+                                widget.lng);
                             Navigator.push<void>(
                               context,
                               MaterialPageRoute<void>(

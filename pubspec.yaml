@@ -69,6 +69,12 @@ dependencies:
   #firebase
   firebase_core: ^2.3.0
   cloud_firestore: ^4.1.0
+  firebase_auth: ^4.2.10
+  google_sign_in: ^6.0.2
+
+  #Device id
+  device_info_plus: ^8.1.0
+  
 
   #ads
   google_mobile_ads: ^2.3.0
@@ -129,9 +135,17 @@ flutter:
   assets:
     #env
     - .env
-    #metrotro logo
+
+    #metrotrot login
+    - assets/images/metrotrot_login.gif
+
+    #metrotrot logo
     - assets/images/metrotrot.png
     - assets/images/metrotrot_header.png
+    - assets/images/metrotrot_header_alt.png
+
+    #social logins
+    - assets/images/google_logo.png
 
     #metro logos
     - assets/images/dmrc.png

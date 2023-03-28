@@ -15,12 +15,14 @@ enum NearbyMetroStatus {
 class NearbyMetroState extends Equatable {
   final NearbyMetroStatus status;
   final FromMetro metro;
+  final User? user;
   final String distance;
   bool isOffline;
   NearbyMetroState(
       {required this.status,
       required this.metro,
       required this.distance,
+      this.user,
       this.isOffline = false});
 
   @override
@@ -30,10 +32,12 @@ class NearbyMetroState extends Equatable {
     return NearbyMetroState(
         status: NearbyMetroStatus.initial,
         metro: FromMetro.initial(),
+        user: FirebaseAuth.instance.currentUser,
         distance: "N/A");
   }
   NearbyMetroState copyWith(
       {NearbyMetroStatus? status,
+      User? user,
       FromMetro? metro,
       String? distance,
       bool? isOffline}) {
@@ -41,6 +45,7 @@ class NearbyMetroState extends Equatable {
         status: status ?? this.status,
         metro: metro ?? this.metro,
         isOffline: isOffline ?? this.isOffline,
+        user:user??this.user,
         distance: distance ?? this.distance);
   }
 }

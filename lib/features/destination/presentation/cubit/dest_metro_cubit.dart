@@ -2,7 +2,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:get/get.dart';
 import 'package:isar/isar.dart';
 import 'package:app/features/destination/data/models/dest_metro.dart';
 import 'package:app/features/destination/data/repositories/dest_metro_repository.dart';
@@ -62,4 +61,6 @@ class DestMetroCubit extends Cubit<DestMetroState> {
       ),
     );
   }
+
+  
 }

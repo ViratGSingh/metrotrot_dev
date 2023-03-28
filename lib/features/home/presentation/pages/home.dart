@@ -1,4 +1,3 @@
-import 'package:app/features/home/presentation/widgets/onboarding/main.dart';
 import 'package:app/features/home/presentation/widgets/userDrawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -75,44 +74,55 @@ class _HomePageState extends State<HomePage> {
       builder: (context, state) {
         return SafeArea(
           child: Scaffold(
-            
             appBar: AppBar(
               backgroundColor: Colors.white,
               shadowColor: Colors.transparent,
               elevation: 0,
-              actions: [Padding(
-                padding: const EdgeInsets.only(right: 20),
-                child: InternetStatus(
-                              isOffline: state.isOffline,
-                              tapLogic: () {
-                                if (state.isOffline == false) {
-                                  return context
-                                      .read<NearbyMetroCubit>()
-                                      .getOfflineFromStation();
-                                } else {
-                                  return context
-                                      .read<NearbyMetroCubit>()
-                                      .checkUserLocation(state.isOffline == false
-                                          ? true
-                                          : false);
-                                }
-                              },
-                            ),
-              ),],
-              leading: Builder(
-              builder: (context) {
+              actions: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 20),
+                  child: InternetStatus(
+                    isOffline: state.isOffline,
+                    tapLogic: () {
+                      if (state.isOffline == false) {
+                        return context
+                            .read<NearbyMetroCubit>()
+                            .getOfflineFromStation();
+                      } else {
+                        return context
+                            .read<NearbyMetroCubit>()
+                            .checkUserLocation(
+                                state.isOffline == false ? true : false);
+                      }
+                    },
+                  ),
+                ),
+              ],
+              leading: Builder(builder: (context) {
                 return IconButton(
-                                  icon: Icon(Icons.account_circle_rounded, size: 32,),
-                                  color: Color(0xffFFBB23),
-                                  onPressed: () {
-                                    // Wiredash.of(context)
-                                    //     .show(inheritMaterialTheme: true);
-                                    Scaffold.of(context).openDrawer();
-                                  },
-                                );
-              }
-            ),),
-            drawer: UserProfileDrawer(),
+                  icon: Icon(
+                    Icons.account_circle_rounded,
+                    size: 32,
+                  ),
+                  color: Color(0xffFFBB23),
+                  onPressed: () {
+                    // Wiredash.of(context)
+                    //     .show(inheritMaterialTheme: true);
+                    Scaffold.of(context).openDrawer();
+                  },
+                );
+              }),
+            ),
+            drawer: state.user != null
+                ? UserProfileDrawer(
+                  userId:state.user!.uid.toString(),
+                    userName: state.user!.displayName.toString(),
+                    userEmail: state.user!.email.toString(),
+                    isGuest: false,
+                    isOffline: state.isOffline,
+                    fromMetro: state.metro,
+                  )
+                : UserProfileDrawer(isGuest: true, isOffline: state.isOffline),
             body: RefreshIndicator(
               onRefresh: () {
                 return context
@@ -177,12 +187,16 @@ class _HomePageState extends State<HomePage> {
                       Padding(
                         padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
                         child: SearchAppBar(
+                            userId:
+                                state.user == null ? "guest" : state.user!.uid,
+                            isGuest: state.user == null ? true : false,
                             fromMetro: state.metro,
                             distance: state.distance,
                             isOffline: state.isOffline,
                             lat: state.metro.lat,
                             lng: state.metro.lng),
                       ),
+                      
                       Padding(
                         padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                         child: FromStation(

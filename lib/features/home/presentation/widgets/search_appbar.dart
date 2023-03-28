@@ -6,6 +6,8 @@ import 'package:app/features/to_search/presentation/pages/to_search.dart';
 
 class SearchAppBar extends StatelessWidget {
   final FromMetro fromMetro;
+  final String userId;
+  final bool isGuest;
   final bool isOffline;
   final double lat;
   final String distance;
@@ -13,6 +15,8 @@ class SearchAppBar extends StatelessWidget {
   const SearchAppBar(
       {super.key,
       required this.fromMetro,
+      required this.userId,
+      required this.isGuest,
       required this.lat,
       required this.distance,
       required this.lng,
@@ -26,6 +30,8 @@ class SearchAppBar extends StatelessWidget {
           context,
           MaterialPageRoute<void>(
             builder: (BuildContext context) => ToSearchPage(
+                userId: userId,
+                isGuest: isGuest,
                 distance: distance,
                 fromMetro: fromMetro,
                 isOffline: isOffline,
@@ -61,6 +67,8 @@ class SearchAppBar extends StatelessWidget {
                     context,
                     MaterialPageRoute<void>(
                       builder: (BuildContext context) => ToSearchPage(
+                        userId: userId,
+                        isGuest: isGuest,
                           distance: distance,
                           fromMetro: fromMetro,
                           isOffline: isOffline,

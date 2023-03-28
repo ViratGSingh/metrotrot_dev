@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:isar/isar.dart';
@@ -8,7 +9,6 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:app/features/from_search/data/models/from_metro.dart';
 import 'package:app/features/home/data/models/directions.dart';
 import 'package:app/features/home/data/repositories/nearby_metro_repository.dart';
-
 part 'nearby_metro_state.dart';
 
 class NearbyMetroCubit extends Cubit<NearbyMetroState> {
@@ -17,7 +17,11 @@ class NearbyMetroCubit extends Cubit<NearbyMetroState> {
       : super(NearbyMetroState.initial());
 
   getOfflineFromStation() async {
-    emit(state.copyWith(status: NearbyMetroStatus.loading, isOffline: true));
+        User? user = FirebaseAuth.instance.currentUser;
+
+    emit(state.copyWith(
+      user: user,
+      status: NearbyMetroStatus.loading, isOffline: true));
     var isar = Isar.getInstance() ?? await Isar.open([DirectionsSchema]);
 
     List<Directions> fromSearchRecoms = await isar.directions
@@ -44,28 +48,37 @@ class NearbyMetroCubit extends Cubit<NearbyMetroState> {
       //     nearbyMetro.lat, nearbyMetro.lng, accPos.latitude, accPos.longitude);
 
       emit(state.copyWith(
+          user: user,
           status: NearbyMetroStatus.loaded,
           metro: nearbyMetro,
           distance: "N/A",
           isOffline: true));
     } else {
       emit(state.copyWith(
+        user: user,
           status: NearbyMetroStatus.locPermDenied, isOffline: true));
     }
   }
 
   checkUserLocation(isOffline) async {
+
+    User? user = FirebaseAuth.instance.currentUser;
     emit(state.copyWith(
+      user: user,
         status: NearbyMetroStatus.loading, isOffline: isOffline));
     var status = await Permission.location.request();
-    print(status);
+
     if (status.isPermanentlyDenied) {
       emit(state.copyWith(
-          status: NearbyMetroStatus.locPermDenied, isOffline: isOffline));
+          user: user,
+          status: NearbyMetroStatus.locPermDenied,
+          isOffline: isOffline));
     }
     if (status.isDenied) {
       emit(state.copyWith(
-          status: NearbyMetroStatus.locDenied, isOffline: isOffline));
+          user: user,
+          status: NearbyMetroStatus.locDenied,
+          isOffline: isOffline));
     }
 
     if (status.isGranted || status.isLimited) {
@@ -76,8 +89,9 @@ class NearbyMetroCubit extends Cubit<NearbyMetroState> {
   }
 
   Future getNearbyMetro() async {
-    var locAccuracy = await Geolocator.getLocationAccuracy();
 
+    User? user = FirebaseAuth.instance.currentUser;
+    var locAccuracy = await Geolocator.getLocationAccuracy();
     Position accPos;
     if (locAccuracy == LocationAccuracyStatus.precise) {
       accPos = await Geolocator.getCurrentPosition();
@@ -85,7 +99,8 @@ class NearbyMetroCubit extends Cubit<NearbyMetroState> {
       accPos = await Geolocator.getCurrentPosition(
           desiredAccuracy: LocationAccuracy.low);
     }
-    emit(state.copyWith(status: NearbyMetroStatus.loading, isOffline: false));
+    emit(state.copyWith(
+        user: user, status: NearbyMetroStatus.loading, isOffline: false));
     final FromMetro nearbyMetro = await nearbyMetroRepository.fetchNearestMetro(
         accPos.latitude, accPos.longitude);
     var distance = Geolocator.distanceBetween(
@@ -94,6 +109,7 @@ class NearbyMetroCubit extends Cubit<NearbyMetroState> {
     emit(
       state.copyWith(
         status: NearbyMetroStatus.loaded,
+        user: user,
         metro: nearbyMetro,
         isOffline: false,
         distance: distance.toStringAsFixed(0),
@@ -102,7 +118,10 @@ class NearbyMetroCubit extends Cubit<NearbyMetroState> {
   }
 
   Future getFromNearbyMetro(String placeId, bool isOffline) async {
+
+    User? user = FirebaseAuth.instance.currentUser;
     emit(state.copyWith(
+      user:user,
         status: NearbyMetroStatus.loading, isOffline: isOffline));
     FromMetro nearbyMetro = FromMetro.initial();
     String distance = "N/A";
@@ -138,6 +157,7 @@ class NearbyMetroCubit extends Cubit<NearbyMetroState> {
     }
     emit(
       state.copyWith(
+        user: user,
         status: NearbyMetroStatus.loaded,
         metro: nearbyMetro,
         isOffline: isOffline,

@@ -1,4 +1,7 @@
+import 'package:app/features/dest_history/presentation/cubit/dest_history_cubit.dart';
 import 'package:app/features/home/presentation/widgets/onboarding/main.dart';
+import 'package:app/features/login/presentation/cubit/login_cubit.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -27,6 +30,9 @@ import 'package:app/features/home/data/models/directions.dart';
 void main() async {
   await dotenv.load(fileName: '.env');
   bool isFirst;
+  WidgetsFlutterBinding.ensureInitialized();
+  // initializing the firebase app
+  await Firebase.initializeApp(); 
   Isar isar = Isar.getInstance() ?? await Isar.open([DirectionsSchema]);
   int totalDirections = await isar.directions.count();
   if (totalDirections == 0) {
@@ -106,9 +112,13 @@ class _MyAppState extends State<MyApp> {
             ),
           ),
         ),
+
       ],
       child: MultiBlocProvider(
         providers: [
+          BlocProvider<LoginCubit>(
+            create: (BuildContext context) => LoginCubit(),
+          ),
           BlocProvider<NearbyMetroCubit>(
             create: (BuildContext context) => NearbyMetroCubit(
                 nearbyMetroRepository: context.read<NearbyMetroRepository>()),
@@ -128,6 +138,9 @@ class _MyAppState extends State<MyApp> {
           BlocProvider<DirectionsCubit>(
             create: (BuildContext context) => DirectionsCubit(
                 directionsRepository: context.read<DirectionsRepository>()),
+          ),
+          BlocProvider<DestHistoryCubit>(
+            create: (BuildContext context) =>DestHistoryCubit()
           ),
         ],
         child: Wiredash(
