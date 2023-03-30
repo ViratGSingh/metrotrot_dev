@@ -60,18 +60,20 @@ class DestItem extends StatelessWidget {
                             name,
                             style: GoogleFonts.notoSans(
                                 color: Colors.black,
-                                fontSize: 18,
+                                fontSize: 16,
                                 fontWeight: FontWeight.bold),
                           )
                         : Container(
                             height: 28,
+                            padding: EdgeInsets.only(bottom: 10),
                             width: 2 * MediaQuery.of(context).size.width / 3,
                             child: LinearProgressIndicator(),
                           ),
+
                     isUpdating == false
                         ? Text(address,
                             style: GoogleFonts.notoSans(
-                                color: Colors.black, fontSize: 16))
+                                color: Colors.black, fontSize: 14))
                         : Container(
                             height: 28,
                             width: 2 * MediaQuery.of(context).size.width / 3,
@@ -79,7 +81,7 @@ class DestItem extends StatelessWidget {
                           )
                   ],
                 ),
-
+                  SizedBox(height: 20),
                   Align(
                     alignment: Alignment.centerRight,
                     child: isUpdating == false

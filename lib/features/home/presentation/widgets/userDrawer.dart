@@ -107,7 +107,7 @@ class UserProfileDrawer extends StatelessWidget {
                     SizedBox(
                       width: 4,
                     ),
-                    Text("Destination history",
+                    Text("Location history",
                         style: GoogleFonts.notoSans(
                             fontSize: 16, fontWeight: FontWeight.w500))
                   ],
