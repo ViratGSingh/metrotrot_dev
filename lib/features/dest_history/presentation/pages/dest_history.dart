@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:app/features/dest_history/presentation/cubit/dest_history_cubit.dart';
+import 'package:app/features/destination/presentation/pages/destination.dart';
 import 'package:app/features/destination/presentation/widgets/nearestTo.dart';
 import 'package:app/features/home/presentation/widgets/nearestFrom.dart';
 import 'package:app/features/to_search/data/models/dest_tap_data.dart';
@@ -12,16 +13,18 @@ import 'package:app/features/dest_history/presentation/widgets/destination.dart'
 import 'package:app/features/dest_history/presentation/widgets/location.dart';
 import 'package:app/features/destination/presentation/cubit/dest_metro_cubit.dart';
 import 'package:app/features/from_search/data/models/from_metro.dart';
-
+import 'package:intl/intl.dart';
 class DestHistoryPage extends StatefulWidget {
   final FromMetro fromMetro;
   final bool isOffline;
   final String userId;
+  final String fromDistance;
   const DestHistoryPage({
     Key? key,
     required this.userId,
     required this.fromMetro,
     required this.isOffline,
+    required this.fromDistance
   }) : super(key: key);
 
   @override
@@ -116,22 +119,45 @@ class _LocationPageState extends State<DestHistoryPage> {
                   itemBuilder: (BuildContext context, int index) {
                     return Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 15),
-                      child: DestItem(
-                        destDate: state.destData.isEmpty != true
-                            ? state.destData
-                                .elementAt(index)
-                                .lastTappedAt
-                                .toString()
-                            : "",
-                        name: state.destData.isEmpty != true
-                            ? state.destData.elementAt(index).toName
-                            : "",
-                        address: state.destData.isEmpty != true
-                            ? state.destData.elementAt(index).toAddress
-                            : "",
-                        isUpdating: state.status == DestHistoryStatus.loading
-                            ? true
-                            : false,
+                      child: InkWell(
+                        onTap: (){
+                          Navigator.push<void>(
+                              context,
+                              MaterialPageRoute<void>(
+                                builder: (BuildContext context) => LocationPage(
+                                  isOffline: widget.isOffline,
+                                  toPlaceId: state.destData.elementAt(index).toPlaceId,
+                                  fromMetro: widget.fromMetro,
+                                  name: state.destData
+                                  .elementAt(index)
+                                  .toName,
+                                  distance: widget.fromDistance,
+                                  address: state.destData
+                                  .elementAt(index)
+                                  .toAddress,
+                                  fromLat: widget.fromMetro.lat,
+                                  fromLng: widget.fromMetro.lng,
+                                ),
+                              ),
+                            );
+                        },
+                        child: DestItem(
+                          destDate: state.destData.isEmpty != true
+                              ? 
+                                  DateFormat("dd-MM-yyyy HH:mm:ss").format(state.destData
+                                  .elementAt(index)
+                                  .lastTappedAt).toString()
+                              : "",
+                          name: state.destData.isEmpty != true
+                              ? state.destData.elementAt(index).toName
+                              : "",
+                          address: state.destData.isEmpty != true
+                              ? state.destData.elementAt(index).toAddress
+                              : "",
+                          isUpdating: state.status == DestHistoryStatus.loading
+                              ? true
+                              : false,
+                        ),
                       ),
                     );
                   },

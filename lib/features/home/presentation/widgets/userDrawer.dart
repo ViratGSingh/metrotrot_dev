@@ -1,11 +1,14 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:app/features/dest_history/presentation/pages/dest_history.dart';
 import 'package:app/features/from_search/data/models/from_metro.dart';
+import 'package:app/features/home/presentation/widgets/privacy_policy.dart';
 import 'package:app/features/login/presentation/pages/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import 'package:webview_flutter/webview_flutter.dart';
 
 class UserProfileDrawer extends StatelessWidget {
   final String userName;
@@ -14,12 +17,14 @@ class UserProfileDrawer extends StatelessWidget {
   final bool isGuest;
   final bool isOffline;
   final String userId;
+  final String fromDistance;
   const UserProfileDrawer(
       {Key? key,
       this.userId = "",
       this.userName = "Welcome",
       this.userEmail = "Log in to save your routes",
       required this.isGuest,
+      required this.fromDistance,
       this.fromMetro,
       required this.isOffline})
       : super(key: key);
@@ -121,6 +126,7 @@ class UserProfileDrawer extends StatelessWidget {
                       context,
                       MaterialPageRoute<void>(
                         builder: (BuildContext context) => DestHistoryPage(
+                          fromDistance: fromDistance,
                           userId: userId,
                           isOffline: isOffline,
                           fromMetro: fromMetro ?? FromMetro.initial(),
@@ -150,10 +156,16 @@ class UserProfileDrawer extends StatelessWidget {
                   ],
                 ),
                 onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute<void>(
+                      builder: (BuildContext context) => const WebViewExample(),
+                    ),
+                  );
                   // Update the state of the app
                   // ...
                   // Then close the drawer
-                  Navigator.pop(context);
+                  //Navigator.pop(context);
                 },
               ),
             ],

@@ -139,9 +139,9 @@ class ToSearchCubit extends Cubit<ToSearchState> {
           DestTapData oldDestData = DestTapData.fromMap(oldData);
           destData.totalTaps = oldDestData.totalTaps + 1;
           destData.firstTappedAt = oldDestData.firstTappedAt;
+          destData.isLiked = oldDestData.isLiked; 
         }
         destData.lastTappedAt = DateTime.now();
-
         db
             .collection("dest_history")
             .doc(destSearchId)

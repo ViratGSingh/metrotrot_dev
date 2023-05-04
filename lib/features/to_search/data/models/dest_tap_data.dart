@@ -22,10 +22,12 @@ class DestTapData extends Equatable {
   DateTime firstTappedAt;
   DateTime lastTappedAt;
   bool isGuest;
+  bool? isLiked;
 
   DestTapData(
       {required this.userId,
       required this.isGuest,
+      this.isLiked,
       required this.fromMetroBusinessStatus,
       required this.fromMetroLat,
       required this.fromMetroLng,
@@ -48,6 +50,7 @@ class DestTapData extends Equatable {
     return [
       userId,
       isGuest,
+      isLiked??false,
       fromMetroBusinessStatus,
       fromMetroLat,
       fromMetroLng,
@@ -71,6 +74,7 @@ class DestTapData extends Equatable {
     return DestTapData(
         userId: "",
         isGuest: true,
+        isLiked: false,
         fromMetroBusinessStatus: "",
         fromMetroLat: 0,
         fromMetroLng: 0,
@@ -95,6 +99,7 @@ class DestTapData extends Equatable {
     return <String, dynamic>{
       "user_id":userId,
       "is_guest":isGuest,
+      "is_liked":isLiked,
       "from_business_status": fromMetroBusinessStatus,
       "from_lat": fromMetroLat,
       "from_lng": fromMetroLng,
@@ -121,6 +126,7 @@ class DestTapData extends Equatable {
     return DestTapData(
         userId: map["user_id"],
         isGuest: map["is_guest"],
+        isLiked: map["is_liked"],
         fromMetroBusinessStatus: map["from_business_status"],
         fromMetroLat: map["from_lat"],
         fromMetroLng: map["from_lng"],

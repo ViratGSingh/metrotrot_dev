@@ -27,7 +27,7 @@ class DestHistoryCubit extends Cubit<DestHistoryState> {
         .where("from_place_id", isEqualTo: fromMetro.placeId)
         .orderBy("last_tapped_at", descending: true)
         .startAt([endTimestamp])
-        .limit(15)
+        .limit(5)
         .get()
         .then((value) {
           value.docs.forEach((element) {
@@ -64,7 +64,7 @@ class DestHistoryCubit extends Cubit<DestHistoryState> {
         .where("user_id", isEqualTo: userId)
         .where("from_place_id", isEqualTo: fromMetro.placeId)
         .orderBy("last_tapped_at", descending: true)
-        .limit(2)
+        .limit(10)
         .get()
         .then((value) {
       value.docs.forEach((element) {

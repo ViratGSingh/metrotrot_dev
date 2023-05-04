@@ -1,4 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:app/features/home/presentation/pages/home.dart';
+import 'package:app/features/login/presentation/pages/login.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -8,6 +11,7 @@ import 'package:app/features/destination/presentation/widgets/card.dart';
 import 'package:app/features/destination/presentation/widgets/nearestTo.dart';
 import 'package:app/features/directions/presentation/pages/directions.dart';
 import 'package:app/features/from_search/data/models/from_metro.dart';
+import 'package:app/features/destination/presentation/widgets/warnings/main.dart';
 
 class LocationPage extends StatefulWidget {
   final String toPlaceId;
@@ -38,7 +42,11 @@ class _LocationPageState extends State<LocationPage> {
   @override
   void initState() {
     context.read<DestMetroCubit>().getDestNearbyMetro(
-        widget.toPlaceId, widget.fromLat, widget.fromLng, widget.isOffline);
+        widget.toPlaceId,
+        widget.fromMetro.placeId,
+        widget.fromLat,
+        widget.fromLng,
+        widget.isOffline);
 
     super.initState();
   }
@@ -48,6 +56,8 @@ class _LocationPageState extends State<LocationPage> {
     return BlocConsumer<DestMetroCubit, DestMetroState>(
       listener: (context, state) {
         // TODO: implement listener
+
+        //
       },
       builder: (context, state) {
         return SafeArea(
@@ -103,47 +113,124 @@ class _LocationPageState extends State<LocationPage> {
                       ],
                     ),
                   ),
+
                   Padding(
                     padding: const EdgeInsets.fromLTRB(15, 5, 15, 5),
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(13),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        ElevatedButton(
+                          style: ButtonStyle(
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(13),
+                              ),
+                            ),
+                            fixedSize: MaterialStateProperty.all(Size(
+                                MediaQuery.of(context).size.width / 3, 48)),
+                            backgroundColor:
+                                MaterialStateProperty.all(Colors.white),
                           ),
+                          onPressed: () async {
+                            if (state.isOffline == true) {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return WarningPopup(
+                                    title: "Warning!",
+                                    message:
+                                        "You are currently in offline mode, please make sure online mode is enabled at home.",
+                                    action: "To Home",
+                                    actionFunc: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute<void>(
+                                          builder: (BuildContext context) =>
+                                              const HomePage(),
+                                        ),
+                                      );
+                                    },
+                                  );
+                                },
+                              );
+                            } else {
+                              context.read<DestMetroCubit>().changeDestStatus(
+                                  widget.fromMetro.placeId,
+                                  widget.toPlaceId,
+                                  state.isOffline,
+                                  context);
+                            }
+                          },
+                          child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  state.isLiked == false
+                                      ? Icons.favorite_outline_outlined
+                                      : Icons.favorite,
+                                  color: Colors.red,
+                                ),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                Text(
+                                  state.isLiked == false ? "Like" : "Liked",
+                                  style: GoogleFonts.notoSans(
+                                      fontSize: 16,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w500),
+                                )
+                              ]),
                         ),
-                        fixedSize: MaterialStateProperty.all(
-                            Size(MediaQuery.of(context).size.width, 52)),
-                        backgroundColor: MaterialStateProperty.all(
-                          Color(0xffFFBB23),
-                        ),
-                      ),
-                      onPressed: () async {
-                        Navigator.push<void>(
-                          context,
-                          MaterialPageRoute<void>(
-                            builder: (BuildContext context) => DirectionsPage(
-                                fromMetro: widget.fromMetro,
-                                destMetro: state.metro,
-                                destName: widget.name,
-                                destAddress: widget.address,
-                                fromDistance: widget.distance,
-                                toDistance: state.distance,
-                                isOffline: widget.isOffline,
-                                destination: widget.name),
+                        ElevatedButton(
+                          style: ButtonStyle(
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(13),
+                              ),
+                            ),
+                            fixedSize: MaterialStateProperty.all(Size(
+                                2 * MediaQuery.of(context).size.width / 3 - 40,
+                                48)),
+                            backgroundColor: MaterialStateProperty.all(
+                              Color(0xffFFBB23),
+                            ),
                           ),
-                        );
-                      },
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(Icons.directions),
-                            Text(
-                              "Directions",
-                              style: GoogleFonts.notoSans(fontSize: 22),
-                            )
-                          ]),
+                          onPressed: () async {
+                            Navigator.push<void>(
+                              context,
+                              MaterialPageRoute<void>(
+                                builder: (BuildContext context) =>
+                                    DirectionsPage(
+                                        fromMetro: widget.fromMetro,
+                                        destMetro: state.metro,
+                                        destName: widget.name,
+                                        destAddress: widget.address,
+                                        fromDistance: widget.distance,
+                                        toDistance: state.distance,
+                                        isOffline: widget.isOffline,
+                                        destination: widget.name),
+                              ),
+                            );
+                          },
+                          child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(Icons.directions_subway_outlined),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                Text(
+                                  "Directions",
+                                  style: GoogleFonts.notoSans(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500),
+                                )
+                              ]),
+                        ),
+                      ],
                     ),
                   ),
                   Container(

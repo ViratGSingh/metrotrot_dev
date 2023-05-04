@@ -27,6 +27,7 @@ import 'package:in_app_update/in_app_update.dart';
 import 'package:isar/isar.dart';
 import 'package:app/features/home/data/models/directions.dart';
 
+import 'package:firebase_auth/firebase_auth.dart';
 void main() async {
   await dotenv.load(fileName: '.env');
   bool isFirst;
@@ -35,11 +36,15 @@ void main() async {
   await Firebase.initializeApp(); 
   Isar isar = Isar.getInstance() ?? await Isar.open([DirectionsSchema]);
   int totalDirections = await isar.directions.count();
-  if (totalDirections == 0) {
-    isFirst = true;
-  } else {
+  
+    print(FirebaseAuth.instance.currentUser);
+  if (totalDirections != 0 || FirebaseAuth.instance.currentUser!=null) {
     isFirst = false;
+  } else {
+    //print(FirebaseAuth.instance.currentUser);
+    isFirst = true;
   }
+  print(isFirst);
   runApp(
     MyApp(
       isFirst: isFirst,
@@ -59,7 +64,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    // _checkForUpdate();
+    _checkForUpdate();
   }
 
   // Method to check for update

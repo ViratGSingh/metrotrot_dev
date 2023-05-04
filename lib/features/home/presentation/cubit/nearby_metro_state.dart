@@ -9,7 +9,8 @@ enum NearbyMetroStatus {
   locDenied,
   locPermDenied,
   error,
-  offline
+  offline,
+  suggestLoading
 }
 
 class NearbyMetroState extends Equatable {
@@ -17,12 +18,16 @@ class NearbyMetroState extends Equatable {
   final FromMetro metro;
   final User? user;
   final String distance;
+  final int selectedValue;
+  final List<DestTapData>? destData;
   bool isOffline;
   NearbyMetroState(
       {required this.status,
       required this.metro,
       required this.distance,
+      required this.selectedValue,
       this.user,
+      this.destData,
       this.isOffline = false});
 
   @override
@@ -33,6 +38,7 @@ class NearbyMetroState extends Equatable {
         status: NearbyMetroStatus.initial,
         metro: FromMetro.initial(),
         user: FirebaseAuth.instance.currentUser,
+        selectedValue: 1,
         distance: "N/A");
   }
   NearbyMetroState copyWith(
@@ -40,12 +46,16 @@ class NearbyMetroState extends Equatable {
       User? user,
       FromMetro? metro,
       String? distance,
+      int? selectedValue,
+      List<DestTapData>? destData,
       bool? isOffline}) {
     return NearbyMetroState(
         status: status ?? this.status,
         metro: metro ?? this.metro,
         isOffline: isOffline ?? this.isOffline,
         user:user??this.user,
+        destData: destData??this.destData,
+        selectedValue: selectedValue??this.selectedValue,
         distance: distance ?? this.distance);
   }
 }

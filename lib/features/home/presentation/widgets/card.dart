@@ -20,7 +20,7 @@ class InfoCard extends StatelessWidget {
     return Container(
         width: MediaQuery.of(context).size.width / 2 - 30,
         padding: const EdgeInsets.all(15),
-        height: 1.25 * (MediaQuery.of(context).size.width / 2 - 25),
+        height: MediaQuery.of(context).size.height / 4 - 20,
         // height: cardHeight,
         constraints: BoxConstraints(
             minWidth: 150, minHeight: 200, maxWidth: 200, maxHeight: 250),
@@ -40,10 +40,10 @@ class InfoCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: EdgeInsets.only(bottom: 12),
+              padding: EdgeInsets.only(bottom: 5),
               child: Text(
                 title,
-                style: GoogleFonts.notoSans(color: Colors.black, fontSize: 16),
+                style: GoogleFonts.notoSans(color: Colors.black, fontSize: 14),
               ),
             ),
             isLoading == false
@@ -51,7 +51,7 @@ class InfoCard extends StatelessWidget {
                     info,
                     style: GoogleFonts.notoSans(
                         color: Colors.black,
-                        fontSize: 24,
+                        fontSize: 18,
                         fontWeight: FontWeight.bold),
                   )
                 : Container(
@@ -83,7 +83,7 @@ class NumberInfoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         width: MediaQuery.of(context).size.width / 2 - 30,
-        height: 1.25 * (MediaQuery.of(context).size.width / 2 - 25),
+        height: MediaQuery.of(context).size.height / 4 - 25,
         // height: cardHeight,
         padding: const EdgeInsets.all(15),
         constraints: BoxConstraints(
@@ -105,10 +105,10 @@ class NumberInfoCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: EdgeInsets.only(bottom: 12),
+              padding: EdgeInsets.only(bottom: 5),
               child: Text(
                 title,
-                style: GoogleFonts.notoSans(color: Colors.black, fontSize: 16),
+                style: GoogleFonts.notoSans(color: Colors.black, fontSize: 14),
               ),
             ),
             isLoading == false
@@ -116,7 +116,7 @@ class NumberInfoCard extends StatelessWidget {
                     info,
                     style: GoogleFonts.notoSans(
                         color: Colors.black,
-                        fontSize: 24,
+                        fontSize: 18,
                         fontWeight: FontWeight.bold),
                   )
                 : Container(

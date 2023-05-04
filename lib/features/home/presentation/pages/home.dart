@@ -1,3 +1,4 @@
+import 'package:app/features/home/presentation/widgets/tab.dart';
 import 'package:app/features/home/presentation/widgets/userDrawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,7 +9,7 @@ import 'package:app/features/home/presentation/widgets/permissions.dart';
 import 'package:app/features/home/presentation/widgets/nearestFrom.dart';
 import 'package:app/features/home/presentation/widgets/search_appbar.dart';
 import 'package:app/features/home/presentation/widgets/status.dart';
-import 'package:wiredash/wiredash.dart';
+import 'package:app/features/home/presentation/widgets/recoms.dart';
 
 class HomePage extends StatefulWidget {
   final bool isFromSearch;
@@ -25,6 +26,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  late ImageProvider _imageProvider;
+  bool isImageError = false;
   @override
   void initState() {
     if (widget.isFromSearch == false) {
@@ -34,9 +37,10 @@ class _HomePageState extends State<HomePage> {
           .read<NearbyMetroCubit>()
           .getFromNearbyMetro(widget.placeId, widget.isFromOffline);
     }
-
     super.initState();
   }
+
+  bool _isSelected = false;
 
   @override
   Widget build(BuildContext context) {
@@ -100,10 +104,38 @@ class _HomePageState extends State<HomePage> {
               ],
               leading: Builder(builder: (context) {
                 return IconButton(
-                  icon: Icon(
-                    Icons.account_circle_rounded,
-                    size: 32,
-                  ),
+                  icon: state.user == null
+                      ? const Icon(
+                          Icons.account_circle_rounded,
+                          size: 32,
+                        )
+                      : Container(
+                          height: 32,
+                          width: 32,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(16),
+                              image: DecorationImage(
+                                  image: isImageError == false
+                                      ? NetworkImage(
+                                          state.user!.photoURL.toString())
+                                      : _imageProvider,
+                                  onError: (exception, stackTrace) {
+                                    //print("Asdasda");
+                                    isImageError = true;
+                                    setState(() {
+                                      _imageProvider = const AssetImage(
+                                          "assets/images/user.png");
+                                    });
+                                  },
+                                  fit: BoxFit.cover),
+                              boxShadow: [
+                                BoxShadow(
+                                    blurRadius: 4,
+                                    offset: Offset(0, 4),
+                                    color: Colors.black.withOpacity(0.25))
+                              ]),
+                        ),
                   color: Color(0xffFFBB23),
                   onPressed: () {
                     // Wiredash.of(context)
@@ -115,14 +147,18 @@ class _HomePageState extends State<HomePage> {
             ),
             drawer: state.user != null
                 ? UserProfileDrawer(
-                  userId:state.user!.uid.toString(),
+                    fromDistance: state.distance,
+                    userId: state.user!.uid.toString(),
                     userName: state.user!.displayName.toString(),
                     userEmail: state.user!.email.toString(),
                     isGuest: false,
                     isOffline: state.isOffline,
                     fromMetro: state.metro,
                   )
-                : UserProfileDrawer(isGuest: true, isOffline: state.isOffline),
+                : UserProfileDrawer(
+                    fromDistance: state.distance,
+                    isGuest: true,
+                    isOffline: state.isOffline),
             body: RefreshIndicator(
               onRefresh: () {
                 return context
@@ -196,9 +232,9 @@ class _HomePageState extends State<HomePage> {
                             lat: state.metro.lat,
                             lng: state.metro.lng),
                       ),
-                      
+
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                        padding: const EdgeInsets.fromLTRB(20, 10, 20, 5),
                         child: FromStation(
                             isOffline: state.isOffline,
                             isUpdating: state.status ==
@@ -209,64 +245,130 @@ class _HomePageState extends State<HomePage> {
                             name: state.metro.name,
                             address: state.metro.vicinity),
                       ),
-                      Container(
-                        width: MediaQuery.of(context).size.width,
-                        padding: EdgeInsets.fromLTRB(20, 5, 20, 5),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            NumberInfoCard(
-                              title: "Distance",
-                              type: "nearest",
-                              info: state.distance,
-                              measure: state.distance != "N/A" ? "metres" : "",
-                              isLoading: state.status ==
-                                          NearbyMetroStatus.loading ||
-                                      state.status == NearbyMetroStatus.initial
-                                  ? true
-                                  : false,
-                            ),
-                            InfoCard(
-                              title: "Operational",
-                              type: "operational_from",
-                              info: state.metro.businessStatus,
-                              isLoading: state.status ==
-                                          NearbyMetroStatus.loading ||
-                                      state.status == NearbyMetroStatus.initial
-                                  ? true
-                                  : false,
+                      Padding(
+                          padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              InfoTab(
+                                info: "Info",
+                                value: 1,
+                                selectedValue: state.selectedValue,
+                                selectedFunc: (){
+                                  
+                                  context
+                                    .read<NearbyMetroCubit>()
+                                    .changeTab(1, state.isOffline, context);
+
+                                    },
+                              ),
+                              InfoTab(
+                                info: "Recent",
+                                value: 2,
+                                selectedValue: state.selectedValue,
+                                selectedFunc: (){
+                                  
+                                  context
+                                    .read<NearbyMetroCubit>()
+                                    .changeTab(2, state.isOffline, context);
+                                    },
+                              ),
+                              InfoTab(
+                                info: "Liked",
+                                value: 3,
+                                selectedValue: state.selectedValue,
+                                selectedFunc: (){context
+                                    .read<NearbyMetroCubit>()
+                                    .changeTab(3, state.isOffline, context);
+                                    },
+                              ),
+                              InfoTab(
+                                info: "Suggestions",
+                                value: 4,
+                                selectedValue: state.selectedValue,
+                                selectedFunc: (){context
+                                    .read<NearbyMetroCubit>()
+                                    .changeTab(4, state.isOffline, context);
+                                    },
+                              ),
+                            ],
+                          )),
+                          Container(
+                            height: MediaQuery.of(context).size.height/2,
+                            child: state.selectedValue==1?SingleChildScrollView(
+                              child: 
+                              Column(children: [
+                                Container(
+                                                    width: MediaQuery.of(context).size.width,
+                                                    padding: EdgeInsets.fromLTRB(20, 5, 20, 5),
+                                                    child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                NumberInfoCard(
+                                  title: "Distance",
+                                  type: "nearest",
+                                  info: state.distance,
+                                  measure: state.distance != "N/A" ? "metres" : "",
+                                  isLoading: state.status ==
+                                              NearbyMetroStatus.loading ||
+                                          state.status == NearbyMetroStatus.initial
+                                      ? true
+                                      : false,
+                                ),
+                                InfoCard(
+                                  title: "Operational",
+                                  type: "operational_from",
+                                  info: state.metro.businessStatus,
+                                  isLoading: state.status ==
+                                              NearbyMetroStatus.loading ||
+                                          state.status == NearbyMetroStatus.initial
+                                      ? true
+                                      : false,
+                                )
+                              ],
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    padding: EdgeInsets.fromLTRB(20, 10, 20, 15),
+                                                    child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                InfoCard(
+                                  title: "Rating",
+                                  type: "rating",
+                                  info: state.metro.rating.toString(),
+                                  isLoading: state.status ==
+                                              NearbyMetroStatus.loading ||
+                                          state.status == NearbyMetroStatus.initial
+                                      ? true
+                                      : false,
+                                ),
+                                InfoCard(
+                                  title: "Users",
+                                  type: "reviews",
+                                  info: state.metro.userRatingsTotal.toString(),
+                                  isLoading: state.status ==
+                                              NearbyMetroStatus.loading ||
+                                          state.status == NearbyMetroStatus.initial
+                                      ? true
+                                      : false,
+                                )
+                              ],
+                                                    ),
+                                                  )
+                              ]),
+                            ): DestRecoms(
+                              recoms: state.destData!.toList(), 
+                            isOffline: state.isOffline,
+                            fromDistance: state.distance,
+                            isLoading: state.status==NearbyMetroStatus.suggestLoading?true:false,
+                            fromMetro: state.metro,
+                            fromLat: state.metro.lat ,
+                            fromLng: state.metro.lng,
+                            tabName: state.selectedValue==2?"Recent":state.selectedValue==3?"Liked":"Suggestions",
                             )
-                          ],
-                        ),
-                      ),
-                      Container(
-                        padding: EdgeInsets.fromLTRB(20, 10, 20, 15),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            InfoCard(
-                              title: "Rating",
-                              type: "rating",
-                              info: state.metro.rating.toString(),
-                              isLoading: state.status ==
-                                          NearbyMetroStatus.loading ||
-                                      state.status == NearbyMetroStatus.initial
-                                  ? true
-                                  : false,
-                            ),
-                            InfoCard(
-                              title: "Users",
-                              type: "reviews",
-                              info: state.metro.userRatingsTotal.toString(),
-                              isLoading: state.status ==
-                                          NearbyMetroStatus.loading ||
-                                      state.status == NearbyMetroStatus.initial
-                                  ? true
-                                  : false,
-                            )
-                          ],
-                        ),
-                      )
+                          )
+                      
                     ],
                   ),
                 ),
