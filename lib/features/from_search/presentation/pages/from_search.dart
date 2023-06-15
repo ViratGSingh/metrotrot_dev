@@ -66,63 +66,148 @@ class _FromSearchPageState extends State<FromSearchPage> {
               ),
             ),
           ),
-          body: state.status == FromSearchStatus.loaded
-              ? ListView(
-                  children: state.locations.map((recom) {
-                    String mainAddr;
-                    String secondaryAddr;
-                    String destinationId;
-                    mainAddr = recom.main;
-                    secondaryAddr = recom.secondary;
-                    destinationId = recom.placeId;
-                    return Card(
-                      child: ListTile(
-                        style: ListTileStyle.list,
-                        onTap: () async {
-                          Navigator.push<void>(
-                            context,
-                            MaterialPageRoute<void>(
-                              builder: (BuildContext context) => HomePage(
-                                isFromSearch: true,
-                                placeId: destinationId,
-                                isFromOffline: widget.isOffline,
-                              ),
-                            ),
-                          );
-                        },
-                        contentPadding: EdgeInsets.all(0),
-                        leading: const Padding(
-                          padding: EdgeInsets.only(top: 5, left: 15),
-                          child: Icon(
-                            Icons.location_on,
-                            color: Color(0xffFF1616),
-                          ),
-                        ),
-                        // trailing: Padding(
-                        //   padding: const EdgeInsets.only(bottom: 10, right: 15),
-                        //   child: Icon(
-                        //     Icons.directions_transit,
-                        //     color: Colors.blue,
-                        //     // color:
-                        //     //     Color(int.parse("0xff${recom["line_color_code"]}")),
-                        //   ),
-                        // ),
-                        subtitle: Text(
-                          secondaryAddr,
-                          style: GoogleFonts.notoSans(
-                              fontSize: 14, color: Colors.grey.shade700),
-                        ),
-                        title: Text(
-                          mainAddr,
-                          style: GoogleFonts.notoSans(fontSize: 16),
-                        ),
-                      ),
-                    );
-                  }).toList(),
-                )
-              : const Center(
-                  child: CircularProgressIndicator(),
+          body: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(10,10,0,0),
+                  child: Text("Suggested Places", style: TextStyle(color: Colors.grey),),
                 ),
+                state.placeStatus == FromSearchPlaceStatus.loaded
+                    ? Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ListView(
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                          children: state.locations.map((recom) {
+                            String mainAddr;
+                            String secondaryAddr;
+                            String destinationId;
+                            mainAddr = recom.main;
+                            secondaryAddr = recom.secondary;
+                            destinationId = recom.placeId;
+                            return Card(
+                              child: ListTile(
+                                style: ListTileStyle.list,
+                                onTap: () async {
+                                  Navigator.push<void>(
+                                    context,
+                                    MaterialPageRoute<void>(
+                                      builder: (BuildContext context) => HomePage(
+                                        isFromSearch: true,
+                                        placeId: destinationId,
+                                        isFromOffline: false,
+                                      ),
+                                    ),
+                                  );
+                                },
+                                contentPadding: EdgeInsets.all(5),
+                                leading: const Padding(
+                                  padding: EdgeInsets.only(top: 5, left: 15),
+                                  child: Icon(
+                                    Icons.location_on_outlined,
+                                    color: Color(0xffFF1616),
+                                  ),
+                                ),
+                                // trailing: Padding(
+                                //   padding: const EdgeInsets.only(bottom: 10, right: 15),
+                                //   child: Icon(
+                                //     Icons.directions_transit,
+                                //     color: Colors.blue,
+                                //     // color:
+                                //     //     Color(int.parse("0xff${recom["line_color_code"]}")),
+                                //   ),
+                                // ),
+                                subtitle: Text(
+                                  secondaryAddr,
+                                  style: GoogleFonts.notoSans(
+                                      fontSize: 12, color: Colors.grey.shade700),
+                                ),
+                                title: Text(
+                                  mainAddr,
+                                  style: GoogleFonts.notoSans(fontSize: 14),
+                                ),
+                              ),
+                            );
+                          }).toList(),
+                        ),
+                    )
+                    : const Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                      Divider(height: 10),
+                      Padding(
+                  padding: const EdgeInsets.fromLTRB(10,10,0,0),
+                  child: Text("Suggested Stations",style: TextStyle(color: Colors.grey),),
+                ),
+                state.stationStatus == FromSearchStationStatus.loaded
+                    ? Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ListView(
+                          physics: NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          children: state.stations.map((recom) {
+                            String mainAddr;
+                            String secondaryAddr;
+                            String destinationId;
+                            mainAddr = recom.main;
+                            secondaryAddr = recom.secondary;
+                            destinationId = recom.placeId;
+                            return Card(
+                              child: ListTile(
+                                style: ListTileStyle.list,
+                                onTap: () async {
+                                  Navigator.push<void>(
+                                    context,
+                                    MaterialPageRoute<void>(
+                                      builder: (BuildContext context) => HomePage(
+                                        isFromSearch: true,
+                                        placeId: destinationId,
+                                        isFromOffline: true,
+                                      ),
+                                    ),
+                                  );
+                                },
+                                contentPadding: EdgeInsets.all(5),
+                                
+                                leading: const Padding(
+                                  padding: EdgeInsets.only(top: 5, left: 15),
+                                  child: Icon(
+                                    Icons.directions_subway_filled_outlined,
+                                    color: Color(0xffFF1616),
+                                  ),
+                                ),
+                                // trailing: Padding(
+                                //   padding: const EdgeInsets.only(bottom: 10, right: 15),
+                                //   child: Icon(
+                                //     Icons.search,
+                                //     color: Colors.blue,
+                                //     // color:
+                                //     //     Color(int.parse("0xff${recom["line_color_code"]}")),
+                                //   ),
+                                // ),
+                                subtitle: Text(
+                                  secondaryAddr,
+                                  style: GoogleFonts.notoSans(
+                                      fontSize: 12, color: Colors.grey.shade700),
+                                ),
+                                title: Text(
+                                  mainAddr,
+                                  style: GoogleFonts.notoSans(fontSize: 14),
+                                ),
+                              ),
+                            );
+                          }).toList(),
+                        ),
+                    )
+                    : const Center(
+                        child: CircularProgressIndicator(),
+                      ),
+           
+              ],
+            ),
+          ),
         );
       }),
     );

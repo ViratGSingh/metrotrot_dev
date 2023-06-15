@@ -13,8 +13,8 @@ class NearbyMetroRepository {
     return nearestMetro;
   }
 
-  Future<FromMetro> fetchFromNearestMetro(String placeId) async {
-    final FromMetro nearestMetro =
+  Future<Map<String,dynamic>> fetchFromNearestMetro(String placeId) async {
+    final  nearestMetro =
         await nearbyMetroService.getFromNearestMetro(placeId);
 
     return nearestMetro;

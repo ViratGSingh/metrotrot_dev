@@ -1,1 +1,4148 @@
-{"yellow_line": {"line": "LN2", "color_code": "FFDF00", "stations": ["SamaypurBadli", "RohiniSector1819", "HaiderpurBadliMor", "Jahangirpuri", "AdarshNagarDelhi", "Railwaypolice", "ModelTown", "GuruTeghBahadurNagar", "Vishwavidyalaya", "VidhanSabhaMetroStation", "CivilLines", "KashmereGate", "ChandniChowk", "ChawriBazar", "DelhiAeroCity", "RajivChowk", "PatelChowkmetrostation", "CentralSecretariat", "UdyogBhawan", "LokKalyanMarg", "JorBagh", "DilliHaatINA", "AIIMSmetrostation", "GreenPark", "HauzKhas", "MalviyaNagar", "Saket", "QutabMinarMetroStation", "Chhattarpur", "SultanpurMetroStation", "GhitorniMetroStation", "ArjanGarh", "GuruDronacharya", "Sikanderpur", "MGRoad", "IffcoChowk", "HudaMetroStationGurugram"], "data": {"SamaypurBadli": {"name": "Samaypur Badli", "city": "Delhi", "code": "SPBI", "location": {"lat": 28.744638, "lng": 77.13829299999999}, "line_color_code": "FFDF00"}, "RohiniSector1819": {"name": "Rohini Sector- 18 19", "city": "Delhi", "code": "RISE", "location": {"lat": 28.73838, "lng": 77.13986}, "line_color_code": "FFDF00"}, "HaiderpurBadliMor": {"name": "Haiderpur Badli Mor", "city": "Delhi", "code": "BIMR", "location": {"lat": 28.7300015, "lng": 77.1491765}, "line_color_code": "FFDF00"}, "Jahangirpuri": {"name": "Jahangirpuri", "city": "Delhi", "code": "JGPI", "location": {"lat": 28.72586, "lng": 77.16279}, "line_color_code": "FFDF00"}, "AdarshNagarDelhi": {"name": "Adarsh Nagar Delhi", "city": "Delhi", "code": "AHNR", "location": {"lat": 28.71441, "lng": 77.1668625}, "line_color_code": "FFDF00"}, "Railwaypolice": {"name": "Railway police", "city": "Delhi", "code": "AZU", "location": {"lat": 28.7066286, "lng": 77.18047899999999}, "line_color_code": "FFDF00"}, "ModelTown": {"name": "Model Town", "city": "Delhi", "code": "MDTW", "location": {"lat": 28.7028569, "lng": 77.1937134}, "line_color_code": "FFDF00"}, "GuruTeghBahadurNagar": {"name": "Guru Tegh Bahadur Nagar", "city": "Delhi", "code": "GTBR", "location": {"lat": 28.698384, "lng": 77.20588}, "line_color_code": "FFDF00"}, "Vishwavidyalaya": {"name": "Vishwavidyalaya", "city": "Delhi", "code": "VW", "location": {"lat": 28.69519, "lng": 77.21450999999999}, "line_color_code": "FFDF00"}, "VidhanSabhaMetroStation": {"name": "Vidhan Sabha Metro Station", "city": "Delhi", "code": "VS", "location": {"lat": 28.687763, "lng": 77.221577}, "line_color_code": "FFDF00"}, "CivilLines": {"name": "Civil Lines", "city": "Delhi", "code": "CL", "location": {"lat": 28.67734, "lng": 77.22480999999999}, "line_color_code": "FFDF00"}, "KashmereGate": {"name": "Kashmere Gate", "city": "Delhi", "code": "KG", "location": {"lat": 28.66747, "lng": 77.22824}, "line_color_code": "FFDF00"}, "ChandniChowk": {"name": "Chandni Chowk", "city": "Delhi", "code": "CHK", "location": {"lat": 28.6588265, "lng": 77.2303565}, "line_color_code": "FFDF00"}, "ChawriBazar": {"name": "Chawri Bazar", "city": "Delhi", "code": "CWBR", "location": {"lat": 28.6488005, "lng": 77.2262994}, "line_color_code": "FFDF00"}, "DelhiAeroCity": {"name": "Delhi Aero City", "city": "Delhi", "code": "NDI", "location": {"lat": 28.54888, "lng": 77.12077}, "line_color_code": "FFDF00"}, "RajivChowk": {"name": "Rajiv Chowk", "city": "Delhi", "code": "RCK", "location": {"lat": 28.632986, "lng": 77.219374}, "line_color_code": "FFDF00"}, "PatelChowkmetrostation": {"name": "Patel Chowk metro station", "city": "Delhi", "code": "PTCK", "location": {"lat": 28.6232809, "lng": 77.214478}, "line_color_code": "FFDF00"}, "CentralSecretariat": {"name": "Central Secretariat", "city": "Delhi", "code": "CTST", "location": {"lat": 28.6151511, "lng": 77.21226349999999}, "line_color_code": "FFDF00"}, "UdyogBhawan": {"name": "Udyog Bhawan", "city": "Delhi", "code": "UDB", "location": {"lat": 28.61071, "lng": 77.21188}, "line_color_code": "FFDF00"}, "LokKalyanMarg": {"name": "Lok Kalyan Marg", "city": "Delhi", "code": "LKM", "location": {"lat": 28.5976575, "lng": 77.21117730000002}, "line_color_code": "FFDF00"}, "JorBagh": {"name": "Jor Bagh", "city": "Delhi", "code": "JB", "location": {"lat": 28.5877575, "lng": 77.215312}, "line_color_code": "FFDF00"}, "DilliHaatINA": {"name": "Dilli Haat INA", "city": "Delhi", "code": "INA", "location": {"lat": 28.5733233, "lng": 77.2075473}, "line_color_code": "FFDF00"}, "AIIMSmetrostation": {"name": "AIIMS metro station", "city": "Delhi", "code": "AIIMS", "location": {"lat": 28.5668365, "lng": 77.2080758}, "line_color_code": "FFDF00"}, "GreenPark": {"name": "Green Park", "city": "Delhi", "code": "GNPK", "location": {"lat": 28.5598217, "lng": 77.20682560000002}, "line_color_code": "FFDF00"}, "HauzKhas": {"name": "Hauz Khas", "city": "Delhi", "code": "HKS", "location": {"lat": 28.5439504, "lng": 77.2062395}, "line_color_code": "FFDF00"}, "MalviyaNagar": {"name": "Malviya Nagar", "city": "Delhi", "code": "MVNR", "location": {"lat": 28.5342332, "lng": 77.2094473}, "line_color_code": "FFDF00"}, "Saket": {"name": "Saket", "city": "Delhi", "code": "SAKT", "location": {"lat": 28.52113, "lng": 77.20218}, "line_color_code": "FFDF00"}, "QutabMinarMetroStation": {"name": "Qutab Minar Metro Station", "city": "Delhi", "code": "QM", "location": {"lat": 28.5129418, "lng": 77.18634879999999}, "line_color_code": "FFDF00"}, "Chhattarpur": {"name": "Chhattarpur", "city": "Delhi", "code": "CHTP", "location": {"lat": 28.5067936, "lng": 77.17502569999999}, "line_color_code": "FFDF00"}, "SultanpurMetroStation": {"name": "Sultanpur Metro Station", "city": "Delhi", "code": "SLTP", "location": {"lat": 28.4991292, "lng": 77.16118999999999}, "line_color_code": "FFDF00"}, "GhitorniMetroStation": {"name": "Ghitorni Metro Station", "city": "Delhi", "code": "GTNI", "location": {"lat": 28.493814, "lng": 77.14917539999999}, "line_color_code": "FFDF00"}, "ArjanGarh": {"name": "Arjan Garh", "city": "Delhi", "code": "AJG", "location": {"lat": 28.48088, "lng": 77.12585}, "line_color_code": "FFDF00"}, "GuruDronacharya": {"name": "Guru Dronacharya", "city": "Delhi", "code": "GE", "location": {"lat": 28.4819493, "lng": 77.10225179999999}, "line_color_code": "FFDF00"}, "Sikanderpur": {"name": "Sikanderpur", "city": "Delhi", "code": "SKRP", "location": {"lat": 28.48131, "lng": 77.09312}, "line_color_code": "FFDF00"}, "MGRoad": {"name": "MG Road", "city": "Delhi", "code": "MGRO", "location": {"lat": 28.47957, "lng": 77.08006}, "line_color_code": "FFDF00"}, "IffcoChowk": {"name": "Iffco Chowk", "city": "Delhi", "code": "IFOC", "location": {"lat": 28.47224, "lng": 77.0724}, "line_color_code": "FFDF00"}, "HudaMetroStationGurugram": {"name": "Huda Metro Station (Gurugram)", "city": "Delhi", "code": "HCC", "location": {"lat": 28.4592, "lng": 77.07248}, "line_color_code": "FFDF00"}}}, "violet_line": {"line": "LN6", "color_code": "553592", "stations": ["KashmereGate", "LalQuila", "JamaMasjidmetrostation", "DelhiGatemetrostation", "ITO", "MandiHousemetrostation", "Janpath", "CentralSecretariat", "KhanMarketmetrostation", "JLNStadium", "JangpuraMetroRailStation", "LajpatNagarmetrostation", "Moolchand", "KailashColonyMetroStation", "NehruPlace", "KalkajiMandir", "Govindpuri", "HarkeshNagarOkhla", "JasolaApollo", "SaritaVihar", "MohanEstate", "Tughlakabad", "BadarpurBorder", "Sarai", "NHPCChowk", "MewalaMaharajpur", "Sector28", "BadkhalMormetrostation", "OldFaridabad", "LakhaniArmaanNeelamChowkAjronda", "BataChowkMetroStation", "EscortsMujesar", "ChandniChowkMetroStation", "RajaNaharSinghBallabhgarhMetrostation"], "data": {"KashmereGate": {"name": "Kashmere Gate", "city": "Delhi", "code": "KG", "location": {"lat": 28.66747, "lng": 77.22824}, "line_color_code": "553592"}, "LalQuila": {"name": "Lal Quila", "city": "Delhi", "code": "LLQA", "location": {"lat": 28.6568551, "lng": 77.2368125}, "line_color_code": "553592"}, "JamaMasjidmetrostation": {"name": "Jama Masjid metro station", "city": "Delhi", "code": "JAMD", "location": {"lat": 28.651065, "lng": 77.2381355}, "line_color_code": "553592"}, "DelhiGatemetrostation": {"name": "Delhi Gate metro station", "city": "Delhi", "code": "DLIG", "location": {"lat": 28.6377338, "lng": 77.2411067}, "line_color_code": "553592"}, "ITO": {"name": "ITO", "city": "Delhi", "code": "ITO", "location": {"lat": 28.62839, "lng": 77.24118}, "line_color_code": "553592"}, "MandiHousemetrostation": {"name": "Mandi House metro station", "city": "Delhi", "code": "MDHS", "location": {"lat": 28.6258654, "lng": 77.23429440000001}, "line_color_code": "553592"}, "Janpath": {"name": "Janpath", "city": "Delhi", "code": "JNPH", "location": {"lat": 28.625061, "lng": 77.219184}, "line_color_code": "553592"}, "CentralSecretariat": {"name": "Central Secretariat", "city": "Delhi", "code": "CTST", "location": {"lat": 28.6151511, "lng": 77.21226349999999}, "line_color_code": "553592"}, "KhanMarketmetrostation": {"name": "Khan Market metro station", "city": "Delhi", "code": "KM", "location": {"lat": 28.602044, "lng": 77.2292076}, "line_color_code": "553592"}, "JLNStadium": {"name": "JLN Stadium", "city": "Delhi", "code": "JLNS", "location": {"lat": 28.589363, "lng": 77.23356199999999}, "line_color_code": "553592"}, "JangpuraMetroRailStation": {"name": "Jangpura Metro Rail Station", "city": "Delhi", "code": "JGPA", "location": {"lat": 28.583698, "lng": 77.238436}, "line_color_code": "553592"}, "LajpatNagarmetrostation": {"name": "Lajpat Nagar metro station", "city": "Delhi", "code": "LJPN", "location": {"lat": 28.5705418, "lng": 77.236409}, "line_color_code": "553592"}, "Moolchand": {"name": "Moolchand", "city": "Delhi", "code": "MLCD", "location": {"lat": 28.564012, "lng": 77.234245}, "line_color_code": "553592"}, "KailashColonyMetroStation": {"name": "Kailash Colony Metro Station", "city": "Delhi", "code": "KHCY", "location": {"lat": 28.5553874, "lng": 77.2419541}, "line_color_code": "553592"}, "NehruPlace": {"name": "Nehru Place", "city": "Delhi", "code": "NP", "location": {"lat": 28.551403, "lng": 77.2517658}, "line_color_code": "553592"}, "KalkajiMandir": {"name": "Kalkaji Mandir", "city": "Delhi", "code": "KJMD", "location": {"lat": 28.54945, "lng": 77.25922}, "line_color_code": "553592"}, "Govindpuri": {"name": "Govindpuri", "city": "Delhi", "code": "GDPI", "location": {"lat": 28.5444, "lng": 77.26435}, "line_color_code": "553592"}, "HarkeshNagarOkhla": {"name": "Harkesh Nagar Okhla", "city": "Delhi", "code": "HNOK", "location": {"lat": 28.54292, "lng": 77.27503999999999}, "line_color_code": "553592"}, "JasolaApollo": {"name": "Jasola Apollo", "city": "Delhi", "code": "JLA", "location": {"lat": 28.53813, "lng": 77.2833}, "line_color_code": "553592"}, "SaritaVihar": {"name": "Sarita Vihar", "city": "Delhi", "code": "STVR", "location": {"lat": 28.52873, "lng": 77.28822}, "line_color_code": "553592"}, "MohanEstate": {"name": "Mohan Estate", "city": "Delhi", "code": "METE", "location": {"lat": 28.5194926, "lng": 77.29449559999999}, "line_color_code": "553592"}, "Tughlakabad": {"name": "Tughlakabad", "city": "Delhi", "code": "TKDS", "location": {"lat": 28.5030317, "lng": 77.2995009}, "line_color_code": "553592"}, "BadarpurBorder": {"name": "Badarpur Border", "city": "Delhi", "code": "BAPB", "location": {"lat": 28.4936925, "lng": 77.3026974}, "line_color_code": "553592"}, "Sarai": {"name": "Sarai", "city": "Delhi", "code": "SRAI", "location": {"lat": 28.47807, "lng": 77.3049}, "line_color_code": "553592"}, "NHPCChowk": {"name": "NHPC Chowk", "city": "Delhi", "code": "NHPC", "location": {"lat": 28.4577014, "lng": 77.30744279999999}, "line_color_code": "553592"}, "MewalaMaharajpur": {"name": "Mewala Maharajpur", "city": "Delhi", "code": "MMJR", "location": {"lat": 28.4485624, "lng": 77.30797969999999}, "line_color_code": "553592"}, "Sector28": {"name": "Sector 28", "city": "Delhi", "code": "STTA", "location": {"lat": 28.43801, "lng": 77.30899}, "line_color_code": "553592"}, "BadkhalMormetrostation": {"name": "Badkhal Mor metro station", "city": "Delhi", "code": "BKMR", "location": {"lat": 28.4228115, "lng": 77.31013490000001}, "line_color_code": "553592"}, "OldFaridabad": {"name": "Old Faridabad", "city": "Delhi", "code": "OFDB", "location": {"lat": 28.4107712, "lng": 77.31150749999999}, "line_color_code": "553592"}, "LakhaniArmaanNeelamChowkAjronda": {"name": "Lakhani Armaan - Neelam Chowk Ajronda", "city": "Delhi", "code": "NCAJ", "location": {"lat": 28.3976669, "lng": 77.3122504}, "line_color_code": "553592"}, "BataChowkMetroStation": {"name": "Bata Chowk Metro Station", "city": "Delhi", "code": "BACH", "location": {"lat": 28.3859614, "lng": 77.3134303}, "line_color_code": "553592"}, "EscortsMujesar": {"name": "Escorts Mujesar", "city": "Delhi", "code": "ECMJ", "location": {"lat": 28.37016, "lng": 77.31493999999999}, "line_color_code": "553592"}, "ChandniChowkMetroStation": {"name": "Chandni Chowk Metro Station", "city": "Delhi", "code": "NCBC", "location": {"lat": 28.3546799, "lng": 77.31608349999999}, "line_color_code": "553592"}, "RajaNaharSinghBallabhgarhMetrostation": {"name": "Raja Nahar Singh (Ballabhgarh) Metro station", "city": "Delhi", "code": "BVHM", "location": {"lat": 28.3397989, "lng": 77.316372}, "line_color_code": "553592"}}}, "red_line": {"line": "LN1", "color_code": "FF4040", "stations": ["ShaheedSthalNewBusAdda", "HindonRiver", "Arthala", "MohanNagar", "ShyamPark", "MajorMohitSharmaRajendraNagar", "RajBagh", "ShaheedNagar", "DilshadGarden", "Jhilmil", "MansarovarParkMetroStation", "Shahdara", "Welcome", "Seelampur", "ShastriPark", "KashmereGate", "TisHazari", "PulBangashmetrostation", "PratapNagar", "ShastriNagarMetroStation", "Inderlok", "KanhaiyaNagar", "B4KeshavPuram", "NetajiSubhashPlace", "KohatEnclave", "Pitampura", "RohiniEastmetrostation", "RohiniWest", "Rithala"], "data": {"ShaheedSthalNewBusAdda": {"name": "Shaheed Sthal (New Bus Adda)", "city": "Delhi", "code": "NBAA", "location": {"lat": 28.670621, "lng": 77.415453}, "line_color_code": "FF4040"}, "HindonRiver": {"name": "Hindon River", "city": "Delhi", "code": "HDNR", "location": {"lat": 28.67341499999999, "lng": 77.40637}, "line_color_code": "FF4040"}, "Arthala": {"name": "Arthala", "city": "Delhi", "code": "ATHA", "location": {"lat": 28.6738477, "lng": 77.3905711}, "line_color_code": "FF4040"}, "MohanNagar": {"name": "Mohan Nagar", "city": "Delhi", "code": "MNGM", "location": {"lat": 28.67848, "lng": 77.383933}, "line_color_code": "FF4040"}, "ShyamPark": {"name": "Shyam Park", "city": "Delhi", "code": "SMPK", "location": {"lat": 28.6782, "lng": 77.37024}, "line_color_code": "FF4040"}, "MajorMohitSharmaRajendraNagar": {"name": "Major Mohit Sharma Rajendra Nagar", "city": "Delhi", "code": "RJNM", "location": {"lat": 28.67762, "lng": 77.35828}, "line_color_code": "FF4040"}, "RajBagh": {"name": "Raj Bagh", "city": "Delhi", "code": "RJBH", "location": {"lat": 28.6770329, "lng": 77.3467459}, "line_color_code": "FF4040"}, "ShaheedNagar": {"name": "Shaheed Nagar", "city": "Delhi", "code": "SHDN", "location": {"lat": 28.676632, "lng": 77.333759}, "line_color_code": "FF4040"}, "DilshadGarden": {"name": "Dilshad Garden", "city": "Delhi", "code": "DSG", "location": {"lat": 28.6828082, "lng": 77.3121354}, "line_color_code": "FF4040"}, "Jhilmil": {"name": "Jhilmil", "city": "Delhi", "code": "JLML", "location": {"lat": 28.67576, "lng": 77.312426}, "line_color_code": "FF4040"}, "MansarovarParkMetroStation": {"name": "Mansarovar Park Metro Station", "city": "Delhi", "code": "MPK", "location": {"lat": 28.675566, "lng": 77.300119}, "line_color_code": "FF4040"}, "Shahdara": {"name": "Shahdara", "city": "Delhi", "code": "SHD", "location": {"lat": 28.67345, "lng": 77.28988}, "line_color_code": "FF4040"}, "Welcome": {"name": "Welcome", "city": "Delhi", "code": "WC", "location": {"lat": 28.6719297, "lng": 77.2776303}, "line_color_code": "FF4040"}, "Seelampur": {"name": "Seelampur", "city": "Delhi", "code": "SLAP", "location": {"lat": 28.6697637, "lng": 77.2668193}, "line_color_code": "FF4040"}, "ShastriPark": {"name": "Shastri Park", "city": "Delhi", "code": "SHPK", "location": {"lat": 28.6683013, "lng": 77.2502654}, "line_color_code": "FF4040"}, "KashmereGate": {"name": "Kashmere Gate", "city": "Delhi", "code": "KG", "location": {"lat": 28.66747, "lng": 77.22824}, "line_color_code": "FF4040"}, "TisHazari": {"name": "Tis Hazari", "city": "Delhi", "code": "TZI", "location": {"lat": 28.6669745, "lng": 77.21663930000001}, "line_color_code": "FF4040"}, "PulBangashmetrostation": {"name": "Pul Bangash metro station", "city": "Delhi", "code": "PBGH", "location": {"lat": 28.666398, "lng": 77.2073716}, "line_color_code": "FF4040"}, "PratapNagar": {"name": "Pratap Nagar", "city": "Delhi", "code": "PRA", "location": {"lat": 28.666615, "lng": 77.19888259999999}, "line_color_code": "FF4040"}, "ShastriNagarMetroStation": {"name": "Shastri Nagar Metro Station", "city": "Delhi", "code": "SHT", "location": {"lat": 28.670081, "lng": 77.18124999999999}, "line_color_code": "FF4040"}, "Inderlok": {"name": "Inderlok", "city": "Delhi", "code": "ILOK", "location": {"lat": 28.673571, "lng": 77.170296}, "line_color_code": "FF4040"}, "KanhaiyaNagar": {"name": "Kanhaiya Nagar", "city": "Delhi", "code": "KN", "location": {"lat": 28.68237, "lng": 77.16481}, "line_color_code": "FF4040"}, "B4KeshavPuram": {"name": "B-4 Keshav Puram", "city": "Delhi", "code": "KP", "location": {"lat": 28.687551, "lng": 77.162475}, "line_color_code": "FF4040"}, "NetajiSubhashPlace": {"name": "Netaji Subhash Place", "city": "Delhi", "code": "NSHP", "location": {"lat": 28.69605, "lng": 77.15259}, "line_color_code": "FF4040"}, "KohatEnclave": {"name": "Kohat Enclave", "city": "Delhi", "code": "KE", "location": {"lat": 28.69799, "lng": 77.14063999999999}, "line_color_code": "FF4040"}, "Pitampura": {"name": "Pitampura", "city": "Delhi", "code": "PTP", "location": {"lat": 28.70311, "lng": 77.13247}, "line_color_code": "FF4040"}, "RohiniEastmetrostation": {"name": "Rohini East metro station", "city": "Delhi", "code": "RHE", "location": {"lat": 28.7076699, "lng": 77.1258745}, "line_color_code": "FF4040"}, "RohiniWest": {"name": "Rohini West", "city": "Delhi", "code": "RHW", "location": {"lat": 28.714869, "lng": 77.115484}, "line_color_code": "FF4040"}, "Rithala": {"name": "Rithala", "city": "Delhi", "code": "RI", "location": {"lat": 28.72077, "lng": 77.10716}, "line_color_code": "FF4040"}}}, "pink_line": {"line": "LN7", "color_code": "FC8EAC", "stations": ["MajlisPark", "Railwaypolice", "ShalimarBagh", "NetajiSubhashPlace", "Shakurpur", "PunjabiBaghWest", "ESIBasaidarapur", "RajouriGarden", "Mayapuri", "NarainaVihar", "DelhiCanttMetroStation", "DurgabaiDeshmukhSouthCampus", "SirMVishweshwaraiahMotiBagh", "BhikajiCamaPlace", "SarojiniNagar", "DilliHaatINA", "SouthExtension", "LajpatNagarmetrostation", "Vinobapuri", "Ashrammetrostation", "SaraiKaleKhanNizamuddin", "MayurVihar1", "MayurViharPkt1", "SanjayLake", "EastVinodNagarMayurVihar2MetroStation", "MandawaliWestVinodNagar", "IPExtension", "AnandViharMetroStation", "Karkarduma", "KarkardumaCourt", "Krishnanagarmetrostation", "EastAzadNagar", "Welcome", "Jaffrabad", "MaujpurBabarpur", "Gokulpuri", "JohriEnclave", "ShivVihar"], "data": {"MajlisPark": {"name": "Majlis Park", "city": "Delhi", "code": "MKPR", "location": {"lat": 28.72416, "lng": 77.18205}, "line_color_code": "FC8EAC"}, "Railwaypolice": {"name": "Railway police", "city": "Delhi", "code": "AZU", "location": {"lat": 28.7066286, "lng": 77.18047899999999}, "line_color_code": "FC8EAC"}, "ShalimarBagh": {"name": "Shalimar Bagh", "city": "Delhi", "code": "SMBG", "location": {"lat": 28.7019188, "lng": 77.1651467}, "line_color_code": "FC8EAC"}, "NetajiSubhashPlace": {"name": "Netaji Subhash Place", "city": "Delhi", "code": "NSHP", "location": {"lat": 28.69605, "lng": 77.15259}, "line_color_code": "FC8EAC"}, "Shakurpur": {"name": "Shakurpur", "city": "Delhi", "code": "SAKP", "location": {"lat": 28.6857084, "lng": 77.1496861}, "line_color_code": "FC8EAC"}, "PunjabiBaghWest": {"name": "Punjabi Bagh West", "city": "Delhi", "code": "PBGW", "location": {"lat": 28.67274, "lng": 77.13918}, "line_color_code": "FC8EAC"}, "ESIBasaidarapur": {"name": "ESI-Basaidarapur", "city": "Delhi", "code": "ESIH", "location": {"lat": 28.6580684, "lng": 77.127462}, "line_color_code": "FC8EAC"}, "RajouriGarden": {"name": "Rajouri Garden", "city": "Delhi", "code": "RG", "location": {"lat": 28.649019, "lng": 77.122705}, "line_color_code": "FC8EAC"}, "Mayapuri": {"name": "Mayapuri", "city": "Delhi", "code": "MYPI", "location": {"lat": 28.6230738, "lng": 77.1207739}, "line_color_code": "FC8EAC"}, "NarainaVihar": {"name": "Naraina Vihar", "city": "Delhi", "code": "NAVR", "location": {"lat": 28.624125, "lng": 77.136488}, "line_color_code": "FC8EAC"}, "DelhiCanttMetroStation": {"name": "Delhi Cantt Metro Station", "city": "Delhi", "code": "DLIC", "location": {"lat": 28.6086915, "lng": 77.1404225}, "line_color_code": "FC8EAC"}, "DurgabaiDeshmukhSouthCampus": {"name": "Durgabai Deshmukh South Campus", "city": "Delhi", "code": "DDSC", "location": {"lat": 28.58938, "lng": 77.16951999999999}, "line_color_code": "FC8EAC"}, "SirMVishweshwaraiahMotiBagh": {"name": "Sir M. Vishweshwaraiah Moti Bagh", "city": "Delhi", "code": "SVMB", "location": {"lat": 28.578504, "lng": 77.175726}, "line_color_code": "FC8EAC"}, "BhikajiCamaPlace": {"name": "Bhikaji Cama Place", "city": "Delhi", "code": "BKCP", "location": {"lat": 28.567924, "lng": 77.1880786}, "line_color_code": "FC8EAC"}, "SarojiniNagar": {"name": "Sarojini Nagar", "city": "Delhi", "code": "SOJI", "location": {"lat": 28.5740324, "lng": 77.19906689999999}, "line_color_code": "FC8EAC"}, "DilliHaatINA": {"name": "Dilli Haat INA", "city": "Delhi", "code": "INA", "location": {"lat": 28.5733233, "lng": 77.2075473}, "line_color_code": "FC8EAC"}, "SouthExtension": {"name": "South Extension", "city": "Delhi", "code": "SOEN", "location": {"lat": 28.568611, "lng": 77.220265}, "line_color_code": "FC8EAC"}, "LajpatNagarmetrostation": {"name": "Lajpat Nagar metro station", "city": "Delhi", "code": "LJPN", "location": {"lat": 28.5705418, "lng": 77.236409}, "line_color_code": "FC8EAC"}, "Vinobapuri": {"name": "Vinobapuri", "city": "Delhi", "code": "VNPR", "location": {"lat": 28.565944, "lng": 77.250502}, "line_color_code": "FC8EAC"}, "Ashrammetrostation": {"name": "Ashram metro station", "city": "Delhi", "code": "AHRM", "location": {"lat": 28.5735755, "lng": 77.2575}, "line_color_code": "FC8EAC"}, "SaraiKaleKhanNizamuddin": {"name": "Sarai Kale Khan - Nizamuddin", "city": "Delhi", "code": "NIZM", "location": {"lat": 28.5880776, "lng": 77.2532422}, "line_color_code": "FC8EAC"}, "MayurVihar1": {"name": "Mayur Vihar-1", "city": "Delhi", "code": "MVP1", "location": {"lat": 28.6042259, "lng": 77.289608}, "line_color_code": "FC8EAC"}, "MayurViharPkt1": {"name": "Mayur Vihar Pkt-1", "city": "Delhi", "code": "MVPO", "location": {"lat": 28.6057944, "lng": 77.2987035}, "line_color_code": "FC8EAC"}, "SanjayLake": {"name": "Sanjay Lake", "city": "Delhi", "code": "TKPR", "location": {"lat": 28.6147599, "lng": 77.304082}, "line_color_code": "FC8EAC"}, "EastVinodNagarMayurVihar2MetroStation": {"name": "East Vinod Nagar Mayur Vihar 2 Metro Station", "city": "Delhi", "code": "VENT", "location": {"lat": 28.6200432, "lng": 77.3052467}, "line_color_code": "FC8EAC"}, "MandawaliWestVinodNagar": {"name": "Mandawali - West Vinod Nagar", "city": "Delhi", "code": "VNNR", "location": {"lat": 28.624877, "lng": 77.304372}, "line_color_code": "FC8EAC"}, "IPExtension": {"name": "IP Extension", "city": "Delhi", "code": "IPE", "location": {"lat": 28.6319356, "lng": 77.31075659999999}, "line_color_code": "FC8EAC"}, "AnandViharMetroStation": {"name": "Anand Vihar Metro Station", "city": "Delhi", "code": "AVIT", "location": {"lat": 28.6469527, "lng": 77.3159156}, "line_color_code": "FC8EAC"}, "Karkarduma": {"name": "Karkarduma", "city": "Delhi", "code": "KKDA", "location": {"lat": 28.64849, "lng": 77.30557999999999}, "line_color_code": "FC8EAC"}, "KarkardumaCourt": {"name": "Karkarduma Court", "city": "Delhi", "code": "KKDC", "location": {"lat": 28.65359, "lng": 77.29558999999999}, "line_color_code": "FC8EAC"}, "Krishnanagarmetrostation": {"name": "Krishna nagar metro station", "city": "Delhi", "code": "KHNA", "location": {"lat": 28.6585312, "lng": 77.2895047}, "line_color_code": "FC8EAC"}, "EastAzadNagar": {"name": "East Azad Nagar", "city": "Delhi", "code": "EANR", "location": {"lat": 28.66479, "lng": 77.28479999999999}, "line_color_code": "FC8EAC"}, "Welcome": {"name": "Welcome", "city": "Delhi", "code": "WC", "location": {"lat": 28.6719297, "lng": 77.2776303}, "line_color_code": "FC8EAC"}, "Jaffrabad": {"name": "Jaffrabad", "city": "Delhi", "code": "JFRB", "location": {"lat": 28.6827404, "lng": 77.2748209}, "line_color_code": "FC8EAC"}, "MaujpurBabarpur": {"name": "Maujpur-Babarpur", "city": "Delhi", "code": "MUPR", "location": {"lat": 28.6921031, "lng": 77.279612}, "line_color_code": "FC8EAC"}, "Gokulpuri": {"name": "Gokulpuri", "city": "Delhi", "code": "GKPR", "location": {"lat": 28.7023798, "lng": 77.28603369999999}, "line_color_code": "FC8EAC"}, "JohriEnclave": {"name": "Johri Enclave", "city": "Delhi", "code": "JIEE", "location": {"lat": 28.71318, "lng": 77.29006}, "line_color_code": "FC8EAC"}, "ShivVihar": {"name": "Shiv Vihar", "city": "Delhi", "code": "SVVR", "location": {"lat": 28.7216122, "lng": 77.2894938}, "line_color_code": "FC8EAC"}}}, "magenta_line": {"line": "LN8", "color_code": "CC338B", "stations": ["JanakpuriWest", "DabriMorJanakpuriSouth", "Dashrathpuri", "Palam", "SadarBazarCantonmentMetroStation", "IndigoTerminal1IGIAirport", "ShankarVihar", "VasantVihar", "Munirka", "RKPuram", "IIT", "HauzKhas", "PanchsheelPark", "ChiragDelhimetrostation", "GreaterKailash", "NehruEnclave", "KalkajiMandir", "OkhlaNSIC", "SukhdevVihar", "JamiaMilliaIslamia", "OkhlaVihar", "JasolaViharShaheenBagh", "KalindiKunj", "OkhlaBirdSanctuary", "BotanicalGardenmetrostation"], "data": {"JanakpuriWest": {"name": "Janakpuri West", "city": "Delhi", "code": "JPW", "location": {"lat": 28.62947, "lng": 77.07777}, "line_color_code": "CC338B"}, "DabriMorJanakpuriSouth": {"name": "Dabri Mor- Janakpuri South", "city": "Delhi", "code": "DBMR", "location": {"lat": 28.615906, "lng": 77.085257}, "line_color_code": "CC338B"}, "Dashrathpuri": {"name": "Dashrathpuri", "city": "Delhi", "code": "DSHP", "location": {"lat": 28.6023411, "lng": 77.0826046}, "line_color_code": "CC338B"}, "Palam": {"name": "Palam", "city": "Delhi", "code": "PALM", "location": {"lat": 28.58907, "lng": 77.08296}, "line_color_code": "CC338B"}, "SadarBazarCantonmentMetroStation": {"name": "Sadar Bazar Cantonment Metro Station", "city": "Delhi", "code": "SABR", "location": {"lat": 28.5770418, "lng": 77.1113903}, "line_color_code": "CC338B"}, "IndigoTerminal1IGIAirport": {"name": "Indigo Terminal 1 IGI Airport", "city": "Delhi", "code": "IGDA", "location": {"lat": 28.5653, "lng": 77.12238099999999}, "line_color_code": "CC338B"}, "ShankarVihar": {"name": "Shankar Vihar", "city": "Delhi", "code": "SKVR", "location": {"lat": 28.5608664, "lng": 77.1403535}, "line_color_code": "CC338B"}, "VasantVihar": {"name": "Vasant Vihar", "city": "Delhi", "code": "VTVR", "location": {"lat": 28.557829, "lng": 77.16099000000001}, "line_color_code": "CC338B"}, "Munirka": {"name": "Munirka", "city": "Delhi", "code": "MIRK", "location": {"lat": 28.5578944, "lng": 77.173968}, "line_color_code": "CC338B"}, "RKPuram": {"name": "R.K. Puram", "city": "Delhi", "code": "RKPM", "location": {"lat": 28.5503325, "lng": 77.1851905}, "line_color_code": "CC338B"}, "IIT": {"name": "IIT", "city": "Delhi", "code": "IIT", "location": {"lat": 28.547199, "lng": 77.193817}, "line_color_code": "CC338B"}, "HauzKhas": {"name": "Hauz Khas", "city": "Delhi", "code": "HKS", "location": {"lat": 28.5439504, "lng": 77.2062395}, "line_color_code": "CC338B"}, "PanchsheelPark": {"name": "Panchsheel Park", "city": "Delhi", "code": "PSPK", "location": {"lat": 28.542338, "lng": 77.220507}, "line_color_code": "CC338B"}, "ChiragDelhimetrostation": {"name": "Chirag Delhi metro station", "city": "Delhi", "code": "CDLI", "location": {"lat": 28.5415545, "lng": 77.231886}, "line_color_code": "CC338B"}, "GreaterKailash": {"name": "Greater Kailash", "city": "Delhi", "code": "GKEI", "location": {"lat": 28.541832, "lng": 77.238247}, "line_color_code": "CC338B"}, "NehruEnclave": {"name": "Nehru Enclave", "city": "Delhi", "code": "NUEE", "location": {"lat": 28.5458514, "lng": 77.251167}, "line_color_code": "CC338B"}, "KalkajiMandir": {"name": "Kalkaji Mandir", "city": "Delhi", "code": "KJMD", "location": {"lat": 28.54945, "lng": 77.25922}, "line_color_code": "CC338B"}, "OkhlaNSIC": {"name": "Okhla NSIC", "city": "Delhi", "code": "OKNS", "location": {"lat": 28.5544259, "lng": 77.2648833}, "line_color_code": "CC338B"}, "SukhdevVihar": {"name": "Sukhdev Vihar", "city": "Delhi", "code": "IWNR", "location": {"lat": 28.5597744, "lng": 77.2751248}, "line_color_code": "CC338B"}, "JamiaMilliaIslamia": {"name": "Jamia Millia Islamia", "city": "Delhi", "code": "JANR", "location": {"lat": 28.56295, "lng": 77.28622}, "line_color_code": "CC338B"}, "OkhlaVihar": {"name": "Okhla Vihar", "city": "Delhi", "code": "OVA", "location": {"lat": 28.561087, "lng": 77.29197429999999}, "line_color_code": "CC338B"}, "JasolaViharShaheenBagh": {"name": "Jasola Vihar Shaheen Bagh", "city": "Delhi", "code": "JLA8", "location": {"lat": 28.5459354, "lng": 77.296551}, "line_color_code": "CC338B"}, "KalindiKunj": {"name": "Kalindi Kunj", "city": "Delhi", "code": "KIKJ", "location": {"lat": 28.542835, "lng": 77.310175}, "line_color_code": "CC338B"}, "OkhlaBirdSanctuary": {"name": "Okhla Bird Sanctuary", "city": "Delhi", "code": "OKBS", "location": {"lat": 28.5528635, "lng": 77.3216503}, "line_color_code": "CC338B"}, "BotanicalGardenmetrostation": {"name": "Botanical Garden metro station", "city": "Delhi", "code": "BCGN", "location": {"lat": 28.5640373, "lng": 77.3342687}, "line_color_code": "CC338B"}}}, "grey_line": {"line": "LN9", "color_code": "838996", "stations": ["Dwarka", "Nangli", "Najafgarhmetrostation", "DhansaBusStand"], "data": {"Dwarka": {"name": "Dwarka", "city": "Delhi", "code": "DW", "location": {"lat": 28.6148727, "lng": 77.0229419}, "line_color_code": "838996"}, "Nangli": {"name": "Nangli", "city": "Delhi", "code": "NNGI", "location": {"lat": 28.617239, "lng": 77.0104}, "line_color_code": "838996"}, "Najafgarhmetrostation": {"name": "Najafgarh metro station", "city": "Delhi", "code": "NFGH", "location": {"lat": 28.6125955, "lng": 76.986314}, "line_color_code": "838996"}, "DhansaBusStand": {"name": "Dhansa Bus Stand", "city": "Delhi", "code": "DNBT", "location": {"lat": 28.6119, "lng": 76.978}, "line_color_code": "838996"}}}, "green_line": {"line": "LN5", "color_code": "20B2AA", "stations": ["KirtiNagar", "SatguruRamSinghMarg", "Inderlok", "AshokParkMain", "PunjabiBagh", "PunjabiBaghWest", "ShivajiPark", "Madipur", "PaschimViharEast", "PaschimViharWest", "Peeragarhi", "UdyogNagar", "SurajmalStadium", "Nangloi", "NangloiRailwayStation", "RajdhaniPark", "Mundka", "MIAMetroStation", "Ghevra", "TikriKalan", "TikriBorder", "PanditShreeRamSharma", "BahadurgarhCity", "BrigadierHoshiarSingh"], "data": {"KirtiNagar": {"name": "Kirti Nagar", "city": "Delhi", "code": "KNR", "location": {"lat": 28.6556764, "lng": 77.1508142}, "line_color_code": "20B2AA"}, "SatguruRamSinghMarg": {"name": "Satguru Ram Singh Marg", "city": "Delhi", "code": "SRSM", "location": {"lat": 28.6620427, "lng": 77.1577283}, "line_color_code": "20B2AA"}, "Inderlok": {"name": "Inderlok", "city": "Delhi", "code": "ILOK", "location": {"lat": 28.673571, "lng": 77.170296}, "line_color_code": "20B2AA"}, "AshokParkMain": {"name": "Ashok Park Main", "city": "Delhi", "code": "APMN", "location": {"lat": 28.6716168, "lng": 77.15522639999999}, "line_color_code": "20B2AA"}, "PunjabiBagh": {"name": "Punjabi Bagh", "city": "Delhi", "code": "PBGA", "location": {"lat": 28.6729291, "lng": 77.1460592}, "line_color_code": "20B2AA"}, "PunjabiBaghWest": {"name": "Punjabi Bagh West", "city": "Delhi", "code": "PBGW", "location": {"lat": 28.67274, "lng": 77.13918}, "line_color_code": "20B2AA"}, "ShivajiPark": {"name": "Shivaji Park", "city": "Delhi", "code": "SHVP", "location": {"lat": 28.6749653, "lng": 77.13044959999999}, "line_color_code": "20B2AA"}, "Madipur": {"name": "Madipur", "city": "Delhi", "code": "MAPR", "location": {"lat": 28.6764174, "lng": 77.1194824}, "line_color_code": "20B2AA"}, "PaschimViharEast": {"name": "Paschim Vihar (East)", "city": "Delhi", "code": "PVE", "location": {"lat": 28.67727, "lng": 77.11241}, "line_color_code": "20B2AA"}, "PaschimViharWest": {"name": "Paschim Vihar (West)", "city": "Delhi", "code": "PVW", "location": {"lat": 28.6786, "lng": 77.10231}, "line_color_code": "20B2AA"}, "Peeragarhi": {"name": "Peeragarhi", "city": "Delhi", "code": "PAGI", "location": {"lat": 28.67965319999999, "lng": 77.09277689999999}, "line_color_code": "20B2AA"}, "UdyogNagar": {"name": "Udyog Nagar", "city": "Delhi", "code": "UNRG", "location": {"lat": 28.681048, "lng": 77.08086399999999}, "line_color_code": "20B2AA"}, "SurajmalStadium": {"name": "Surajmal Stadium", "city": "Delhi", "code": "SMSM", "location": {"lat": 28.6819922, "lng": 77.0739822}, "line_color_code": "20B2AA"}, "Nangloi": {"name": "Nangloi", "city": "Delhi", "code": "NNOI", "location": {"lat": 28.68233, "lng": 77.06481}, "line_color_code": "20B2AA"}, "NangloiRailwayStation": {"name": "Nangloi Railway Station", "city": "Delhi", "code": "NRSN", "location": {"lat": 28.682133, "lng": 77.05622}, "line_color_code": "20B2AA"}, "RajdhaniPark": {"name": "Rajdhani Park", "city": "Delhi", "code": "RDPK", "location": {"lat": 28.6822794, "lng": 77.044007}, "line_color_code": "20B2AA"}, "Mundka": {"name": "Mundka", "city": "Delhi", "code": "MUDK", "location": {"lat": 28.68239, "lng": 77.03034}, "line_color_code": "20B2AA"}, "MIAMetroStation": {"name": "MIA Metro Station", "city": "Delhi", "code": "MIAA", "location": {"lat": 28.6835289, "lng": 77.01685049999999}, "line_color_code": "20B2AA"}, "Ghevra": {"name": "Ghevra", "city": "Delhi", "code": "GHEM", "location": {"lat": 28.691376, "lng": 76.9975867}, "line_color_code": "20B2AA"}, "TikriKalan": {"name": "Tikri Kalan", "city": "Delhi", "code": "TKLM", "location": {"lat": 28.68688, "lng": 76.97726999999999}, "line_color_code": "20B2AA"}, "TikriBorder": {"name": "Tikri Border", "city": "Delhi", "code": "TKBR", "location": {"lat": 28.6880203, "lng": 76.9640989}, "line_color_code": "20B2AA"}, "PanditShreeRamSharma": {"name": "Pandit Shree Ram Sharma", "city": "Delhi", "code": "MIEE", "location": {"lat": 28.689242, "lng": 76.95114699999999}, "line_color_code": "20B2AA"}, "BahadurgarhCity": {"name": "Bahadurgarh City", "city": "Delhi", "code": "BUSS", "location": {"lat": 28.69074, "lng": 76.93538}, "line_color_code": "20B2AA"}, "BrigadierHoshiarSingh": {"name": "Brigadier Hoshiar Singh", "city": "Delhi", "code": "CIPK", "location": {"lat": 28.69741, "lng": 76.91927}, "line_color_code": "20B2AA"}}}, "blue_line": {"line": "LN3", "color_code": "4169E1", "stations": ["DwarkaSector21", "DwarkaSec08", "DwarkaSector9", "DwarkaSector10", "DwarkaSector11metrostation", "DwarkaSec12", "DwarkaSector13", "DwarkaSector14metrostation", "Dwarka", "DwarkaMorMetroStation", "Nawadametrostation", "UttamNagarWest", "UttamNagarEast", "JanakpuriWest", "JanakPuriEast", "TilakNagar", "SubhashNagarMetroStation", "TagoreGarden", "RajouriGarden", "RameshNagar", "MotiNagarmetrostation", "KirtiNagar", "Shadipur", "PatelNagar", "RajendraPlace", "KarolBagh", "Jhandewalan", "RKAshramMarg", "RajivChowk", "BarakhambaRoad", "MandiHousemetrostation", "SupremeCourt", "Indraprastha", "YamunaBank", "Akshardham", "MayurVihar1", "MayurViharExtentionMetroStation", "NewAshokNagar", "NoidaSector15MetroStation", "Sector16MetroStation", "Noida", "BotanicalGardenmetrostation", "GolfCourseMetroGateno1", "WaveCityCenterNoida", "Sector34Noida", "Sector52Noida", "Sector61Noida", "NoidaSector59MetroStation", "Sector62Noida", "NoidaElectronicCity"], "data": {"DwarkaSector21": {"name": "Dwarka Sector 21", "city": "Delhi", "code": "DSTO", "location": {"lat": 28.5522057, "lng": 77.0583048}, "line_color_code": "4169E1"}, "DwarkaSec08": {"name": "Dwarka Sec-08", "city": "Delhi", "code": "DSET", "location": {"lat": 28.5658774, "lng": 77.0670303}, "line_color_code": "4169E1"}, "DwarkaSector9": {"name": "Dwarka Sector 9", "city": "Delhi", "code": "DSN", "location": {"lat": 28.57428, "lng": 77.06528}, "line_color_code": "4169E1"}, "DwarkaSector10": {"name": "Dwarka Sector- 10", "city": "Delhi", "code": "DST", "location": {"lat": 28.5811243, "lng": 77.0575085}, "line_color_code": "4169E1"}, "DwarkaSector11metrostation": {"name": "Dwarka Sector 11 metro station", "city": "Delhi", "code": "DSE", "location": {"lat": 28.5863613, "lng": 77.0497386}, "line_color_code": "4169E1"}, "DwarkaSec12": {"name": "Dwarka Sec 12", "city": "Delhi", "code": "DSW", "location": {"lat": 28.59231, "lng": 77.04063}, "line_color_code": "4169E1"}, "DwarkaSector13": {"name": "Dwarka Sector 13", "city": "Delhi", "code": "DSTN", "location": {"lat": 28.5972, "lng": 77.03332999999999}, "line_color_code": "4169E1"}, "DwarkaSector14metrostation": {"name": "Dwarka Sector 14 metro station", "city": "Delhi", "code": "DSFN", "location": {"lat": 28.6022415, "lng": 77.02591249999999}, "line_color_code": "4169E1"}, "Dwarka": {"name": "Dwarka", "city": "Delhi", "code": "DW", "location": {"lat": 28.6148727, "lng": 77.0229419}, "line_color_code": "4169E1"}, "DwarkaMorMetroStation": {"name": "Dwarka Mor Metro Station", "city": "Delhi", "code": "DM", "location": {"lat": 28.6192938, "lng": 77.0333266}, "line_color_code": "4169E1"}, "Nawadametrostation": {"name": "Nawada metro station", "city": "Delhi", "code": "NWD", "location": {"lat": 28.620156, "lng": 77.0450226}, "line_color_code": "4169E1"}, "UttamNagarWest": {"name": "Uttam Nagar West", "city": "Delhi", "code": "UNW", "location": {"lat": 28.6217542, "lng": 77.0558111}, "line_color_code": "4169E1"}, "UttamNagarEast": {"name": "Uttam Nagar East", "city": "Delhi", "code": "UNE", "location": {"lat": 28.6248053, "lng": 77.0653064}, "line_color_code": "4169E1"}, "JanakpuriWest": {"name": "Janakpuri West", "city": "Delhi", "code": "JPW", "location": {"lat": 28.62947, "lng": 77.07777}, "line_color_code": "4169E1"}, "JanakPuriEast": {"name": "Janak Puri East", "city": "Delhi", "code": "JPE", "location": {"lat": 28.63306, "lng": 77.08672}, "line_color_code": "4169E1"}, "TilakNagar": {"name": "Tilak Nagar", "city": "Delhi", "code": "TN", "location": {"lat": 28.636568, "lng": 77.09648}, "line_color_code": "4169E1"}, "SubhashNagarMetroStation": {"name": "Subhash Nagar Metro Station", "city": "Delhi", "code": "SN", "location": {"lat": 28.64039, "lng": 77.10495}, "line_color_code": "4169E1"}, "TagoreGarden": {"name": "Tagore Garden", "city": "Delhi", "code": "TG", "location": {"lat": 28.643754, "lng": 77.1128805}, "line_color_code": "4169E1"}, "RajouriGarden": {"name": "Rajouri Garden", "city": "Delhi", "code": "RG", "location": {"lat": 28.649019, "lng": 77.122705}, "line_color_code": "4169E1"}, "RameshNagar": {"name": "Ramesh Nagar", "city": "Delhi", "code": "RN", "location": {"lat": 28.65274999999999, "lng": 77.13163999999999}, "line_color_code": "4169E1"}, "MotiNagarmetrostation": {"name": "Moti Nagar metro station", "city": "Delhi", "code": "MN", "location": {"lat": 28.6578704, "lng": 77.1426742}, "line_color_code": "4169E1"}, "KirtiNagar": {"name": "Kirti Nagar", "city": "Delhi", "code": "KNR", "location": {"lat": 28.6556764, "lng": 77.1508142}, "line_color_code": "4169E1"}, "Shadipur": {"name": "Shadipur", "city": "Delhi", "code": "SP", "location": {"lat": 28.651027, "lng": 77.1562196}, "line_color_code": "4169E1"}, "PatelNagar": {"name": "Patel Nagar", "city": "Delhi", "code": "PN", "location": {"lat": 28.6450319, "lng": 77.169271}, "line_color_code": "4169E1"}, "RajendraPlace": {"name": "Rajendra Place", "city": "Delhi", "code": "RP", "location": {"lat": 28.64253, "lng": 77.17824}, "line_color_code": "4169E1"}, "KarolBagh": {"name": "Karol Bagh", "city": "Delhi", "code": "KB", "location": {"lat": 28.6439851, "lng": 77.1884965}, "line_color_code": "4169E1"}, "Jhandewalan": {"name": "Jhandewalan", "city": "Delhi", "code": "JW", "location": {"lat": 28.64429, "lng": 77.19991999999999}, "line_color_code": "4169E1"}, "RKAshramMarg": {"name": "RK Ashram Marg", "city": "Delhi", "code": "RKAM", "location": {"lat": 28.63924, "lng": 77.20855999999999}, "line_color_code": "4169E1"}, "RajivChowk": {"name": "Rajiv Chowk", "city": "Delhi", "code": "RCK", "location": {"lat": 28.632986, "lng": 77.219374}, "line_color_code": "4169E1"}, "BarakhambaRoad": {"name": "Barakhamba Road", "city": "Delhi", "code": "BRKR", "location": {"lat": 28.62994, "lng": 77.22449999999999}, "line_color_code": "4169E1"}, "MandiHousemetrostation": {"name": "Mandi House metro station", "city": "Delhi", "code": "MDHS", "location": {"lat": 28.6258654, "lng": 77.23429440000001}, "line_color_code": "4169E1"}, "SupremeCourt": {"name": "Supreme Court", "city": "Delhi", "code": "PTMD", "location": {"lat": 28.6231754, "lng": 77.24292849999999}, "line_color_code": "4169E1"}, "Indraprastha": {"name": "Indraprastha", "city": "Delhi", "code": "IDPT", "location": {"lat": 28.62055, "lng": 77.24995}, "line_color_code": "4169E1"}, "YamunaBank": {"name": "Yamuna Bank", "city": "Delhi", "code": "YB", "location": {"lat": 28.6231664, "lng": 77.26800000000001}, "line_color_code": "4169E1"}, "Akshardham": {"name": "Akshardham", "city": "Delhi", "code": "ASDM", "location": {"lat": 28.6179626, "lng": 77.2793762}, "line_color_code": "4169E1"}, "MayurVihar1": {"name": "Mayur Vihar-1", "city": "Delhi", "code": "MVP1", "location": {"lat": 28.6042259, "lng": 77.289608}, "line_color_code": "4169E1"}, "MayurViharExtentionMetroStation": {"name": "Mayur Vihar Extention Metro Station", "city": "Delhi", "code": "MVE", "location": {"lat": 28.5928265, "lng": 77.2947027}, "line_color_code": "4169E1"}, "NewAshokNagar": {"name": "New Ashok Nagar", "city": "Delhi", "code": "NAGR", "location": {"lat": 28.58916, "lng": 77.30214}, "line_color_code": "4169E1"}, "NoidaSector15MetroStation": {"name": "Noida Sector- 15 Metro Station", "city": "Delhi", "code": "NSFT", "location": {"lat": 28.58509, "lng": 77.31159}, "line_color_code": "4169E1"}, "Sector16MetroStation": {"name": "Sector 16 Metro Station", "city": "Delhi", "code": "NSST", "location": {"lat": 28.5785782, "lng": 77.3172683}, "line_color_code": "4169E1"}, "Noida": {"name": "Noida", "city": "Delhi", "code": "NSET", "location": {"lat": 28.570751, "lng": 77.326188}, "line_color_code": "4169E1"}, "BotanicalGardenmetrostation": {"name": "Botanical Garden metro station", "city": "Delhi", "code": "BCGN", "location": {"lat": 28.5640373, "lng": 77.3342687}, "line_color_code": "4169E1"}, "GolfCourseMetroGateno1": {"name": "Golf Course Metro Gate no. 1", "city": "Delhi", "code": "GEC", "location": {"lat": 28.5671765, "lng": 77.3459827}, "line_color_code": "4169E1"}, "WaveCityCenterNoida": {"name": "Wave City Center Noida", "city": "Delhi", "code": "NCC", "location": {"lat": 28.57467, "lng": 77.35605}, "line_color_code": "4169E1"}, "Sector34Noida": {"name": "Sector 34 Noida", "city": "Delhi", "code": "STFN", "location": {"lat": 28.580117, "lng": 77.36348699999999}, "line_color_code": "4169E1"}, "Sector52Noida": {"name": "Sector 52 Noida", "city": "Delhi", "code": "SFTN", "location": {"lat": 28.5867, "lng": 77.372839}, "line_color_code": "4169E1"}, "Sector61Noida": {"name": "Sector 61 Noida", "city": "Delhi", "code": "SSON", "location": {"lat": 28.597631, "lng": 77.372299}, "line_color_code": "4169E1"}, "NoidaSector59MetroStation": {"name": "Noida Sector 59 Metro Station", "city": "Delhi", "code": "SFNN", "location": {"lat": 28.6064812, "lng": 77.37272039999999}, "line_color_code": "4169E1"}, "Sector62Noida": {"name": "Sector 62 Noida", "city": "Delhi", "code": "SSTN", "location": {"lat": 28.616995, "lng": 77.37361}, "line_color_code": "4169E1"}, "NoidaElectronicCity": {"name": "Noida Electronic City", "city": "Delhi", "code": "NECC", "location": {"lat": 28.627941, "lng": 77.37493}, "line_color_code": "4169E1"}}}, "blue_line_branch": {"line": "LN4", "color_code": "4169E1", "stations": ["YamunaBank", "LaxmiNagarMetroStation", "NirmanVihar", "PreetViharMetroStation", "Karkarduma", "AnandViharMetroStation", "Kaushambi", "VaishaliMetroStation"], "data": {"YamunaBank": {"name": "Yamuna Bank", "city": "Delhi", "code": "YB", "location": {"lat": 28.6231664, "lng": 77.26800000000001}, "line_color_code": "4169E1"}, "LaxmiNagarMetroStation": {"name": "Laxmi Nagar Metro Station", "city": "Delhi", "code": "LN", "location": {"lat": 28.6305146, "lng": 77.2773139}, "line_color_code": "4169E1"}, "NirmanVihar": {"name": "Nirman Vihar", "city": "Delhi", "code": "NV", "location": {"lat": 28.63663, "lng": 77.28683}, "line_color_code": "4169E1"}, "PreetViharMetroStation": {"name": "Preet Vihar Metro Station", "city": "Delhi", "code": "PTVR", "location": {"lat": 28.6418643, "lng": 77.29563089999999}, "line_color_code": "4169E1"}, "Karkarduma": {"name": "Karkarduma", "city": "Delhi", "code": "KKDA", "location": {"lat": 28.64849, "lng": 77.30557999999999}, "line_color_code": "4169E1"}, "AnandViharMetroStation": {"name": "Anand Vihar Metro Station", "city": "Delhi", "code": "AVIT", "location": {"lat": 28.6469527, "lng": 77.3159156}, "line_color_code": "4169E1"}, "Kaushambi": {"name": "Kaushambi", "city": "Delhi", "code": "KSHI", "location": {"lat": 28.6424143, "lng": 77.3187435}, "line_color_code": "4169E1"}, "VaishaliMetroStation": {"name": "Vaishali Metro Station", "city": "Delhi", "code": "VASI", "location": {"lat": 28.64984, "lng": 77.33968}, "line_color_code": "4169E1"}}}, "airport_express": {"line": "LN10", "color_code": "FF8C00", "stations": ["DelhiAeroCity", "ShivajiStadium", "DhaulaKuanmetrostation", "DelhiAeroCity", "Terminal3", "DwarkaSector21"], "data": {"DelhiAeroCity": {"name": "Delhi Aero City", "city": "Delhi", "code": "DACY", "location": {"lat": 28.54888, "lng": 77.12077}, "line_color_code": "FF8C00"}, "ShivajiStadium": {"name": "Shivaji Stadium", "city": "Delhi", "code": "SJSU", "location": {"lat": 28.6287699, "lng": 77.21141209999999}, "line_color_code": "FF8C00"}, "DhaulaKuanmetrostation": {"name": "Dhaula Kuan metro station", "city": "Delhi", "code": "DKV", "location": {"lat": 28.5924241, "lng": 77.1624241}, "line_color_code": "FF8C00"}, "Terminal3": {"name": "Terminal 3", "city": "Delhi", "code": "APOT", "location": {"lat": 28.5550838, "lng": 77.0844015}, "line_color_code": "FF8C00"}, "DwarkaSector21": {"name": "Dwarka Sector 21", "city": "Delhi", "code": "DSTO", "location": {"lat": 28.5522057, "lng": 77.0583048}, "line_color_code": "FF8C00"}}}, "rapid_metro": {"line": "LN11", "color_code": "4169E1", "stations": ["Sector5556", "Sector54Chowk", "Sector5354", "Sector4243", "MayurVihar1", "Sikanderpur", "Phase2MetroStation", "BelvedereTowers", "CyberCity", "MoulsariAvenue", "Phase3"], "data": {"Sector5556": {"name": "Sector 55-56", "city": "Delhi", "code": "S55", "location": {"lat": 28.42341, "lng": 77.1052}, "line_color_code": "4169E1"}, "Sector54Chowk": {"name": "Sector 54 Chowk", "city": "Delhi", "code": "AIT", "location": {"lat": 28.432883, "lng": 77.1049802}, "line_color_code": "4169E1"}, "Sector5354": {"name": "Sector 53-54", "city": "Delhi", "code": "S53", "location": {"lat": 28.4464177, "lng": 77.1004521}, "line_color_code": "4169E1"}, "Sector4243": {"name": "Sector 42-43", "city": "Delhi", "code": "SUL", "location": {"lat": 28.45743, "lng": 77.09694}, "line_color_code": "4169E1"}, "MayurVihar1": {"name": "Mayur Vihar-1", "city": "Delhi", "code": "PH1", "location": {"lat": 28.6042259, "lng": 77.289608}, "line_color_code": "4169E1"}, "Sikanderpur": {"name": "Sikanderpur", "city": "Delhi", "code": "SKRP", "location": {"lat": 28.48131, "lng": 77.09312}, "line_color_code": "4169E1"}, "Phase2MetroStation": {"name": "Phase 2 Metro Station", "city": "Delhi", "code": "DL2", "location": {"lat": 28.48761, "lng": 77.09286999999999}, "line_color_code": "4169E1"}, "BelvedereTowers": {"name": "Belvedere Towers", "city": "Delhi", "code": "BEL", "location": {"lat": 28.491657, "lng": 77.0882554}, "line_color_code": "4169E1"}, "CyberCity": {"name": "Cyber City", "city": "Delhi", "code": "GAT", "location": {"lat": 28.49797, "lng": 77.08918}, "line_color_code": "4169E1"}, "MoulsariAvenue": {"name": "Moulsari Avenue", "city": "Delhi", "code": "MAL", "location": {"lat": 28.500758, "lng": 77.0945121}, "line_color_code": "4169E1"}, "Phase3": {"name": "Phase 3", "city": "Delhi", "code": "DL3", "location": {"lat": 28.49368, "lng": 77.09342}, "line_color_code": "4169E1"}}}}
+{
+  "id": "delhi_ncr",
+  "city": "Delhi NCR",
+  "name": "DMRC",
+  "total_lines": 12,
+  "total_stations": 286,
+  "data": {
+    "line_1":{
+      "name": "Red Line",
+      "colour_code": "DC3545",
+      "stations":[
+        {
+          "place_id": "F56%2fW4VexU6tHL1eX3F7kg%3d%3d",
+          "name": "Shaheed Sthal",
+          "address": "Shaheed Sthal (New Bus Adda, Sector 7, Islam Nagar Village, Madhopura, Ghaziabad, Uttar Pradesh 201003",
+          "coordinates": {
+            "lat": 28.6706257,
+            "lng": 77.4128781
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_1"]
+          }
+        },
+        {
+          "place_id": "zLTIvfNDI0er0OqUe1E2Tg%3d%3d",
+          "name": "Hindon River",
+          "address": "Sewa Nagar, Ghaziabad, Uttar Pradesh 201003",
+          "coordinates": {
+            "lat": 28.6734197,
+            "lng": 77.4037951
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_1"]
+          }
+        },
+        {
+          "place_id": "j5lRVnlScU2ATZ56Wmd1kw%3d%3d",
+          "name": "Arthala",
+          "address": "Anand Industrial Estate, Mohan Nagar, Ghaziabad, Uttar Pradesh 201007",
+          "coordinates": {
+            "lat": 28.6769317,
+            "lng": 77.3891981
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_1"]
+          }
+        },
+        {
+          "place_id": "gTNQDLxQ%2fEKzlar5KlRxFQ%3d%3d",
+          "name": "Mohan Nagar",
+          "address": "Mohan Nagar, Ghaziabad, Uttar Pradesh 201007",
+          "coordinates": {
+            "lat": 28.6784847,
+            "lng": 77.3813581
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_1"]
+          }
+        },
+        {
+          "place_id": "Tnpi9w3SiEq8hq7i15hDfw%3d%3d",
+          "name": "Shyam Park",
+          "address": "Shyam Park Main, Rajendra Nagar, Ghaziabad, Uttar Pradesh 201007",
+          "coordinates": {
+            "lat": 28.6782047,
+            "lng": 77.3676651
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_1"]
+          }
+        },
+        {
+          "place_id": "x9b7K%2fOO2UmV1vFJgkhyow%3d%3d",
+          "name": "Major Mohit Sharma Rajendra Nagar",
+          "address": "Prakash Industrial Estate, Sahibabad Industrial Area Site 4, Sahibabad, Ghaziabad, Uttar Pradesh 201005",
+          "coordinates": {
+            "lat": 28.6776247,
+            "lng": 77.3557051
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_1"]
+          }
+        }, 
+        {
+          "place_id": "DMeocgWHIECfxiHp6OT56g%3d%3d",
+          "name": "Raj Bagh",
+          "address": "132/9, Grand Trunk Rd, Prakash Industrial Estate, Sahibabad Industrial Area Site 4, Raj Bagh, Ghaziabad, Uttar Pradesh 201005",
+          "coordinates": {
+            "lat": 28.6770347,
+            "lng": 77.3440051
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_1"]
+          }
+        },
+        {
+          "place_id": "4A5yyjr2l0WkK4OLO1bSew%3d%3d",
+          "name": "Shaheed Nagar",
+          "address": "Prakash Industrial Estate, Sahibabad Industrial Area Site 4, Ghaziabad, Uttar Pradesh 201006",
+          "coordinates": {
+            "lat": 28.6766367,
+            "lng": 77.3440051
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_1"]
+          }
+        },
+        {
+          "place_id": "WnGhRuUt%2fEa2g0Qui74U8A%3d%3d",
+          "name": "Dilshad Garden",
+          "address": "Grand Trunk Rd, Jhilmil Industrial Area, Dilshad Garden, New Delhi, Delhi 110095",
+          "coordinates": {
+            "lat": 28.6759025,
+            "lng": 77.3189416
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_1"]
+          }
+        },
+        {
+          "place_id": "knNgEIJNpEOzGKh0oJB0Mg%3d%3d",
+          "name": "Jhilmil",
+          "address": "Grand Trunk Rd, Jhilmil Industrial Area, Dilshad Garden, New Delhi, Delhi 110095",
+          "coordinates": {
+            "lat": 28.6757647,
+            "lng": 77.3098511
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_1"]
+          }
+        },
+        {
+          "place_id": "qxPyAzgbyUaBano981fVaA%3d%3d",
+          "name": "Mansarovar Park",
+          "address": "Shahdara Flyover, Jhilmil Industrial Area, Shahdara, New Delhi, Delhi 110095",
+          "coordinates": {
+            "lat": 28.6755707,
+            "lng": 77.2975441
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_1"]
+          }
+        },
+        {
+          "place_id": "CUshSsXi2Ue3SIDtR5tkdg%3d%3d",
+          "name": "Shahdara",
+          "address": "Shahdara, New Delhi, Delhi 110032",
+          "coordinates": {
+            "lat": 28.6734547,
+            "lng": 77.2873051
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_1"]
+          }
+        },
+        {
+          "place_id": "cium3yogaUaT2jnQecwgpQ%3d%3d",
+          "name": "Welcome",
+          "address": "North Kanti Nagar, Block A, Silampur, Shahdara, New Delhi, Delhi 110031",
+          "coordinates": {
+            "lat": 28.6717662,
+            "lng": 77.275084
+          },
+          "is_interchange": true,
+          "interchange_data": {
+            "count": 2,
+            "lines": ["line_1","line_7"]
+          }
+        },
+        {
+          "place_id": "PxIF4by980iWMwi7XfAsWA%3d%3d",
+          "name": "Seelampur",
+          "address": "Seelampur Gali, New Seelampur, Seelampur, Shahdara, New Delhi, Delhi 110053",
+          "coordinates": {
+            "lat": 28.6698047,
+            "lng": 77.2642351
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_1"]
+          }
+        },
+        {
+          "place_id": "meKCdYOnEUiyWtrh4eXydw%3d%3d",
+          "name": "Shastri Park",
+          "address": "Metro Vihar, Shastri Park, Shahdara, Delhi, 110053",
+          "coordinates": {
+            "lat": 28.668306,
+            "lng": 77.2476905
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_1"]
+          }
+        },
+        {
+          "place_id": "8XxL6%2fC2eEOh1eZAkN%2fy2A%3d%3d",
+          "name": "Kashmere Gate",
+          "address": "Lothian Rd, Inter State Bus Terminal, Kashmere Gate, New Delhi, Delhi 110006",
+          "coordinates": {
+            "lat": 28.6674747,
+            "lng": 77.2256651
+          },
+          "is_interchange": true,
+          "interchange_data": {
+            "count": 3,
+            "lines": ["line_1","line_2","line_6"]
+          }
+        },
+        {
+          "place_id": "93l6IjAkvEGNeaKP0VBNzw%3d%3d",
+          "name": "Tis Hazari",
+          "address": "Bhiku Ram Jain Marg, Kamla Nehru Ridge, Civil Lines, New Delhi, Delhi 110054",
+          "coordinates": {
+            "lat": 28.6671947,
+            "lng": 77.2140851
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_1"]
+          }
+        },
+        {
+          "place_id": "IwkeIsVAeUay606fw1R8zg%3d%3d",
+          "name": "Pulbangash",
+          "address": "Aram Ganj, Sabzi Mandi Old, New Delhi, Delhi 110006",
+          "coordinates": {
+            "lat": 28.6664047,
+            "lng": 77.2047951
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_1"]
+          }
+        },
+        {
+          "place_id": "dopT25J2XEigGK6Ej9ui%2bQ%3d%3d",
+          "name": "Pratap Nagar",
+          "address": "Vir Banda Bairagi Marg, Azad Nagar, Gulabi Bagh, New Delhi, Delhi 110007",
+          "coordinates": {
+            "lat": 28.6666197,
+            "lng": 77.1963077
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_1"]
+          }
+        },
+        {
+          "place_id": "TP4M856xSk%2bPL3x%2fxNCpWg%3d%3d",
+          "name": "Shastri Nagar",
+          "address": "Shri balaji madical.ltd, E2/202, Block C, Subhadra Colony, Shastri Nagar, New Delhi, Delhi 110052",
+          "coordinates": {
+            "lat": 28.6702482,
+            "lng": 77.180914
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_1"]
+          }
+        },
+        {
+          "place_id": "ImjMe7N2a0aqJwNL4veYfg%3d%3d",
+          "name": "Inderlok",
+          "address": "Maharaj Nar Singh Marg, Shastri Nagar, New Delhi, Delhi 110035",
+          "coordinates": {
+            "lat": 28.6734411,
+            "lng": 77.1693442
+          },
+          "is_interchange": true,
+          "interchange_data": {
+            "count": 2,
+            "lines": ["line_1","line_5"]
+          }
+        },
+        {
+          "place_id": "ONL82u2IlEWknbtte8Kuqw%3d%3d",
+          "name": "Kanhaiya Nagar",
+          "address": "Block F, JJ Colony Wazirpur, Ashok Vihar, New Delhi, Delhi 110034",
+          "coordinates": {
+            "lat": 28.6823747,
+            "lng": 77.1622351
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_1"]
+          }
+        },
+        {
+          "place_id": "f3V4F8UHOkmjGhXuOq7v9w%3d%3d",
+          "name": "Keshav Puram",
+          "address": "New Delhi, Maharaja Nahar Singh Marg, Pocket F, Phase 1, Ashok Vihar, Delhi, 110034",
+          "coordinates": {
+            "lat": 28.6875557,
+            "lng": 77.1599001
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_1"]
+          }
+        },
+        {
+          "place_id": "BPjUOA0ErE6M%2bkZ6WMI5eQ%3d%3d",
+          "name": "Netaji Subhash Place",
+          "address": "Guru Govind Singh College, Pitampura, New Delhi, Delhi 110034",
+          "coordinates": {
+            "lat": 28.6960547,
+            "lng": 77.1500151
+          },
+          "is_interchange": true,
+          "interchange_data": {
+            "count": 2,
+            "lines": ["line_1", "line_7"]
+          }
+        },
+        {
+          "place_id": "cs4pC7B%2b1EOYZukCf%2baSsw%3d%3d",
+          "name": "Kohat Enclave",
+          "address": "Lala Jagat Narayan Marg, Block KD, Dakshini Pitampura, Pitam Pura, New Delhi, Delhi 110034",
+          "coordinates": {
+            "lat": 28.6974617,
+            "lng": 77.1395231
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_1"]
+          }
+        },
+        {
+          "place_id": "uccx2beGV0qzwJTu0vumuw%3d%3d",
+          "name": "Pitampura",
+          "address": "Block CD, Dakshini Pitampura, Pitam Pura, New Delhi, Delhi 110034",
+          "coordinates": {
+            "lat": 28.7031147,
+            "lng": 77.1298951
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_1"]
+          }
+        },
+        {
+          "place_id": "pr6IqgucK06OQBYvTMuZbA%3d%3d",
+          "name": "Rohini East",
+          "address": "Bhagawan Mahavir Marg, Pocket 12, Sector 14, Rohini, New Delhi, Delhi 110085",
+          "coordinates": {
+            "lat": 28.7076717,
+            "lng": 77.1233681
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_1"]
+          }
+        },
+        {
+          "place_id": "DLfnQwXQ40GQSc6db5bYgg%3d%3d",
+          "name": "Rohini West",
+          "address": "Bhagawan M, Bhagwan Mahavir Marg, Swarn Jayanti Park, Sector 10, Rohini, Delhi, 110085",
+          "coordinates": {
+            "lat": 28.7148737,
+            "lng": 77.1129091
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_1"]
+          }
+        },
+        {
+          "place_id": "W9mRS7jjbkme%2bhXluP49zA%3d%3d",
+          "name": "Rithala",
+          "address": "Bhagwan Mahavir Marg, Varun Kunj, Rithala, Rohini, New Delhi, Delhi 110085",
+          "coordinates": {
+            "lat": 28.7197827,
+            "lng": 77.1060951
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_1"]
+          }
+        }
+      ]
+    },
+    "line_2":{
+      "name":"Yellow Line",
+      "colour_code":"FFC107",
+      "stations":[
+        {
+          "place_id": "rHRE8YHya0CBKtGlarRQBA%3d%3d",
+          "name": "Samaypur Badli",
+          "address": "Samaypur Horizon plant, Bawana Rd, Suraj Park, Badli, Rohini, New Delhi, Delhi 110042",
+          "coordinates": {
+            "lat": 28.7433903,
+            "lng": 77.1377153
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_2"]
+          }
+        },
+        {
+          "place_id": "kdPEUr7GDkKfAjmWwxkWcg%3d%3d",
+          "name": "Rohini Sector - 18, 19",
+          "address": "Block C, Sector 19, Rohini, Delhi, 110089",
+          "coordinates": {
+            "lat": 28.7383847,
+            "lng": 77.1372851
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_2"]
+          }
+        },
+        {
+          "place_id": "DwtAQosN%2fUmGeCTnSlMfnA%3d%3d",
+          "name": "Haiderpur Badli Mor",
+          "address": "C and D Block, Shalimar Place Site, Shalimar Bagh, Delhi, 110088",
+          "coordinates": {
+            "lat": 28.7300062,
+            "lng": 77.1466016
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_2"]
+          }
+        },
+        {
+          "place_id": "JlgIZaU7f0O8WhUBPpYQQA%3d%3d",
+          "name": "Jahangirpuri",
+          "address": "Grand Trunk Rd, New Delhi, Delhi 110033",
+          "coordinates": {
+            "lat": 28.7258647,
+            "lng": 77.1602151
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_2"]
+          }
+        },
+        {
+          "place_id": "GAJPIG61T0C3Xtx9BpFFrw%3d%3d",
+          "name": "Adarsh Nagar",
+          "address": "Adarsh Nagar Metro Station, New Delhi, Delhi, 110033",
+          "coordinates": {
+            "lat": 28.71645,
+            "lng": 77.17058
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_2"]
+          }
+        },
+        {
+          "place_id": "BT0Cg5xk3UuVH3AAUNLhYw%3d%3d",
+          "name": "Azadpur",
+          "address": "G, 85, Sector 23 Rd, Vijay vihar Phase I, Pocket 5, Sector-24, Rohini, Delhi, 110085",
+          "coordinates": {
+            "lat": 28.70702,
+            "lng": 77.18052
+          },
+          "is_interchange": true,
+          "interchange_data": {
+            "count": 2,
+            "lines": ["line_2","line_7"]
+          }
+        },
+        {
+          "place_id": "GwfyMIcI%2fc0m90rBW8yO4Rg%3d%3d",
+          "name": "Model Town",
+          "address": "Shalimar Bagh, New Delhi, Delhi",
+          "coordinates": {
+            "lat": 28.7028569,
+            "lng": 77.1937134
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_2"]
+          }
+        },
+        {
+          "place_id": "N2yklYPIJkSS013pD9PFEQ%3d%3d",
+          "name": "Guru Teg Bahadur Nagar",
+          "address": "65, Ring Rd, Outram Lines, GTB Nagar, New Delhi, Delhi 110009",
+          "coordinates": {
+            "lat": 28.698384,
+            "lng": 77.20588
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_2"]
+          }
+        },
+        {
+          "place_id": "HsKQ6FFYMkyOKteS8yCDng%3d%3d",
+          "name": "Vishwavidyalaya",
+          "address": "Delhi, 110007",
+          "coordinates": {
+            "lat": 28.6952077,
+            "lng": 77.2113631
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_2"]
+          }
+        },
+        {
+          "place_id": "5LeB1r4BskKYrY6QwMP4zg%3d%3d",
+          "name": "Vidhan Sabha",
+          "address": "Mudrika Marg, Khyber Pass, Civil Line, New Delhi 110054",
+          "coordinates": {
+            "lat": 28.6872568,
+            "lng": 77.2214236
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_2"]
+          }
+        },
+        {
+          "place_id": "8P3NRyJEr02oDyfuN8mErg%3d%3d",
+          "name": "Civil Lines",
+          "address": "Sham Nath Marg, Railway Colony, Civil Lines, New Delhi, Delhi 110054",
+          "coordinates": {
+            "lat": 28.67734,
+            "lng": 77.22481
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_2"]
+          }
+        },
+        {
+          "place_id": "8XxL6%2fC2eEOh1eZAkN%2fy2A%3d%3d",
+          "name": "Kashmere Gate",
+          "address": "Lothian Rd, Inter State Bus Terminal, Kashmere Gate, New Delhi, Delhi 110006",
+          "coordinates": {
+            "lat": 28.6674747,
+            "lng": 77.2256651
+          },
+          "is_interchange": true,
+          "interchange_data": {
+            "count": 3,
+            "lines": ["line_1","line_2","line_6"]
+          }
+        },
+        {
+          "place_id": "jjJYPofAykWodZQJOS3dkw%3d%3d",
+          "name": "Chandni Chowk",
+          "address": "Kaccha Bagh Area, Old Delhi, New Delhi, Delhi 110006",
+          "coordinates": {
+            "lat": 28.6588312,
+            "lng": 77.2277816
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_2"]
+          }
+        },
+        {
+          "place_id": "VHdPAZVF10uNqSprEZR83w%3d%3d",
+          "name": "Chawri Bazar",
+          "address": "Ajmere Gate Rd, Bazar Sirkiwalan, Chawri Bazar, Old Delhi, New Delhi, Delhi 110006",
+          "coordinates": {
+            "lat": 28.6488047,
+            "lng": 77.2237251
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_2"]
+          }
+        },
+        {
+          "place_id": "sQAlAUDZJUy%2fo4UkmRHrMg%3d%3d",
+          "name": "New Delhi",
+          "address": "Ajmeri Gate, New Delhi, Delhi 110006",
+          "coordinates": {
+            "lat": 28.6437255,
+            "lng": 77.2204149
+          },
+          "is_interchange": true,
+          "interchange_data": {
+            "count": 2,
+            "lines": ["line_2","line_10"]
+          }
+        },
+        {
+          "place_id": "LmCdGcqN9UWUjiRwhsmmDg%3d%3d",
+          "name": "Rajiv Chowk",
+          "address": "Block F, Connaught Place, New Delhi, Delhi 110001",
+          "coordinates": {
+            "lat": 28.631576,
+            "lng": 77.2175157
+          },
+          "is_interchange": true,
+          "interchange_data": {
+            "count": 2,
+            "lines": ["line_3","line_2"]
+          }
+        },
+        {
+          "place_id": "4sLIGcvWqkW3S0Bu5uDtzA%3d%3d",
+          "name": "Patel Chowk",
+          "address": "Ashoka Road, Sansad Marg, Crossing, New Delhi, Delhi 110001",
+          "coordinates": {
+            "lat": 28.6233506,
+            "lng": 77.2100011
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_2"]
+          }
+        },
+        {
+          "place_id": "6Lxfl2fQj0uoW9bNwD5MIA%3d%3d",
+          "name": "Central Secretariat",
+          "address": "Rafi Ahmed Kidwai Marg, Kartavya Path, Central Secretariat, New Delhi, Delhi 110001",
+          "coordinates": {
+            "lat": 28.6151511,
+            "lng": 77.2077574
+          },
+          "is_interchange": true,
+          "interchange_data": {
+            "count": 2,
+            "lines": ["line_2","line_6"]
+          }
+        },
+        {
+          "place_id": "ROamkHBvdkyMZor3xdTjNw%3d%3d",
+          "name": "Udyog Bhawan",
+          "address": "Rafi Ahmed Kidwai Marg, Kartavya Path, Central Secretariat, New Delhi, Delhi 110001",
+          "coordinates": {
+            "lat": 28.6107147,
+            "lng": 77.2093051
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_2"]
+          }
+        },
+        {
+          "place_id": "4JZ93%2frN3UeXtPyHSjrzug%3d%3d",
+          "name": "Lok Kalyan Marg",
+          "address": "Tees January Road Area, Tughlak Road Area, New Delhi, Delhi 110001",
+          "coordinates": {
+            "lat": 28.5976622,
+            "lng": 77.2086024
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_2"]
+          }
+        },
+        {
+          "place_id": "yZxfp2rHR0O8fBUEdekL%2fQ%3d%3d",
+          "name": "Jor Bagh",
+          "address": "Sri Aurobindo Marg, Safdarjung Airport Area, Jor Bagh, New Delhi, Delhi 110003",
+          "coordinates": {
+            "lat": 28.5858949,
+            "lng": 77.2099357
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_2"]
+          }
+        },
+        {
+          "place_id": "FtnTWPRinUyuiV4223jQ4Q%3d%3d",
+          "name": "Dilli Haat - INA",
+          "address": "Sri Aurobindo Marg, Aviation Colony, INA Colony, New Delhi, Delhi 110023",
+          "coordinates": {
+            "lat": 28.5744541,
+            "lng": 77.2070475
+          },
+          "is_interchange": true,
+          "interchange_data": {
+            "count": 2,
+            "lines": ["line_2","line_7"]
+          }
+        },
+        {
+          "place_id": "nzPfculKHEWnHCtgeAQAhw%3d%3d",
+          "name": "Green Park",
+          "address": "Sri Aurobindo Marg, Block Q, Green Park Extension, Green Park, New Delhi, Delhi 110016",
+          "coordinates": {
+            "lat": 28.5598225,
+            "lng": 77.2023244
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_2"]
+          }
+        },
+        {
+          "place_id": "WJvE6WYkd0KNJjQMAxorig%3d%3d",
+          "name": "Hauz Khas",
+          "address": "Jia Sarai, Gamal Abdel Nasser Marg, Block F, Deer Park, Hauz Khas, New Delhi, Delhi 110016",
+          "coordinates": {
+            "lat": 28.5439551,
+            "lng": 77.2036646
+          },
+          "is_interchange": true,
+          "interchange_data": {
+            "count": 2,
+            "lines": ["line_2","line_8"]
+          }
+        },
+        {
+          "place_id": "z3wa9EVcQEOUZ4dN9DP3Qg%3d%3d",
+          "name": "Malviya Nagar",
+          "address": "Press Enclave Marg, Block A, Shivalik Colony, Saket, New Delhi, Delhi 110017",
+          "coordinates": {
+            "lat": 28.5289947,
+            "lng": 77.2024151
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_2"]
+          }
+        },
+        {
+          "place_id": "thnxdGBXp0Gzox3OEHzQaw%3d%3d",
+          "name": "Saket",
+          "address": "Mehrauli - Badarpur Rd, Block A, DDA Flats, Saket, New Delhi, Delhi 110030",
+          "coordinates": {
+            "lat": 28.5211312,
+            "lng": 77.2015363
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_2"]
+          }
+        },
+        {
+          "place_id": "DyInt0L3nkmXo3IHy%2f37BA%3d%3d",
+          "name": "Qutab Minar",
+          "address": "Qutab Minar Metro Station, Mittal Garden, Sainik Farm, New Delhi, Delhi 110030",
+          "coordinates": {
+            "lat": 28.51302,
+            "lng": 77.1864
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_2"]
+          }
+        },
+        {
+          "place_id": "kESX2Jdgi0mkD5O7q2bLpQ%3d%3d",
+          "name": "Chhatarpur",
+          "address": "Chattarpur Metro Station, Mehrauli-Gurgaon Road, New Delhi, 110070",
+          "coordinates": {
+            "lat": 28.5067936,
+            "lng": 77.1705196
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_2"]
+          }
+        },
+        {
+          "place_id": "fAuHN98JQ02XN9jDbkDRxw%3d%3d",
+          "name": "Sultanpur",
+          "address": "NH 236, Sultanpur, New Delhi, Delhi 110030",
+          "coordinates": {
+            "lat": 28.4991572,
+            "lng": 77.1589628
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_2"]
+          }
+        },
+        {
+          "place_id": "rwdXP3Zob0unHwJ%2b7h%2fsWg%3d%3d",
+          "name": "Ghitorni",
+          "address": "Gadaipur, DLF Farms, New Delhi, Delhi 110030",
+          "coordinates": {
+            "lat": 28.4938187,
+            "lng": 77.1466005
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_2"]
+          }
+        },
+        {
+          "place_id": "hYVUo4cEKESXm8MvixocIQ%3d%3d",
+          "name": "Arjan Garh",
+          "address": "National Highway 236, 1, Aya Nagar, Aya Nagar Phase New, Aya Nagar Phase 2, Aya Nagar, New Delhi, Delhi 110047",
+          "coordinates": {
+            "lat": 28.4808847,
+            "lng": 77.1232751
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_2"]
+          }
+        },
+        {
+          "place_id": "7SdKJSctQU%2b96Ubz1gQweQ%3d%3d",
+          "name": "Guru Dronacharya",
+          "address": "NH236, Garden Estate, DLF Phase 3, Sector 26, Gurugram, Haryana 122002",
+          "coordinates": {
+            "lat": 28.481954,
+            "lng": 77.0996769
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_2"]
+          }
+        },
+        {
+          "place_id": "VRuIB1RxoU2XwqE7HBc94w%3d%3d",
+          "name": "Sikanderpur",
+          "address": "A Block, DLF Phase 1, Sector 28, Gurugram, Haryana 122022",
+          "coordinates": {
+            "lat": 28.4813147,
+            "lng": 77.0905451
+          },
+          "is_interchange": true,
+          "interchange_data": {
+            "count": 2,
+            "lines": ["line_2","line_11"]
+          }
+        },
+        {
+          "place_id": "kGQ4Vw1BUUaXZYNAlA2Awg%3d%3d",
+          "name": "M.G. Road",
+          "address": "Maruti Housing Colony, Sector 25, Gurugram, Haryana 122022",
+          "coordinates": {
+            "lat": 28.4795747,
+            "lng": 77.0774851
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_2"]
+          }
+        },
+        {
+          "place_id": "Fmrzwr1Al0uEoHcYsLNmvg%3d%3d",
+          "name": "Iffco Chowk",
+          "address": "Sector 29, Gurugram, Haryana 122002",
+          "coordinates": {
+            "lat": 28.47224,
+            "lng": 77.0543756
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_2"]
+          }
+        },
+        {
+          "place_id": "OnrML%2f8a9k%2bqWFENfc3%2bfg%3d%3d",
+          "name": "Huda City Centre",
+          "address": "Gurgaon - Delhi Expy, Sector 29, Gurugram, Haryana 122007",
+          "coordinates": {
+            "lat": 28.4592,
+            "lng": 77.0679739
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_2"]
+          }
+        }
+ 
+      ]
+    },
+    "line_3": {
+      "name": "Blue Line",
+      "colour_code": "3B76C0",
+      "stations": [
+        {
+          "place_id": "BRiyD1FtX0GQrnPoWQog9Q",
+          "name": "Dwarka Sector - 21",
+          "address": "Metro Station-Dwarka Sector 21, Sector 21, Dwarka, New Delhi, Delhi 110077",
+          "coordinates": {
+            "lat": 28.5522057,
+            "lng": 77.0557245
+          },
+          "is_interchange": true,
+          "interchange_data": {
+            "count": 2,
+            "lines": ["line_3", "line_10"]
+          }
+        },
+        {
+          "place_id": "Bua7N1HgfUOXMloRilqNfA",
+          "name": "Dwarka Sector - 8",
+          "address": "Sector 8 Dwarka, Dwarka, New Delhi, Delhi 110077",
+          "coordinates": {
+            "lat": 28.5656826,
+            "lng": 77.06453
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_3"]
+          }
+        },
+        {
+          "place_id": "zC8cewsJTUuBEpX7QdSYAQ%3d%3d",
+          "name": "Dwarka Sector - 9",
+          "address": "Dwarka Sector 9, Dwarka, New Delhi, Delhi 110075",
+          "coordinates": {
+            "lat": 28.5742847,
+            "lng": 77.0627051
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_3"]
+          }
+        },
+        {
+          "place_id": "9t3pJwEXWE2BlB4G%2fgnGaQ%3d%3d",
+          "name": "Dwarka Sector - 10",
+          "address": "Dwarka Shree Ramlila Society ,Ramlila Ground New 110075, Sector 10 Dwarka, Dwarka, Delhi",
+          "coordinates": {
+            "lat": 28.581129,
+            "lng": 77.0549336
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_3"]
+          }
+        },
+        {
+          "place_id": "ifGog%2bra%2fk6sLoSF5bkdxQ%3d%3d",
+          "name": "Dwarka Sector - 11",
+          "address": "Sector 11 Dwarka, Dwarka, New Delhi, Delhi 110075",
+          "coordinates": {
+            "lat": 28.586366,
+            "lng": 77.0471637
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_3"]
+          }
+        },
+        {
+          "place_id": "HI1Y%2bG6E8EKwKtLGI7SJYg%3d%3d",
+          "name": "Dwarka Sector - 12",
+          "address": "Pocket 8, Block B, Sector 12 Dwarka, Dwarka, New Delhi, Delhi 110078",
+          "coordinates": {
+            "lat": 28.5923147,
+            "lng": 77.0380551
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_3"]
+          }
+        },
+        {
+          "place_id": "doP7HvRxj0qvssQYL%2fvaDA%3d%3d",
+          "name": "Dwarka Sector - 13",
+          "address": "Sector 13, Dwarka, Delhi, 110075",
+          "coordinates": {
+            "lat": 28.5972486,
+            "lng": 77.0309647
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_3"]
+          }
+        },
+        {
+          "place_id": "jpvhRxWGcUGfGis9THPfXg%3d%3d",
+          "name": "Dwarka Sector - 14",
+          "address": "Pocket 1, Sector 14 Dwarka, Dwarka, Delhi, 110075",
+          "coordinates": {
+            "lat": 28.6016187,
+            "lng": 77.0237785
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_3"]
+          }
+        },
+        {
+          "place_id": "OK8doXUQpEKkOUroK4uqLQ%3d%3d",
+          "name": "Dwarka",
+          "address": "Nand Vihar, Sector 16A, Dwarka, New Delhi, Delhi 110078",
+          "coordinates": {
+            "lat": 28.6149247,
+            "lng": 77.0201451
+          },
+          "is_interchange": true,
+          "interchange_data": {
+            "count": 2,
+            "lines": ["line_3","line_9"]
+          }
+        },
+        {
+          "place_id": "QZJkbh1PEUmovSM2BHS5Fw%3d%3d",
+          "name": "Dwarka Mor",
+          "address": "B-Block, Nangli Dairy Extn. Ph-II, 110043, Dwaraka Marg, Bhagwati Garden, Baprola, New Delhi, Delhi 110066",
+          "coordinates": {
+            "lat": 28.6192985,
+            "lng": 77.0307517
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_3"]
+          }
+        },
+        {
+          "place_id": "Nre6x43QNkGVkACdgvmi5w%3d%3d",
+          "name": "Nawada",
+          "address": "icici bank A TM opposit Hanuman Mandir New, Kiran Garden, Uttam Nagar, Delhi, 110059",
+          "coordinates": {
+            "lat": 28.6202647,
+            "lng": 77.0424951
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_3"]
+          }
+        },
+        {
+          "place_id": "ftYorov0iUiEO7mZ8REjDg%3d%3d",
+          "name": "Uttam Nagar West",
+          "address": "Najafgarh Road, Param Puri, Uttam Nagar, New Delhi, Delhi 110059",
+          "coordinates": {
+            "lat": 28.6217589,
+            "lng": 77.0532362
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_3"]
+          }
+        },
+        {
+          "place_id": "gBYCgiFa%2fUCl263%2faRKlLA%3d%3d",
+          "name": "Uttam Nagar East",
+          "address": "shish ram park A-62/3, Chatrapati, Shivaji Marg, Block D, JJ Colony, Uttam Nagar, New Delhi, Delhi 110059",
+          "coordinates": {
+            "lat": 28.62481,
+            "lng": 77.0627315
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_3"]
+          }
+        },
+        {
+          "place_id": "1oImZJcTYUGvhWrEgUvNZg%3d%3d",
+          "name": "Janak Puri West",
+          "address": "Janakpuri District Center, Janakpuri, Delhi, 110018",
+          "coordinates": {
+            "lat": 28.6297207,
+            "lng": 77.0755026
+          },
+          "is_interchange": true,
+          "interchange_data": {
+            "count": 2,
+            "lines": ["line_3","line_8"]
+          }
+        },
+        {
+          "place_id": "aw5F%2fYsgh0WBMALx0LjD4w%3d%3d",
+          "name": "Janak Puri East",
+          "address": "Nangli Jalib, Janakpuri, New Delhi, Delhi 110058",
+          "coordinates": {
+            "lat": 28.6330647,
+            "lng": 77.0841451
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_3"]
+          }
+        },
+        {
+          "place_id": "7aFni0aCt0%2bWg7o5P9b2%2bA%3d%3d",
+          "name": "Tilak Nagar",
+          "address": "Block 3, Tilak Nagar, Delhi, 110018",
+          "coordinates": {
+            "lat": 28.6369843,
+            "lng": 77.0939499
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_3"]
+          }
+        },
+        {
+          "place_id": "Sd3D5yc5HUWn9ir82Ou%2fxA%3d%3d",
+          "name": "Subhash Nagar",
+          "address": "Najafgarh Rd, Meenakshi Garden, Ashok Nagar, New Delhi, Delhi 110018",
+          "coordinates": {
+            "lat": 28.6403947,
+            "lng": 77.1023751
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_3"]
+          }
+        },
+        {
+          "place_id": "M4pdT1nqoEqK4WUqY0%2fWSg%3d%3d",
+          "name": "Tagore Garden",
+          "address": "Najafgarh Rd, Block BF, Rajouri Garden Extension, Rajouri Garden, New Delhi, Delhi 110027",
+          "coordinates": {
+            "lat": 28.6437587,
+            "lng": 77.1103056
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_3"]
+          }
+        },
+        {
+          "place_id": "1bUAoDp9RUqzI31DLJ1ZcA%3d%3d",
+          "name": "Rajouri Garden",
+          "address": "Najafgarh Rd, Shivaji Place, Vishal Enclave, Tagore Garden Extension, New Delhi, Delhi 110018",
+          "coordinates": {
+            "lat": 28.649019,
+            "lng": 77.122705
+          },
+          "is_interchange": true,
+          "interchange_data": {
+            "count": 2,
+            "lines": ["line_3","line_7"]
+          }
+        },
+        {
+          "place_id": "GwNZy7xoPkGdSp3TF9M4vA%3d%3d",
+          "name": "Ramesh Nagar",
+          "address": "Ramesh Nagar, C Block, Ramesh Nagar, New Delhi, Delhi 110015",
+          "coordinates": {
+            "lat": 28.6527547,
+            "lng": 77.1290651
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_3"]
+          }
+        },
+        {
+          "place_id": "L1TSq9Jy40GvSSua2BJZbg%3d%3d",
+          "name": "Moti Nagar",
+          "address": "Najafgarh Rd, DLE Industrial Area, Kirti Nagar, Delhi, 110015",
+          "coordinates": {
+            "lat": 28.6579647,
+            "lng": 77.1400951
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_3"]
+          }
+        },
+        {
+          "place_id": "bwd%2bDvFLm0OhYMxMBVHHXA%3d%3d",
+          "name": "Kirti Nagar",
+          "address": "Karampura Flyover, Block 1, Kirti Nagar Industrial Area, Kirti Nagar, New Delhi, Delhi 110015",
+          "coordinates": {
+            "lat": 28.6556811,
+            "lng": 77.1482393
+          },
+          "is_interchange": true,
+          "interchange_data": {
+            "count": 2,
+            "lines": ["line_3","line_5"]
+          }
+        },
+        {
+          "place_id": "USmmSWbcVkqBprcFG7R0rw%3d%3d",
+          "name": "Shadipur",
+          "address": "Patel Rd, Block W, West Patel Nagar, Delhi",
+          "coordinates": {
+            "lat": 28.6512267,
+            "lng": 77.1567041
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_3"]
+          }
+        },
+        {
+          "place_id": "S%2ftNokuJfkyAtDj3GWqM9A%3d%3d",
+          "name": "Patel Nagar",
+          "address": "Patel Rd, Block 2, West Patel Nagar, Patel Nagar, New Delhi, Delhi 110008",
+          "coordinates": {
+            "lat": 28.6450366,
+            "lng": 77.1666961
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_3"]
+          }
+        },
+        {
+          "place_id": "1OXc6x5uWE%2b4ThalmkbWlg%3d%3d",
+          "name": "Rajendra Place",
+          "address": "Uttam Singh Narula Marg, Rajinder Nagar, New Delhi, Delhi 110060",
+          "coordinates": {
+            "lat": 28.6425347,
+            "lng": 77.1756651
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_3"]
+          }
+        },
+        {
+          "place_id": "LSVjU7RVU0qOBMUPz9pPoQ%3d%3d",
+          "name": "Karol Bagh",
+          "address": "Block 1, WEA, Karol Bagh, Delhi, 110005",
+          "coordinates": {
+            "lat": 28.6442637,
+            "lng": 77.1864121
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_3"]
+          }
+        },
+        {
+          "place_id": "Y822HnH5fUC013hVb901Eg%3d%3d",
+          "name": "Jhandewalan",
+          "address": "Doctor Bhim Rao Ambedkar Marg, Block E 1, Jhandewalan Extension, Jhandewalan, New Delhi, Delhi 110005",
+          "coordinates": {
+            "lat": 28.6442947,
+            "lng": 77.1973451
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_3"]
+          }
+        },
+        {
+          "place_id": "o1DvpEtgd0agqydszciVzA%3d%3d",
+          "name": "Ramakrishna Ashram Marg",
+          "address": "Bharat Nagar, Paharganj, New Delhi, Delhi 110055",
+          "coordinates": {
+            "lat": 28.6392447,
+            "lng": 77.2059851
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_3"]
+          }
+        },
+        {
+          "place_id": "LmCdGcqN9UWUjiRwhsmmDg%3d%3d",
+          "name": "Rajiv Chowk",
+          "address": "Block F, Connaught Place, New Delhi, Delhi 110001",
+          "coordinates": {
+            "lat": 28.631576,
+            "lng": 77.2175157
+          },
+          "is_interchange": true,
+          "interchange_data": {
+            "count": 2,
+            "lines": ["line_3","line_2"]
+          }
+        },
+        {
+          "place_id": "6FJVBBgaXU%2boHCbvbRtYiA%3d%3d",
+          "name": "Barakhamba Road",
+          "address": "Barakhamba Rd, Barakhamba, New Delhi, Delhi 110001",
+          "coordinates": {
+            "lat": 28.6299447,
+            "lng": 77.2219251
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_3"]
+          }
+        },
+        {
+          "place_id": "SUO%2bs7VsT0e%2fPGyzHpanaw%3d%3d",
+          "name": "Mandi House",
+          "address": "New Delhi, Delhi 110001",
+          "coordinates": {
+            "lat": 28.6259038,
+            "lng": 77.2317208
+          },
+          "is_interchange": true,
+          "interchange_data": {
+            "count": 2,
+            "lines": ["line_3","line_6"]
+          }
+        },
+        {
+          "place_id": "SZfx0XzMAM0OTlCOi%2fueaJg%3d%3d",
+          "name": "Supreme Court",
+          "address": "Appu Ghar, Pragati Maidan, New Delhi, Delhi 110001",
+          "coordinates": {
+            "lat": 28.6231801,
+            "lng": 77.2403536
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 2,
+            "lines": ["line_3"]
+          }
+        },
+        {
+          "place_id": "eI6rRH%2f4MUae5SRr8K7Qow%3d%3d",
+          "name": "Indraprastha",
+          "address": "Mahatma Gandhi Rd, Gas Turbine Power Station, IP Estate, New Delhi, Delhi 110002",
+          "coordinates": {
+            "lat": 28.6205547,
+            "lng": 77.2473751
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 2,
+            "lines": ["line_3"]
+          }
+        },
+        {
+          "place_id": "TOvJPV46gEKYHQ1IOAKk4Q%3d%3d",
+          "name": "Yamuna Bank",
+          "address": "Yamuna Bank, New Delhi, Delhi 110092",
+          "coordinates": {
+            "lat": 28.62333,
+            "lng": 77.26792
+          },
+          "is_interchange": true,
+          "interchange_data": {
+            "count": 2,
+            "lines": ["line_3","line_4"]
+          }
+        },
+        {
+          "place_id": "iYvY1U5E0EKssIjqN%2fcD3Q%3d%3d",
+          "name": "Akshardam",
+          "address": "Noida Link Rd, Ganesh Nagar, New Delhi, Delhi 110092",
+          "coordinates": {
+            "lat": 28.6179673,
+            "lng": 77.2768013
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_3"]
+          }
+        },
+        {
+          "place_id": "My0UtHGYEE28bvins%2bcWyA%3d%3d",
+          "name": "Mayur Vihar - 1",
+          "address": "Pocket 4, Mayur Vihar, New Delhi, Delhi 110091",
+          "coordinates": {
+            "lat": 28.6042306,
+            "lng": 77.2870331
+          },
+          "is_interchange": true,
+          "interchange_data": {
+            "count": 2,
+            "lines": ["line_3","line_7"]
+          }
+        },
+        {
+          "place_id": "IEWttqFePEGWM5u%2bwWR0CA%3d%3d",
+          "name": "Mayur Vihar Extension",
+          "address": "Mayur Vihar, New Delhi, Delhi 110091",
+          "coordinates": {
+            "lat": 28.5942247,
+            "lng": 77.2921651
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_3"]
+          }
+        },
+        {
+          "place_id": "BMCKyyNF4UaxZlf0TRbkqA%3d%3d",
+          "name": "New Ashok Nagar",
+          "address": "A-706, Block B, New Ashok Nagar, New Delhi, Delhi 110096",
+          "coordinates": {
+            "lat": 28.5891647,
+            "lng": 77.2995651
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_3"]
+          }
+        },
+        {
+          "place_id": "TkxVFnbD4k6PJ3Pxhhbisg%3d%3d",
+          "name": "Noida Sector - 15",
+          "address": "H8M6+WPC, A Block, Sector 2, Noida, Uttar Pradesh 201301",
+          "coordinates": {
+            "lat": 28.5848247,
+            "lng": 77.3091888
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_3"]
+          }
+        },
+        {
+          "place_id": "lsABPslZl0%2bF7AB%2bnySIUw%3d%3d",
+          "name": "Noida Sector - 16",
+          "address": "Captain Vijyant Thapar Marg, Block A, Sector 3, Noida, Uttar Pradesh 201301",
+          "coordinates": {
+            "lat": 28.5782353,
+            "lng": 77.3132137
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_3"]
+          }
+        },
+        {
+          "place_id": "XdbNEK8gdUuvftQkrjMHYQ%3d%3d",
+          "name": "Noida Sector - 18",
+          "address": "Captain Vijyant Thapar Marg, Noida Sector 18, Pocket E, Sector 27, Noida, Uttar Pradesh 201301",
+          "coordinates": {
+            "lat": 28.5707557,
+            "lng": 77.3236131
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_3"]
+          }
+        },
+        {
+          "place_id": "M76MynA8VUKJtPhlKCvgbg%3d%3d",
+          "name": "Botanical Garden",
+          "address": "Captain Vijyant Thapar Marg, Sector 38, Noida, Uttar Pradesh 201301",
+          "coordinates": {
+            "lat": 28.5640378,
+            "lng": 77.3317051
+          },
+          "is_interchange": true,
+          "interchange_data": {
+            "count": 2,
+            "lines": ["line_3","line_8"]
+          }
+        },
+        {
+          "place_id": "yKUK8iUcQky2BDXjNiWKKw%3d%3d",
+          "name": "Golf Course",
+          "address": "Captain Shashi Kant Sharma Marg, Noida Golf Course, Sector 37, Noida, Uttar Pradesh 201303",
+          "coordinates": {
+            "lat": 28.5671947,
+            "lng": 77.3433951
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_3"]
+          }
+        },
+        {
+          "place_id": "zSoo4LMs9ku2fE4YtO%2b%2fvg%3d%3d",
+          "name": "Noida City Centre",
+          "address": "Sector 39A, Sector 32, Noida, Uttar Pradesh 201303",
+          "coordinates": {
+            "lat": 28.5746747,
+            "lng": 77.3534751
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_3"]
+          }
+        },
+        {
+          "place_id": "vtebD5vbhkCW9Px7CUbSkQ%3d%3d",
+          "name": "Sector - 34 Noida",
+          "address": "Kendriya Vihar, Sector 51, Noida, Uttar Pradesh 201307",
+          "coordinates": {
+            "lat": 28.580118,
+            "lng": 77.3589799
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_3"]
+          }
+        },
+        {
+          "place_id": "SW0yoD9BfU6Vs%2bC8jbz5Fw%3d%3d",
+          "name": "Sector - 52 Noida",
+          "address": "Block E, Sector 51, Noida, Uttar Pradesh 201301",
+          "coordinates": {
+            "lat": 28.5867,
+            "lng": 77.3683329
+          },
+          "is_interchange": true,
+          "interchange_data": {
+            "count": 2,
+            "lines": ["line_3", "line_12"]
+          }
+        },
+        {
+          "place_id": "LIhM7iqn8kOTMmwfuBICQw%3d%3d",
+          "name": "Sector - 61 Noida",
+          "address": "H9XC+2W6, Vishwakarma Rd, Block D, Sector 71, Noida, Uttar Pradesh 201307",
+          "coordinates": {
+            "lat": 28.5975347,
+            "lng": 77.36777367
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_3"]
+          }
+        },
+        {
+          "place_id": "IuF%2bQkEncEeso1Yicd0C6Q%3d%3d",
+          "name": "Sector - 59 Noida",
+          "address": "A Block, Sector 59, Noida, Uttar Pradesh 201301",
+          "coordinates": {
+            "lat": 28.606493,
+            "lng": 77.372726
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_3"]
+          }
+        },
+        {
+          "place_id": "KLFOKEfit0aUTNz%2fDD%2f3%2bA%3d%3d",
+          "name": "Sector - 62 Noida",
+          "address": "Phase 2, Industrial Area, Sector 62, Noida, Uttar Pradesh 201301",
+          "coordinates": {
+            "lat": 28.6169997,
+            "lng": 77.3710351
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_3"]
+          }
+        },
+        {
+          "place_id": "9PgfAchSUUGIGAxVO1kzSA%3d%3d",
+          "name": "Noida Electronic City",
+          "address": "H Block, Sector 62, Noida, Uttar Pradesh 201301",
+          "coordinates": {
+            "lat": 28.6279457,
+            "lng": 77.3723551
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_3"]
+          }
+        }
+      ]
+    },
+    "line_4": {
+      "name": "Blue Line - Branch",
+      "colour_code": "3B76C0",
+      "stations": [
+        {
+          "place_id": "TOvJPV46gEKYHQ1IOAKk4Q%3d%3d",
+          "name": "Yamuna Bank",
+          "address": "Yamuna Bank, New Delhi, Delhi 110092",
+          "coordinates": {
+            "lat": 28.62333,
+            "lng": 77.26792
+          },
+          "is_interchange": true,
+          "interchange_data": {
+            "count": 2,
+            "lines": ["line_3","line_4"]
+          }
+        },
+        {
+          "place_id": "JqBam2MuWES%2bcHhbLV84AA%3d%3d",
+          "name": "Laxmi Nagar",
+          "address": "Veer Savarkar Block, Block H, Sector 18, Kavi Nagar, Ghaziabad, Uttar Pradesh 110092",
+          "coordinates": {
+            "lat": 28.6306847,
+            "lng": 77.2750451
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_4"]
+          }
+        },
+        {
+          "place_id": "VzmmZmr%2f8kKm1LPT6dbjMA%3d%3d",
+          "name": "Nirman Vihar",
+          "address": "Laxmi Nagar Commercial Complex, Swasthya Vihar, Delhi, 110092",
+          "coordinates": {
+            "lat": 28.6370347,
+            "lng": 77.2847351
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_4"]
+          }
+        },
+        {
+          "place_id": "HO6mHSLQI0%2bNdiesqbRIVQ%3d%3d",
+          "name": "Preet Vihar",
+          "address": "Vikas Marg, New Rajdhani Enclave, Swasthya Vihar, New Delhi, Delhi 110092",
+          "coordinates": {
+            "lat": 28.6417147,
+            "lng": 77.2928551
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_4"]
+          }
+        },
+        {
+          "place_id": "6bTiPwtf9E%2beLFP9XkKetg%3d%3d",
+          "name": "Karkarduma",
+          "address": "J8X4+96W, Vikash Marg Rd, Arya Nagar, C Block, Preet Vihar, Delhi, 110092",
+          "coordinates": {
+            "lat": 28.6484843,
+            "lng": 77.3030106
+          },
+          "is_interchange": true,
+          "interchange_data": {
+            "count": 2,
+            "lines": ["line_4","line_7"]
+          }
+        },
+        {
+          "place_id": "7fAkkcUDVEeQwSTFij7sbw%3d%3d",
+          "name": "Anand Vihar ISBT",
+          "address": "Isbt Anand Vihar, Anand Vihar, New Delhi, Delhi 110092",
+          "coordinates": {
+            "lat": 28.6469574,
+            "lng": 77.3133407
+          },
+          "is_interchange": true,
+          "interchange_data": {
+            "count": 2,
+            "lines": ["line_4", "line_7"]
+          }
+        },
+        {
+          "place_id": "ECfb%2f7CGvUCiumGyhNn2xg%3d%3d",
+          "name": "Kaushambi",
+          "address": "Dabur India Limited Office, Kaushambi, Ghaziabad, Uttar Pradesh 201012",
+          "coordinates": {
+            "lat": 28.6454749,
+            "lng": 77.321836
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_4"]
+          }
+        },
+        {
+          "place_id": "UC9qRZFsX0O9A8nz2nMKTQ%3d%3d",
+          "name": "Vaishali",
+          "address": "Madan Mohan Malviya Marg, Gaur Ganga 2, Phase 1, Sector 4, Vaishali, Ghaziabad, Uttar Pradesh 201010",
+          "coordinates": {
+            "lat": 28.6498447,
+            "lng": 77.3371051
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_4"]
+          }
+        }
+        
+      ]
+    },
+    "line_5": {
+      "name": "Green Line",
+      "colour_code": "198754",
+      "stations":[
+        {
+          "place_id": "bwd%2bDvFLm0OhYMxMBVHHXA%3d%3d",
+          "name": "Kirti Nagar",
+          "address": "Karampura Flyover, Block 1, Kirti Nagar Industrial Area, Kirti Nagar, New Delhi, Delhi 110015",
+          "coordinates": {
+            "lat": 28.6556811,
+            "lng": 77.1482393
+          },
+          "is_interchange": true,
+          "interchange_data": {
+            "count": 2,
+            "lines": ["line_3","line_5"]
+          }
+        },
+        {
+          "place_id": "7Wclg2S8ck%2bBwqQwY5X76A%3d%3d",
+          "name": "Satguru Ram Singh Marg",
+          "address": "Block B, Najafgarh Road Industrial Area, New Delhi, Delhi 110008",
+          "coordinates": {
+            "lat": 28.6621347,
+            "lng": 77.1550851
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_5"]
+          }
+        },
+        {
+          "place_id": "ImjMe7N2a0aqJwNL4veYfg%3d%3d",
+          "name": "Inderlok",
+          "address": "Maharaj Nar Singh Marg, Shastri Nagar, New Delhi, Delhi 110035",
+          "coordinates": {
+            "lat": 28.6734411,
+            "lng": 77.1693442
+          },
+          "is_interchange": true,
+          "interchange_data": {
+            "count": 2,
+            "lines": ["line_1","line_5"]
+          }
+        },
+        {
+          "place_id": "z3Wjxy%2fCykilkZzOVApbZg%3d%3d",
+          "name": "Ashok Park Main",
+          "address": "Rohtak Rd, Manohar Park, Block D, East Punjabi Bagh, Punjabi Bagh, New Delhi, Delhi 110026",
+          "coordinates": {
+            "lat": 28.6716215,
+            "lng": 77.1526515
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_5"]
+          }
+        },
+        {
+          "place_id": "r74eX0M900CE7DuYWRWj7Q%3d%3d",
+          "name": "Punjabi Bagh",
+          "address": "Rohtak Rd, Railway Colony, East Punjabi Bagh, Punjabi Bagh, New Delhi, Delhi 110026",
+          "coordinates": {
+            "lat": 28.6729338,
+            "lng": 77.1434843
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_5"]
+          }
+        },
+        {
+          "place_id": "Yz445Ojx3U22P1rC1Tpmxw%3d%3d",
+          "name": "Punjabi Bagh West",
+          "address": "Punjabi Bagh Chowk, West Punjabi Bagh, Punjabi Bagh, New Delhi, Delhi 110026",
+          "coordinates": {
+            "lat": 28.6727447,
+            "lng": 77.1366051
+          },
+          "is_interchange": true,
+          "interchange_data": {
+            "count": 2,
+            "lines": ["line_5", "line_7"]
+          }
+        },
+        {
+          "place_id": "XVDjVblLzEWHczD%2fwPDiGw%3d%3d",
+          "name": "Shivaji Park",
+          "address": "Rohtak Rd, Block S, Shivaji Park, Punjabi Bagh, New Delhi, Delhi 110026",
+          "coordinates": {
+            "lat": 28.6749437,
+            "lng": 77.1280071
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_5"]
+          }
+        },
+        {
+          "place_id": "6FJqQhLr0EydtuMuSzpzQw%3d%3d",
+          "name": "Madipur",
+          "address": "Madipur JJ Colony, Madhuban Enclave, Paschim Vihar, Delhi, 110063",
+          "coordinates": {
+            "lat": 28.6763447,
+            "lng": 77.1171651
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_5"]
+          }
+        },
+        {
+          "place_id": "OE8%2f59ySx0azm89kXW07ew%3d%3d",
+          "name": "Paschim Vihar East",
+          "address": "Rohtak Rd, Shiva Enclave, Paschim Vihar, New Delhi, Delhi 110063",
+          "coordinates": {
+            "lat": 28.6772747,
+            "lng": 77.1098351
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_5"]
+          }
+        },
+        {
+          "place_id": "FOXso7ILoEmYKMnxjUtNNg%3d%3d",
+          "name": "Paschim Vihar West",
+          "address": "M4H2+9W7, Paschim Vihar West Metro Station, Block A 1, Ashirwad, Paschim Vihar, New Delhi, Delhi 110063",
+          "coordinates": {
+            "lat": 28.6784048,
+            "lng": 77.0997153
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_5"]
+          }
+        },
+        {
+          "place_id": "d3GmQzTZAU6t83X9LZJzSA%3d%3d",
+          "name": "Peeragarhi",
+          "address": "Rohtak Rd, Peera Garhi, Peeragarhi Village, Paschim Vihar, New Delhi, Delhi 110087",
+          "coordinates": {
+            "lat": 28.6796579,
+            "lng": 77.090202
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_5"]
+          }
+        },
+        {
+          "place_id": "4usPF%2bkV5k6H1PkszOLXRQ%3d%3d",
+          "name": "Peeragarhi",
+          "address": "Rohtak Rd, Peera Garhi, Peeragarhi Village, Paschim Vihar, New Delhi, Delhi 110087",
+          "coordinates": {
+            "lat": 28.6796579,
+            "lng": 77.090202
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_5"]
+          }
+        },
+        {
+          "place_id": "gjxmzmhO80e9HoRhLs1cZw%3d%3d",
+          "name": "Udyog Nagar",
+          "address": "Rohtak Rd, Block A, Jwalapuri, Paschim Vihar, New Delhi, Delhi 110041",
+          "coordinates": {
+            "lat": 28.6810527,
+            "lng": 77.0782891
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_5"]
+          }
+        },
+        {
+          "place_id": "5AHE2Qn7BU%2bROxi4KE%2fZVw%3d%3d",
+          "name": "Maharaja Surajmal Stadium",
+          "address": "Rohtak Rd, Nangloi, New Delhi, Delhi 110041",
+          "coordinates": {
+            "lat": 28.6818247,
+            "lng": 77.0713851
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_5"]
+          }
+        },
+        {
+          "place_id": "WW8kGy%2ba4EORR8j01%2fiwXw%3d%3d",
+          "name": "Nangloi",
+          "address": "Kirari Extension 2, JJ Colony No 1, Nangloi, New Delhi, Delhi 110041",
+          "coordinates": {
+            "lat": 28.6823347,
+            "lng": 77.0622351
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_5"]
+          }
+        },
+        {
+          "place_id": "guCT49c61kejZ5p4WpIjJA%3d%3d",
+          "name": "Nangloi Railway Station",
+          "address": "Rohtak Rd, Tyagi Colony, Nangloi Extension, Nangloi, New Delhi, Delhi 110041",
+          "coordinates": {
+            "lat": 28.6821377,
+            "lng": 77.0536451
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_5"]
+          }
+        },
+        {
+          "place_id": "PkCcZG4SxESDK3kWMhwaSg%3d%3d",
+          "name": "Rajdhani Park",
+          "address": "NH 10, Gulshan Park, Mundka, New Delhi, Delhi 110041",
+          "coordinates": {
+            "lat": 28.6822841,
+            "lng": 77.0414321
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_5"]
+          }
+        },
+        {
+          "place_id": "irTQhr%2fJREuf57kJVWFikw%3d%3d",
+          "name": "Mundka",
+          "address": "NH 10, West Cabin Block, Mundka, New Delhi, Delhi 110041",
+          "coordinates": {
+            "lat": 28.6823947,
+            "lng": 77.0277651
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_5"]
+          }
+        },
+        {
+          "place_id": "irTQhr%2fJREuf57kJVWFikw%3d%3d",
+          "name": "Mundka",
+          "address": "NH 10, West Cabin Block, Mundka, New Delhi, Delhi 110041",
+          "coordinates": {
+            "lat": 28.6823947,
+            "lng": 77.0277651
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_5"]
+          }
+        },
+        {
+          "place_id": "fvFPiiW7OEuBS6r21CA7TA%3d%3d",
+          "name": "Mundka Industrial Area (MIA)",
+          "address": "Mundka Industrial Area, Mundka, Delhi, 110081",
+          "coordinates": {
+            "lat": 28.6835409,
+            "lng": 77.0142814
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_5"]
+          }
+        },
+        {
+          "place_id": "36w%2fW3rOekKHyv5LdEjsYA%3d%3d",
+          "name": "Ghevra Metro Station",
+          "address": "Block C, Tyagi Vihar, Ghevra, Delhi, 110081",
+          "coordinates": {
+            "lat": 28.6852417,
+            "lng": 76.9935291
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_5"]
+          }
+        },
+        {
+          "place_id": "nJUEn2fo9Uyg5QAscw5zTA%3d%3d",
+          "name": "Tikri Kalan",
+          "address": "Netaji Subhash Vihar, Delhi, 110072",
+          "coordinates": {
+            "lat": 28.6868847,
+            "lng": 76.9746951
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_5"]
+          }
+        },
+        {
+          "place_id": "ztmsMp6otUusm2rAj90%2fbQ%3d%3d",
+          "name": "Tikri Border",
+          "address": "Tikri Kalan, Delhi, 110072",
+          "coordinates": {
+            "lat": 28.688025,
+            "lng": 76.961524
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_5"]
+          }
+        },
+        {
+          "place_id": "hmBc31nlVEiBqM%2bk%2bORbRQ%3d%3d",
+          "name": "Pandit Shree Ram Sharma",
+          "address": "MIE Part-B, Bahadurgarh, Haryana 124507",
+          "coordinates": {
+            "lat": 28.6892467,
+            "lng": 76.9485721
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_5"]
+          }
+        },
+        {
+          "place_id": "Xlec3zfs8066KFKpge%2bjjA%3d%3d",
+          "name": "Bahadurgarh City",
+          "address": "Ram Nagar, Bahadurgarh, Haryana 124507",
+          "coordinates": {
+            "lat": 28.6907447,
+            "lng": 76.9328051
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_5"]
+          }
+        },
+        {
+          "place_id": "Owa9CYU5pEST39wMF75VeA%3d%3d",
+          "name": "Brig. Hoshiar Singh",
+          "address": "Old Industrial Area, Bahadurgarh, Haryana 124507",
+          "coordinates": {
+            "lat": 28.6974147,
+            "lng": 76.9166951
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_5"]
+          }
+        }
+      ]
+    },
+    "line_6":{
+      "name":"Violet Line",
+      "colour_code":"6f42c1",
+      "stations":[
+        {
+          "place_id": "8XxL6%2fC2eEOh1eZAkN%2fy2A%3d%3d",
+          "name": "Kashmere Gate",
+          "address": "Lothian Rd, Inter State Bus Terminal, Kashmere Gate, New Delhi, Delhi 110006",
+          "coordinates": {
+            "lat": 28.6674747,
+            "lng": 77.2256651
+          },
+          "is_interchange": true,
+          "interchange_data": {
+            "count": 3,
+            "lines": ["line_1","line_2","line_6"]
+          }
+        },
+        {
+          "place_id": "AH9WR%2bHtKkSL0ak3nN9cZA%3d%3d",
+          "name": "Lal Quila",
+          "address": "Angoori Bagh Rd, Netaji Subash Place, Lajpat Rai Market, Chandni Chowk, New Delhi, Delhi 110006",
+          "coordinates": {
+            "lat": 28.6568598,
+            "lng": 77.2342376
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_6"]
+          }
+        },
+        {
+          "place_id": "c449UzmH2kWNcSbRGMxmPQ%3d%3d",
+          "name": "Jama Masjid",
+          "address": "Meena Bazar, Meena Bazaar, Jama Masjid, Chandni Chowk, New Delhi, Delhi 110006",
+          "coordinates": {
+            "lat": 28.6495547,
+            "lng": 77.2354451
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_6"]
+          }
+        },
+        {
+          "place_id": "5YCG31HxlkCjF1w%2fPEd45A%3d%3d",
+          "name": "Delhi Gate",
+          "address": "Asaf Ali Rd, Chatta lal Miya, Chandni Mahal, Chandni Chowk, New Delhi, Delhi 110002",
+          "coordinates": {
+            "lat": 28.64008,
+            "lng": 77.2360039
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_6"]
+          }
+        },
+        {
+          "place_id": "k2L6iH%2bcakWuPt4aE%2b%2bCOA%3d%3d",
+          "name": "ITO",
+          "address": "Rajendra Bhawan, 110002, T Sohanlal Marg, Rajendra Place, New Delhi, Delhi 110008",
+          "coordinates": {
+            "lat": 28.6283947,
+            "lng": 77.2386051
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_6"]
+          }
+        },
+        {
+          "place_id": "SUO%2bs7VsT0e%2fPGyzHpanaw%3d%3d",
+          "name": "Mandi House",
+          "address": "New Delhi, Delhi 110001",
+          "coordinates": {
+            "lat": 28.6259038,
+            "lng": 77.2317208
+          },
+          "is_interchange": true,
+          "interchange_data": {
+            "count": 2,
+            "lines": ["line_3","line_6"]
+          }
+        },
+        {
+          "place_id": "TBjWGZrms0COW%2fB%2b71Xoaw%3d%3d",
+          "name": "Janpath",
+          "address": "Jantar Mantar Road, Janpath, Connaught Place, New Delhi, Delhi 110001",
+          "coordinates": {
+            "lat": 28.6250657,
+            "lng": 77.2166091
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_6"]
+          }
+        },
+        {
+          "place_id": "6Lxfl2fQj0uoW9bNwD5MIA%3d%3d",
+          "name": "Central Secretariat",
+          "address": "Rafi Ahmed Kidwai Marg, Kartavya Path, Central Secretariat, New Delhi, Delhi 110001",
+          "coordinates": {
+            "lat": 28.6151511,
+            "lng": 77.2077574
+          },
+          "is_interchange": true,
+          "interchange_data": {
+            "count": 2,
+            "lines": ["line_2","line_6"]
+          }
+        },
+        {
+          "place_id": "7K5BMAgACUWziil57kGrlQ%3d%3d",
+          "name": "Khan Market",
+          "address": "Sujan Sing Park North, Sujan Singh Park, New Delhi, Delhi 110003",
+          "coordinates": {
+            "lat": 28.6021557,
+            "lng": 77.2264441
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_6"]
+          }
+        },
+        {
+          "place_id": "3hFN06svbEKBEKfi9izhJg%3d%3d",
+          "name": "Jln Stadium",
+          "address": "CGO Complex, Pragati Vihar, New Delhi, Delhi 110003",
+          "coordinates": {
+            "lat": 28.5893677,
+            "lng": 77.2309871
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_6"]
+          }
+        },
+        {
+          "place_id": "omyyLL54kECzKwU5nzQU7A%3d%3d",
+          "name": "Jangpura",
+          "address": "Jangpura, Jungpura Extension, Pragati Vihar, New Delhi, Delhi 110014",
+          "coordinates": {
+            "lat": 28.5833099,
+            "lng": 77.2351527
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_6"]
+          }
+        },
+        {
+          "place_id": "ZQ9kO8Kx5Emf8vsFldvjEg%3d%3d",
+          "name": "Lajpat Nagar",
+          "address": "Lala Lajpat Rai Rd, Block A, Lajpat Nagar II, Lajpat Nagar, New Delhi, Delhi 110024",
+          "coordinates": {
+            "lat": 28.5707181,
+            "lng": 77.2353233
+          },
+          "is_interchange": true,
+          "interchange_data": {
+            "count": 2,
+            "lines": ["line_6", "line_7"]
+          }
+        },
+        {
+          "place_id": "MRlDI4ajIkqgB0ZaskNWMw%3d%3d",
+          "name": "Moolchand",
+          "address": "Lala Lajpat Rai Marg, Vikram Vihar, Lajpat Nagar IV, Lajpat Nagar, New Delhi, Delhi 110048",
+          "coordinates": {
+            "lat": 28.5640167,
+            "lng": 77.2316701
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_6"]
+          }
+        },
+        {
+          "place_id": "o8vmrhxaG0O05HR23fd4Nw%3d%3d",
+          "name": "Kailash Colony",
+          "address": "Block E, East of Kailash, New Delhi, Delhi 110048",
+          "coordinates": {
+            "lat": 28.5553921,
+            "lng": 77.2393792
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_6"]
+          }
+        },
+        {
+          "place_id": "CVBKS3ZdQkWYpQstgKW%2bew%3d%3d",
+          "name": "Nehru Place",
+          "address": "Nehru Place, New Delhi, Delhi 110019",
+          "coordinates": {
+            "lat": 28.5514077,
+            "lng": 77.2491909
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_6"]
+          }
+        },
+        {
+          "place_id": "My4Z5CzzT0e8gBQ3PCAUNA%3d%3d",
+          "name": "Kalkaji Mandir",
+          "address": "Block 9, Kalkaji, New Delhi, Delhi 110019",
+          "coordinates": {
+            "lat": 28.5494547,
+            "lng": 77.2566451
+          },
+          "is_interchange": true,
+          "interchange_data": {
+            "count": 2,
+            "lines": ["line_6","line_8"]
+          }
+        },
+        {
+          "place_id": "1zebnsTVskCZ5jLEFle0Gg%3d%3d",
+          "name": "Govindpuri",
+          "address": "Ma Anandmayee Marg, NSIC Estate, Balaji Estate, Kalkaji, New Delhi, Delhi 110019",
+          "coordinates": {
+            "lat": 28.5444,
+            "lng": 77.26435
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_6"]
+          }
+        },
+        {
+          "place_id": "UGP7SzdGhUqlcyqKYXgW1Q%3d%3d",
+          "name": "Harkesh Nagar Okhla",
+          "address": "Okhla Phase II, Okhla Industrial Estate, New Delhi, Delhi 110020",
+          "coordinates": {
+            "lat": 28.5429247,
+            "lng": 77.2724651
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_6"]
+          }
+        },
+        {
+          "place_id": "xEuPGXP52kODWlkayeHfHQ%3d%3d",
+          "name": "Jasola-Apollo",
+          "address": "Pedestrian Opas, Jasola, New Delhi, Delhi 110025",
+          "coordinates": {
+            "lat": 28.5381347,
+            "lng": 77.2807251
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_6"]
+          }
+        },
+        {
+          "place_id": "D47iq097ikehD%2fG8xL5fQg%3d%3d",
+          "name": "Sarita Vihar",
+          "address": "Pocket C, Saidabad, New Delhi, Delhi 110076",
+          "coordinates": {
+            "lat": 28.5287347,
+            "lng": 77.2856451
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_6"]
+          }
+        },
+        {
+          "place_id": "yK6C%2fTC83EOAYVDXEKgy8A%3d%3d",
+          "name": "Mohan Estate",
+          "address": "Block B, Mohan Cooperative Industrial Estate, Badarpur, New Delhi, Delhi 110076",
+          "coordinates": {
+            "lat": 28.5195247,
+            "lng": 77.2919851
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_6"]
+          }
+        },
+        {
+          "place_id": "H58bbPNLl0aeidiv%2fK9eZw%3d%3d",
+          "name": "Tughlakabad Station",
+          "address": "Balmiki Mohalla, Block E, Mohan Cooperative Industrial Estate, Tughlakabad, New Delhi, Delhi 110044",
+          "coordinates": {
+            "lat": 28.5025447,
+            "lng": 77.2967251
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_6"]
+          }
+        },
+        {
+          "place_id": "2DI27nQCt0uaX%2fck4MdRYQ%3d%3d",
+          "name": "Badarpur Border",
+          "address": "Block B, Block E, Mohan Cooperative Industrial Estate, Badarpur, New Delhi, Delhi 110044",
+          "coordinates": {
+            "lat": 28.4932547,
+            "lng": 77.3003951
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_6"]
+          }
+        },
+        {
+          "place_id": "u1WVdLQYO0uGx7K9F5TUOQ%3d%3d",
+          "name": "Sarai",
+          "address": "Sector 27D, Faridabad, Haryana 121003",
+          "coordinates": {
+            "lat": 28.4780747,
+            "lng": 77.3023251
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_6"]
+          }
+        },
+        {
+          "place_id": "QndefRKNhka%2bMpOAz36DCA%3d%3d",
+          "name": "NHPC Chowk",
+          "address": "Block A, DLF Industrial Area, Sector 32, Faridabad, Haryana 121003",
+          "coordinates": {
+            "lat": 28.4577061,
+            "lng": 77.3048679
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_6"]
+          }
+        },
+        {
+          "place_id": "48HRUG6qUE2gFgU2kxwrmw%3d%3d",
+          "name": "Mewala Maharajpur",
+          "address": "Mathura Rd, Sector 31, Faridabad, Haryana 121003",
+          "coordinates": {
+            "lat": 28.4485707,
+            "lng": 77.3054801
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_6"]
+          }
+        },
+        {
+          "place_id": "HRsRIJ5pOkSVjuz60ZULGg%3d%3d",
+          "name": "Sector-28",
+          "address": "Mathura Rd, HBH Colony, Sector 28, Faridabad, Haryana 121008",
+          "coordinates": {
+            "lat": 28.4383847,
+            "lng": 77.3063631
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_6"]
+          }
+        },
+        {
+          "place_id": "iD1dl27f9UWE4Nu3zMAnWA%3d%3d",
+          "name": "Badkal Mor",
+          "address": "Sector 19, Faridabad, Haryana 121002",
+          "coordinates": {
+            "lat": 28.4227579,
+            "lng": 77.3077824
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_6"]
+          }
+        },
+        {
+          "place_id": "CTyfP3FMUEeILhoHoKOGUQ%3d%3d",
+          "name": "Old Faridabad",
+          "address": "Sector 16A, Faridabad, Haryana 121002",
+          "coordinates": {
+            "lat": 28.4107759,
+            "lng": 77.3089326
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_6"]
+          }
+        },
+        {
+          "place_id": "vVknTkKI1Uu0kMTvQGiXfQ%3d%3d",
+          "name": "Neelam Chowk Ajronda",
+          "address": "Mathura Road, Sector 15A, Faridabad, Haryana 121013",
+          "coordinates": {
+            "lat": 28.3976727,
+            "lng": 77.3097901
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_6"]
+          }
+        },
+        {
+          "place_id": "t4Azje9rKUawVYZVOYFksQ%3d%3d",
+          "name": "Bata Chowk",
+          "address": "Mathura Rd, Sector 12, Faridabad, Haryana 121007",
+          "coordinates": {
+            "lat": 28.3859947,
+            "lng": 77.3108451
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_6"]
+          }
+        },
+        {
+          "place_id": "tvQqkc%2biq0imQZOCiOtU7A%3d%3d",
+          "name": "Escorts Mujesar",
+          "address": "Mathura Rd, Sector 11, Pocket A, Sector 11, Faridabad, Haryana 121006",
+          "coordinates": {
+            "lat": 28.3701647,
+            "lng": 77.3123651
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_6"]
+          }
+        },
+        {
+          "place_id": "zSGIi1fCcECZ08LABC0atA%3d%3d",
+          "name": "Sant Surdas (SIHI)",
+          "address": "Sector 6, Faridabad, Haryana 121006",
+          "coordinates": {
+            "lat": 28.3546777,
+            "lng": 77.3136431
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_6"]
+          }
+        },
+        {
+          "place_id": "gK5uYrtV%2fUitc4qXDgWh2g%3d%3d",
+          "name": "Raja Nahar Singh (Ballabhgarh)",
+          "address": "Ballabhgarh, Faridabad, Haryana 121004",
+          "coordinates": {
+            "lat": 28.3398057,
+            "lng": 77.3138711
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_6"]
+          }
+        }
+      ]
+    },
+    "line_7":{
+      "name":"Pink Line",
+      "colour_code":"d63384",
+      "stations":[
+        {
+          "place_id": "h2BYKu5z4UO%2bm%2fZ%2bJJbvWQ%3d%3d",
+          "name": "Majlis Park",
+          "address": "Block EE, Jahangirpuri, Delhi, 110033",
+          "coordinates": {
+            "lat": 28.7243231,
+            "lng": 77.1797071
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_7"]
+          }
+        },
+        {
+          "place_id": "BT0Cg5xk3UuVH3AAUNLhYw%3d%3d",
+          "name": "Azadpur",
+          "address": "G, 85, Sector 23 Rd, Vijay vihar Phase I, Pocket 5, Sector-24, Rohini, Delhi, 110085",
+          "coordinates": {
+            "lat": 28.70702,
+            "lng": 77.18052
+          },
+          "is_interchange": true,
+          "interchange_data": {
+            "count": 2,
+            "lines": ["line_2","line_7"]
+          }
+        },
+        {
+          "place_id": "Ywn7clDD60SnIZMSTzwMgg%3d%3d",
+          "name": "Shalimar Bagh",
+          "address": "Wazirpur Industrial Area, Wazirpur, Delhi, 110052",
+          "coordinates": {
+            "lat": 28.7020227,
+            "lng": 77.1621953
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_7"]
+          }
+        },
+        {
+          "place_id": "BPjUOA0ErE6M%2bkZ6WMI5eQ%3d%3d",
+          "name": "Netaji Subhash Place",
+          "address": "Guru Govind Singh College, Pitampura, New Delhi, Delhi 110034",
+          "coordinates": {
+            "lat": 28.6960547,
+            "lng": 77.1500151
+          },
+          "is_interchange": true,
+          "interchange_data": {
+            "count": 2,
+            "lines": ["line_1", "line_7"]
+          }
+        },
+        {
+          "place_id": "vbhgziH4GUih%2fNTrWnkYIQ%3d%3d",
+          "name": "Shakurpur",
+          "address": "JJ Colony, Shakurpur Colony, Shakurpur, Delhi, 110034",
+          "coordinates": {
+            "lat": 28.6857837,
+            "lng": 77.1470511
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_7"]
+          }
+        },
+        {
+          "place_id": "Yz445Ojx3U22P1rC1Tpmxw%3d%3d",
+          "name": "Punjabi Bagh West",
+          "address": "Punjabi Bagh Chowk, West Punjabi Bagh, Punjabi Bagh, New Delhi, Delhi 110026",
+          "coordinates": {
+            "lat": 28.6727447,
+            "lng": 77.1366051
+          },
+          "is_interchange": true,
+          "interchange_data": {
+            "count": 2,
+            "lines": ["line_5", "line_7"]
+          }
+        },
+        {
+          "place_id": "uGH%2ftws420mcHH7MqvgJjA%3d%3d",
+          "name": "ESI-Basaidarapur",
+          "address": "Shivaji Enclave, Tagore Garden Extension, Delhi, 110027",
+          "coordinates": {
+            "lat": 28.6581647,
+            "lng": 77.1247451
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_7"]
+          }
+        },
+        {
+          "place_id": "K48ReY%2f1HUOt3xtOPpYaZA%3d%3d",
+          "name": "Rajouri Garden",
+          "address": "Najafgarh Rd, Shivaji Place, Vishal Enclave, Tagore Garden Extension, New Delhi, Delhi 110018",
+          "coordinates": {
+            "lat": 28.649019,
+            "lng": 77.122705
+          },
+          "is_interchange": true,
+          "interchange_data": {
+            "count": 2,
+            "lines": ["line_3","line_7"]
+          }
+        },
+        {
+          "place_id": "TG7j8ahjo02FP0P2U%2bCwnQ%3d%3d",
+          "name": "Mayapuri",
+          "address": "Block WH, Mayapuri Industrial Area Phase I, Mayapuri, Delhi, 110064",
+          "coordinates": {
+            "lat": 28.6371037,
+            "lng": 77.1271661
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_7"]
+          }
+        },
+        {
+          "place_id": "3wHOx05MOkKE7lxkj1HMSg%3d%3d",
+          "name": "Naraina Vihar",
+          "address": "Shindi Colony, Naraina Village, Naraina, New Delhi, Delhi 110028",
+          "coordinates": {
+            "lat": 28.624125,
+            "lng": 77.1319819
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_7"]
+          }
+        },
+        {
+          "place_id": "U5O0orL9E0GrmEJzLHtTng%3d%3d",
+          "name": "Delhi Cantt.",
+          "address": "Brar Square, Delhi Cantonment, New Delhi, Delhi 110010",
+          "coordinates": {
+            "lat": 28.6087847,
+            "lng": 77.1377651
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_7"]
+          }
+        },
+        {
+          "place_id": "aefqK2z7bEGWtWACkTsm6Q%3d%3d",
+          "name": "Durgabai Deshmukh South Campus",
+          "address": "near University of Delhi, Satya Niketan, South Moti Bagh, New Delhi, Delhi 110021",
+          "coordinates": {
+            "lat": 28.5893847,
+            "lng": 77.1669451
+          },
+          "is_interchange": true,
+          "interchange_data": {
+            "count": 2,
+            "lines": ["line_7","line_10"]
+          }
+        },
+        {
+          "place_id": "l0nncMLG2E%2bRB263sWEnvg%3d%3d",
+          "name": "Sir M. Vishweshwaraiah Moti Bagh",
+          "address": "Sector 12, Rama Krishna Puram, New Delhi, Delhi 110021",
+          "coordinates": {
+            "lat": 28.5785087,
+            "lng": 77.1731511
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_7"]
+          }
+        },
+        {
+          "place_id": "hqG71zFcF0ij3DsTd8Tmvg%3d%3d",
+          "name": "Bhikaji Cama Place",
+          "address": "Block A, Netaji Nagar, New Delhi, Delhi 110023",
+          "coordinates": {
+            "lat": 28.5702157,
+            "lng": 77.1853131
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_7"]
+          }
+        },
+        {
+          "place_id": "AoNYhdAUEEObxz8r8bX2ww%3d%3d",
+          "name": "Sarojini Nagar",
+          "address": "Block C, Sarojini Nagar, New Delhi, Delhi 110023",
+          "coordinates": {
+            "lat": 28.5758117,
+            "lng": 77.1959961
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_7"]
+          }
+        },
+        {
+          "place_id": "FtnTWPRinUyuiV4223jQ4Q%3d%3d",
+          "name": "Dilli Haat - INA",
+          "address": "Sri Aurobindo Marg, Aviation Colony, INA Colony, New Delhi, Delhi 110023",
+          "coordinates": {
+            "lat": 28.5744541,
+            "lng": 77.2070475
+          },
+          "is_interchange": true,
+          "interchange_data": {
+            "count": 2,
+            "lines": ["line_2","line_7"]
+          }
+        },
+        {
+          "place_id": "7hzTJTQk9keJsu3OH9yIpw%3d%3d",
+          "name": "South Extension",
+          "address": "Block E, New Delhi, Delhi 110049",
+          "coordinates": {
+            "lat": 28.568611,
+            "lng": 77.2157589
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_7"]
+          }
+        },
+        {
+          "place_id": "ZQ9kO8Kx5Emf8vsFldvjEg%3d%3d",
+          "name": "Lajpat Nagar",
+          "address": "Lala Lajpat Rai Rd, Block A, Lajpat Nagar II, Lajpat Nagar, New Delhi, Delhi 110024",
+          "coordinates": {
+            "lat": 28.5707181,
+            "lng": 77.2353233
+          },
+          "is_interchange": true,
+          "interchange_data": {
+            "count": 2,
+            "lines": ["line_6", "line_7"]
+          }
+        },
+        {
+          "place_id": "Md7lnEXmJEiGtQEdHnNADg%3d%3d",
+          "name": "Vinobapuri",
+          "address": "Nehru Nagar, Lajpat Nagar, New Delhi, Delhi 110065",
+          "coordinates": {
+            "lat": 28.5659487,
+            "lng": 77.2479271
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_7"]
+          }
+        },
+        {
+          "place_id": "YnNBoNUacUKd4j3hWvCtIQ%3d%3d",
+          "name": "Ashram",
+          "address": "Ashram metro station, Delhi Metro Pink Line, Block A, Friends Colony East, New Friends Colony, New Delhi, Delhi 110065",
+          "coordinates": {
+            "lat": 28.57217,
+            "lng": 77.2559347
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_7"]
+          }
+        },
+        {
+          "place_id": "YLx9XIVWukSAQtt5hKsHNw%3d%3d",
+          "name": "Sarai Kale Khan - Nizamuddin",
+          "address": "Block A, Ganga Vihar, Sarai Kale Khan, New Delhi, Delhi 110013",
+          "coordinates": {
+            "lat": 28.5887223,
+            "lng": 77.2559864
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_7"]
+          }
+        },
+        {
+          "place_id": "My0UtHGYEE28bvins%2bcWyA%3d%3d",
+          "name": "Mayur Vihar - 1",
+          "address": "Pocket 4, Mayur Vihar, New Delhi, Delhi 110091",
+          "coordinates": {
+            "lat": 28.6042306,
+            "lng": 77.2870331
+          },
+          "is_interchange": true,
+          "interchange_data": {
+            "count": 2,
+            "lines": ["line_3","line_7"]
+          }
+        },
+        {
+          "place_id": "k2bVudrVRE27rcCXmFemeg%3d%3d",
+          "name": "Mayur Vihar Pocket-1",
+          "address": "Mayur Vihar Phase I, Pocket 3, Delhi, 110091",
+          "coordinates": {
+            "lat": 28.6057991,
+            "lng": 77.2961286
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_7"]
+          }
+        },
+        {
+          "place_id": "pcr%2fqTv2e02X2TVlCINDug%3d%3d",
+          "name": "Trilokpuri-Sanjay Lake",
+          "address": "Vasundhara Rd, Pocket D, Trilokpuri, New Delhi, Delhi 110091",
+          "coordinates": {
+            "lat": 28.6135947,
+            "lng": 77.3062651
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_7"]
+          }
+        },
+        {
+          "place_id": "eHUOwlVNzUmAJUNIodkgvw%3d%3d",
+          "name": "East Vinod Nagar-Mayur Vihar -II",
+          "address": "Block E, Vinod Nagar East, Delhi, 110091",
+          "coordinates": {
+            "lat": 28.6200617,
+            "lng": 77.3026951
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_7"]
+          }
+        },
+        {
+          "place_id": "cjJ0pj2CHUqEAamOeLDLtg%3d%3d",
+          "name": "Mandawali - West Vinod Nagar",
+          "address": "I.P.Extension, Patparganj, Delhi, 110092",
+          "coordinates": {
+            "lat": 28.6248817,
+            "lng": 77.3017971
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_7"]
+          }
+        },
+        {
+          "place_id": "ABpQ4rDXMEWurC7B79KS4Q%3d%3d",
+          "name": "I.P. Extension",
+          "address": "I.P.Extension, Patparganj, Delhi, 110092",
+          "coordinates": {
+            "lat": 28.6319403,
+            "lng": 77.3081817
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_7"]
+          }
+        },
+        {
+          "place_id": "7fAkkcUDVEeQwSTFij7sbw%3d%3d",
+          "name": "Anand Vihar ISBT",
+          "address": "Isbt Anand Vihar, Anand Vihar, New Delhi, Delhi 110092",
+          "coordinates": {
+            "lat": 28.6469574,
+            "lng": 77.3133407
+          },
+          "is_interchange": true,
+          "interchange_data": {
+            "count": 2,
+            "lines": ["line_4", "line_7"]
+          }
+        },
+        {
+          "place_id": "6bTiPwtf9E%2beLFP9XkKetg%3d%3d",
+          "name": "Karkarduma",
+          "address": "J8X4+96W, Vikash Marg Rd, Arya Nagar, C Block, Preet Vihar, Delhi, 110092",
+          "coordinates": {
+            "lat": 28.6484843,
+            "lng": 77.3030106
+          },
+          "is_interchange": true,
+          "interchange_data": {
+            "count": 2,
+            "lines": ["line_4","line_7"]
+          }
+        },
+        {
+          "place_id": "piVBEfdTBUOvT5Kqsv%2f4kg%3d%3d",
+          "name": "Karkarduma Court",
+          "address": "Arjun Gali, A G C R Enclave, Anand Vihar, Delhi, 110092",
+          "coordinates": {
+            "lat": 28.6535947,
+            "lng": 77.2930151
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_7"]
+          }
+        },
+        {
+          "place_id": "dn7cjKo7oUenzecpNhK2dw%3d%3d",
+          "name": "Krishna Nagar",
+          "address": "Vishwas Nagar Extension, Vishwas Nagar, Shahdara, Delhi, 110051",
+          "coordinates": {
+            "lat": 28.6585359,
+            "lng": 77.2869298
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_7"]
+          }
+        },
+        {
+          "place_id": "ciKbc534sEGk3WheXO5HDg%3d%3d",
+          "name": "East Azad Nagar",
+          "address": "East Azad Nagar, East Old Seelampur, Shahdara, Delhi, 110051",
+          "coordinates": {
+            "lat": 28.6647947,
+            "lng": 77.2822251
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_7"]
+          }
+        },
+        {
+          "place_id": "cium3yogaUaT2jnQecwgpQ%3d%3d",
+          "name": "Welcome",
+          "address": "North Kanti Nagar, Block A, Silampur, Shahdara, New Delhi, Delhi 110031",
+          "coordinates": {
+            "lat": 28.6717662,
+            "lng": 77.275084
+          },
+          "is_interchange": true,
+          "interchange_data": {
+            "count": 2,
+            "lines": ["line_1","line_7"]
+          }
+        },
+        {
+          "place_id": "H7Dhj6I5xUyCt%2bV3xSUBwQ%3d%3d",
+          "name": "Jafrabad",
+          "address": "Jafrabad, Shahdara, Delhi, 110053",
+          "coordinates": {
+            "lat": 28.6830072,
+            "lng": 77.2722832
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_7"]
+          }
+        },
+        {
+          "place_id": "1ZrNfDLZd0qvzuWSAFNi5w%3d%3d",
+          "name": "Maujpur-Babarpur",
+          "address": "Shahadara Drain New Delhi, Delhi, Uttar Pradesh 110001",
+          "coordinates": {
+            "lat": 28.6921078,
+            "lng": 77.2770371
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_7"]
+          }
+        },
+        {
+          "place_id": "dYqUHcwRckWcs0BjXX0EgQ%3d%3d",
+          "name": "Gokulpuri",
+          "address": "Sanjay Colony, Gokalpur, Delhi, 110094",
+          "coordinates": {
+            "lat": 28.7024147,
+            "lng": 77.2834051
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_7"]
+          }
+        },
+        {
+          "place_id": "PCWB6l0isEaG8RasgtXOVA%3d%3d",
+          "name": "Johri Enclave",
+          "address": "Gulab Vatika, Jawahar Nagar, Uttar Pradesh 201102",
+          "coordinates": {
+            "lat": 28.7131847,
+            "lng": 77.2874851
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_7"]
+          }
+        },
+        {
+          "place_id": "87simbG00EGDoDsu9K75Hw%3d%3d",
+          "name": "Shiv Vihar",
+          "address": "Jeewanpur, Jawahar Nagar, Delhi, 110094",
+          "coordinates": {
+            "lat": 28.7216169,
+            "lng": 77.2869189
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_7"]
+          }
+        }
+
+        
+      ]
+    },
+    "line_8":{
+      "name":"Magenta Line",
+      "colour_code":"FF00FF",
+      "stations":[
+        {
+          "place_id": "1oImZJcTYUGvhWrEgUvNZg%3d%3d",
+          "name": "Janak Puri West",
+          "address": "Janakpuri District Center, Janakpuri, Delhi, 110018",
+          "coordinates": {
+            "lat": 28.6297207,
+            "lng": 77.0755026
+          },
+          "is_interchange": true,
+          "interchange_data": {
+            "count": 2,
+            "lines": ["line_3","line_8"]
+          }
+        },
+        {
+          "place_id": "EjwZwRD1F0C70vrt8d%2f86w%3d%3d",
+          "name": "Dabri Mor - Janakpuri South",
+          "address": "Block C 2D, Janakpuri, Delhi, 110058",
+          "coordinates": {
+            "lat": 28.6159107,
+            "lng": 77.0826821
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_8"]
+          }
+        },
+        {
+          "place_id": "FaG9Uj0q6UOB9HL6ra7oew%3d%3d",
+          "name": "Dashrathpuri",
+          "address": "Ch Harphool Singh Market, Sector 1A Dwarka, Mahavir Enclave, Delhi, 110045",
+          "coordinates": {
+            "lat": 28.6023547,
+            "lng": 77.0799651
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_8"]
+          }
+        },
+        {
+          "place_id": "Dwp90mqUXkyQlIXY5YbZug%3d%3d",
+          "name": "Palam",
+          "address": "Block J, Palam, Delhi, 110045",
+          "coordinates": {
+            "lat": 28.588485,
+            "lng": 77.0813163
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_8"]
+          }
+        },
+        {
+          "place_id": "TeZPRO01rEuUW1FeHPjDQw%3d%3d",
+          "name": "Sadar Bazar Cantonment",
+          "address": "Shekhawati Lines, Delhi Cantonment, New Delhi, Delhi 110010",
+          "coordinates": {
+            "lat": 28.5771147,
+            "lng": 77.1087251
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_8"]
+          }
+        },
+        {
+          "place_id": "DtUmB2c9uEOIE6ys6GNHyg%3d%3d",
+          "name": "Terminal 1-IGI Airport Station",
+          "address": "New Delhi, Delhi 110037",
+          "coordinates": {
+            "lat": 28.5653047,
+            "lng": 77.1198061
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_8"]
+          }
+        },
+        {
+          "place_id": "ZnWZW6%2frvUuQIRay%2bF%2fq8Q%3d%3d",
+          "name": "Shankar Vihar",
+          "address": "Shankar Vihar, New Delhi, Delhi 110037",
+          "coordinates": {
+            "lat": 28.5608173,
+            "lng": 77.1377701
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_8"]
+          }
+        },
+        {
+          "place_id": "aBxYBoU6%2f02txM%2b%2bMa7JjA%3d%3d",
+          "name": "Vasant Vihar",
+          "address": "CGHS Colony, Vasant Vihar, New Delhi, Delhi 110057",
+          "coordinates": {
+            "lat": 28.5578337,
+            "lng": 77.1584151
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_8"]
+          }
+        },
+        {
+          "place_id": "RAzGNugZA0SYPbVsa76bxg%3d%3d",
+          "name": "Munirka",
+          "address": "Palam Flyover, Sector 4, Munirka, New Delhi, Delhi 110022",
+          "coordinates": {
+            "lat": 28.5578991,
+            "lng": 77.1713931
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_8"]
+          }
+        },
+        {
+          "place_id": "DvSWpfymB064pHxc3RRYLA%3d%3d",
+          "name": "Munirka",
+          "address": "Palam Flyover, Sector 4, Munirka, New Delhi, Delhi 110022",
+          "coordinates": {
+            "lat": 28.5578991,
+            "lng": 77.1713931
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_8"]
+          }
+        },
+        {
+          "place_id": "bPY7WozNe0qJIUvGefKhbQ%3d%3d",
+          "name": "R.K.Puram",
+          "address": "Deer Park, Hauz Khas, New Delhi, Delhi 110016",
+          "coordinates": {
+            "lat": 28.5503497,
+            "lng": 77.1806425
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_8"]
+          }
+        },
+        {
+          "place_id": "UhMx9VbvZk6WnuisGzoXJw%3d%3d",
+          "name": "IIT",
+          "address": "Deer Park, Hauz Khas, New Delhi, Delhi 110016",
+          "coordinates": {
+            "lat": 28.5462846,
+            "lng": 77.1921636
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_8"]
+          }
+        },
+        {
+          "place_id": "WJvE6WYkd0KNJjQMAxorig%3d%3d",
+          "name": "Hauz Khas",
+          "address": "Jia Sarai, Gamal Abdel Nasser Marg, Block F, Deer Park, Hauz Khas, New Delhi, Delhi 110016",
+          "coordinates": {
+            "lat": 28.5439551,
+            "lng": 77.2036646
+          },
+          "is_interchange": true,
+          "interchange_data": {
+            "count": 2,
+            "lines": ["line_2","line_8"]
+          }
+        },
+        {
+          "place_id": "6yyYLM7RUU2uD1TXTpLTZw%3d%3d",
+          "name": "Panchsheel Park",
+          "address": "Block B, Soami Nagar South, Soami Nagar, New Delhi, Delhi 110017",
+          "coordinates": {
+            "lat": 28.5423427,
+            "lng": 77.2179321
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_8"]
+          }
+        },
+        {
+          "place_id": "fxZxrPR30kuVh1Kp6MI5HQ%3d%3d",
+          "name": "Chirag Delhi",
+          "address": "Chirag Dilli, New Delhi, Delhi 110017",
+          "coordinates": {
+            "lat": 28.5412269,
+            "lng": 77.2248758
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_8"]
+          }
+        },
+        {
+          "place_id": "O279L%2ber6EqIRqCokX36dQ%3d%3d",
+          "name": "Greater Kailash",
+          "address": "Masjid Moth, Greater Kailash, New Delhi, Delhi 110048",
+          "coordinates": {
+            "lat": 28.5418367,
+            "lng": 77.2356721
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_8"]
+          }
+        },
+        {
+          "place_id": "4kOXva1eyUiYi%2flFpMGu7Q%3d%3d",
+          "name": "Nehru Enclave",
+          "address": "Block C, Kalkaji, New Delhi, Delhi 110019",
+          "coordinates": {
+            "lat": 28.5458561,
+            "lng": 77.2485921
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_8"]
+          }
+        },
+        {
+          "place_id": "My4Z5CzzT0e8gBQ3PCAUNA%3d%3d",
+          "name": "Kalkaji Mandir",
+          "address": "Block 9, Kalkaji, New Delhi, Delhi 110019",
+          "coordinates": {
+            "lat": 28.5494547,
+            "lng": 77.2566451
+          },
+          "is_interchange": true,
+          "interchange_data": {
+            "count": 2,
+            "lines": ["line_6","line_8"]
+          }
+        },
+        {
+          "place_id": "vvpE5oq1MUWD7ZtL9AwGhg%3d%3d",
+          "name": "Okhla NSIC",
+          "address": "Shambhu Dayal Bagh, Kalkaji, New Delhi, Delhi 110065",
+          "coordinates": {
+            "lat": 28.5458969,
+            "lng": 77.2305672
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_8"]
+          }
+        },
+        {
+          "place_id": "g6tA2W%2bju0KyBuU6emERaQ%3d%3d",
+          "name": "Sukhdev Vihar",
+          "address": "Masihgarh, Okhla, New Delhi, Delhi 110025",
+          "coordinates": {
+            "lat": 28.5597791,
+            "lng": 77.2725499
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_8"]
+          }
+        },
+        {
+          "place_id": "UMtpBSdDoke%2f%2bcTCsoZ2bg%3d%3d",
+          "name": "Jamia Milia Islamiya",
+          "address": "Jamia Nagar, Okhla, New Delhi, Delhi 110025",
+          "coordinates": {
+            "lat": 28.5629547,
+            "lng": 77.2836451
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_8"]
+          }
+        },
+        {
+          "place_id": "pgZh5Dc2Ok27ds83mdCSeQ%3d%3d",
+          "name": "Okhla Vihar",
+          "address": "Jamia Nagar, Okhla, New Delhi, Delhi 110025",
+          "coordinates": {
+            "lat": 28.5610947,
+            "lng": 77.2893151
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_8"]
+          }
+        },
+        {
+          "place_id": "FWW213Lxo02P%2fwPE8XnLNQ%3d%3d",
+          "name": "Jasola Vihar Shaheen Bagh",
+          "address": "Shaheen Bagh, Jasola Vihar, New Delhi, Delhi 110025",
+          "coordinates": {
+            "lat": 28.545983,
+            "lng": 77.2940719
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_8"]
+          }
+        },
+        {
+          "place_id": "B7P1lybnn0264NeVqOEwBQ%3d%3d",
+          "name": "Jasola Vihar Shaheen Bagh",
+          "address": "Shaheen Bagh, Jasola Vihar, New Delhi, Delhi 110025",
+          "coordinates": {
+            "lat": 28.545983,
+            "lng": 77.2940719
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_8"]
+          }
+        },
+        {
+          "place_id": "X65oVQbYOkKe7TmdhJfIpw%3d%3d",
+          "name": "Kalindi Kunj",
+          "address": "Madanpur Khadar, New Delhi, Delhi 110076",
+          "coordinates": {
+            "lat": 28.5428397,
+            "lng": 77.3076001
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_8"]
+          }
+        },
+        {
+          "place_id": "OG5QDc6udEKVlLzmCLkmJg%3d%3d",
+          "name": "Okhla Bird Sanctuary",
+          "address": "Sector 94, Noida, Uttar Pradesh 201313",
+          "coordinates": {
+            "lat": 28.5528682,
+            "lng": 77.3190754
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_8"]
+          }
+        },
+        {
+          "place_id": "M76MynA8VUKJtPhlKCvgbg%3d%3d",
+          "name": "Botanical Garden",
+          "address": "Captain Vijyant Thapar Marg, Sector 38, Noida, Uttar Pradesh 201301",
+          "coordinates": {
+            "lat": 28.5640378,
+            "lng": 77.3317051
+          },
+          "is_interchange": true,
+          "interchange_data": {
+            "count": 2,
+            "lines": ["line_3","line_8"]
+          }
+        }
+        
+      ]
+    },
+    "line_9":{
+      "name":"Grey Line",
+      "colour_code":"6c757d",
+      "stations":[
+        {
+          "place_id": "OK8doXUQpEKkOUroK4uqLQ%3d%3d",
+          "name": "Dwarka",
+          "address": "Nand Vihar, Sector 16A, Dwarka, New Delhi, Delhi 110078",
+          "coordinates": {
+            "lat": 28.6149247,
+            "lng": 77.0201451
+          },
+          "is_interchange": true,
+          "interchange_data": {
+            "count": 2,
+            "lines": ["line_3","line_9"]
+          }
+        },
+        {
+          "place_id": "2oWbj0kLiU28AnX1kkE2Ww%3d%3d",
+          "name": "Nangli",
+          "address": "Ranaji Enclave, Masudabad, Najafgarh, Delhi, 110043",
+          "coordinates": {
+            "lat": 28.6172437,
+            "lng": 77.0078251
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_9"]
+          }
+        },
+        {
+          "place_id": "a830wzC12k%2bybub7DhB%2f1g%3d%3d",
+          "name": "Najafgarh",
+          "address": "Najafgarh Extension, Najafgarh, Delhi, 110043",
+          "coordinates": {
+            "lat": 28.6127527,
+            "lng": 76.9842931
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_9"]
+          }
+        },
+        {
+          "place_id": "vJ1IKPTlvE2vqzwt8weAgw%3d%3d",
+          "name": "Dhansa Bus Stand",
+          "address": "Najafgarh Village, Najafgarh, Delhi, 110043",
+          "coordinates": {
+            "lat": 28.6119047,
+            "lng": 76.9754251
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_9"]
+          }
+        }
+      ]
+    },
+    "line_10":{
+      "name":"Airport Express",
+      "colour_code":"fd7e14",
+      "stations":[
+        {
+          "place_id": "sQAlAUDZJUy%2fo4UkmRHrMg%3d%3d",
+          "name": "New Delhi",
+          "address": "Ajmeri Gate, New Delhi, Delhi 110006",
+          "coordinates": {
+            "lat": 28.6437255,
+            "lng": 77.2204149
+          },
+          "is_interchange": true,
+          "interchange_data": {
+            "count": 2,
+            "lines": ["line_2","line_10"]
+          }
+        },
+        {
+          "place_id": "H33GTNYZoUySzFDoDeaZuQ%3d%3d",
+          "name": "Shivaji Stadium",
+          "address": "Hanuman Road Area, Connaught Place, New Delhi, Delhi 110001",
+          "coordinates": {
+            "lat": 28.6288929,
+            "lng": 77.2105736
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_10"]
+          }
+        },
+        {
+          "place_id": "aefqK2z7bEGWtWACkTsm6Q%3d%3d",
+          "name": "Dhaula Kuan",
+          "address": "Dhaula Kuan Enclave I, Dhaula Kuan, New Delhi, Delhi 110010",
+          "coordinates": {
+            "lat": 28.5918947,
+            "lng": 77.1590951
+          },
+          "is_interchange": true,
+          "interchange_data": {
+            "count": 2,
+            "lines": ["line_7","line_10"]
+          }
+        },
+        {
+          "place_id": "BjIDDlKaKUSBK%2bX6h038WQ%3d%3d",
+          "name": "Delhi Aerocity",
+          "address": "B-block Rd no. 6mahipalpur, village, New Delhi, Delhi 110037",
+          "coordinates": {
+            "lat": 28.54888,
+            "lng": 77.1027456
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_10"]
+          }
+        },
+        {
+          "place_id": "3cEMi6bS3ESsVOCGHHmSlg%3d%3d",
+          "name": "Airport (T-3)",
+          "address": "Indira Gandhi International Airport, Terminal 2B Rd, हवाईअड्डा, Delhi 110037",
+          "coordinates": {
+            "lat": 28.5570947,
+            "lng": 77.0842651
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_10"]
+          }
+        },
+        {
+          "place_id": "BRiyD1FtX0GQrnPoWQog9Q",
+          "name": "Dwarka Sector - 21",
+          "address": "Metro Station-Dwarka Sector 21, Sector 21, Dwarka, New Delhi, Delhi 110077",
+          "coordinates": {
+            "lat": 28.5522057,
+            "lng": 77.0557245
+          },
+          "is_interchange": true,
+          "interchange_data": {
+            "count": 2,
+            "lines": ["line_3", "line_10"]
+          }
+        }
+
+      ]
+    },
+    "line_11":{
+      "name":"Rapid Metro - RMGL",
+      "colour_code":"20c997",
+      "stations":[
+        {
+          "place_id": "yjDu0FdbZU66jwkAdkKwJg%3d%3d",
+          "name": "Sector 55-56",
+          "address": "Sector 56, Ghata, Haryana 122011",
+          "coordinates": {
+            "lat": 28.42341,
+            "lng": 77.1006939
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_11"]
+          }
+        },
+        {
+          "place_id": "f3sVgByJckeAvWBhG2RmBg%3d%3d",
+          "name": "Sector-54 Chowk",
+          "address": "Suncity, Sector 54, Gurugram, Haryana 122022",
+          "coordinates": {
+            "lat": 28.4326527,
+            "lng": 77.1027231
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_11"]
+          }
+        },
+        {
+          "place_id": "vkzzj%2bQzO0KSPOFLEVxLmQ%3d%3d",
+          "name": "Sector-53-54",
+          "address": "DLF Phase 5, Sector 54, Gurugram, Haryana 122022",
+          "coordinates": {
+            "lat": 28.4464224,
+            "lng": 77.0978772
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_11"]
+          }
+        },
+        {
+          "place_id": "fitQzd9sF0SJqlXD84XxtQ%3d%3d",
+          "name": "Sector-42-43",
+          "address": "Sector 42, Gurugram, Haryana 122002",
+          "coordinates": {
+            "lat": 28.4574347,
+            "lng": 77.0943651
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_11"]
+          }
+        },
+        {
+          "place_id": "Ece3a%2f0890WPGDhVav286g%3d%3d",
+          "name": "Phase-1",
+          "address": "Chakkarpur, Sector 28, Gurugram, Haryana 122022",
+          "coordinates": {
+            "lat": 28.4713,
+            "lng": 77.0893939
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_11"]
+          }
+        },
+        {
+          "place_id": "VRuIB1RxoU2XwqE7HBc94w%3d%3d",
+          "name": "Sikanderpur",
+          "address": "A Block, DLF Phase 1, Sector 28, Gurugram, Haryana 122022",
+          "coordinates": {
+            "lat": 28.4813147,
+            "lng": 77.0905451
+          },
+          "is_interchange": true,
+          "interchange_data": {
+            "count": 2,
+            "lines": ["line_2","line_11"]
+          }
+        },
+        {
+          "place_id": "OMJko3qWKE2osMLYwOI4Zg%3d%3d",
+          "name": "Phase-2",
+          "address": "U Block, DLF Phase 2, Sector 25, Gurugram, Haryana 122002",
+          "coordinates": {
+            "lat": 28.4876147,
+            "lng": 77.0902951
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_11"]
+          }
+        },
+        {
+          "place_id": "sAo6ZDB4cUeU%2fo89cQI2DQ%3d%3d",
+          "name": "Belvedere Towers",
+          "address": "DLF Cyber City, DLF Phase 2, Sector 25, Gurugram, Haryana 122002",
+          "coordinates": {
+            "lat": 28.4916447,
+            "lng": 77.0856451
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_11"]
+          }
+        },
+        {
+          "place_id": "m1jTjjf1eUCXfsMfD5SJ2Q%3d%3d",
+          "name": "Cyber City",
+          "address": "DLF Cyber City, DLF Phase 2, Sector 24, Gurugram, Haryana 122022",
+          "coordinates": {
+            "lat": 28.4979747,
+            "lng": 77.0866051
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_11"]
+          }
+        },
+        {
+          "place_id": "TfraSp4tKkCztM7X%2bnsYrw%3d%3d",
+          "name": "Moulsari Avenue",
+          "address": "Ambience Island, DLF Phase 3, Sector 24, Gurugram, Haryana 122010",
+          "coordinates": {
+            "lat": 28.5008233,
+            "lng": 77.0920104
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_11"]
+          }
+        },
+        {
+          "place_id": "AheGlzbUPEahikBRj6lZ9g%3d%3d",
+          "name": "Phase-3",
+          "address": "Cyber City, Road Number 19, U bLock ,DLF, DLF Phase 3, Sector 24, Gurugram, Haryana 122002",
+          "coordinates": {
+            "lat": 28.4936847,
+            "lng": 77.0908451
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_11"]
+          }
+        }
+      ]
+    },
+    "line_12":{
+      "name":"Aqua Line",
+      "colour_code":"30d5c8",
+      "stations":[
+        {
+          "place_id": "SW0yoD9BfU6Vs%2bC8jbz5Fw%3d%3d",
+          "name": "Noida Sector 51",
+          "address": "Block E, Sector 51, Noida, Uttar Pradesh 201301",
+          "coordinates": {
+            "lat": 28.58559,
+            "lng": 77.37536
+          },
+          "is_interchange": true,
+          "interchange_data": {
+            "count": 2,
+            "lines": ["line_3", "line_12"]
+          }
+        },
+        {
+          "place_id": "7QbipTsbm0iaK%2bO9K2x9Dg%3d%3d",
+          "name": "Noida Sector 50",
+          "address": "Gardenia Gateway, Sector 75, Noida, Uttar Pradesh",
+          "coordinates": {
+            "lat": 28.5745487,
+            "lng": 77.3756741
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_12"]
+          }
+        },
+        {
+          "place_id": "CbqTR95npkKSOfrJZicHtg%3d%3d",
+          "name": "Noida Sector 76",
+          "address": "Amrapali Princely Estate, Sector 76, Noida, Uttar Pradesh",
+          "coordinates": {
+            "lat": 28.5654527,
+            "lng": 77.3771931
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_12"]
+          }
+        },
+        {
+          "place_id": "lstuVPzGFEGEsiSyuwRTzA%3d%3d",
+          "name": "Noida Sector 101",
+          "address": "Sector 79, Noida, Uttar Pradesh 201305",
+          "coordinates": {
+            "lat": 28.5560747,
+            "lng": 77.3824771
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_12"]
+          }
+        },
+        {
+          "place_id": "MFwg1F3GNEGNYgP7x943gQ%3d%3d",
+          "name": "Noida Sector 81",
+          "address": "Block C, Sector 81, Noida, Uttar Pradesh 201305",
+          "coordinates": {
+            "lat": 28.5492637,
+            "lng": 77.3875251
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_12"]
+          }
+        },
+        {
+          "place_id": "I6cLY%2b5xiUiDJ8YfZLGIaw%3d%3d",
+          "name": "NSEZ",
+          "address": "Block A, Yakubpur, Noida, Uttar Pradesh 201305",
+          "coordinates": {
+            "lat": 28.532238,
+            "lng": 77.3902659
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_12"]
+          }
+        },
+        {
+          "place_id": "Dwul9PhV7UeN4JXYNgWp3g%3d%3d",
+          "name": "Noida Sector 83",
+          "address": "Yakubpur, Noida, Uttar Pradesh 201305",
+          "coordinates": {
+            "lat": 28.5222887,
+            "lng": 77.3939001
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_12"]
+          }
+        },
+        {
+          "place_id": "I1pu5AOydUeh%2fmp%2fcdA5cA%3d%3d",
+          "name": "Noida Sector 137",
+          "address": "Sector 137, Noida, Uttar Pradesh 201305",
+          "coordinates": {
+            "lat": 28.510812,
+            "lng": 77.3675791
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_12"]
+          }
+        },
+        {
+          "place_id": "XqtUyXvZBUi7TYOd1fg3pw%3d%3d",
+          "name": "Noida Sector 142",
+          "address": "Sector 142, Noida, Uttar Pradesh 201305",
+          "coordinates": {
+            "lat": 28.499029,
+            "lng": 77.412591
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_12"]
+          }
+        },
+        {
+          "place_id": "GuWjMp%2f9gkaiJVr5mvfafw%3d%3d",
+          "name": "Noida Sector 143",
+          "address": "Sector 143B, Noida, Uttar Pradesh 201306",
+          "coordinates": {
+            "lat": 28.4942531,
+            "lng": 77.4197469
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_12"]
+          }
+        },
+        {
+          "place_id": "Iswn%2bsiT%2fkahI3r%2fJC4h0Q%3d%3d",
+          "name": "Noida Sector 144",
+          "address": "Sector 144, Noida, Uttar Pradesh 201306",
+          "coordinates": {
+            "lat": 28.4863757,
+            "lng": 77.4303961
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_12"]
+          }
+        },
+        {
+          "place_id": "E6kOveHU7kyTPCGkW%2bfGGw%3d%3d",
+          "name": "Noida Sector 145",
+          "address": "Sector 145, Gohiyapur, Uttar Pradesh 201306",
+          "coordinates": {
+            "lat": 28.4791277,
+            "lng": 77.4397321
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_12"]
+          }
+        },
+        {
+          "place_id": "BTWMXbIo7EqVipMpVT%2fEXA%3d%3d",
+          "name": "Noida Sector 146",
+          "address": "Sector 146, Noida, Uttar Pradesh 201310",
+          "coordinates": {
+            "lat": 28.4688287,
+            "lng": 77.4525251
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_12"]
+          }
+        },
+        {
+          "place_id": "doVtxk7gjUesOTFWvQfxvw%3d%3d",
+          "name": "Noida Sector 147",
+          "address": "Sector 154, Noida, Uttar Pradesh 201310",
+          "coordinates": {
+            "lat": 28.4594297,
+            "lng": 77.4634161
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_12"]
+          }
+        },
+        {
+          "place_id": "CCmKqJd8FEaswv%2fXIyqS8w%3d%3d",
+          "name": "Noida Sector 148",
+          "address": "Kondli Khadar, Uttar Pradesh 201310",
+          "coordinates": {
+            "lat": 28.4480247,
+            "lng": 77.4741141
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_12"]
+          }
+        },
+        {
+          "place_id": "kJGsLXTk6U2FgDiG22rdnQ%3d%3d",
+          "name": "Knowledge Park II",
+          "address": "Knowledge Park II, Greater Noida, Uttar Pradesh 201310",
+          "coordinates": {
+            "lat": 28.4568647,
+            "lng": 77.4977251
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_12"]
+          }
+        },
+        {
+          "place_id": "x56EUMAHwE2seFsKS13XlA%3d%3d",
+          "name": "Pari Chowk",
+          "address": "Tugalpur Village, Greater Noida, Uttar Pradesh 201310",
+          "coordinates": {
+            "lat": 28.4633233,
+            "lng": 77.5057403
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_12"]
+          }
+        },
+        {
+          "place_id": "74Ax6akS%2bkakxCc5HGlHuQ%3d%3d",
+          "name": "Alpha 1",
+          "address": "Block E, Alpha I, Greater Noida, Uttar Pradesh",
+          "coordinates": {
+            "lat": 28.4708837,
+            "lng": 77.5101401
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_12"]
+          }
+        },
+        {
+          "place_id": "clubfQTyiE6R4vqomOQCtg%3d%3d",
+          "name": "Delta 1",
+          "address": "Block A, Delta I, Brahmpur Rajraula Urf Nawada, Uttar Pradesh",
+          "coordinates": {
+            "lat": 28.4783737,
+            "lng": 77.5230011
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_12"]
+          }
+        },
+        {
+          "place_id": "1T98%2fWNQ4UORx8cOsrAt5A%3d%3d",
+          "name": "GNIDA Office",
+          "address": "Knowledge Park IV, Greater Noida, Uttar Pradesh 201310",
+          "coordinates": {
+            "lat": 28.4845327,
+            "lng": 77.5340441
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_12"]
+          }
+        },
+        {
+          "place_id": "8RVDWHwfzkehP1o9CnpQUA%3d%3d",
+          "name": "Depot",
+          "address": "Sector 34, Greater Noida, Uttar Pradesh 201310",
+          "coordinates": {
+            "lat": 28.4886567,
+            "lng": 77.5415011
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_12"]
+          }
+        }
+      ]
+    }
+    
+  }
+}

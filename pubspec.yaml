@@ -15,7 +15,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.0+1
+version: 1.0.0+21
 
 environment:
   sdk: ">=2.17.5 <3.0.0"
@@ -43,6 +43,7 @@ dependencies:
   custom_refresh_indicator: ^2.0.1
   webview_flutter: ^4.0.7
   url_launcher: ^6.1.10
+  dropdown_button2: ^2.1.3
 
   #fonts
   google_fonts: ^3.0.1
@@ -58,7 +59,7 @@ dependencies:
   in_app_update: ^4.0.1
   
   #feedback
-  wiredash: ^1.5.0
+  #wiredash: ^1.5.0
  
 
   #search
@@ -142,7 +143,7 @@ flutter:
     - assets/images/user.png
     
     #metrotrot login
-    - assets/images/metrotrot_login.gif
+    #- assets/images/metrotrot_login.gif
 
     #metrotrot logo
     - assets/images/metrotrot.png
@@ -150,7 +151,7 @@ flutter:
     - assets/images/metrotrot_header_alt.png
 
     #social logins
-    - assets/images/google_logo.png
+    #- assets/images/google_logo.png
 
     #metro logos
     - assets/images/dmrc.png
@@ -159,21 +160,22 @@ flutter:
     - assets/images/nearest.png
     - assets/images/parking.png
     - assets/images/interchange.png
-    - assets/images/disable_friendly.png
-    - assets/images/rating.png
-    - assets/images/reviews.png
+    #- assets/images/disable_friendly.png
+    #- assets/images/rating.png
+    #- assets/images/reviews.png
     - assets/images/operational_from.png
     - assets/images/operational_to.png
     - assets/images/destination.png
     - assets/images/dotted_line.png
     - assets/images/transit.png
     - assets/images/metrotrot.png
+    - assets/images/metro_line.png
     - assets/images/no_directions.png
-    - assets/images/onboarding_1.gif
-    - assets/images/onboarding_2.gif
-    - assets/images/onboarding_3.gif
-    - assets/images/location_permission.gif
-    - assets/images/welcome.gif
+    # - assets/images/onboarding_1.gif
+    # - assets/images/onboarding_2.gif
+    # - assets/images/onboarding_3.gif
+    - assets/images/location_permission.png
+    # - assets/images/welcome.gif
 
     #data
     - assets/data/delhi_ncr.json

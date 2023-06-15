@@ -13,6 +13,11 @@ class FromMetro extends Equatable {
   final String userRatingsTotal;
   final String vicinity;
   final String data;
+  final String metro;
+  final List<String> lines;
+  final List<String> startStations;
+  final List<String> endStations;
+  final List<String> colourCodes;
 
   const FromMetro({
     required this.businessStatus,
@@ -24,6 +29,11 @@ class FromMetro extends Equatable {
     required this.userRatingsTotal,
     required this.vicinity,
     required this.data,
+    required this.metro,
+    required this.lines,
+    required this.startStations,
+    required this.endStations,
+    required this.colourCodes
   });
 
   @override
@@ -36,7 +46,12 @@ class FromMetro extends Equatable {
         rating,
         userRatingsTotal,
         vicinity,
-        data
+        data,
+        metro,
+        lines,
+        colourCodes,
+        startStations,
+        endStations
       ];
 
   factory FromMetro.initial() {
@@ -49,7 +64,13 @@ class FromMetro extends Equatable {
         rating: "N/A",
         userRatingsTotal: "N/A",
         vicinity: "Address Unavailable",
-        data: "");
+        data: "",
+        metro:"N/A",
+        lines:["Unknown"],
+        colourCodes: ["000000"],
+        startStations: ["Start"],
+        endStations: ["End"]
+        );
   }
 
   factory FromMetro.fromMap(Map<String, dynamic> map) {
@@ -62,7 +83,13 @@ class FromMetro extends Equatable {
         rating: map["rating"].toString(),
         userRatingsTotal: map["user_ratings_total"].toString(),
         vicinity: map["vicinity"],
-        data: json.encode(map));
+        data: json.encode(map),
+        metro: "",
+        lines: [],
+        colourCodes: [],
+        startStations: [],
+        endStations: []
+        );
   }
 
   factory FromMetro.fromJson(String source) =>

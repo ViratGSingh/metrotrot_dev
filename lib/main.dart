@@ -1,6 +1,5 @@
-import 'package:app/features/dest_history/presentation/cubit/dest_history_cubit.dart';
+
 import 'package:app/features/home/presentation/widgets/onboarding/main.dart';
-import 'package:app/features/login/presentation/cubit/login_cubit.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,7 +21,6 @@ import 'package:app/features/home/presentation/pages/home.dart';
 import 'package:app/features/to_search/data/datasources/to_search_service.dart';
 import 'package:app/features/to_search/data/repositories/from_search_repository.dart';
 import 'package:app/features/to_search/presentation/cubit/to_search_cubit.dart';
-import 'package:wiredash/wiredash.dart';
 import 'package:in_app_update/in_app_update.dart';
 import 'package:isar/isar.dart';
 import 'package:app/features/home/data/models/directions.dart';
@@ -121,9 +119,7 @@ class _MyAppState extends State<MyApp> {
       ],
       child: MultiBlocProvider(
         providers: [
-          BlocProvider<LoginCubit>(
-            create: (BuildContext context) => LoginCubit(),
-          ),
+         
           BlocProvider<NearbyMetroCubit>(
             create: (BuildContext context) => NearbyMetroCubit(
                 nearbyMetroRepository: context.read<NearbyMetroRepository>()),
@@ -144,22 +140,15 @@ class _MyAppState extends State<MyApp> {
             create: (BuildContext context) => DirectionsCubit(
                 directionsRepository: context.read<DirectionsRepository>()),
           ),
-          BlocProvider<DestHistoryCubit>(
-            create: (BuildContext context) =>DestHistoryCubit()
-          ),
         ],
-        child: Wiredash(
-          projectId: 'metrotrot-arcxpzu',
-          secret: 'I2U5sQGZWY7f6fGd8CJNOHBRwOwIWiAj',
-          child: MaterialApp(
+        child:  MaterialApp(
             title: 'MetroTrot',
             debugShowCheckedModeBanner: false,
             theme: ThemeData.light(),
-            home: widget.isFirst == false
-                ? const HomePage()
-                : const IntroScreen(),
+            home:  const HomePage()
+                //: const IntroScreen(),
           ),
-        ),
+        
       ),
     );
   }

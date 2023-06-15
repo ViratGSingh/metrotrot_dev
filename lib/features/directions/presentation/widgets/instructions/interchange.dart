@@ -6,12 +6,16 @@ class InterInstruction extends StatelessWidget {
   String interchange;
   String prevLine;
   String currLine;
+  bool isBridge;
+  String? currStation;
   //BannerAd? bannerAd;
   InterInstruction({
     Key? key,
     required this.interchange,
     required this.prevLine,
     required this.currLine,
+    required this.isBridge,
+    this.currStation
     //this.bannerAd
   }) : super(key: key);
 
@@ -32,12 +36,14 @@ class InterInstruction extends StatelessWidget {
             ]),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            Text("Instruction", style: GoogleFonts.notoSans(fontSize: 16, color: Colors.black, fontWeight: FontWeight.bold),),
+            SizedBox(height: 8),
             RichText(
               text: TextSpan(children: [
                 TextSpan(
-                  text: "From $interchange, change lines from ",
+                  text: isBridge==false?"From $interchange, change lines from ":"From $interchange, use the follow on bridge (FOB) to go to $currStation and change lines from ",
                   style:
                       GoogleFonts.notoSans(fontSize: 16, color: Colors.black),
                 ),

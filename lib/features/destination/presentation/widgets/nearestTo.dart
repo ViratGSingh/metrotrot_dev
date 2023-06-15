@@ -49,7 +49,7 @@ class ToStation extends StatelessWidget {
                       Text(
                         "Nearest Station",
                         style: GoogleFonts.notoSans(
-                            color: Colors.white, fontSize: 16),
+                            color: Colors.white, fontSize: 12),
                       )
                     ],
                   ),
@@ -62,7 +62,7 @@ class ToStation extends StatelessWidget {
                             name,
                             style: GoogleFonts.notoSans(
                                 color: Colors.white,
-                                fontSize: 24,
+                                fontSize: 18,
                                 fontWeight: FontWeight.bold),
                           )
                         : Container(

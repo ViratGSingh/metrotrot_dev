@@ -50,7 +50,7 @@ class FromStation extends StatelessWidget {
                         ? Text(
                             isOffline == false ? "Nearest Metro" : "Last Seen",
                             style: GoogleFonts.notoSans(
-                                color: Colors.white, fontSize: 16),
+                                color: Colors.white, fontSize: 12),
                           )
                         : Container(
                             height: 16,
@@ -94,7 +94,7 @@ class FromStation extends StatelessWidget {
                           name,
                           style: GoogleFonts.notoSans(
                               color: Colors.white,
-                              fontSize: 24,
+                              fontSize: 18,
                               fontWeight: FontWeight.bold),
                         )
                       : Container(
@@ -106,7 +106,7 @@ class FromStation extends StatelessWidget {
                       ? Text(
                           address,
                           style: GoogleFonts.notoSans(
-                              color: Colors.white, fontSize: 18),
+                              color: Colors.white, fontSize: 16),
                         )
                       : Container(
                           padding: EdgeInsets.only(top: 10),

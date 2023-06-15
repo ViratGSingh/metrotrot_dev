@@ -16,6 +16,11 @@ class DestMetro extends Equatable {
   final String userRatingsTotal;
   final String vicinity;
   final String data;
+  final String metro;
+  final List<String> lines;
+  final List<String> startStations;
+  final List<String> endStations;
+  final List<String> colourCodes;
 
   const DestMetro({
     required this.businessStatus,
@@ -29,6 +34,11 @@ class DestMetro extends Equatable {
     required this.userRatingsTotal,
     required this.vicinity,
     required this.data,
+    required this.metro,
+    required this.lines,
+    required this.startStations,
+    required this.endStations,
+    required this.colourCodes,
   });
 
   @override
@@ -43,7 +53,12 @@ class DestMetro extends Equatable {
         rating,
         userRatingsTotal,
         vicinity,
-        data
+        data,
+        metro,
+        lines,
+        startStations,
+        endStations,
+        colourCodes
       ];
 
   factory DestMetro.initial() {
@@ -58,7 +73,13 @@ class DestMetro extends Equatable {
         rating: "N/A",
         userRatingsTotal: "N/A",
         vicinity: "Address Unavailable",
-        data: "");
+        data: "",
+        metro: "",
+        lines: [],
+        startStations: [],
+        endStations: [],
+        colourCodes: []
+        );
   }
 
   factory DestMetro.fromMap(Map<String, dynamic> map) {
@@ -77,7 +98,13 @@ class DestMetro extends Equatable {
         rating: map["rating"].toString(),
         userRatingsTotal: map["user_ratings_total"].toString(),
         vicinity: map["vicinity"],
-        data: json.encode(map));
+        data: json.encode(map),
+        metro: "",
+        lines: [],
+        colourCodes: [],
+        startStations: [],
+        endStations: []
+        );
   }
 
   factory DestMetro.fromJson(String source) =>

@@ -34,12 +34,13 @@ class _ToSearchPageState extends State<ToSearchPage> {
   @override
   void initState() {
     context.read<ToSearchCubit>().getSearchRecommendations(
-        widget.userId,
-        widget.fromMetro.placeId,
+        //widget.userId,
+        //widget.fromMetro.placeId,
         toSearchController.text,
         widget.isOffline,
         widget.lat,
-        widget.lng);
+        widget.lng
+        );
     super.initState();
   }
 
@@ -63,12 +64,13 @@ class _ToSearchPageState extends State<ToSearchPage> {
                     autofocus: true,
                     onChanged: (location) {
                       context.read<ToSearchCubit>().getSearchRecommendations(
-                          widget.userId,
-                          widget.fromMetro.placeId,
+                          //widget.userId,
+                          //widget.fromMetro.placeId,
                           toSearchController.text,
                           widget.isOffline,
                           widget.lat,
-                          widget.lng);
+                          widget.lng
+                          );
                       // if (location.isNotEmpty == true) {
 
                       // }
@@ -95,77 +97,177 @@ class _ToSearchPageState extends State<ToSearchPage> {
                 ),
               ),
             ),
-            body: state.status == ToSearchStatus.loaded
-                ? ListView(
-                    children: state.locations.map((recom) {
-                      String mainAddr;
-                      String secondaryAddr;
-                      String destinationId;
-                      mainAddr = recom.main;
-                      secondaryAddr = recom.secondary;
-                      destinationId = recom.placeId;
-                      return Card(
-                        child: ListTile(
-                          style: ListTileStyle.list,
-                          onTap: () async {
-                            context.read<ToSearchCubit>().saveDestinationInfo(
-                                widget.userId,
-                                widget.isGuest,
-                                widget.fromMetro,
-                                destinationId,
-                                mainAddr,
-                                secondaryAddr,
-                                widget.lat,
-                                widget.lng);
-                            Navigator.push<void>(
-                              context,
-                              MaterialPageRoute<void>(
-                                builder: (BuildContext context) => LocationPage(
-                                  isOffline: widget.isOffline,
-                                  toPlaceId: destinationId,
-                                  fromMetro: widget.fromMetro,
-                                  name: mainAddr,
-                                  distance: widget.distance,
-                                  address: secondaryAddr,
-                                  fromLat: widget.lat,
-                                  fromLng: widget.lng,
+            body: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(10,10,0,0),
+                  child: Text("Suggested Places", style: TextStyle(color: Colors.grey),),
+                ),
+                
+                  state.placeStatus == ToSearchPlaceStatus.loaded
+                      ? Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ListView(
+                      
+                          physics: NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                            children: state.locations.map((recom) {
+                              String mainAddr;
+                              String secondaryAddr;
+                              String destinationId;
+                              mainAddr = recom.main;
+                              secondaryAddr = recom.secondary;
+                              destinationId = recom.placeId;
+                              return Card(
+                                child: ListTile(
+                                  style: ListTileStyle.list,
+                                  onTap: () async {
+                                    context.read<ToSearchCubit>().saveDestinationInfo(
+                                        widget.userId,
+                                        widget.isGuest,
+                                        widget.fromMetro,
+                                        destinationId,
+                                        mainAddr,
+                                        secondaryAddr,
+                                        widget.lat,
+                                        widget.lng);
+                                    Navigator.push<void>(
+                                      context,
+                                      MaterialPageRoute<void>(
+                                        builder: (BuildContext context) => LocationPage(
+                                          isOffline: false,
+                                          toPlaceId: destinationId,
+                                          fromMetro: widget.fromMetro,
+                                          name: mainAddr,
+                                          distance: widget.distance,
+                                          address: secondaryAddr,
+                                          fromLat: widget.lat,
+                                          fromLng: widget.lng,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  contentPadding: EdgeInsets.all(0),
+                                  leading: const Padding(
+                                    padding: EdgeInsets.only(top: 5, left: 15),
+                                    child: Icon(
+                                      Icons.location_on_outlined,
+                                      color: Color(0xff004aad),
+                                    ),
+                                  ),
+                                  // trailing: Padding(
+                                  //   padding: const EdgeInsets.only(bottom: 10, right: 15),
+                                  //   child: Icon(
+                                  //     Icons.directions_transit,
+                                  //     color: Colors.blue,
+                                  //     // color:
+                                  //     //     Color(int.parse("0xff${recom["line_color_code"]}")),
+                                  //   ),
+                                  // ),
+                                  subtitle: Text(
+                                    secondaryAddr,
+                                    style: GoogleFonts.notoSans(
+                                        fontSize: 12, color: Colors.grey.shade700),
+                                  ),
+                                  title: Text(
+                                    mainAddr,
+                                    style: GoogleFonts.notoSans(fontSize: 14),
+                                  ),
+                                ),
+                              );
+                            }).toList(),
+                          ),
+                      )
+                      : const Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                        Divider(height: 10),
+                      Padding(
+                  padding: const EdgeInsets.fromLTRB(10,10,0,0),
+                  child: Text("Suggested Stations",style: TextStyle(color: Colors.grey),),
+                ),
+                state.stationStatus == ToSearchStationStatus.loaded
+                    ? Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ListView(
+                          physics: NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          children: state.stations.map((recom) {
+                            String mainAddr;
+                            String secondaryAddr;
+                            String destinationId;
+                            mainAddr = recom.main;
+                            secondaryAddr = recom.secondary;
+                            destinationId = recom.placeId;
+                            return Card(
+                              child: ListTile(
+                                style: ListTileStyle.list,
+                                onTap: () async {
+                                    context.read<ToSearchCubit>().saveDestinationInfo(
+                                        widget.userId,
+                                        widget.isGuest,
+                                        widget.fromMetro,
+                                        destinationId,
+                                        mainAddr,
+                                        secondaryAddr,
+                                        widget.lat,
+                                        widget.lng);
+                                  Navigator.push<void>(
+                                      context,
+                                      MaterialPageRoute<void>(
+                                        builder: (BuildContext context) => LocationPage(
+                                          isOffline: true,
+                                          toPlaceId: destinationId,
+                                          fromMetro: widget.fromMetro,
+                                          name: mainAddr,
+                                          distance: widget.distance,
+                                          address: secondaryAddr,
+                                          fromLat: widget.lat,
+                                          fromLng: widget.lng,
+                                        ),
+                                      ),
+                                    );
+                                },
+                                contentPadding: EdgeInsets.all(5),
+                                
+                                leading: const Padding(
+                                  padding: EdgeInsets.only(top: 5, left: 15),
+                                  child: Icon(
+                                    Icons.directions_subway_filled_outlined,
+                                    
+                                      color: Color(0xff004aad),
+                                  ),
+                                ),
+                                // trailing: Padding(
+                                //   padding: const EdgeInsets.only(bottom: 10, right: 15),
+                                //   child: Icon(
+                                //     Icons.search,
+                                //     color: Colors.blue,
+                                //     // color:
+                                //     //     Color(int.parse("0xff${recom["line_color_code"]}")),
+                                //   ),
+                                // ),
+                                subtitle: Text(
+                                  secondaryAddr,
+                                  style: GoogleFonts.notoSans(
+                                      fontSize: 12, color: Colors.grey.shade700),
+                                ),
+                                title: Text(
+                                  mainAddr,
+                                  style: GoogleFonts.notoSans(fontSize: 14),
                                 ),
                               ),
                             );
-                          },
-                          contentPadding: EdgeInsets.all(0),
-                          leading: const Padding(
-                            padding: EdgeInsets.only(top: 5, left: 15),
-                            child: Icon(
-                              Icons.location_on,
-                              color: Color(0xff004aad),
-                            ),
-                          ),
-                          // trailing: Padding(
-                          //   padding: const EdgeInsets.only(bottom: 10, right: 15),
-                          //   child: Icon(
-                          //     Icons.directions_transit,
-                          //     color: Colors.blue,
-                          //     // color:
-                          //     //     Color(int.parse("0xff${recom["line_color_code"]}")),
-                          //   ),
-                          // ),
-                          subtitle: Text(
-                            secondaryAddr,
-                            style: GoogleFonts.notoSans(
-                                fontSize: 14, color: Colors.grey.shade700),
-                          ),
-                          title: Text(
-                            mainAddr,
-                            style: GoogleFonts.notoSans(fontSize: 16),
-                          ),
+                          }).toList(),
                         ),
-                      );
-                    }).toList(),
-                  )
-                : const Center(
-                    child: CircularProgressIndicator(),
-                  ),
+                    ):const Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                ],
+              ),
+            ),
           );
         },
       ),

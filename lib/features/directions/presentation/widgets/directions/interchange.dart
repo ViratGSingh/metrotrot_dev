@@ -7,9 +7,15 @@ class DirectionInter extends StatelessWidget {
   int prevLineColor;
   String currLine;
   int currLineColor;
+  String header;
+  bool isBridge;
+  String newStation;
   DirectionInter(
       {Key? key,
+      required this.isBridge,
+      required this.header,
       required this.interchangeStation,
+      required this.newStation,
       required this.prevLine,
       required this.prevLineColor,
       required this.currLine,
@@ -22,7 +28,7 @@ class DirectionInter extends StatelessWidget {
       padding: EdgeInsets.all(15),
       decoration: BoxDecoration(
           image: DecorationImage(
-              image: AssetImage("assets/images/interchange.png"),
+              image: isBridge==false?AssetImage("assets/images/interchange.png"):AssetImage("assets/images/nearest.png"),
               alignment: Alignment.bottomCenter),
           color: Colors.white,
           borderRadius: BorderRadius.circular(10),
@@ -34,17 +40,32 @@ class DirectionInter extends StatelessWidget {
             )
           ]),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Text("Change lines in", style: GoogleFonts.notoSans(fontSize: 16)),
-        Text(
+        Text(header, style: GoogleFonts.notoSans(fontSize: 14)),
+        isBridge==false?Text(
           interchangeStation,
           style:
-              GoogleFonts.notoSans(fontSize: 22, fontWeight: FontWeight.bold),
-        ),
+              GoogleFonts.notoSans(fontSize: 16, fontWeight: FontWeight.bold),
+        ): Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+            Text(
+            interchangeStation,
+            style:
+                GoogleFonts.notoSans(fontSize: 16, fontWeight: FontWeight.bold),
+          ),
+          Icon(Icons.arrow_downward_outlined),
+          Text(
+            newStation,
+            style:
+                GoogleFonts.notoSans(fontSize: 16, fontWeight: FontWeight.bold),
+          )
+          ]),
+        
         Padding(
           padding: EdgeInsets.only(top: 20),
           child: Container(
             padding: EdgeInsets.all(5),
-            height: 30,
+            //height: 30,
             decoration: BoxDecoration(
               color: Color(prevLineColor),
               borderRadius: BorderRadius.circular(8),
@@ -69,7 +90,7 @@ class DirectionInter extends StatelessWidget {
           padding: EdgeInsets.only(top: 0),
           child: Container(
             padding: EdgeInsets.all(5),
-            height: 30,
+            //height: 30,
             decoration: BoxDecoration(
               color: Color(currLineColor),
               borderRadius: BorderRadius.circular(8),

@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:dropdown_button2/src/dropdown_button2.dart';
 import 'package:app/features/destination/data/models/dest_metro.dart';
 import 'package:app/features/directions/presentation/cubit/directions_cubit.dart';
 import 'package:app/features/directions/presentation/widgets/directions/directions.dart';
@@ -41,7 +41,8 @@ class _DirectionsPageState extends State<DirectionsPage> {
         widget.destMetro,
         widget.destName,
         widget.destAddress,
-        widget.isOffline);
+        widget.isOffline,
+        UserPriorityStatus.stops);
 
     super.initState();
   }
@@ -85,14 +86,162 @@ class _DirectionsPageState extends State<DirectionsPage> {
                   ? Container(
                       color: Colors.white,
                       padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-                      child: Center(
-                        child: MetroDirections(
-                            destMetro: widget.destMetro,
-                            fromDistance: widget.fromDistance,
-                            toDistance: widget.toDistance,
-                            routeCost: state.routeData.routeCost,
-                            directions: state.routeData.route,
-                            destination: widget.destination),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(40, 0, 40, 5),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(
+                                    padding:
+                                        EdgeInsets.fromLTRB(8, 10, 8, 10),
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(10),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            offset: Offset(0, 4),
+                                            blurRadius: 4,
+                                            color:
+                                                Colors.black.withOpacity(0.25),
+                                          )
+                                        ]),
+                                    child: RichText(
+                                      text: TextSpan(children: [
+                                        TextSpan(
+                                          text: "Trip Fare: ",
+                                          style: GoogleFonts.notoSans(
+                                              fontSize: 16,
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        TextSpan(
+                                          text: state.routeData.routeCost,
+                                          style: GoogleFonts.notoSans(
+                                            fontSize: 16,
+                                            color: Colors.black,
+                                          ),
+                                        )
+                                      ]),
+                                    )),
+                                DropdownButtonHideUnderline(
+        child: DropdownButton2(
+                                    hint: Text(
+                                      "User Priority",
+                                      style: GoogleFonts.notoSans(
+                                          fontSize: 14,
+                                          color: Colors.grey,
+                                          //fontWeight: FontWeight.bold
+                                          ),
+                                    ),
+                                    autofocus: true,
+                                    value:
+                                        state.priority == UserPriorityStatus.stops
+                                            ? "0"
+                                            : "1",
+                                
+                                    isExpanded: true,
+                                
+                                    buttonStyleData: ButtonStyleData(
+                                      padding: EdgeInsets.only(left: 8),
+                                      width:
+                                          MediaQuery.of(context).size.width / 3,
+                                      height: 40,
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.circular(10),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              offset: Offset(0, 4),
+                                              blurRadius: 4,
+                                              color:
+                                                  Colors.black.withOpacity(0.25),
+                                            )
+                                          ]),
+                                    ),
+                                    iconStyleData: IconStyleData(
+                                      iconEnabledColor: Color(0xffFFBB23),
+                                    ),
+                                    onChanged: (value) {
+                                      if (value == "0") {
+                                        context
+                                            .read<DirectionsCubit>()
+                                            .getDirections(
+                                                widget.fromMetro,
+                                                widget.destMetro,
+                                                widget.destName,
+                                                widget.destAddress,
+                                                widget.isOffline,
+                                                UserPriorityStatus.stops);
+                                      } else if (value == "1") {
+                                        context
+                                            .read<DirectionsCubit>()
+                                            .getDirections(
+                                                widget.fromMetro,
+                                                widget.destMetro,
+                                                widget.destName,
+                                                widget.destAddress,
+                                                widget.isOffline,
+                                                UserPriorityStatus.interchanges);
+                                      }
+                                    },
+                                    items: [
+                                      DropdownMenuItem<String>(
+                                        value: "0",
+                                        child: Text(
+                                          "Less Stations",
+                                          style: GoogleFonts.notoSans(
+                                            fontSize: 14,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold
+                                          ),
+                                        ),
+                                      ),
+                                      DropdownMenuItem<String>(
+                                        value: "1",
+                                        child: Text(
+                                          "Less Walking",
+                                          style: GoogleFonts.notoSans(
+                                            fontSize: 14,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                
+                                    //  Container(
+                                    //   width: 40,
+                                    //       height: 40,
+                                    //       decoration: BoxDecoration(
+                                    //           color: Color(0xffFFBB23),
+                                    //           borderRadius: BorderRadius.circular(10),
+                                    //           boxShadow: [
+                                    //             BoxShadow(
+                                    //               offset: Offset(0, 4),
+                                    //               blurRadius: 4,
+                                    //               color: Colors.black.withOpacity(0.25),
+                                    //             )
+                                    //           ]),
+                                    //       child:
+                                    //           Icon(Icons.tune, color: Colors.white, size: 24,),
+                                    //           ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          MetroDirections(
+                              priority: state.priority,
+                              destMetro: widget.destMetro,
+                              fromDistance: widget.fromDistance,
+                              toDistance: widget.toDistance,
+                              routeCost: state.routeData.routeCost,
+                              directions: state.routeData.route,
+                              destination: widget.destination),
+                        ],
                       ),
                     )
                   // : Padding(

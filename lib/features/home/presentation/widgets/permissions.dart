@@ -22,7 +22,7 @@ class RequestPermission extends StatelessWidget {
                 Column(
                   children: [
                     Image.asset(
-                      "assets/images/location_permission.gif",
+                      "assets/images/location_permission.png",
                       fit: BoxFit.cover,
                     ),
                     Padding(
@@ -38,7 +38,7 @@ class RequestPermission extends StatelessWidget {
                       padding: EdgeInsets.symmetric(horizontal: 0),
                       width: MediaQuery.of(context).size.width,
                       child: Text(
-                        "Location services are required to make your metro journey more simpler and efficient than ever before.",
+                        "Enable precise location to find nearby metro stations automatically and identify your current station while traveling.",
                         textAlign: TextAlign.center,
                         style: GoogleFonts.notoSans(
                             fontSize: 16, color: Theme.of(context).hintColor),
@@ -47,67 +47,142 @@ class RequestPermission extends StatelessWidget {
                   ],
                 ),
 
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 0),
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                      padding: MaterialStateProperty.all<EdgeInsets>(
-                        EdgeInsets.all(0),
-                      ),
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(26),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 0),
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          padding: MaterialStateProperty.all<EdgeInsets>(
+                            EdgeInsets.all(0),
+                          ),
+                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(26),
+                            ),
+                          ),
+                          fixedSize: MaterialStateProperty.all(
+                              Size(MediaQuery.of(context).size.width/2 , 52)),
+                          backgroundColor: MaterialStateProperty.all(
+                            Color(0xffFFBB23),
+                          ),
+                        ),
+                        onPressed: () async {
+                          await Permission.location
+                              .request()
+                              .then((locationStatus) {
+                            if (locationStatus.isGranted ||
+                                locationStatus.isLimited) {
+                              Navigator.push<void>(
+                                context,
+                                MaterialPageRoute<void>(
+                                  builder: (BuildContext context) =>
+                                      const HomePage(),
+                                ),
+                              );
+                            } else {
+                              Navigator.push<void>(
+                                context,
+                                MaterialPageRoute<void>(
+                                  builder: (BuildContext context) =>
+                                      const FromSearchPage(),
+                                ),
+                              );
+                            }
+                          });
+
+                          // else if (locationStatus.isDenied == true) {
+                          //   Navigator.push<void>(
+                          //     context,
+                          //     MaterialPageRoute<void>(
+                          //       builder: (BuildContext context) =>
+                          //           const RequestPermissionAgain(),
+                          //     ),
+                          //   );
+                          // } else {
+                          //   print(locationStatus);
+                          // }
+                          // controller.getUserLocation();
+                          // Get.to(HomePage());
+                        },
+                        child: Text(
+                          "Enable Location",
+                          style: GoogleFonts.notoSans(fontSize: 16),
                         ),
                       ),
-                      fixedSize: MaterialStateProperty.all(
-                          Size(MediaQuery.of(context).size.width, 52)),
-                      backgroundColor: MaterialStateProperty.all(
-                        Color(0xffFFBB23),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 0),
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          padding: MaterialStateProperty.all<EdgeInsets>(
+                            EdgeInsets.all(0),
+                          ),
+                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(26),
+                            ),
+                          ),
+                          fixedSize: MaterialStateProperty.all(
+                              Size(MediaQuery.of(context).size.width/3, 52)),
+                          backgroundColor: MaterialStateProperty.all(
+                            Colors.white,
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.pop(context);
+                          Navigator.push<void>(
+                                context,
+                                MaterialPageRoute<void>(
+                                  builder: (BuildContext context) =>
+                                      const FromSearchPage(),
+                                ),
+                              );
+                          // await Permission.location
+                          //     .request()
+                          //     .then((locationStatus) {
+                          //   if (locationStatus.isGranted ||
+                          //       locationStatus.isLimited) {
+                          //     Navigator.push<void>(
+                          //       context,
+                          //       MaterialPageRoute<void>(
+                          //         builder: (BuildContext context) =>
+                          //             const HomePage(),
+                          //       ),
+                          //     );
+                          //   } else {
+                          //     Navigator.push<void>(
+                          //       context,
+                          //       MaterialPageRoute<void>(
+                          //         builder: (BuildContext context) =>
+                          //             const FromSearchPage(),
+                          //       ),
+                          //     );
+                          //   }
+                          // });
+
+                          // else if (locationStatus.isDenied == true) {
+                          //   Navigator.push<void>(
+                          //     context,
+                          //     MaterialPageRoute<void>(
+                          //       builder: (BuildContext context) =>
+                          //           const RequestPermissionAgain(),
+                          //     ),
+                          //   );
+                          // } else {
+                          //   print(locationStatus);
+                          // }
+                          // controller.getUserLocation();
+                          // Get.to(HomePage());
+                        },
+                        child: Text(
+                          "Skip",
+                          style: GoogleFonts.notoSans(fontSize: 16, color: Colors.black),
+                        ),
                       ),
                     ),
-                    onPressed: () async {
-                      await Permission.location
-                          .request()
-                          .then((locationStatus) {
-                        if (locationStatus.isGranted ||
-                            locationStatus.isLimited) {
-                          Navigator.push<void>(
-                            context,
-                            MaterialPageRoute<void>(
-                              builder: (BuildContext context) =>
-                                  const HomePage(),
-                            ),
-                          );
-                        } else {
-                          Navigator.push<void>(
-                            context,
-                            MaterialPageRoute<void>(
-                              builder: (BuildContext context) =>
-                                  const FromSearchPage(),
-                            ),
-                          );
-                        }
-                      });
-
-                      // else if (locationStatus.isDenied == true) {
-                      //   Navigator.push<void>(
-                      //     context,
-                      //     MaterialPageRoute<void>(
-                      //       builder: (BuildContext context) =>
-                      //           const RequestPermissionAgain(),
-                      //     ),
-                      //   );
-                      // } else {
-                      //   print(locationStatus);
-                      // }
-                      // controller.getUserLocation();
-                      // Get.to(HomePage());
-                    },
-                    child: Text(
-                      "Enable Location",
-                      style: GoogleFonts.notoSans(fontSize: 18),
-                    ),
-                  ),
+                  ],
                 ),
                 // ElevatedButton(
                 //     style: ButtonStyle(

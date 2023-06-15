@@ -13,6 +13,7 @@ class MetroDirection extends Equatable {
   final String interchange;
   final String duration;
   final String headsign;
+  final int stops;
   List stations;
 
   MetroDirection({
@@ -27,6 +28,7 @@ class MetroDirection extends Equatable {
     required this.duration,
     required this.headsign,
     required this.stations,
+    required this.stops,
   });
 
   @override
@@ -46,6 +48,7 @@ class MetroDirection extends Equatable {
 
   factory MetroDirection.initial() {
     return MetroDirection(
+        stops:0,
         travelMode: "",
         vehicleType: "",
         duration: "",
@@ -96,6 +99,7 @@ class MetroDirection extends Equatable {
       }
     }
     return MetroDirection(
+      stops:0,
         travelMode: map["travel_mode"],
         vehicleType: vehicleType,
         metro: metro,

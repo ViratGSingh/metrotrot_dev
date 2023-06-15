@@ -12,6 +12,7 @@ class DirectionTransit extends StatelessWidget {
   String duration;
   int lineColor;
   List stations;
+  int stops;
   DirectionTransit({
     Key? key,
     required this.headsign,
@@ -21,6 +22,7 @@ class DirectionTransit extends StatelessWidget {
     required this.lineColor,
     required this.duration,
     required this.stations,
+    required this.stops
   }) : super(key: key);
 
   @override
@@ -51,27 +53,46 @@ class DirectionTransit extends StatelessWidget {
                 children: [
                   Text(
                     "Take metro heading",
-                    style: GoogleFonts.notoSans(fontSize: 16),
+                    style: GoogleFonts.notoSans(fontSize: 14),
                   ),
                 ],
               ),
               Text("Towards $headsign",
                   style: GoogleFonts.notoSans(
-                      fontSize: 22, fontWeight: FontWeight.bold)),
+                      fontSize: 16, fontWeight: FontWeight.bold)),
               Padding(
-                padding: EdgeInsets.only(top: 2),
-                child: Row(
+                padding: EdgeInsets.only(top: 5),
+                child: Column(
                   children: [
-                    // const Icon(
-                    //   Icons.watch_later_outlined,
-                    //   size: 16,
-                    //   color: Colors.black,
-                    // ),
+                    Row(
+                      children: [
+                        const Icon(
+                          Icons.directions_subway_outlined,
+                          size: 20,
+                          color: Colors.black,
+                        ),
+                        Text(
+                          "  ${stops.toString()} stops ",
+                          style: GoogleFonts.notoSans(
+                            fontWeight: FontWeight.bold,
+                               fontSize: 12),
+                        ),
+                       
+                      ],
+                    ),
+                    SizedBox(height: 5,),
+                    Row(children: [ const Icon(
+                      Icons.watch_later_outlined,
+                      size: 20,
+                      color: Colors.black,
+                    ),
                     Text(
-                      "$duration",
+                      "  $duration",
                       style: GoogleFonts.notoSans(
-                          fontWeight: FontWeight.bold, fontSize: 14),
-                    )
+                        fontWeight: FontWeight.bold,
+                        
+                           fontSize: 12),
+                    )],)
                   ],
                 ),
               ),
@@ -79,7 +100,7 @@ class DirectionTransit extends StatelessWidget {
                 padding: EdgeInsets.only(top: 20, bottom: 5),
                 child: Container(
                   padding: EdgeInsets.all(5),
-                  height: 30,
+                  //height: 30,
                   decoration: BoxDecoration(
                     color: Color(lineColor),
                     borderRadius: BorderRadius.circular(8),
@@ -125,25 +146,26 @@ class DirectionTransit extends StatelessWidget {
                     ),
                   ),
                   Container(
+                    padding: EdgeInsets.only(left: 4),
                     height: 86,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(
-                          width: 250,
+                          width: MediaQuery.of(context).size.width/2,
                           child: Text(
                             departure,
                             style: GoogleFonts.notoSans(
-                                fontSize: 16, fontWeight: FontWeight.bold),
+                                fontSize: 14, fontWeight: FontWeight.bold),
                           ),
                         ),
                         SizedBox(
-                          width: 250,
+                          width: MediaQuery.of(context).size.width/2,
                           child: Text(
                             arrival,
                             style: GoogleFonts.notoSans(
-                                fontSize: 16, fontWeight: FontWeight.bold),
+                                fontSize: 14, fontWeight: FontWeight.bold),
                           ),
                         ),
                       ],

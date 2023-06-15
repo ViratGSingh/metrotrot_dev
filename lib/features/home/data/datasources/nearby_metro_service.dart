@@ -44,7 +44,7 @@ class NearbyMetroService {
     }
   }
 
-  Future<FromMetro> getFromNearestMetro(String placeId) async {
+  Future<Map<String,dynamic>> getFromNearestMetro(String placeId) async {
     Map<String, dynamic> location = {};
     //Get coordinates
     final String apiKey = dotenv.env["MAPS_API_KEY"].toString();
@@ -62,37 +62,39 @@ class NearbyMetroService {
     if (placeData.containsKey("result") == true) {
       location = placeData["result"]["geometry"]["location"];
     }
+    return location;
 
-    //Find metro station nearby
-    final Uri requestUri = Uri(
-        scheme: 'https',
-        host: kApiHost,
-        path: "/maps/api/place/nearbysearch/json",
-        queryParameters: {
-          "key": apiKey,
-          "keyword": "metro station",
-          "location":
-              "${location["lat"].toString()},${location["lng"].toString()}",
-          "type": "subway_station",
-          "rankby": "distance"
-        });
 
-    try {
-      final http.Response response = await httpClient.get(requestUri);
+    // //Find metro station nearby
+    // final Uri requestUri = Uri(
+    //     scheme: 'https',
+    //     host: kApiHost,
+    //     path: "/maps/api/place/nearbysearch/json",
+    //     queryParameters: {
+    //       "key": apiKey,
+    //       "keyword": "metro station",
+    //       "location":
+    //           "${location["lat"].toString()},${location["lng"].toString()}",
+    //       "type": "subway_station",
+    //       "rankby": "distance"
+    //     });
 
-      // if (response.statusCode != 200) {
-      //   throw httpErrorHandler(response);
-      // }
+    // try {
+    //   final http.Response response = await httpClient.get(requestUri);
 
-      final responseBody = json.decode(response.body);
-      final List fromMetros = responseBody["results"];
+    //   // if (response.statusCode != 200) {
+    //   //   throw httpErrorHandler(response);
+    //   // }
 
-      final FromMetro fromNearestMetro =
-          FromMetro.fromJson(json.encode(fromMetros.first));
+    //   final responseBody = json.decode(response.body);
+    //   final List fromMetros = responseBody["results"];
 
-      return fromNearestMetro;
-    } catch (e) {
-      rethrow;
-    }
+    //   final FromMetro fromNearestMetro =
+    //       FromMetro.fromJson(json.encode(fromMetros.first));
+
+    //   return fromNearestMetro;
+    // } catch (e) {
+    //   rethrow;
+    // }
   }
 }

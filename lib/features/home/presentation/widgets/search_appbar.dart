@@ -1,3 +1,6 @@
+import 'package:app/features/destination/presentation/widgets/errors/main.dart';
+import 'package:app/features/destination/presentation/widgets/warnings/main.dart';
+import 'package:app/features/from_search/presentation/pages/from_search.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
@@ -26,6 +29,7 @@ class SearchAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        if(lat!=0 && lat!=0){
         Navigator.push<void>(
           context,
           MaterialPageRoute<void>(
@@ -39,6 +43,30 @@ class SearchAppBar extends StatelessWidget {
                 lng: lng),
           ),
         );
+        }else{
+          showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return ErrorPopup(
+                                    title: "Error!",
+                                    message:
+                                        "Please select your departure metro station before searching for your destination.",
+                                    action: "Select Station",
+                                    actionFunc: () {
+                                      Navigator.pop(context);
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute<void>(
+                                          builder: (BuildContext context) =>
+                                              const FromSearchPage(),
+                                        ),
+                                      );
+                                    },
+                                  );
+                                },
+                              );
+          print(fromMetro);
+        }
       },
       child: Container(
         height: 50,
