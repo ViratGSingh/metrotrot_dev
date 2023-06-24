@@ -86,11 +86,11 @@ class _MetroDirectionsState extends State<MetroDirections> {
         header = "Change lines in";
       } else {
         isBridge = true;
-        header = "Change lines using FOB";
+        header = "Change lines using FOB";;
       }
 
       return DirectionInter(
-          newStation: direction.arrivalName,
+          newStation: currName,
           isBridge: isBridge,
           header: header,
           interchangeStation: direction.interchange,
@@ -102,6 +102,7 @@ class _MetroDirectionsState extends State<MetroDirections> {
 
     if (direction.travelMode == "TRANSIT") {
       return DirectionTransit(
+          platform: direction.platform,
           stops: direction.stops,
           duration: direction.duration,
           headsign: direction.headsign,

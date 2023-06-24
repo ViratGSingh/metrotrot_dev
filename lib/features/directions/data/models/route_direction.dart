@@ -7,6 +7,7 @@ class MetroDirection extends Equatable {
   final String vehicleType;
   final String metro;
   final String departureName;
+  final String platform;
   final String arrivalName;
   String currLineName;
   final int currLineColour;
@@ -28,6 +29,7 @@ class MetroDirection extends Equatable {
     required this.duration,
     required this.headsign,
     required this.stations,
+    required this.platform,
     required this.stops,
   });
 
@@ -43,6 +45,7 @@ class MetroDirection extends Equatable {
       currLineColour,
       stations,
       interchange,
+      platform
     ];
   }
 
@@ -59,6 +62,7 @@ class MetroDirection extends Equatable {
         currLineName: "",
         currLineColour: 0,
         stations: [],
+        platform: "",
         interchange: "");
   }
 
@@ -111,6 +115,7 @@ class MetroDirection extends Equatable {
         duration: map["duration"]["text"],
         headsign: headsign,
         currLineColour: currLineColour,
+        platform:"",
         stations: stations);
   }
 

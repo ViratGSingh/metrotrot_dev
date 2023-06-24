@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class DirectionTransit extends StatelessWidget {
+  String platform;
   String headsign;
   String departure;
   String arrival;
@@ -16,6 +17,7 @@ class DirectionTransit extends StatelessWidget {
   DirectionTransit({
     Key? key,
     required this.headsign,
+    required this.platform,
     required this.departure,
     required this.arrival,
     required this.currLine,
@@ -67,32 +69,57 @@ class DirectionTransit extends StatelessWidget {
                     Row(
                       children: [
                         const Icon(
-                          Icons.directions_subway_outlined,
+                          Icons.logout,
                           size: 20,
-                          color: Colors.black,
+                          color: Color.fromARGB(255, 157, 157, 157),
                         ),
                         Text(
-                          "  ${stops.toString()} stops ",
+                          "  ${platform.toString()}",
                           style: GoogleFonts.notoSans(
-                            fontWeight: FontWeight.bold,
+                            color: Color.fromARGB(255, 124, 124, 124),
                                fontSize: 12),
                         ),
                        
                       ],
                     ),
                     SizedBox(height: 5,),
-                    Row(children: [ const Icon(
+                    Row(
+                      children: [
+                        Row(
+                      children: [
+                        const Icon(
+                          Icons.directions_subway_outlined,
+                          size: 20,
+                          color: Color.fromARGB(255, 157, 157, 157),
+                        ),
+                        Text(
+                          "  ${stops.toString()} stops ",
+                          style: GoogleFonts.notoSans(
+                            //fontWeight: FontWeight.bold,
+                          color: Color.fromARGB(255, 157, 157, 157),
+                               fontSize: 12),
+                        ),
+                       
+                      ],
+                    ),
+                    SizedBox(width: 10,),
+                    Row(
+                      children: [ const Icon(
                       Icons.watch_later_outlined,
                       size: 20,
-                      color: Colors.black,
+                          color: Color.fromARGB(255, 157, 157, 157),
                     ),
                     Text(
                       "  $duration",
                       style: GoogleFonts.notoSans(
-                        fontWeight: FontWeight.bold,
-                        
+                        //fontWeight: FontWeight.bold,
+                          color: Color.fromARGB(255, 157, 157, 157),
                            fontSize: 12),
                     )],)
+                      ],
+                    ),
+
+                    
                   ],
                 ),
               ),

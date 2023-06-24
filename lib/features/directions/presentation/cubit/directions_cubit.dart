@@ -209,12 +209,12 @@ class DirectionsCubit extends Cubit<DirectionsState> {
     int bestRouteIndex = -1;
 
     //Find index of least stops
-    int i =0;
+    int i = 0;
     stopsList.forEach((element) {
       if (element == leastStops) {
         bestRouteIndexList.add(i);
       }
-      i+=1;
+      i += 1;
     });
     //print("LEAST STATIONS");
     //print(bestRouteIndexList);
@@ -250,12 +250,11 @@ class DirectionsCubit extends Cubit<DirectionsState> {
     bestRouteIndex = bestRouteIndexList.first;
     //Find least stops with least interchanges if more than one route
     if (bestRouteIndexList.length > 1) {
-    bestRouteIndexList.forEach((element) {
-      if (stopsList[bestRouteIndex] > stopsList[element]) {
+      bestRouteIndexList.forEach((element) {
+        if (stopsList[bestRouteIndex] > stopsList[element]) {
           bestRouteIndex = element;
         }
-      
-    });
+      });
     }
     //print(bestRouteIndex);
     return bestRouteIndex;
@@ -909,9 +908,29 @@ getMetroRoute(List<Station> path, List<int> interchanges,
       transitDistance += calculateDistance(path[j].latitude, path[j].longitude,
           path[j + 1].latitude, path[j + 1].longitude);
     }
+    if(line=="line_10"){
+      fare = fareCalculator(0,isAirport: true, airportStations: stops);
+    }else{
     fare = fareCalculator(transitDistance.toInt());
+    }
     routeDistance = transitDistance;
+
+    String transitPlatform = "";
+    Map<String, dynamic> startStationInfo =
+        metroData["data"][line]["stations"][startIndex];
+    if (startStationInfo.containsKey("platforms") == true) {
+      if (startStationInfo["platforms"].containsKey(line) == true) {
+        if (startIndex > endIndex) {
+          transitPlatform =
+              startStationInfo["platforms"][line]["towards_start"];
+        }
+        if (endIndex > startIndex) {
+          transitPlatform = startStationInfo["platforms"][line]["towards_end"];
+        }
+      }
+    }
     MetroDirection transit = MetroDirection(
+        platform: transitPlatform,
         stops: stops,
         travelMode: "TRANSIT",
         vehicleType: "SUBWAY",
@@ -934,6 +953,7 @@ getMetroRoute(List<Station> path, List<int> interchanges,
         }
       });
       MetroDirection bridge = MetroDirection(
+          platform: "",
           stops: 0,
           travelMode: "WALKING",
           vehicleType: "BRIDGE",
@@ -1039,11 +1059,30 @@ getMetroRoute(List<Station> path, List<int> interchanges,
           stops = endIndex - startIndex + 1;
         }
 
-        fare += fareCalculator(transitDistance.toInt());
-
+        if(line=="line_10"){
+      fare += fareCalculator(0,isAirport: true, airportStations: stops);
+    }else{
         routeDistance += transitDistance;
+    }
+
+        String transitPlatform = "";
+        Map<String, dynamic> startStationInfo =
+            metroData["data"][line]["stations"][startIndex];
+        if (startStationInfo.containsKey("platforms") == true) {
+          if (startStationInfo["platforms"].containsKey(line) == true) {
+            if (startIndex > endIndex) {
+              transitPlatform =
+                  startStationInfo["platforms"][line]["towards_start"];
+            }
+            if (endIndex > startIndex) {
+              transitPlatform =
+                  startStationInfo["platforms"][line]["towards_end"];
+            }
+          }
+        }
 
         MetroDirection transit = MetroDirection(
+            platform: transitPlatform,
             stops: stops,
             travelMode: "TRANSIT",
             vehicleType: "SUBWAY",
@@ -1141,11 +1180,30 @@ getMetroRoute(List<Station> path, List<int> interchanges,
               direction[j + 1].latitude,
               direction[j + 1].longitude);
         }
-
-        fare += fareCalculator(transitDistance.toInt());
-
+   if(line=="line_10"){
+      fare += fareCalculator(0,isAirport: true, airportStations: stops);
+    }else{
         routeDistance += transitDistance;
+    }
+
+
+        String transitPlatform = "";
+        Map<String, dynamic> startStationInfo =
+            metroData["data"][line]["stations"][startIndex];
+        if (startStationInfo.containsKey("platforms") == true) {
+          if (startStationInfo["platforms"].containsKey(line) == true) {
+            if (startIndex > endIndex) {
+              transitPlatform =
+                  startStationInfo["platforms"][line]["towards_start"];
+            }
+            if (endIndex > startIndex) {
+              transitPlatform =
+                  startStationInfo["platforms"][line]["towards_end"];
+            }
+          }
+        }
         MetroDirection transit = MetroDirection(
+            platform: transitPlatform,
             stops: stops,
             travelMode: "TRANSIT",
             vehicleType: "SUBWAY",
@@ -1168,6 +1226,7 @@ getMetroRoute(List<Station> path, List<int> interchanges,
       ////print("");
 
       MetroDirection transit = MetroDirection(
+          platform: "",
           stops: 0,
           travelMode: "WALKING",
           vehicleType: "WALKING",
@@ -1284,12 +1343,29 @@ getMetroRoute(List<Station> path, List<int> interchanges,
           direction[j + 1].latitude,
           direction[j + 1].longitude);
     }
-
-    fare += fareCalculator(transitDistance.toInt());
-
+   if(line=="line_10"){
+      fare += fareCalculator(0,isAirport: true, airportStations: stops);
+    }else{
     routeDistance += transitDistance;
+    }
 
+
+    String transitPlatform = "";
+    Map<String, dynamic> startStationInfo =
+        metroData["data"][line]["stations"][startIndex];
+    if (startStationInfo.containsKey("platforms") == true) {
+      if (startStationInfo["platforms"].containsKey(line) == true) {
+        if (startIndex > endIndex) {
+          transitPlatform =
+              startStationInfo["platforms"][line]["towards_start"];
+        }
+        if (endIndex > startIndex) {
+          transitPlatform = startStationInfo["platforms"][line]["towards_end"];
+        }
+      }
+    }
     MetroDirection transit = MetroDirection(
+        platform: transitPlatform,
         stops: stops,
         travelMode: "TRANSIT",
         vehicleType: "SUBWAY",
@@ -1311,6 +1387,7 @@ getMetroRoute(List<Station> path, List<int> interchanges,
         }
       });
       MetroDirection bridge = MetroDirection(
+          platform: "",
           stops: 0,
           travelMode: "WALKING",
           vehicleType: "BRIDGE",
@@ -1329,7 +1406,7 @@ getMetroRoute(List<Station> path, List<int> interchanges,
   }
 
   //print("Distance covered: $routeDistance");
-  fare = fareCalculator(routeDistance.toInt());
+  fare += fareCalculator(routeDistance.toInt());
   metro = MetroRoute(
       routeCost: "₹${fare.toString()}", route: routeDirections, data: '');
   return metro;
@@ -1350,22 +1427,35 @@ double calculateDistance(
   return distanceInKm;
 }
 
-int fareCalculator(int distance) {
+int fareCalculator(int distance,
+    {bool isAirport = false, int airportStations = 0}) {
   int fare = 0;
-
-  if (distance < 2) {
-    fare = 10;
-  } else if (2 <= distance && distance < 5) {
-    fare = 20;
-  } else if (5 <= distance && distance < 12) {
-    fare = 30;
-  } else if (12 <= distance && distance < 21) {
-    fare = 40;
-  } else if (21 <= distance && distance < 32) {
-    fare = 50;
-  } else if (distance >= 32) {
-    fare = 60;
+  if (isAirport == true) {
+    if (airportStations == 2) {
+      fare = 20;
+    } else if (airportStations == 3) {
+      fare = 30;
+    } else if (airportStations == 4) {
+      fare = 40;
+    } else if (airportStations == 5) {
+      fare = 50;
+    } else if (airportStations == 6) {
+      fare = 60;
+    } 
+  } else {
+    if (distance < 2) {
+      fare = 10;
+    } else if (2 <= distance && distance < 5) {
+      fare = 20;
+    } else if (5 <= distance && distance < 12) {
+      fare = 30;
+    } else if (12 <= distance && distance < 21) {
+      fare = 40;
+    } else if (21 <= distance && distance < 32) {
+      fare = 50;
+    } else if (distance >= 32) {
+      fare = 60;
+    }
   }
-
   return fare;
 }
