@@ -1,4 +1,7 @@
 import 'dart:convert';
+import 'package:app/features/destination/data/models/dest_metro.dart';
+import 'package:app/features/from_search/data/models/from_fav_recom.dart';
+import 'package:app/features/to_search/data/models/to_fav_recom.dart';
 import 'package:uuid/uuid.dart';
 import 'package:app/features/from_search/data/models/from_metro.dart';
 import 'package:app/features/to_search/data/models/dest_tap_data.dart';
@@ -20,13 +23,38 @@ class ToSearchCubit extends Cubit<ToSearchState> {
   ToSearchCubit({required this.toSearchRepository})
       : super(ToSearchState.initial());
 
+  Future<void> updateDestFavRecommendation(
+      ToRecommendation recommendation, bool isFavourite) async {
+    String placeId = recommendation.placeId;
+    Isar isar = Isar.getInstance() ??
+        await Isar.open([
+          DirectionsSchema,
+          SavedFromRecommendationSchema,
+          SavedToRecommendationSchema,
+          SavedFromMetroSchema,
+          SavedDestMetroSchema
+        ]);
+    //Check place id exists in From recommendations
+    final savedRecommendation = await isar.savedToRecommendations
+        .filter()
+        .placeIdEqualTo(placeId)
+        .findFirst();
 
-  Future<List<ToRecommendation>> getSuggestedStations(String location)async{
+    //If exists update
+    if (savedRecommendation != null) {
+      await isar.writeTxn(() async {
+        savedRecommendation.isFavourite = isFavourite;
+        await isar.savedToRecommendations.put(savedRecommendation);
+      });
+    }
+  }
+
+  Future<List<ToRecommendation>> getSuggestedStations(String location) async {
     //Get Stations
     final metroResp = await rootBundle.loadString('assets/data/delhi_ncr.json');
     final metroData = json.decode(metroResp);
     List<Map<String, dynamic>> metroStations = [];
-    int metroLines= metroData["total_lines"];
+    int metroLines = metroData["total_lines"];
     for (var i = 1; i <= metroLines; i++) {
       List lineData = metroData["data"]["line_${i.toString()}"]["stations"];
       lineData.forEach((element) {
@@ -44,125 +72,95 @@ class ToSearchCubit extends Cubit<ToSearchState> {
     final List<ToRecommendation> stationSuggestions = [];
     final String lowercaseQuery = location.toLowerCase();
     for (final station in metroStations) {
-      if ((station["name"]+station["address"]).toLowerCase().contains(lowercaseQuery)) {
+      if ((station["name"] + station["address"])
+          .toLowerCase()
+          .contains(lowercaseQuery)) {
         ToRecommendation stationRecom = ToRecommendation(
             placeId: station["place_id"],
             main: station["name"],
             secondary: station["address"]);
-        if(stationSuggestions.contains(stationRecom)==false){
-        stationSuggestions.add(stationRecom);
-            }
+        if (stationSuggestions.contains(stationRecom) == false) {
+          stationSuggestions.add(stationRecom);
+        }
       }
     }
     return stationSuggestions;
-    
   }
 
-
   getSearchRecommendations(
-    //String userId, String fromPlaceId, 
-    String location,
-      bool isOffline, 
-      double lat, double lng
-      ) async {
-    emit(state.copyWith(placeStatus: ToSearchPlaceStatus.loading,stationStatus: ToSearchStationStatus.loading));
-    List<ToRecommendation> locations = [];
-    List<ToRecommendation> stations = [];
-    //var isar = Isar.getInstance() ?? await Isar.open([DirectionsSchema]);
+      //String userId, String fromPlaceId,
+      String location,
+      bool isOffline,
+      double lat,
+      double lng) async {
+    emit(state.copyWith(
+        stationStatus: ToSearchStationStatus.loading,
+        placeStatus: ToSearchPlaceStatus.loading));
+    List<ToRecommendation> predictions = [];
+    List<ToRecommendation> stationSuggestions = [];
 
-    //Suggested Stations
-    stations = await getSuggestedStations(location);
+    stationSuggestions = await getSuggestedStations(location);
+    //print(stationSuggestions);
+    Isar isar = Isar.getInstance() ??
+        await Isar.open([
+          DirectionsSchema,
+          SavedFromRecommendationSchema,
+          SavedToRecommendationSchema,
+          SavedFromMetroSchema,
+          SavedDestMetroSchema
+        ]);
 
-      print(stations);
     //Suggested Places
-    toSearchRepository.getSearchRecommendations(location, lat, lng).then((value) {
-      locations = value;
-      emit(state.copyWith(
+    //Check for saved places
+
+    List<ToRecommendation> favSavedPredictions = [];
+    List<ToRecommendation> nonFavSavedPredictions = [];
+    final savedRecommendations = await isar.savedToRecommendations
+        .filter()
+        .destContentContains(location, caseSensitive: false)
+        .findAll();
+    for (SavedToRecommendation savedRecommendation in savedRecommendations) {
+      ToRecommendation updSavedRecommendation = ToRecommendation(
+          placeId: savedRecommendation.placeId ?? "",
+          main: savedRecommendation.main ?? "",
+          secondary: savedRecommendation.secondary ?? "",
+          isFavourite: savedRecommendation.isFavourite ?? false);
+      if (updSavedRecommendation.isFavourite == true) {
+        favSavedPredictions.add(updSavedRecommendation);
+      } else {
+        nonFavSavedPredictions.add(updSavedRecommendation);
+      }
+    }
+    //Add all fav saved recommendations
+    predictions.addAll(favSavedPredictions);
+    predictions.addAll(nonFavSavedPredictions);
+    //Get new places
+    if (predictions.isEmpty == true) {
+      await toSearchRepository
+          .getSearchRecommendations(location)
+          .then((value) async {
+        predictions = value;
+        for (ToRecommendation recommendation in predictions) {
+          SavedToRecommendation newPlace = SavedToRecommendation()
+            ..placeId = recommendation.placeId
+            ..main = recommendation.main
+            ..secondary = recommendation.secondary
+            ..totaltaps = 1
+            ..firstTapDate = DateTime.now()
+            ..lastTapDate = DateTime.now()
+            ..isFavourite = false
+            ..destContent = recommendation.main;
+          await isar.writeTxn(() async {
+            await isar.savedToRecommendations.put(newPlace);
+          });
+        }
+      });
+    }
+    emit(state.copyWith(
         stationStatus: ToSearchStationStatus.loaded,
         placeStatus: ToSearchPlaceStatus.loaded,
-        locations: locations.take(5).toList(),
-        stations: stations.take(5).toList()));
-  
-    });
-
-
-    // if (isOffline == false) {
-    //   if (location.isEmpty == true) {
-    //     //Personal Recoms
-    //     // FirebaseFirestore db = FirebaseFirestore.instance;
-    //     // await db
-    //     //     .collection("dest_history")
-    //     //     .where("user_id", isEqualTo: userId)
-    //     //     .where("from_place_id", isEqualTo: fromPlaceId)
-    //     //     .orderBy("total_taps", descending: true)
-    //     //     .orderBy("last_tapped_at", descending: true)
-    //     //     .limit(5)
-    //     //     .get()
-    //     //     .then((query) {
-    //     //   query.docs.forEach((personalRecom) {
-    //     //     Map<String, dynamic> data = personalRecom.data();
-    //     //     ToRecommendation dest = ToRecommendation(
-    //     //         placeId: data["to_place_id"],
-    //     //         main: data["to_name"],
-    //     //         secondary: data["to_address"]);
-
-    //     //     predictions.add(dest);
-    //     //   });
-    //     // });
-    //     // recoms = await isar.directions
-    //     //     .where()
-    //     //     .filter()
-    //     //     .fromIdEqualTo(fromPlaceId)
-    //     //     .sortByTimeDesc()
-    //     //     .distinctByDestContent()
-    //     //     .limit(5)
-    //     //     .findAll();
-    //     // recoms.forEach((Directions recom) {
-    //     //   ToRecommendation dest = ToRecommendation.fromJson(
-    //     //     recom.toData.toString(),
-    //     //   );
-    //     //   dest.main = recom.destMain.toString();
-    //     //   dest.secondary = recom.destSecondary.toString();
-    //     //   predictions.add(dest);
-    //     // });
-    //   } else {
-    //     predictions = await toSearchRepository.getSearchRecommendations(
-    //         location, lat, lng);
-    //   }
-    // } else {
-    //   //isar = Isar.getInstance() ?? await Isar.open([DirectionsSchema]);
-
-    //   // if (location.isEmpty == true) {
-    //   //   recoms = await isar.directions
-    //   //       .where()
-    //   //       .filter()
-    //   //       .fromIdEqualTo(fromPlaceId)
-    //   //       .sortByTimeDesc()
-    //   //       .distinctByDestContent()
-    //   //       .limit(5)
-    //   //       .findAll();
-    //   // } else {
-    //   //   recoms = await isar.directions
-    //   //       .where()
-    //   //       .filter()
-    //   //       .fromIdEqualTo(fromPlaceId)
-    //   //       .contentWordsElementStartsWith(location)
-    //   //       .distinctByDestContent()
-    //   //       .limit(5)
-    //   //       .findAll();
-    //   // }
-
-    //   // recoms.forEach((Directions recom) {
-    //   //   ToRecommendation dest = ToRecommendation.fromJson(
-    //   //     recom.toData.toString(),
-    //   //   );
-    //   //   dest.main = recom.destMain.toString();
-    //   //   dest.secondary = recom.destSecondary.toString();
-
-    //   //   predictions.add(dest);
-    //   // });
-    // }
-    emit(state.copyWith(stationStatus: ToSearchStationStatus.loaded, stations: stations.take(5).toList() ));
+        locations: predictions.take(5).toList(),
+        stations: stationSuggestions.take(5).toList()));
   }
 
   saveDestinationInfo(
@@ -197,10 +195,10 @@ class ToSearchCubit extends Cubit<ToSearchState> {
     String destSearchId = const Uuid().v4();
     //"${userId}_${fromMetro.placeId}_$toPlaceId";
     db
-            .collection("dest_history")
-            .doc(destSearchId)
-            .set(destData.toMap())
-            .onError((e, _) => print("Error writing document: $e"));
+        .collection("dest_history")
+        .doc(destSearchId)
+        .set(destData.toMap())
+        .onError((e, _) => print("Error writing document: $e"));
     // db.collection("dest_history").doc(destSearchId).get().then((value) {
     //   // if (value.exists) {
     //   //   //Update User Info
@@ -209,7 +207,7 @@ class ToSearchCubit extends Cubit<ToSearchState> {
     //   //     DestTapData oldDestData = DestTapData.fromMap(oldData);
     //   //     destData.totalTaps = oldDestData.totalTaps + 1;
     //   //     destData.firstTappedAt = oldDestData.firstTappedAt;
-    //   //     destData.isLiked = oldDestData.isLiked; 
+    //   //     destData.isLiked = oldDestData.isLiked;
     //   //   }
     //   //   destData.lastTappedAt = DateTime.now();
     //   //   db

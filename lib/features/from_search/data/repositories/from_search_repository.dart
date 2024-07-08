@@ -1,5 +1,5 @@
 import 'package:app/features/from_search/data/datasources/from_search_service.dart';
-import 'package:app/features/from_search/data/models/recommendation.dart';
+import 'package:app/features/from_search/data/models/from_recommendation.dart';
 
 class FromSearchRepository {
   final FromSearchService fromSearchService;

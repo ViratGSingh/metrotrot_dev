@@ -86,7 +86,8 @@ class _MetroDirectionsState extends State<MetroDirections> {
         header = "Change lines in";
       } else {
         isBridge = true;
-        header = "Change lines using FOB";;
+        header = "Change lines using FOB";
+        ;
       }
 
       return DirectionInter(
@@ -101,6 +102,21 @@ class _MetroDirectionsState extends State<MetroDirections> {
     }
 
     if (direction.travelMode == "TRANSIT") {
+      //Filter Stations
+      List<dynamic> filteredStations = [];
+      int startIndex = 0;
+      int endIndex = 0;
+      filteredStations = direction.stations.sublist(startIndex, endIndex);
+      int i = 0;
+      direction.stations.forEach((element) {
+        if (element["name"] == direction.departureName) {
+          startIndex = i;
+        } else if (element["name"] == direction.arrivalName) {
+          endIndex = i;
+        }
+        i++;
+      });
+      filteredStations = direction.stations.sublist(startIndex, endIndex + 1);
       return DirectionTransit(
           platform: direction.platform,
           stops: direction.stops,
@@ -109,7 +125,7 @@ class _MetroDirectionsState extends State<MetroDirections> {
           departure: direction.departureName,
           arrival: direction.arrivalName,
           currLine: direction.currLineName,
-          stations: direction.stations,
+          stations: filteredStations,
           lineColor: direction.currLineColour);
     }
   }
@@ -142,6 +158,7 @@ class _MetroDirectionsState extends State<MetroDirections> {
 
   getInstructions(int step, List<MetroDirection> directions) {
     MetroDirection direction = directions[step.toInt()];
+
     if (direction.travelMode == "WALKING" &&
         direction.vehicleType == "BRIDGE") {
       MetroDirection prevDir = directions[step.toInt() - 1];
@@ -198,6 +215,7 @@ class _MetroDirectionsState extends State<MetroDirections> {
       int colourCode = direction.currLineColour;
       String lineName = direction.currLineName;
       List stations = direction.stations;
+
       if (stations.isEmpty == true) {
         return TransitInstruction(
             headsign: direction.headsign,
@@ -224,184 +242,35 @@ class _MetroDirectionsState extends State<MetroDirections> {
   @override
   Widget build(BuildContext context) {
     ValueNotifier<int> i = ValueNotifier<int>(0);
-    selectedValue =  widget.priority==UserPriorityStatus.stops?"0":"1";
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        // Padding(
-        //   padding: EdgeInsets.fromLTRB(40, 0, 40, 5),
-        //   child: Row(
-        //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //     children: [
-        //       Container(
-        //           padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
-        //           decoration: BoxDecoration(
-        //               color: Colors.white,
-        //               borderRadius: BorderRadius.circular(10),
-        //               boxShadow: [
-        //                 BoxShadow(
-        //                   offset: Offset(0, 4),
-        //                   blurRadius: 4,
-        //                   color: Colors.black.withOpacity(0.25),
-        //                 )
-        //               ]),
-        //           child: RichText(
-        //             text: TextSpan(children: [
-        //               TextSpan(
-        //                 text: "Trip Fare: ",
-        //                 style: GoogleFonts.notoSans(
-        //                     fontSize: 16,
-        //                     color: Colors.black,
-        //                     fontWeight: FontWeight.bold),
-        //               ),
-        //               TextSpan(
-        //                 text: widget.routeCost,
-        //                 style: GoogleFonts.notoSans(
-        //                   fontSize: 16,
-        //                   color: Colors.black,
-        //                 ),
-        //               )
-        //             ]),
-        //           )),
-        //       DropdownButton2(
-        //         hint: Text(
-        //           "User Priority",
-        //           style: GoogleFonts.notoSans(
-        //               fontSize: 14,
-        //               color: Colors.black,
-        //               fontWeight: FontWeight.bold),
-        //         ),
-        //         autofocus: true,
-        //         value: selectedValue,
-
-        //         isExpanded: true,
-
-        //         buttonStyleData: ButtonStyleData(
-        //           padding: EdgeInsets.only(left: 10),
-        //           width: MediaQuery.of(context).size.width / 3,
-        //           height: 40,
-        //           decoration: BoxDecoration(
-        //               color: Colors.white,
-        //               borderRadius: BorderRadius.circular(10),
-        //               boxShadow: [
-        //                 BoxShadow(
-        //                   offset: Offset(0, 4),
-        //                   blurRadius: 4,
-        //                   color: Colors.black.withOpacity(0.25),
-        //                 )
-        //               ]),
-        //         ),
-        //         iconStyleData: IconStyleData(
-        //           iconEnabledColor: Color(0xffFFBB23),
-        //         ),
-        //         onChanged: (value) {
-        //           if(value=="0"){
-                    
-        //           }else if(value=="1"){
-
-        //           }
-        //         },
-        //         items: [
-        //           DropdownMenuItem<String>(
-        //             value: "0",
-        //             child: Text(
-        //               "Less Walking",
-        //               style: GoogleFonts.notoSans(
-        //                 fontSize: 14,
-        //                 color: Colors.black,
-        //               ),
-        //             ),
-        //           ),
-        //           DropdownMenuItem<String>(
-        //             value: "1",
-        //             child: Text(
-        //               "Less Stations",
-        //               style: GoogleFonts.notoSans(
-        //                 fontSize: 14,
-        //                 color: Colors.black,
-        //               ),
-        //             ),
-        //           ),
-        //         ],
-
-        //         //  Container(
-        //         //   width: 40,
-        //         //       height: 40,
-        //         //       decoration: BoxDecoration(
-        //         //           color: Color(0xffFFBB23),
-        //         //           borderRadius: BorderRadius.circular(10),
-        //         //           boxShadow: [
-        //         //             BoxShadow(
-        //         //               offset: Offset(0, 4),
-        //         //               blurRadius: 4,
-        //         //               color: Colors.black.withOpacity(0.25),
-        //         //             )
-        //         //           ]),
-        //         //       child:
-        //         //           Icon(Icons.tune, color: Colors.white, size: 24,),
-        //         //           ),
-        //       ),
-        //     ],
-        //   ),
-        // ),
-        CarouselSlider(
-          items: widget.directions
-              .map((direction) => Padding(
-                    padding: EdgeInsets.only(top: 5, bottom: 5),
-                    child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        // decoration: BoxDecoration(
-                        //     color: Colors.white,
-                        //     borderRadius: BorderRadius.circular(10),
-                        //     boxShadow: [
-                        //       BoxShadow(
-                        //         offset: Offset(0, 4),
-                        //         blurRadius: 4,
-                        //         color: Colors.black.withOpacity(0.25),
-                        //       )
-                        //     ]),
-                        child: formatDirection(
-                            direction,
-                            widget
-                                .directions) //controller.formatDirection(direction),
-                        ),
-                  ))
-              .toList(),
-          options: CarouselOptions(
-              onPageChanged: ((value, CarouselPageChangedReason) {
-                //controller.currentStep.value = value;
-
-                i.value = value;
-              }),
-              scrollPhysics: BouncingScrollPhysics(),
-              enlargeCenterPage: true,
-              enableInfiniteScroll: false,
-              height: MediaQuery.of(context).size.height / 2),
-        ),
-        ValueListenableBuilder(
-          valueListenable: i,
-          builder: (BuildContext context, dynamic value, Widget? child) {
-            return Padding(
-              padding: EdgeInsets.only(top: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: getCarouselIcons(i.value, widget.directions.length),
-              ),
-            );
-          },
-        ),
-        ValueListenableBuilder(
-            valueListenable: i,
-            builder: (BuildContext context, dynamic value, Widget? child) {
-              return Container(
-                padding: const EdgeInsets.only(top: 30),
-                width: 2 * MediaQuery.of(context).size.width / 3 + 60,
-                height: MediaQuery.of(context).size.height / 4,
-                child: getInstructions(i.value, widget.directions),
-              );
-            })
-      ],
+    selectedValue = widget.priority == UserPriorityStatus.stops ? "0" : "1";
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+      child: Column(
+        // crossAxisAlignment: CrossAxisAlignment.center,
+        // mainAxisAlignment: MainAxisAlignment.center,
+        children: widget.directions
+            .map((direction) => Padding(
+                  padding: EdgeInsets.only(top: 5, bottom: 5),
+                  child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      // decoration: BoxDecoration(
+                      //     color: Colors.white,
+                      //     borderRadius: BorderRadius.circular(10),
+                      //     boxShadow: [
+                      //       BoxShadow(
+                      //         offset: Offset(0, 4),
+                      //         blurRadius: 4,
+                      //         color: Colors.black.withOpacity(0.25),
+                      //       )
+                      //     ]),
+                      child: formatDirection(
+                          direction,
+                          widget
+                              .directions) //controller.formatDirection(direction),
+                      ),
+                ))
+            .toList(),
+      ),
     );
   }
 }

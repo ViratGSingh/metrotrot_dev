@@ -10,18 +10,8 @@ class DirectionStart extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(15),
       decoration: BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage("assets/images/nearest.png"),
-              alignment: Alignment.bottomCenter),
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
-          boxShadow: [
-            BoxShadow(
-              offset: Offset(0, 4),
-              blurRadius: 4,
-              color: Colors.black.withOpacity(0.25),
-            )
-          ]),
+        color: Colors.white,
+      ),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Text(
           "Start from",

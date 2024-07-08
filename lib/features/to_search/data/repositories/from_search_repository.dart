@@ -5,10 +5,9 @@ class ToSearchRepository {
   final ToSearchService toSearchService;
   const ToSearchRepository({required this.toSearchService});
 
-  Future getSearchRecommendations(
-      String location, double lat, double lng) async {
+  Future getSearchRecommendations(String location) async {
     final List<ToRecommendation> predictions =
-        await toSearchService.getSearchRecommendations(location, lat, lng);
+        await toSearchService.getSearchRecommendations(location);
 
     return predictions;
   }

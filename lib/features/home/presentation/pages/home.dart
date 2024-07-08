@@ -1,13 +1,17 @@
-
+import 'package:app/features/home/presentation/widgets/map.dart';
+import 'package:app/features/home/presentation/widgets/service_tile.dart';
+import 'package:app/features/nearby/presentation/pages/nearby.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:app/features/from_search/presentation/pages/from_search.dart';
-import 'package:app/features/home/presentation/cubit/nearby_metro_cubit.dart';
+import 'package:app/features/home/presentation/cubit/home_cubit.dart';
 import 'package:app/features/home/presentation/widgets/card.dart';
 import 'package:app/features/home/presentation/widgets/permissions.dart';
 import 'package:app/features/home/presentation/widgets/nearestFrom.dart';
 import 'package:app/features/home/presentation/widgets/search_appbar.dart';
 import 'package:app/features/home/presentation/widgets/recoms.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:app/features/directions/presentation/pages/directions.dart';
 
 class HomePage extends StatefulWidget {
   final bool isFromSearch;
@@ -28,11 +32,14 @@ class _HomePageState extends State<HomePage> {
   bool isImageError = false;
   @override
   void initState() {
-    if (widget.isFromSearch == false) {
-      context.read<NearbyMetroCubit>().checkUserLocation(false);
-    } else {
+    if (widget.isFromSearch == false && widget.placeId != "") {
+      //context.read<HomeCubit>().checkUserLocation(false);
       context
-          .read<NearbyMetroCubit>()
+          .read<HomeCubit>()
+          .getDestNearbyMetro(widget.placeId, widget.isFromOffline);
+    } else if (widget.isFromSearch == true && widget.placeId != "") {
+      context
+          .read<HomeCubit>()
           .getFromNearbyMetro(widget.placeId, widget.isFromOffline);
     }
     super.initState();
@@ -42,12 +49,12 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<NearbyMetroCubit, NearbyMetroState>(
+    return BlocConsumer<HomeCubit, HomeState>(
       listener: (context, state) {
-        if (state.status == NearbyMetroStatus.check) {
-          context.read<NearbyMetroCubit>().checkUserLocation(state.isOffline);
+        if (state.status == HomeStatus.check) {
+          context.read<HomeCubit>().checkUserLocation(state.isOffline);
         }
-        if (state.status == NearbyMetroStatus.locDenied) {
+        if (state.status == HomeStatus.locDenied) {
           showGeneralDialog(
             context: context,
             transitionDuration: Duration(milliseconds: 400),
@@ -60,8 +67,8 @@ class _HomePageState extends State<HomePage> {
             },
           );
         }
-        if (state.status == NearbyMetroStatus.locPermDenied) {
-          //state.copyWith( status:NearbyMetroStatus.loaded, metro: NearbyMetro.initial(),distance: "N/A");
+        if (state.status == HomeStatus.locPermDenied) {
+          //state.copyWith( status:HomeStatus.loaded, metro: NearbyMetro.initial(),distance: "N/A");
           Navigator.push<void>(
             context,
             MaterialPageRoute<void>(
@@ -76,6 +83,42 @@ class _HomePageState extends State<HomePage> {
       builder: (context, state) {
         return SafeArea(
           child: Scaffold(
+            floatingActionButton: ElevatedButton(
+              onPressed: () {
+                context.read<HomeCubit>().callMetroHelpline('tel:155370');
+              },
+              style: ButtonStyle(
+                  padding: MaterialStatePropertyAll(
+                    EdgeInsets.all(5),
+                  ),
+                  fixedSize: MaterialStatePropertyAll(
+                    Size(80, 80),
+                  ),
+                  shape: MaterialStatePropertyAll(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(40),
+                    ),
+                  ),
+                  backgroundColor: MaterialStatePropertyAll(
+                    Color(0xFFFFBB23),
+                  )),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.support_agent, color: Colors.white),
+                  SizedBox(
+                    width: 5,
+                  ),
+                  Text(
+                    "Helpline",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold),
+                  )
+                ],
+              ),
+            ),
             // appBar: AppBar(
             //   backgroundColor: Colors.white,
             //   shadowColor: Colors.transparent,
@@ -88,11 +131,11 @@ class _HomePageState extends State<HomePage> {
             //         tapLogic: () {
             //           if (state.isOffline == false) {
             //             return context
-            //                 .read<NearbyMetroCubit>()
+            //                 .read<HomeCubit>()
             //                 .getOfflineFromStation();
             //           } else {
             //             return context
-            //                 .read<NearbyMetroCubit>()
+            //                 .read<HomeCubit>()
             //                 .checkUserLocation(
             //                     state.isOffline == false ? true : false);
             //           }
@@ -159,222 +202,258 @@ class _HomePageState extends State<HomePage> {
             //         isOffline: state.isOffline),
             body: RefreshIndicator(
               onRefresh: () {
-                return context
-                    .read<NearbyMetroCubit>()
-                    .checkUserLocation(false);
+                return context.read<HomeCubit>().checkUserLocation(false);
               },
-              child:  Center(
-                child: ListView(
-                      shrinkWrap: true,
-                      
-                      children: [
-                        // Row(
-                        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        //   children: [
-                        //     // Obx(() {
-                        //     //   return controller.isOnline.value == true
-                        //     //       ? OnlineStatus()
-                        //     //       : OfflineStatus();
-                        //     // }),
-                        //     InternetStatus(
-                        //       isOffline: state.isOffline,
-                        //       tapLogic: () {
-                        //         if (state.isOffline == false) {
-                        //           return context
-                        //               .read<NearbyMetroCubit>()
-                        //               .getOfflineFromStation();
-                        //         } else {
-                        //           return context
-                        //               .read<NearbyMetroCubit>()
-                        //               .checkUserLocation(state.isOffline == false
-                        //                   ? true
-                        //                   : false);
-                        //         }
-                        //       },
-                        //     ),
-                        //     Padding(
-                        //       padding: EdgeInsets.only(right: 10),
-                        //       child: IconButton(
-                        //         icon: Icon(Icons.feedback),
-                        //         color: Color(0xffFFBB23),
-                        //         onPressed: () {
-                        //           // Wiredash.of(context)
-                        //           //     .show(inheritMaterialTheme: true);
-                        //           Scaffold.of(context).openDrawer();
-                        //         },
-                        //       ),
-                        //     )
-                        //   ],
-                        // ),
-                        Container(
-                          padding: EdgeInsets.fromLTRB(15, 15, 15, 0),
-                          alignment: Alignment.center,
-                          child: Image.asset(
-                            "assets/images/metrotrot_header.png",
-                            fit: BoxFit.cover,
-                            width: 250,
-                            height: 50,
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: Column(
+                        children: [
+                          //Title
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 10),
+                            child: Row(
+                              children: [
+                                Text(
+                                  "Dilli",
+                                  style: GoogleFonts.pacifico(
+                                      color: Color(0xFFFFBB23), fontSize: 36),
+                                )
+                              ],
+                            ),
                           ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
-                          child: SearchAppBar(
-                              userId:
-                                  state.user == null ? "guest" : state.user!.uid,
+
+                          //From-To Route
+                          SearchAppBar(
+                              title: state.fromData.fromName,
+                              userId: state.user == null
+                                  ? "guest"
+                                  : state.user!.uid,
+                              isDest: false,
                               isGuest: state.user == null ? true : false,
-                              fromMetro: state.metro,
+                              fromMetro: state.fromData,
                               distance: state.distance,
                               isOffline: state.isOffline,
-                              lat: state.metro.lat,
-                              lng: state.metro.lng),
-                        ),
-              
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(20, 10, 20, 5),
-                          child: FromStation(
-                              isOffline: false,
-                              isUpdating: state.status ==
-                                          NearbyMetroStatus.loading ||
-                                      state.status == NearbyMetroStatus.initial
-                                  ? true
-                                  : false,
-                              name: state.metro.name,
-                              address: state.metro.vicinity),
-                        ),
-                        // Padding(
-                        //     padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
-                        //     child: Row(
-                        //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        //       children: [
-                        //         InfoTab(
-                        //           info: "Info",
-                        //           value: 1,
-                        //           selectedValue: state.selectedValue,
-                        //           selectedFunc: (){
-                                    
-                        //             context
-                        //               .read<NearbyMetroCubit>()
-                        //               .changeTab(1, state.isOffline, context);
-              
-                        //               },
-                        //         ),
-                        //         InfoTab(
-                        //           info: "Recent",
-                        //           value: 2,
-                        //           selectedValue: state.selectedValue,
-                        //           selectedFunc: (){
-                                    
-                        //             context
-                        //               .read<NearbyMetroCubit>()
-                        //               .changeTab(2, state.isOffline, context);
-                        //               },
-                        //         ),
-                        //         InfoTab(
-                        //           info: "Liked",
-                        //           value: 3,
-                        //           selectedValue: state.selectedValue,
-                        //           selectedFunc: (){context
-                        //               .read<NearbyMetroCubit>()
-                        //               .changeTab(3, state.isOffline, context);
-                        //               },
-                        //         ),
-                        //         InfoTab(
-                        //           info: "Suggestions",
-                        //           value: 4,
-                        //           selectedValue: state.selectedValue,
-                        //           selectedFunc: (){context
-                        //               .read<NearbyMetroCubit>()
-                        //               .changeTab(4, state.isOffline, context);
-                        //               },
-                        //         ),
-                        //       ],
-                        //     )),
-                            Container(
-                              padding: EdgeInsets.only(top: 10),
-                              child: state.selectedValue==1?SingleChildScrollView(
-                                child: 
-                                Column(children: [
-                                  Container(
-                                                      width: MediaQuery.of(context).size.width,
-                                                      padding: EdgeInsets.fromLTRB(20, 5, 20, 5),
-                                                      child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              lat: state.fromData.lat,
+                              lng: state.fromData.lng),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Stack(
+                                alignment: Alignment.center,
                                 children: [
-                                  InfoCard(
-                                    title: "Metro",
-                                    type: "dmrc",
-                                    info: state.metro.metro,
-                                    isLoading: state.status ==
-                                                NearbyMetroStatus.loading ||
-                                            state.status == NearbyMetroStatus.initial
-                                        ? true
-                                        : false,
+                                  Container(
+                                    padding: EdgeInsets.only(left: 0),
+                                    width:
+                                        1, // Width of the container holding the dots
+                                    height: 80, // Height of the dotted line
+                                    child: CustomPaint(
+                                      painter: DashedLinePainter(
+                                        dashWidth: 4,
+                                        dashSpace: 4,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
                                   ),
-                                  NumberInfoCard(
-                                    title: "Distance",
-                                    type: "nearest",
-                                    info: state.distance,
-                                    measure: state.distance != "N/A" ? "metres" : "",
-                                    isLoading: state.status ==
-                                                NearbyMetroStatus.loading ||
-                                            state.status == NearbyMetroStatus.initial
-                                        ? true
-                                        : false,
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      context.read<HomeCubit>().exchangePoints(
+                                          state.fromData, state.toData);
+                                    },
+                                    style: ButtonStyle(
+                                      padding: MaterialStatePropertyAll(
+                                          EdgeInsets.zero),
+                                      fixedSize: MaterialStatePropertyAll(
+                                        Size(52, 52),
+                                      ),
+                                      backgroundColor: MaterialStatePropertyAll(
+                                        Color(0xFFFFBB23),
+                                      ),
+                                      shape: MaterialStatePropertyAll(
+                                        CircleBorder(),
+                                      ),
+                                    ),
+                                    child: Icon(Icons.swap_vert,
+                                        color: Colors.white),
                                   ),
-                                  
-                                ], 
-                                                      ),
-                                                    ),
-                                  //                       Container(
-                                  //                     padding: EdgeInsets.fromLTRB(20, 10, 20, 15),
-                                  //                     child: LineInfoCard(
-                                  //   title: "Blue Line",
-                                  //   type: "rating",
-                                  //   info: state.metro.rating.toString(),
-                                  //   isLoading: state.status ==
-                                  //               NearbyMetroStatus.loading ||
-                                  //           state.status == NearbyMetroStatus.initial
-                                  //       ? true
-                                  //       : false,
-                                  // ),
-                                  //                   )
-                                  LineInfoCard(
-                                    title: state.metro.metro,
-                                    type: "rating",
-                                    names: state.metro.lines,
-                                    startStations: state.metro.startStations,
-                                    endStations: state.metro.endStations,
-                                    hexcodes: state.metro.colourCodes,
-                                    info: state.metro.rating.toString(),
-                                    isLoading: state.status ==
-                                                NearbyMetroStatus.loading ||
-                                            state.status == NearbyMetroStatus.initial
-                                        ? true
-                                        : false,
-                                  ),
-                                  
-                                ]),
-                              ): DestRecoms(
-                                recoms: state.destData!.toList(), 
+                                ],
+                              ),
+                            ],
+                          ),
+                          SearchAppBar(
+                              title: state.toData.destName,
+                              userId: state.user == null
+                                  ? "guest"
+                                  : state.user!.uid,
+                              isDest: true,
+                              isGuest: state.user == null ? true : false,
+                              fromMetro: state.fromData,
+                              distance: state.distance,
                               isOffline: state.isOffline,
-                              fromDistance: state.distance,
-                              isLoading: state.status==NearbyMetroStatus.suggestLoading?true:false,
-                              fromMetro: state.metro,
-                              fromLat: state.metro.lat ,
-                              fromLng: state.metro.lng,
-                              tabName: state.selectedValue==2?"Recent":state.selectedValue==3?"Liked":"Suggestions",
-                              )
-                            )
-                        
-                      ],
+                              lat: state.fromData.lat,
+                              lng: state.fromData.lng),
+                        ],
+                      ),
                     ),
-              ),
+                    SizedBox(height: 10),
+                    //Directions Button
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.push<void>(
+                            context,
+                            MaterialPageRoute<void>(
+                              builder: (BuildContext context) => DirectionsPage(
+                                  fromMetro: state.fromData,
+                                  destMetro: state.toData,
+                                  destName: state.toData.destName,
+                                  destAddress: state.toData.destAddress,
+                                  fromDistance: "0",
+                                  toDistance: "0",
+                                  isOffline: state.isOffline,
+                                  destination: state.toData.destName),
+                            ),
+                          );
+                        },
+                        style: ButtonStyle(
+                          fixedSize: MaterialStatePropertyAll(
+                            Size(MediaQuery.of(context).size.width, 52),
+                          ),
+                          backgroundColor: MaterialStatePropertyAll(
+                            Color(0xFFFFBB23),
+                          ),
+                          shape: MaterialStatePropertyAll(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.directions, color: Colors.white),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Text(
+                              "Directions",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+
+                    //Route Section Divider
+                    SizedBox(height: 30),
+                    Divider(
+                      thickness: 1,
+                      color: Colors.black.withOpacity(0.10),
+                    ),
+
+                    //Services
+                    Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Services",
+                            style: TextStyle(
+                                color: Colors.grey.shade400,
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(height: 10),
+                          Wrap(
+                            spacing: 20,
+                            runSpacing: 20,
+                            children: [
+                              ServiceTile(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute<void>(
+                                        builder: (BuildContext context) =>
+                                            const MetroMapView(metro: "dmrc"),
+                                      ),
+                                    );
+                                  },
+                                  icon: Icons.map_outlined,
+                                  title: "Map"),
+                              ServiceTile(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute<void>(
+                                        builder: (BuildContext context) =>
+                                            const NearbyPage(),
+                                      ),
+                                    );
+                                  },
+                                  icon: Icons.pin_drop,
+                                  title: "Nearby"),
+                              ServiceTile(
+                                  onTap: () {},
+                                  icon: Icons.favorite,
+                                  title: "Favourites"),
+                              ServiceTile(
+                                  onTap: () {},
+                                  icon: Icons.currency_rupee,
+                                  title: "Fare"),
+                              ServiceTile(
+                                  onTap: () {},
+                                  icon: Icons.access_time_filled,
+                                  title: "Timings")
+                            ],
+                          )
+                        ],
+                      ),
+                    )
+                  ],
                 ),
               ),
-            
-          
+            ),
+          ),
         );
       },
     );
+  }
+}
+
+class DashedLinePainter extends CustomPainter {
+  final double dashWidth;
+  final double dashSpace;
+  final Color color;
+
+  DashedLinePainter({
+    this.dashWidth = 5.0,
+    this.dashSpace = 5.0,
+    this.color = Colors.black,
+  });
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = color
+      ..strokeWidth = 1.0;
+
+    double startY = 0;
+    while (startY < size.height) {
+      canvas.drawLine(Offset(0, startY), Offset(0, startY + dashWidth), paint);
+      startY += dashWidth + dashSpace;
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return false;
   }
 }

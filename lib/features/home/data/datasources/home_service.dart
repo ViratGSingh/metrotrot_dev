@@ -5,10 +5,10 @@ import 'package:http/http.dart' as http;
 import 'package:app/features/from_search/data/models/from_metro.dart';
 import 'package:app/features/home/data/datasources/home_constants.dart';
 
-class NearbyMetroService {
+class HomeService {
   final http.Client httpClient;
 
-  NearbyMetroService({required this.httpClient});
+  HomeService({required this.httpClient});
 
   Future<FromMetro> getNearestMetro(double lat, double lng) async {
     final String apiKey = dotenv.env["MAPS_API_KEY"].toString();
@@ -44,8 +44,8 @@ class NearbyMetroService {
     }
   }
 
-  Future<Map<String,dynamic>> getFromNearestMetro(String placeId) async {
-    Map<String, dynamic> location = {};
+  Future<Map<String, dynamic>> getFromNearestMetro(String placeId) async {
+    Map<String, dynamic> locationInfo = {};
     //Get coordinates
     final String apiKey = dotenv.env["MAPS_API_KEY"].toString();
     final Uri placeReqUri = Uri(
@@ -55,15 +55,15 @@ class NearbyMetroService {
         queryParameters: {
           "place_id": placeId,
           "key": apiKey,
-          "fields": "geometry"
+          "fields": "formatted_address,name,geometry"
         });
     final http.Response placeResp = await httpClient.get(placeReqUri);
     final Map<String, dynamic> placeData = json.decode(placeResp.body);
     if (placeData.containsKey("result") == true) {
-      location = placeData["result"]["geometry"]["location"];
+      locationInfo = placeData["result"];
+      //print(placeData);
     }
-    return location;
-
+    return locationInfo;
 
     // //Find metro station nearby
     // final Uri requestUri = Uri(

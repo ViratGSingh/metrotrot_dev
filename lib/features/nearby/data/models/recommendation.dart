@@ -3,11 +3,11 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 
-class FromRecommendation extends Equatable {
+class Recommendation extends Equatable {
   final String main;
   final String secondary;
   final String placeId;
-  const FromRecommendation({
+  const Recommendation({
     required this.placeId,
     required this.main,
     required this.secondary,
@@ -18,8 +18,8 @@ class FromRecommendation extends Equatable {
     return [placeId, main, secondary];
   }
 
-  factory FromRecommendation.initial() {
-    return const FromRecommendation(
+  factory Recommendation.initial() {
+    return const Recommendation(
       placeId: "",
       main: "",
       secondary: "",
@@ -36,23 +36,28 @@ class FromRecommendation extends Equatable {
     };
   }
 
-  factory FromRecommendation.fromMap(Map<String, dynamic> map) {
+  factory Recommendation.fromMap(Map<String, dynamic> map) {
     String main;
     String secondary;
     if (map.containsKey("structured_formatting") == false) {
       main = map["name"];
       secondary = map["vicinity"];
     } else {
-      main = map["structured_formatting"]['main_text'];
-      secondary = map["structured_formatting"]['secondary_text'];
+      main = map["structured_formatting"].containsKey("main_text") == false
+          ? ""
+          : map["structured_formatting"]['main_text'];
+      secondary =
+          map["structured_formatting"].containsKey("secondary_text") == false
+              ? ""
+              : map["structured_formatting"]['secondary_text'];
     }
-    return FromRecommendation(
+    return Recommendation(
       placeId: map['place_id'] as String,
       main: main,
       secondary: secondary,
     );
   }
 
-  factory FromRecommendation.fromJson(String source) =>
-      FromRecommendation.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory Recommendation.fromJson(String source) =>
+      Recommendation.fromMap(json.decode(source) as Map<String, dynamic>);
 }

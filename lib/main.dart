@@ -1,5 +1,11 @@
-
+import 'package:app/features/destination/data/models/dest_metro.dart';
+import 'package:app/features/from_search/data/models/from_fav_recom.dart';
+import 'package:app/features/from_search/data/models/from_metro.dart';
 import 'package:app/features/home/presentation/widgets/onboarding/main.dart';
+import 'package:app/features/nearby/data/datasources/nearby_service.dart';
+import 'package:app/features/nearby/data/repositories/nearby_repository.dart';
+import 'package:app/features/nearby/presentation/cubit/nearby_cubit.dart';
+import 'package:app/features/to_search/data/models/to_fav_recom.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,9 +20,9 @@ import 'package:app/features/directions/presentation/cubit/directions_cubit.dart
 import 'package:app/features/from_search/data/datasources/from_search_service.dart';
 import 'package:app/features/from_search/data/repositories/from_search_repository.dart';
 import 'package:app/features/from_search/presentation/cubit/from_search_cubit.dart';
-import 'package:app/features/home/data/datasources/nearby_metro_service.dart';
-import 'package:app/features/home/data/repositories/nearby_metro_repository.dart';
-import 'package:app/features/home/presentation/cubit/nearby_metro_cubit.dart';
+import 'package:app/features/home/data/datasources/home_service.dart';
+import 'package:app/features/home/data/repositories/home_repository.dart';
+import 'package:app/features/home/presentation/cubit/home_cubit.dart';
 import 'package:app/features/home/presentation/pages/home.dart';
 import 'package:app/features/to_search/data/datasources/to_search_service.dart';
 import 'package:app/features/to_search/data/repositories/from_search_repository.dart';
@@ -26,17 +32,25 @@ import 'package:isar/isar.dart';
 import 'package:app/features/home/data/models/directions.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
+
 void main() async {
   await dotenv.load(fileName: '.env');
   bool isFirst;
   WidgetsFlutterBinding.ensureInitialized();
   // initializing the firebase app
-  await Firebase.initializeApp(); 
-  Isar isar = Isar.getInstance() ?? await Isar.open([DirectionsSchema]);
+  await Firebase.initializeApp();
+  Isar isar = Isar.getInstance() ??
+      await Isar.open([
+        DirectionsSchema,
+        SavedFromRecommendationSchema,
+        SavedToRecommendationSchema,
+        SavedFromMetroSchema,
+        SavedDestMetroSchema
+      ]);
   int totalDirections = await isar.directions.count();
-  
-    print(FirebaseAuth.instance.currentUser);
-  if (totalDirections != 0 || FirebaseAuth.instance.currentUser!=null) {
+
+  print(FirebaseAuth.instance.currentUser);
+  if (totalDirections != 0 || FirebaseAuth.instance.currentUser != null) {
     isFirst = false;
   } else {
     //print(FirebaseAuth.instance.currentUser);
@@ -81,8 +95,8 @@ class _MyAppState extends State<MyApp> {
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider(
-          create: (context) => NearbyMetroRepository(
-            nearbyMetroService: NearbyMetroService(
+          create: (context) => HomeRepository(
+            nearbyMetroService: HomeService(
               httpClient: http.Client(),
             ),
           ),
@@ -115,14 +129,23 @@ class _MyAppState extends State<MyApp> {
             ),
           ),
         ),
-
+        RepositoryProvider(
+          create: (context) => NearbyRepository(
+            nearbyMetroService: NearbyService(
+              httpClient: http.Client(),
+            ),
+          ),
+        ),
       ],
       child: MultiBlocProvider(
         providers: [
-         
-          BlocProvider<NearbyMetroCubit>(
-            create: (BuildContext context) => NearbyMetroCubit(
-                nearbyMetroRepository: context.read<NearbyMetroRepository>()),
+          BlocProvider<HomeCubit>(
+            create: (BuildContext context) =>
+                HomeCubit(homeRepository: context.read<HomeRepository>()),
+          ),
+          BlocProvider<NearbyCubit>(
+            create: (BuildContext context) =>
+                NearbyCubit(nearbyRepository: context.read<NearbyRepository>()),
           ),
           BlocProvider<FromSearchCubit>(
             create: (BuildContext context) => FromSearchCubit(
@@ -141,14 +164,13 @@ class _MyAppState extends State<MyApp> {
                 directionsRepository: context.read<DirectionsRepository>()),
           ),
         ],
-        child:  MaterialApp(
+        child: MaterialApp(
             title: 'MetroTrot',
             debugShowCheckedModeBanner: false,
             theme: ThemeData.light(),
-            home:  const HomePage()
-                //: const IntroScreen(),
-          ),
-        
+            home: const HomePage()
+            //: const IntroScreen(),
+            ),
       ),
     );
   }

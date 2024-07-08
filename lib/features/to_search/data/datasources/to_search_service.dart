@@ -8,7 +8,7 @@ class ToSearchService {
   ToSearchService({required this.httpClient});
 
   Future<List<ToRecommendation>> getSearchRecommendations(
-      String location, double lat, double lng) async {
+      String location) async {
     final String apiKey = dotenv.env["MAPS_API_KEY"].toString();
     final String apiHost = dotenv.env["MAPS_API_HOST"].toString();
     //Find locations according to string
@@ -19,8 +19,9 @@ class ToSearchService {
         queryParameters: {
           "input": location,
           "language": "en",
-          "locationrestriction":
-              "circle:50000@${lat.toString()},${lng.toString()}",
+          "region": "in",
+          // "locationrestriction":
+          //     "circle:50000@${lat.toString()},${lng.toString()}",
           "key": apiKey
         });
 

@@ -26,6 +26,9 @@ class DirectionsCubit extends Cubit<DirectionsState> {
         status: DirectionsStatus.loading,
         isOffline: isOffline,
         priority: priority));
+    await Future.delayed(
+      Duration(seconds: 2),
+    );
     final metroResp = await rootBundle.loadString('assets/data/delhi_ncr.json');
     final metroData = json.decode(metroResp);
     List<Station> metroStations = [];
@@ -33,6 +36,7 @@ class DirectionsCubit extends Cubit<DirectionsState> {
     Station? endStation;
     int metroLines = metroData["total_lines"];
     Map<String, List<Station>> graphData = {};
+    print("Asdasd1");
     for (var i = 1; i <= metroLines; i++) {
       List lineData = metroData["data"]["line_${i.toString()}"]["stations"];
       List<Station> lineStations = [];
@@ -50,20 +54,23 @@ class DirectionsCubit extends Cubit<DirectionsState> {
         if (metroStations.contains(stationData) == false) {
           metroStations.add(stationData);
         }
-        if (fromMetro.placeId == stationData.id) {
+        if (fromMetro.name == stationData.name) {
           startStation = stationData;
         }
-        if (toMetro.placeId == stationData.id) {
+        if (toMetro.name == stationData.name) {
           endStation = stationData;
         }
       });
       graphData["line_${i.toString()}"] = lineStations;
       //metroStations.addAll(lineData);
     }
+    print("Asdasd2");
     //Find Start Station
     MetroRoute route = MetroRoute.initial();
     List<ShortestPathResult> routes = [];
     //Find End Station
+    print(startStation);
+    print(endStation);
     if (startStation != null && endStation != null) {
       Graph metroGraph = createGraphFromJson(
           metroStations,
@@ -76,9 +83,11 @@ class DirectionsCubit extends Cubit<DirectionsState> {
               isInterchange: false,
               lines: []));
       ////print(metroStations.length);
+
       ShortestPathResult shortestRoute =
           findShortestPath(metroGraph, startStation!, endStation!, metroData);
       //findMinIntPath(metroGraph, startStation!, endStation!, metroData);
+      print(shortestRoute);
       routes.add(shortestRoute);
       route = shortestRoute.route;
       List<Station> incursions = shortestRoute.incursions;
@@ -196,6 +205,7 @@ class DirectionsCubit extends Cubit<DirectionsState> {
     //       .findFirst();
     //   route = MetroRoute.fromJson(offRoute!.directions.toString());
     //}
+    print(route);
     emit(state.copyWith(
         status: DirectionsStatus.loaded,
         routeData: route,
@@ -908,10 +918,10 @@ getMetroRoute(List<Station> path, List<int> interchanges,
       transitDistance += calculateDistance(path[j].latitude, path[j].longitude,
           path[j + 1].latitude, path[j + 1].longitude);
     }
-    if(line=="line_10"){
-      fare = fareCalculator(0,isAirport: true, airportStations: stops);
-    }else{
-    fare = fareCalculator(transitDistance.toInt());
+    if (line == "line_10") {
+      fare = fareCalculator(0, isAirport: true, airportStations: stops);
+    } else {
+      fare = fareCalculator(transitDistance.toInt());
     }
     routeDistance = transitDistance;
 
@@ -1059,11 +1069,11 @@ getMetroRoute(List<Station> path, List<int> interchanges,
           stops = endIndex - startIndex + 1;
         }
 
-        if(line=="line_10"){
-      fare += fareCalculator(0,isAirport: true, airportStations: stops);
-    }else{
-        routeDistance += transitDistance;
-    }
+        if (line == "line_10") {
+          fare += fareCalculator(0, isAirport: true, airportStations: stops);
+        } else {
+          routeDistance += transitDistance;
+        }
 
         String transitPlatform = "";
         Map<String, dynamic> startStationInfo =
@@ -1180,12 +1190,11 @@ getMetroRoute(List<Station> path, List<int> interchanges,
               direction[j + 1].latitude,
               direction[j + 1].longitude);
         }
-   if(line=="line_10"){
-      fare += fareCalculator(0,isAirport: true, airportStations: stops);
-    }else{
-        routeDistance += transitDistance;
-    }
-
+        if (line == "line_10") {
+          fare += fareCalculator(0, isAirport: true, airportStations: stops);
+        } else {
+          routeDistance += transitDistance;
+        }
 
         String transitPlatform = "";
         Map<String, dynamic> startStationInfo =
@@ -1343,12 +1352,11 @@ getMetroRoute(List<Station> path, List<int> interchanges,
           direction[j + 1].latitude,
           direction[j + 1].longitude);
     }
-   if(line=="line_10"){
-      fare += fareCalculator(0,isAirport: true, airportStations: stops);
-    }else{
-    routeDistance += transitDistance;
+    if (line == "line_10") {
+      fare += fareCalculator(0, isAirport: true, airportStations: stops);
+    } else {
+      routeDistance += transitDistance;
     }
-
 
     String transitPlatform = "";
     Map<String, dynamic> startStationInfo =
@@ -1441,7 +1449,7 @@ int fareCalculator(int distance,
       fare = 50;
     } else if (airportStations == 6) {
       fare = 60;
-    } 
+    }
   } else {
     if (distance < 2) {
       fare = 10;

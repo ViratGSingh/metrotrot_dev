@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-part of 'nearby_metro_cubit.dart';
+part of 'home_cubit.dart';
 
-enum NearbyMetroStatus {
+enum HomeStatus {
   check,
   initial,
   loading,
@@ -13,17 +13,19 @@ enum NearbyMetroStatus {
   suggestLoading
 }
 
-class NearbyMetroState extends Equatable {
-  final NearbyMetroStatus status;
-  final FromMetro metro;
+class HomeState extends Equatable {
+  final HomeStatus status;
+  final FromMetro fromData;
+  final DestMetro toData;
   final User? user;
   final String distance;
   final int selectedValue;
   final List<DestTapData>? destData;
   bool isOffline;
-  NearbyMetroState(
+  HomeState(
       {required this.status,
-      required this.metro,
+      required this.fromData,
+      required this.toData,
       required this.distance,
       required this.selectedValue,
       this.user,
@@ -31,31 +33,34 @@ class NearbyMetroState extends Equatable {
       this.isOffline = false});
 
   @override
-  List<Object> get props => [status, metro];
+  List<Object> get props => [status, fromData, toData];
 
-  factory NearbyMetroState.initial() {
-    return NearbyMetroState(
-        status: NearbyMetroStatus.initial,
-        metro: FromMetro.initial(),
+  factory HomeState.initial() {
+    return HomeState(
+        status: HomeStatus.initial,
+        fromData: FromMetro.initial(),
+        toData: DestMetro.initial(),
         user: FirebaseAuth.instance.currentUser,
         selectedValue: 1,
         distance: "N/A");
   }
-  NearbyMetroState copyWith(
-      {NearbyMetroStatus? status,
+  HomeState copyWith(
+      {HomeStatus? status,
       User? user,
-      FromMetro? metro,
+      FromMetro? fromData,
+      DestMetro? toData,
       String? distance,
       int? selectedValue,
       List<DestTapData>? destData,
       bool? isOffline}) {
-    return NearbyMetroState(
+    return HomeState(
         status: status ?? this.status,
-        metro: metro ?? this.metro,
+        fromData: fromData ?? this.fromData,
+        toData: toData ?? this.toData,
         isOffline: isOffline ?? this.isOffline,
-        user:user??this.user,
-        destData: destData??this.destData,
-        selectedValue: selectedValue??this.selectedValue,
+        user: user ?? this.user,
+        destData: destData ?? this.destData,
+        selectedValue: selectedValue ?? this.selectedValue,
         distance: distance ?? this.distance);
   }
 }

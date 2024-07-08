@@ -2,12 +2,17 @@
 import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
-import 'package:geolocator/geolocator.dart';
+
+import 'package:isar/isar.dart';
+
+part 'dest_metro.g.dart';
 
 class DestMetro extends Equatable {
   final String businessStatus;
   final double destLat;
   final double destLng;
+  final String destName;
+  final String destAddress;
   final double nearbyMetroLat;
   final double nearbyMetroLng;
   final String name;
@@ -26,6 +31,8 @@ class DestMetro extends Equatable {
     required this.businessStatus,
     required this.destLat,
     required this.destLng,
+    required this.destName,
+    required this.destAddress,
     required this.nearbyMetroLat,
     required this.nearbyMetroLng,
     required this.name,
@@ -46,6 +53,8 @@ class DestMetro extends Equatable {
         businessStatus,
         destLat,
         destLng,
+        destName,
+        destAddress,
         nearbyMetroLat,
         nearbyMetroLng,
         name,
@@ -69,6 +78,8 @@ class DestMetro extends Equatable {
         nearbyMetroLat: 0,
         nearbyMetroLng: 0,
         name: "Metro Missing 😕",
+        destName: "",
+        destAddress: "",
         placeId: "",
         rating: "N/A",
         userRatingsTotal: "N/A",
@@ -78,8 +89,7 @@ class DestMetro extends Equatable {
         lines: [],
         startStations: [],
         endStations: [],
-        colourCodes: []
-        );
+        colourCodes: []);
   }
 
   factory DestMetro.fromMap(Map<String, dynamic> map) {
@@ -94,6 +104,8 @@ class DestMetro extends Equatable {
         nearbyMetroLat: map["geometry"]["location"]["lat"],
         nearbyMetroLng: map["geometry"]["location"]["lng"],
         name: map["name"],
+        destName: map["destName"],
+        destAddress: map["destAddress"],
         placeId: map["place_id"],
         rating: map["rating"].toString(),
         userRatingsTotal: map["user_ratings_total"].toString(),
@@ -103,10 +115,38 @@ class DestMetro extends Equatable {
         lines: [],
         colourCodes: [],
         startStations: [],
-        endStations: []
-        );
+        endStations: []);
   }
 
   factory DestMetro.fromJson(String source) =>
       DestMetro.fromMap(json.decode(source) as Map<String, dynamic>);
+}
+
+@collection
+class SavedDestMetro {
+  Id id = Isar.autoIncrement; // you can also use id = null to auto increment
+
+  String? businessStatus;
+  double? destLat;
+  double? destLng;
+  String? destName;
+  String? destAddress;
+  double? nearbyMetroLat;
+  double? nearbyMetroLng;
+  String? name;
+  String? placeId;
+  String? rating;
+  String? userRatingsTotal;
+  String? vicinity;
+  String? data;
+  String? metro;
+  List<String>? lines;
+  List<String>? startStations;
+  List<String>? endStations;
+  List<String>? colourCodes;
+
+  late String destContent;
+
+  @Index(type: IndexType.value, caseSensitive: false)
+  List<String> get destContentWords => destContent.split(' ');
 }

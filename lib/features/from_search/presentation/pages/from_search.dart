@@ -23,7 +23,7 @@ class _FromSearchPageState extends State<FromSearchPage> {
   void initState() {
     context
         .read<FromSearchCubit>()
-        .getSearchRecommendations(fromSearchController.text, widget.isOffline);
+        .getSearchRecommendations(fromSearchController.text);
     super.initState();
   }
 
@@ -45,8 +45,9 @@ class _FromSearchPageState extends State<FromSearchPage> {
                   controller: fromSearchController,
                   autofocus: true,
                   onChanged: (location) {
-                    context.read<FromSearchCubit>().getSearchRecommendations(
-                        fromSearchController.text, widget.isOffline);
+                    context
+                        .read<FromSearchCubit>()
+                        .getSearchRecommendations(fromSearchController.text);
                   },
                   decoration: InputDecoration(
                       hintStyle:
@@ -71,15 +72,18 @@ class _FromSearchPageState extends State<FromSearchPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(10,10,0,0),
-                  child: Text("Suggested Places", style: TextStyle(color: Colors.grey),),
+                  padding: const EdgeInsets.fromLTRB(10, 10, 0, 0),
+                  child: Text(
+                    "Suggested Places",
+                    style: TextStyle(color: Colors.grey),
+                  ),
                 ),
                 state.placeStatus == FromSearchPlaceStatus.loaded
                     ? Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: ListView(
-                        physics: NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
+                        padding: const EdgeInsets.all(8.0),
+                        child: ListView(
+                          physics: NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
                           children: state.locations.map((recom) {
                             String mainAddr;
                             String secondaryAddr;
@@ -87,64 +91,96 @@ class _FromSearchPageState extends State<FromSearchPage> {
                             mainAddr = recom.main;
                             secondaryAddr = recom.secondary;
                             destinationId = recom.placeId;
-                            return Card(
-                              child: ListTile(
-                                style: ListTileStyle.list,
-                                onTap: () async {
-                                  Navigator.push<void>(
-                                    context,
-                                    MaterialPageRoute<void>(
-                                      builder: (BuildContext context) => HomePage(
-                                        isFromSearch: true,
-                                        placeId: destinationId,
-                                        isFromOffline: false,
+                            ValueNotifier<bool> isFavourite =
+                                ValueNotifier(recom.isFavourite);
+                            return ValueListenableBuilder(
+                                valueListenable: isFavourite,
+                                builder: (context, value, _) {
+                                  return Card(
+                                    child: ListTile(
+                                      style: ListTileStyle.list,
+                                      onTap: () async {
+                                        Navigator.push<void>(
+                                          context,
+                                          MaterialPageRoute<void>(
+                                            builder: (BuildContext context) =>
+                                                HomePage(
+                                              isFromSearch: true,
+                                              placeId: destinationId,
+                                              isFromOffline: false,
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                      contentPadding: EdgeInsets.all(5),
+                                      leading: const Padding(
+                                        padding:
+                                            EdgeInsets.only(top: 5, left: 15),
+                                        child: Icon(
+                                          Icons.location_on_outlined,
+                                          color: Color(0xffFF1616),
+                                        ),
+                                      ),
+                                      trailing: InkWell(
+                                        onTap: () {
+                                          context
+                                              .read<FromSearchCubit>()
+                                              .updateSavedFromRecommendation(
+                                                  recom, !isFavourite.value);
+                                          isFavourite.value =
+                                              !isFavourite.value;
+                                        },
+                                        child: Container(
+                                          padding: const EdgeInsets.only(
+                                              left: 15,
+                                              top: 15,
+                                              bottom: 15,
+                                              right: 15),
+                                          child: Icon(
+                                            isFavourite.value == true
+                                                ? Icons.favorite
+                                                : Icons
+                                                    .favorite_border_outlined,
+                                            color: isFavourite.value == true
+                                                ? Colors.red
+                                                : Colors.black,
+                                            // color:
+                                            //     Color(int.parse("0xff${recom["line_color_code"]}")),
+                                          ),
+                                        ),
+                                      ),
+                                      subtitle: Text(
+                                        secondaryAddr,
+                                        style: GoogleFonts.notoSans(
+                                            fontSize: 12,
+                                            color: Colors.grey.shade700),
+                                      ),
+                                      title: Text(
+                                        mainAddr,
+                                        style:
+                                            GoogleFonts.notoSans(fontSize: 14),
                                       ),
                                     ),
                                   );
-                                },
-                                contentPadding: EdgeInsets.all(5),
-                                leading: const Padding(
-                                  padding: EdgeInsets.only(top: 5, left: 15),
-                                  child: Icon(
-                                    Icons.location_on_outlined,
-                                    color: Color(0xffFF1616),
-                                  ),
-                                ),
-                                // trailing: Padding(
-                                //   padding: const EdgeInsets.only(bottom: 10, right: 15),
-                                //   child: Icon(
-                                //     Icons.directions_transit,
-                                //     color: Colors.blue,
-                                //     // color:
-                                //     //     Color(int.parse("0xff${recom["line_color_code"]}")),
-                                //   ),
-                                // ),
-                                subtitle: Text(
-                                  secondaryAddr,
-                                  style: GoogleFonts.notoSans(
-                                      fontSize: 12, color: Colors.grey.shade700),
-                                ),
-                                title: Text(
-                                  mainAddr,
-                                  style: GoogleFonts.notoSans(fontSize: 14),
-                                ),
-                              ),
-                            );
+                                });
                           }).toList(),
                         ),
-                    )
+                      )
                     : const Center(
                         child: CircularProgressIndicator(),
                       ),
-                      Divider(height: 10),
-                      Padding(
-                  padding: const EdgeInsets.fromLTRB(10,10,0,0),
-                  child: Text("Suggested Stations",style: TextStyle(color: Colors.grey),),
+                Divider(height: 10),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(10, 10, 0, 0),
+                  child: Text(
+                    "Suggested Stations",
+                    style: TextStyle(color: Colors.grey),
+                  ),
                 ),
                 state.stationStatus == FromSearchStationStatus.loaded
                     ? Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: ListView(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ListView(
                           physics: NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           children: state.stations.map((recom) {
@@ -161,7 +197,8 @@ class _FromSearchPageState extends State<FromSearchPage> {
                                   Navigator.push<void>(
                                     context,
                                     MaterialPageRoute<void>(
-                                      builder: (BuildContext context) => HomePage(
+                                      builder: (BuildContext context) =>
+                                          HomePage(
                                         isFromSearch: true,
                                         placeId: destinationId,
                                         isFromOffline: true,
@@ -170,7 +207,7 @@ class _FromSearchPageState extends State<FromSearchPage> {
                                   );
                                 },
                                 contentPadding: EdgeInsets.all(5),
-                                
+
                                 leading: const Padding(
                                   padding: EdgeInsets.only(top: 5, left: 15),
                                   child: Icon(
@@ -190,7 +227,8 @@ class _FromSearchPageState extends State<FromSearchPage> {
                                 subtitle: Text(
                                   secondaryAddr,
                                   style: GoogleFonts.notoSans(
-                                      fontSize: 12, color: Colors.grey.shade700),
+                                      fontSize: 12,
+                                      color: Colors.grey.shade700),
                                 ),
                                 title: Text(
                                   mainAddr,
@@ -200,11 +238,10 @@ class _FromSearchPageState extends State<FromSearchPage> {
                             );
                           }).toList(),
                         ),
-                    )
+                      )
                     : const Center(
                         child: CircularProgressIndicator(),
                       ),
-           
               ],
             ),
           ),

@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:app/features/from_search/data/datasources/from_search_constants.dart';
-import 'package:app/features/from_search/data/models/recommendation.dart';
+import 'package:app/features/from_search/data/models/from_recommendation.dart';
 
 class FromSearchService {
   final http.Client httpClient;
@@ -16,12 +16,18 @@ class FromSearchService {
         scheme: 'https',
         host: kApiHost,
         path: "/maps/api/place/autocomplete/json",
-        queryParameters: {"input": location, "language": "en", "key": apiKey});
+        queryParameters: {
+          "input": location,
+          "language": "en",
+          "region": "in",
+          "key": apiKey,
+        });
 
     try {
       final http.Response response = await httpClient.get(requestUri);
 
       final responseBody = json.decode(response.body);
+      print(responseBody);
       final List<dynamic> locations = responseBody["predictions"];
       List<FromRecommendation> formattedLocs = [];
       locations.forEach((element) {

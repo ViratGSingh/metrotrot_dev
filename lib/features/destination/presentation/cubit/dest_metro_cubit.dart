@@ -153,6 +153,8 @@ class DestMetroCubit extends Cubit<DestMetroState> {
       // final FromMetro nearbyMetro = await nearbyMetroRepository.fetchNearestMetro(
       //     accPos.latitude, accPos.longitude);
       nearbyMetro = DestMetro(
+          destName: "",
+          destAddress: "",
           businessStatus:
               closestLocation["is_interchange"] == true ? "Yes" : "No",
           destLat: nearbyMetro.destLat,
@@ -205,6 +207,8 @@ class DestMetroCubit extends Cubit<DestMetroState> {
         colourCodes.add(lineData["colour_code"]);
       });
       nearbyMetro = DestMetro(
+          destName: "",
+          destAddress: "",
           businessStatus: metroStation["is_interchange"] == true ? "Yes" : "No",
           destLat: metroStation["coordinates"]["lat"],
           destLng: metroStation["coordinates"]["lng"],
