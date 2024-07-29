@@ -36,6 +36,9 @@ class DirectionsPage extends StatefulWidget {
 class _DirectionsPageState extends State<DirectionsPage> {
   @override
   void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<DirectionsCubit>().initMixpanel();
+    });
     context.read<DirectionsCubit>().getDirections(
         widget.fromMetro,
         widget.destMetro,
@@ -57,29 +60,23 @@ class _DirectionsPageState extends State<DirectionsPage> {
         return SafeArea(
           child: Scaffold(
               appBar: AppBar(
-                elevation: 3,
                 backgroundColor: Colors.white,
-                leadingWidth: 40,
                 iconTheme: IconThemeData(color: Colors.black),
-                automaticallyImplyLeading: true,
-                leading: Padding(
-                  padding: EdgeInsets.only(left: 0),
-                  child: IconButton(
-                    icon: Icon(Icons.arrow_back),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                      //controller.search.close();
-                      //Get.back();
-                    },
-                  ),
-                ),
-                titleSpacing: 0,
+                centerTitle: true,
                 title: Text(
                   "Directions",
-                  style: GoogleFonts.notoSans(
+                  style: TextStyle(
                       color: Colors.black,
                       fontSize: 18,
-                      fontWeight: FontWeight.w500),
+                      fontWeight: FontWeight.bold),
+                ),
+                leading: IconButton(
+                  icon: Icon(Icons.arrow_back),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    //controller.search.close();
+                    //Get.back();
+                  },
                 ),
               ),
               body: state.status == DirectionsStatus.loaded
@@ -91,7 +88,87 @@ class _DirectionsPageState extends State<DirectionsPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Padding(
-                              padding: EdgeInsets.fromLTRB(40, 0, 40, 5),
+                              padding: EdgeInsets.fromLTRB(20, 10, 20, 15),
+                              child: Container(
+                                width: MediaQuery.of(context).size.width,
+                                padding: EdgeInsets.all(15),
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(25),
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Colors.black26,
+                                          offset: Offset(0, 4),
+                                          blurRadius: 2)
+                                    ]),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        const Icon(
+                                          Icons.location_on,
+                                          color: Color(0xFFFF1616),
+                                        ),
+                                        Container(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width -
+                                              100,
+                                          height: 20,
+                                          child: Text(
+                                            widget.fromMetro.fromName,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: GoogleFonts.notoSans(
+                                                color:
+                                                    Theme.of(context).hintColor,
+                                                fontSize: 14),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Container(
+                                      height: 30,
+                                      padding: EdgeInsets.only(left: 11),
+                                      child: Image.asset(
+                                          "assets/images/dotted_line.png"),
+                                    ),
+                                    Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        const Icon(
+                                          Icons.location_on,
+                                          color: Color(0xFF004AAD),
+                                        ),
+                                        Container(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width -
+                                              100,
+                                          height: 20,
+                                          child: Text(
+                                            widget.destMetro.destName,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: GoogleFonts.notoSans(
+                                                color:
+                                                    Theme.of(context).hintColor,
+                                                fontSize: 14),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Divider(
+                              color: Colors.grey.shade300,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(20, 10, 20, 5),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -116,7 +193,7 @@ class _DirectionsPageState extends State<DirectionsPage> {
                                           TextSpan(
                                             text: "Trip Fare: ",
                                             style: GoogleFonts.notoSans(
-                                                fontSize: 16,
+                                                fontSize: 14,
                                                 color: Colors.black,
                                                 fontWeight: FontWeight.bold),
                                           ),
@@ -173,6 +250,11 @@ class _DirectionsPageState extends State<DirectionsPage> {
                                         if (value == "0") {
                                           context
                                               .read<DirectionsCubit>()
+                                              .mixpanel
+                                              .track(
+                                                  "pressedLessStationsDirectionsBtn");
+                                          context
+                                              .read<DirectionsCubit>()
                                               .getDirections(
                                                   widget.fromMetro,
                                                   widget.destMetro,
@@ -181,6 +263,11 @@ class _DirectionsPageState extends State<DirectionsPage> {
                                                   widget.isOffline,
                                                   UserPriorityStatus.stops);
                                         } else if (value == "1") {
+                                          context
+                                              .read<DirectionsCubit>()
+                                              .mixpanel
+                                              .track(
+                                                  "pressedLessInterchangesDirectionsBtn");
                                           context
                                               .read<DirectionsCubit>()
                                               .getDirections(
@@ -238,6 +325,7 @@ class _DirectionsPageState extends State<DirectionsPage> {
                               ),
                             ),
                             MetroDirections(
+                                mixpanel:context.read<DirectionsCubit>().mixpanel,
                                 priority: state.priority,
                                 destMetro: widget.destMetro,
                                 fromDistance: widget.fromDistance,

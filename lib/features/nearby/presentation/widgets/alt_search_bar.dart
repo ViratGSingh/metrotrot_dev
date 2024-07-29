@@ -1,7 +1,7 @@
 import 'package:app/features/nearby/presentation/widgets/alt_search_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:material_floating_search_bar/material_floating_search_bar.dart';
+import 'package:material_floating_search_bar_2/material_floating_search_bar_2.dart';
 
 class AltSearchAppBar extends StatelessWidget {
   final String title;

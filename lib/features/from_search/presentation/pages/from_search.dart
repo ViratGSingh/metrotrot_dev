@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:app/widgets/popups/success.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -8,10 +9,10 @@ import 'package:app/features/home/presentation/pages/home.dart';
 
 class FromSearchPage extends StatefulWidget {
   final bool isOffline;
-  const FromSearchPage({
-    Key? key,
-    this.isOffline = false,
-  }) : super(key: key);
+  final String initialFromSearch;
+  const FromSearchPage(
+      {Key? key, this.isOffline = false, this.initialFromSearch = ""})
+      : super(key: key);
 
   @override
   State<FromSearchPage> createState() => _FromSearchPageState();
@@ -21,9 +22,17 @@ class _FromSearchPageState extends State<FromSearchPage> {
   TextEditingController fromSearchController = TextEditingController();
   @override
   void initState() {
-    context
-        .read<FromSearchCubit>()
-        .getSearchRecommendations(fromSearchController.text);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<FromSearchCubit>().initMixpanel();
+    });
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      fromSearchController.text = widget.initialFromSearch;
+      context.read<FromSearchCubit>().searchLimitChecked = false;
+      context.read<FromSearchCubit>().initialisationAds();
+      context
+          .read<FromSearchCubit>()
+          .getSearchRecommendations(fromSearchController.text, context);
+    });
     super.initState();
   }
 
@@ -32,6 +41,29 @@ class _FromSearchPageState extends State<FromSearchPage> {
     return SafeArea(
       child: BlocConsumer<FromSearchCubit, FromSearchState>(
           listener: (context, state) {
+        if (state.isRewardGranted == true) {
+          showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return SuccessPopup(
+                  title: "Congratulations!",
+                  message:
+                      "You've unlocked advanced online search capabilities for faster and more accurate results. Enjoy your enhanced search experience.",
+                  action: "Continue",
+                  actionFunc: () async {
+                    Navigator.pop(context);
+                    //launchUrl(Uri.parse("https://www.threads.net/@viratgsingh"));
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute<void>(
+                    //     builder: (BuildContext context) => const HomePa,
+                    //   ),
+                    // );
+                  },
+                );
+              });
+          state.isRewardGranted = false;
+        }
         // TODO: implement listener
       }, builder: (context, state) {
         return Scaffold(
@@ -45,9 +77,8 @@ class _FromSearchPageState extends State<FromSearchPage> {
                   controller: fromSearchController,
                   autofocus: true,
                   onChanged: (location) {
-                    context
-                        .read<FromSearchCubit>()
-                        .getSearchRecommendations(fromSearchController.text);
+                    context.read<FromSearchCubit>().getSearchRecommendations(
+                        fromSearchController.text, context);
                   },
                   decoration: InputDecoration(
                       hintStyle:
@@ -100,6 +131,18 @@ class _FromSearchPageState extends State<FromSearchPage> {
                                     child: ListTile(
                                       style: ListTileStyle.list,
                                       onTap: () async {
+                                        if (isFavourite.value == true) {
+                                          context
+                                              .read<FromSearchCubit>()
+                                              .mixpanel
+                                              .track(
+                                                  "tappedFavFromSearchRecomPlace");
+                                        } else {
+                                          context
+                                              .read<FromSearchCubit>()
+                                              .mixpanel
+                                              .track("tappedFromSearchRecomPlace");
+                                        }
                                         Navigator.push<void>(
                                           context,
                                           MaterialPageRoute<void>(
@@ -123,6 +166,18 @@ class _FromSearchPageState extends State<FromSearchPage> {
                                       ),
                                       trailing: InkWell(
                                         onTap: () {
+                                          if (isFavourite.value == true) {
+                                          context
+                                              .read<FromSearchCubit>()
+                                              .mixpanel
+                                              .track(
+                                                  "removedFavFromSearchRecomPlace");
+                                        } else {
+                                          context
+                                              .read<FromSearchCubit>()
+                                              .mixpanel
+                                              .track("addedFavFromSearchRecomPlace");
+                                        }
                                           context
                                               .read<FromSearchCubit>()
                                               .updateSavedFromRecommendation(
@@ -194,6 +249,12 @@ class _FromSearchPageState extends State<FromSearchPage> {
                               child: ListTile(
                                 style: ListTileStyle.list,
                                 onTap: () async {
+                                    context
+                                              .read<FromSearchCubit>()
+                                              .mixpanel
+                                              .track(
+                                                  "tappedFromSearchRecomStation");
+                                        
                                   Navigator.push<void>(
                                     context,
                                     MaterialPageRoute<void>(

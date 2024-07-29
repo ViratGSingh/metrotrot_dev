@@ -10,27 +10,31 @@ class ToSearchState extends Equatable {
   final List<ToRecommendation> stations;
   final ToSearchStationStatus stationStatus;
   final ToSearchPlaceStatus placeStatus;
-  const ToSearchState(
+  bool isRewardGranted;
+  ToSearchState(
       {required this.locations,
       required this.stations,
+      this.isRewardGranted = false,
       this.stationStatus = ToSearchStationStatus.loaded,
       this.placeStatus = ToSearchPlaceStatus.loaded});
 
   @override
-  List<Object> get props => [locations, stationStatus, placeStatus];
+  List<Object> get props => [locations,stations, isRewardGranted,  stationStatus, placeStatus];
 
   factory ToSearchState.initial() {
-    return const ToSearchState(locations: [], stations: []);
+    return ToSearchState(locations: [], stations: [], isRewardGranted: false);
   }
 
   ToSearchState copyWith(
       {List<ToRecommendation>? locations,
       List<ToRecommendation>? stations,
+      bool? isRewardGranted,
       ToSearchStationStatus? stationStatus,
       ToSearchPlaceStatus? placeStatus}) {
     return ToSearchState(
         locations: locations ?? this.locations,
         stations: stations ?? this.stations,
+        isRewardGranted: isRewardGranted ?? this.isRewardGranted,
         stationStatus: stationStatus ?? this.stationStatus,
         placeStatus: placeStatus ?? this.placeStatus
         );

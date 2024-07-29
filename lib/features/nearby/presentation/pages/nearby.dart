@@ -23,6 +23,10 @@ class NearbyPage extends StatefulWidget {
 class _NearbyPageState extends State<NearbyPage> {
   @override
   void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<NearbyCubit>().initMixpanel();
+    });
+    
     if (widget.placeId != null) {
       context.read<NearbyCubit>().getNearbyMetros(widget.placeId ?? "");
     }
@@ -141,7 +145,7 @@ class _NearbyPageState extends State<NearbyPage> {
                                     Row(
                                       children: [
                                         Container(
-                                          width: 80,
+                                          width: MediaQuery.of(context).size.width/7,
                                           child: Text(
                                             "${state.closestMetros[index]["distance"]} Km",
                                             style: GoogleFonts.notoSans(
@@ -151,6 +155,8 @@ class _NearbyPageState extends State<NearbyPage> {
                                         ),
                                         InkWell(
                                           onTap: () async {
+
+    context.read<NearbyCubit>().mixpanel.track("pressedCheckRouteBtn");
                                             final url =
                                                 'https://www.google.com/maps/dir/?api=1&origin=${state.locationName}&destination=${state.closestMetros[index]["name"]} Metro Station&travelmode=driving';
                                             await launch(url);

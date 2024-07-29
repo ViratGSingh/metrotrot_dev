@@ -1,19 +1,19 @@
 import 'package:app/features/destination/data/models/dest_metro.dart';
+import 'package:app/features/favourites/presentation/cubit/favourites_cubit.dart';
 import 'package:app/features/from_search/data/models/from_fav_recom.dart';
 import 'package:app/features/from_search/data/models/from_metro.dart';
+import 'package:app/features/from_search/data/models/from_search_info.dart';
 import 'package:app/features/home/presentation/widgets/onboarding/main.dart';
 import 'package:app/features/nearby/data/datasources/nearby_service.dart';
 import 'package:app/features/nearby/data/repositories/nearby_repository.dart';
 import 'package:app/features/nearby/presentation/cubit/nearby_cubit.dart';
+import 'package:app/features/to_search/data/models/dest_search_info.dart';
 import 'package:app/features/to_search/data/models/to_fav_recom.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
-import 'package:app/features/destination/data/datasources/dest_metro_service.dart';
-import 'package:app/features/destination/data/repositories/dest_metro_repository.dart';
-import 'package:app/features/destination/presentation/cubit/dest_metro_cubit.dart';
 import 'package:app/features/directions/data/datasources/directions_service.dart';
 import 'package:app/features/directions/data/repositories/directions_repository.dart';
 import 'package:app/features/directions/presentation/cubit/directions_cubit.dart';
@@ -45,22 +45,22 @@ void main() async {
         SavedFromRecommendationSchema,
         SavedToRecommendationSchema,
         SavedFromMetroSchema,
-        SavedDestMetroSchema
+        SavedDestMetroSchema,
+        FromSearchInfoSchema,
+        DestSearchInfoSchema
       ]);
-  int totalDirections = await isar.directions.count();
+  // int totalDirections = await isar.directions.count();
 
-  print(FirebaseAuth.instance.currentUser);
-  if (totalDirections != 0 || FirebaseAuth.instance.currentUser != null) {
-    isFirst = false;
-  } else {
-    //print(FirebaseAuth.instance.currentUser);
-    isFirst = true;
-  }
-  print(isFirst);
+  // print(FirebaseAuth.instance.currentUser);
+  // if (totalDirections != 0 || FirebaseAuth.instance.currentUser != null) {
+  //   isFirst = false;
+  // } else {
+  //   //print(FirebaseAuth.instance.currentUser);
+  //   isFirst = true;
+  // }
+  // print(isFirst);
   runApp(
-    MyApp(
-      isFirst: isFirst,
-    ),
+    MyApp(),
   );
 }
 
@@ -76,18 +76,6 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    _checkForUpdate();
-  }
-
-  // Method to check for update
-  void _checkForUpdate() async {
-    // Check for update
-    var updateAvailableResult = await InAppUpdate.checkForUpdate();
-    if (updateAvailableResult.updateAvailability ==
-        UpdateAvailability.updateAvailable) {
-      // If an update is available, initiate the update process
-      InAppUpdate.performImmediateUpdate();
-    }
   }
 
   @override
@@ -115,13 +103,13 @@ class _MyAppState extends State<MyApp> {
             ),
           ),
         ),
-        RepositoryProvider(
-          create: (context) => DestMetroRepository(
-            destMetroService: DestMetroService(
-              httpClient: http.Client(),
-            ),
-          ),
-        ),
+        // RepositoryProvider(
+        //   create: (context) => DestMetroRepository(
+        //     destMetroService: DestMetroService(
+        //       httpClient: http.Client(),
+        //     ),
+        //   ),
+        // ),
         RepositoryProvider(
           create: (context) => DirectionsRepository(
             directionsService: DirectionsService(
@@ -155,19 +143,31 @@ class _MyAppState extends State<MyApp> {
             create: (BuildContext context) => ToSearchCubit(
                 toSearchRepository: context.read<ToSearchRepository>()),
           ),
-          BlocProvider<DestMetroCubit>(
-            create: (BuildContext context) => DestMetroCubit(
-                destMetroRepository: context.read<DestMetroRepository>()),
-          ),
+          // BlocProvider<DestMetroCubit>(
+          //   create: (BuildContext context) => DestMetroCubit(
+          //       destMetroRepository: context.read<DestMetroRepository>()),
+          // ),
           BlocProvider<DirectionsCubit>(
             create: (BuildContext context) => DirectionsCubit(
                 directionsRepository: context.read<DirectionsRepository>()),
+          ),
+          BlocProvider<FavouritesCubit>(
+            create: (BuildContext context) => FavouritesCubit(),
           ),
         ],
         child: MaterialApp(
             title: 'MetroTrot',
             debugShowCheckedModeBanner: false,
-            theme: ThemeData.light(),
+            theme: ThemeData(
+              colorScheme:
+                  ColorScheme.fromSeed(seedColor: Colors.white).copyWith(
+                surfaceTint: Colors.transparent,
+              ),
+              appBarTheme: AppBarTheme(
+                elevation: 4.0,
+                shadowColor: Theme.of(context).colorScheme.shadow,
+              ),
+            ),
             home: const HomePage()
             //: const IntroScreen(),
             ),

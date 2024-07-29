@@ -1,3 +1,5 @@
+import 'package:app/features/favourites/presentation/cubit/favourites_cubit.dart';
+import 'package:app/features/favourites/presentation/pages/favourites.dart';
 import 'package:app/features/home/presentation/widgets/map.dart';
 import 'package:app/features/home/presentation/widgets/service_tile.dart';
 import 'package:app/features/nearby/presentation/pages/nearby.dart';
@@ -9,7 +11,6 @@ import 'package:app/features/home/presentation/widgets/card.dart';
 import 'package:app/features/home/presentation/widgets/permissions.dart';
 import 'package:app/features/home/presentation/widgets/nearestFrom.dart';
 import 'package:app/features/home/presentation/widgets/search_appbar.dart';
-import 'package:app/features/home/presentation/widgets/recoms.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:app/features/directions/presentation/pages/directions.dart';
 
@@ -32,6 +33,9 @@ class _HomePageState extends State<HomePage> {
   bool isImageError = false;
   @override
   void initState() {
+    //WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<HomeCubit>().initMixpanel();
+    //});
     if (widget.isFromSearch == false && widget.placeId != "") {
       //context.read<HomeCubit>().checkUserLocation(false);
       context
@@ -42,6 +46,10 @@ class _HomePageState extends State<HomePage> {
           .read<HomeCubit>()
           .getFromNearbyMetro(widget.placeId, widget.isFromOffline);
     }
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<HomeCubit>().checkForUpdate();
+    });
+
     super.initState();
   }
 
@@ -85,6 +93,7 @@ class _HomePageState extends State<HomePage> {
           child: Scaffold(
             floatingActionButton: ElevatedButton(
               onPressed: () {
+                context.read<HomeCubit>().mixpanel.track("pressedHelplineBtn");
                 context.read<HomeCubit>().callMetroHelpline('tel:155370');
               },
               style: ButtonStyle(
@@ -214,17 +223,21 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           //Title
                           Padding(
-                            padding: const EdgeInsets.only(bottom: 10),
-                            child: Row(
-                              children: [
-                                Text(
-                                  "Dilli",
-                                  style: GoogleFonts.pacifico(
-                                      color: Color(0xFFFFBB23), fontSize: 36),
-                                )
-                              ],
-                            ),
-                          ),
+                              padding: const EdgeInsets.only(bottom: 20),
+                              child: Image.asset(
+                                "assets/images/metrotrot_header_alt.png",
+                                height: 42,
+                              )
+                              // Row(
+                              //   children: [
+                              //     Text(
+                              //       "Dilli",
+                              //       style: GoogleFonts.pacifico(
+                              //           color: Color(0xFFFFBB23), fontSize: 36),
+                              //     )
+                              //   ],
+                              // ),
+                              ),
 
                           //From-To Route
                           SearchAppBar(
@@ -262,6 +275,7 @@ class _HomePageState extends State<HomePage> {
                                     onPressed: () {
                                       context.read<HomeCubit>().exchangePoints(
                                           state.fromData, state.toData);
+                                      context.read<HomeCubit>().mixpanel.track("pressedSwapBtn");
                                     },
                                     style: ButtonStyle(
                                       padding: MaterialStatePropertyAll(
@@ -284,6 +298,7 @@ class _HomePageState extends State<HomePage> {
                             ],
                           ),
                           SearchAppBar(
+                            
                               title: state.toData.destName,
                               userId: state.user == null
                                   ? "guest"
@@ -304,20 +319,28 @@ class _HomePageState extends State<HomePage> {
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: ElevatedButton(
                         onPressed: () {
-                          Navigator.push<void>(
-                            context,
-                            MaterialPageRoute<void>(
-                              builder: (BuildContext context) => DirectionsPage(
-                                  fromMetro: state.fromData,
-                                  destMetro: state.toData,
-                                  destName: state.toData.destName,
-                                  destAddress: state.toData.destAddress,
-                                  fromDistance: "0",
-                                  toDistance: "0",
-                                  isOffline: state.isOffline,
-                                  destination: state.toData.destName),
-                            ),
-                          );
+                          if (state.fromData.name == state.toData.name) {
+                            context
+                                .read<HomeCubit>()
+                                .showLocationErrorInfo(context);
+                          } else {
+                            context.read<HomeCubit>().mixpanel.track("openedDirectionsPage");
+                            Navigator.push<void>(
+                              context,
+                              MaterialPageRoute<void>(
+                                builder: (BuildContext context) =>
+                                    DirectionsPage(
+                                        fromMetro: state.fromData,
+                                        destMetro: state.toData,
+                                        destName: state.toData.destName,
+                                        destAddress: state.toData.destAddress,
+                                        fromDistance: "0",
+                                        toDistance: "0",
+                                        isOffline: state.isOffline,
+                                        destination: state.toData.destName),
+                              ),
+                            );
+                          }
                         },
                         style: ButtonStyle(
                           fixedSize: MaterialStatePropertyAll(
@@ -378,6 +401,7 @@ class _HomePageState extends State<HomePage> {
                             children: [
                               ServiceTile(
                                   onTap: () {
+                                    context.read<HomeCubit>().mixpanel.track("openedMapPage");
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute<void>(
@@ -390,6 +414,7 @@ class _HomePageState extends State<HomePage> {
                                   title: "Map"),
                               ServiceTile(
                                   onTap: () {
+                                    context.read<HomeCubit>().mixpanel.track("openedNearbyPage");
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute<void>(
@@ -401,17 +426,26 @@ class _HomePageState extends State<HomePage> {
                                   icon: Icons.pin_drop,
                                   title: "Nearby"),
                               ServiceTile(
-                                  onTap: () {},
+                                  onTap: () {
+                                    context.read<HomeCubit>().mixpanel.track("openedFavouritesPage");
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute<void>(
+                                        builder: (BuildContext context) =>
+                                            const FavouritesPage(),
+                                      ),
+                                    );
+                                  },
                                   icon: Icons.favorite,
                                   title: "Favourites"),
-                              ServiceTile(
-                                  onTap: () {},
-                                  icon: Icons.currency_rupee,
-                                  title: "Fare"),
-                              ServiceTile(
-                                  onTap: () {},
-                                  icon: Icons.access_time_filled,
-                                  title: "Timings")
+                              // ServiceTile(
+                              //     onTap: () {},
+                              //     icon: Icons.currency_rupee,
+                              //     title: "Fare"),
+                              // ServiceTile(
+                              //     onTap: () {},
+                              //     icon: Icons.access_time_filled,
+                              //     title: "Timings")
                             ],
                           )
                         ],

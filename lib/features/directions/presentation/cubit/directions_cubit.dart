@@ -4,6 +4,7 @@ import 'package:app/features/directions/data/models/route_direction.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:isar/isar.dart';
 import 'package:app/features/destination/data/models/dest_metro.dart';
@@ -14,20 +15,29 @@ import 'package:app/features/home/data/models/directions.dart';
 import 'package:flutter/services.dart';
 import 'dart:convert';
 import 'package:geolocator/geolocator.dart';
+import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 part 'directions_state.dart';
 
 class DirectionsCubit extends Cubit<DirectionsState> {
   final DirectionsRepository directionsRepository;
   DirectionsCubit({required this.directionsRepository})
       : super(DirectionsState.initial());
+
+  late Mixpanel mixpanel;
+  Future<void> initMixpanel() async {
+    mixpanel = await Mixpanel.init(dotenv.env["MIXPANEL_PROJECT_ID"].toString(),
+        trackAutomaticEvents: false);
+  }
+
   getDirections(FromMetro fromMetro, DestMetro toMetro, String destName,
       String destAddress, bool isOffline, UserPriorityStatus priority) async {
     emit(state.copyWith(
         status: DirectionsStatus.loading,
         isOffline: isOffline,
         priority: priority));
+
     await Future.delayed(
-      Duration(seconds: 2),
+      Duration(seconds: 1),
     );
     final metroResp = await rootBundle.loadString('assets/data/delhi_ncr.json');
     final metroData = json.decode(metroResp);
@@ -49,6 +59,13 @@ class DirectionsCubit extends Cubit<DirectionsState> {
             latitude: element["coordinates"]["lat"],
             longitude: element["coordinates"]["lng"],
             isInterchange: element["is_interchange"],
+            isFob: element.containsKey("is_fob") == true ? true : false,
+            fobLine: element.containsKey("fob_data") == true
+                ? element["fob_data"]["line"]
+                : "",
+            fobStationIndex: element.containsKey("fob_data") == true
+                ? element["fob_data"]["index"]
+                : -1,
             lines: lines);
         lineStations.add(stationData);
         if (metroStations.contains(stationData) == false) {
@@ -64,13 +81,11 @@ class DirectionsCubit extends Cubit<DirectionsState> {
       graphData["line_${i.toString()}"] = lineStations;
       //metroStations.addAll(lineData);
     }
-    print("Asdasd2");
     //Find Start Station
     MetroRoute route = MetroRoute.initial();
     List<ShortestPathResult> routes = [];
+
     //Find End Station
-    print(startStation);
-    print(endStation);
     if (startStation != null && endStation != null) {
       Graph metroGraph = createGraphFromJson(
           metroStations,
@@ -82,12 +97,12 @@ class DirectionsCubit extends Cubit<DirectionsState> {
               longitude: 0,
               isInterchange: false,
               lines: []));
+
       ////print(metroStations.length);
 
       ShortestPathResult shortestRoute =
           findShortestPath(metroGraph, startStation!, endStation!, metroData);
       //findMinIntPath(metroGraph, startStation!, endStation!, metroData);
-      print(shortestRoute);
       routes.add(shortestRoute);
       route = shortestRoute.route;
       List<Station> incursions = shortestRoute.incursions;
@@ -96,8 +111,14 @@ class DirectionsCubit extends Cubit<DirectionsState> {
         ////print(incursion.name);
         //metroStations.remove(incursion);
         metroGraph = createGraphFromJson(metroStations, graphData, incursion);
+        // if (priority == UserPriorityStatus.interchanges) {
+        //   shortestRoute =
+        //       findMinIntPath(metroGraph, startStation!, endStation!, metroData);
+        // }
+        //else {
         shortestRoute =
             findShortestPath(metroGraph, startStation!, endStation!, metroData);
+        //}
         routes.add(shortestRoute);
       });
       List<int> stopsList = [];
@@ -204,8 +225,48 @@ class DirectionsCubit extends Cubit<DirectionsState> {
     //       .sortByTimeDesc()
     //       .findFirst();
     //   route = MetroRoute.fromJson(offRoute!.directions.toString());
-    //}
-    print(route);
+    //}¯
+    if (fromMetro.fromName != fromMetro.name) {
+      List<MetroDirection> updRouteData = [];
+      if (route.route.first.departureName.toLowerCase() !=
+          fromMetro.fromName.toLowerCase()) {
+        updRouteData.add(
+          MetroDirection(
+              platform: "",
+              stops: 0,
+              travelMode: "WALKING",
+              vehicleType: "WALKING",
+              metro: "DMRC",
+              departureName: fromMetro.fromName,
+              arrivalName: fromMetro.name,
+              currLineName: "",
+              currLineColour: 000000,
+              interchange: "",
+              duration: "",
+              headsign: "",
+              stations: []),
+        );
+      }
+      updRouteData.addAll(route.route);
+      if (route.route.last.arrivalName.toLowerCase() !=
+          toMetro.destName.toLowerCase()) {
+        updRouteData.add(MetroDirection(
+            platform: "",
+            stops: 0,
+            travelMode: "WALKING",
+            vehicleType: "WALKING",
+            metro: "DMRC",
+            departureName: toMetro.name,
+            arrivalName: toMetro.destName,
+            currLineName: "",
+            currLineColour: 000000,
+            interchange: "",
+            duration: "",
+            headsign: "",
+            stations: []));
+        route.route = updRouteData;
+      }
+    }
     emit(state.copyWith(
         status: DirectionsStatus.loaded,
         routeData: route,
@@ -318,7 +379,10 @@ class Station {
   double latitude;
   double longitude;
   bool isInterchange;
+  bool? isFob;
   List<String> lines;
+  String? fobLine;
+  int? fobStationIndex;
 
   Station(
       {required this.id,
@@ -326,7 +390,23 @@ class Station {
       required this.latitude,
       required this.longitude,
       required this.isInterchange,
-      required this.lines});
+      required this.lines,
+      this.isFob = false,
+      this.fobLine,
+      this.fobStationIndex});
+
+  // Method to convert the User object to a map
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+        "latitude": latitude,
+        "longitude": longitude,
+        "isInterchange": isInterchange,
+        "lines": lines,
+        "isFob": isFob,
+        "fobLine": fobLine,
+        "fobStationIndex": fobStationIndex
+      };
 }
 
 class Edge {
@@ -362,14 +442,35 @@ Graph createGraphFromJson(List<Station> stations,
     List<Station> lineData = metroData[line] ?? [];
     for (final station in lineData) {
       List<String> stationLines = station.lines;
-      for (final line in stationLines) {
-        List<Station> lineData = metroData[line] ?? [];
+      //Check FOB
+      if (station.isFob == true) {
+        Edge stationEdge = Edge(
+            source: station,
+            destination: metroData[station.fobLine]![station.fobStationIndex!],
+            weight: _distance(station, lineData[1]));
+
+        if (edges.contains(stationEdge) == false) {
+          if (incursion.name != stationEdge.source.name) {
+            edges.add(stationEdge);
+          } else {
+            //print("source is ${stationEdge.source.name}");
+
+            //print("incursion is ${incursion.name}");
+            ////print(stationEdge.destination.name);
+          }
+        }
+      }
+      //Check Lines
+      for (final stationLine in stationLines) {
+        List<Station> lineData = metroData[stationLine] ?? [];
+        //Check for nornal lines
         int stationIndex = 0;
         lineData.forEach((element) {
           if (element.name == station.name) {
             stationIndex = lineData.indexOf(element);
           }
         });
+
         if (stationIndex == 0) {
           Edge stationEdge = Edge(
               source: station,
@@ -391,6 +492,7 @@ Graph createGraphFromJson(List<Station> stations,
               source: station,
               destination: lineData[stationIndex - 1],
               weight: _distance(station, lineData[stationIndex - 1]));
+
           if (edges.contains(stationEdge) == false) {
             if (incursion.name != stationEdge.source.name) {
               edges.add(stationEdge);
@@ -406,6 +508,7 @@ Graph createGraphFromJson(List<Station> stations,
               source: station,
               destination: lineData[stationIndex - 1],
               weight: _distance(station, lineData[stationIndex - 1]));
+
           if (edges.contains(stationEdge) == false) {
             if (incursion.name != stationEdge.source.name) {
               edges.add(stationEdge);
@@ -418,6 +521,79 @@ Graph createGraphFromJson(List<Station> stations,
               source: station,
               destination: lineData[stationIndex + 1],
               weight: _distance(station, lineData[stationIndex + 1]));
+
+          if (edges.contains(stationEdge) == false) {
+            if (incursion.name != stationEdge.source.name) {
+              edges.add(stationEdge);
+            } else {
+              //print("source is ${stationEdge.source.name}");
+
+              //print("incursion is ${incursion.name}");
+              ////print(stationEdge.destination.name);
+            }
+          }
+        }
+
+        //Check for reversed list
+        lineData = lineData.reversed.toList();
+        stationIndex = 0;
+        lineData.forEach((element) {
+          if (element.name == station.name) {
+            stationIndex = lineData.indexOf(element);
+          }
+        });
+
+        if (stationIndex == 0) {
+          Edge stationEdge = Edge(
+              source: station,
+              destination: lineData[1],
+              weight: _distance(station, lineData[1]));
+
+          if (edges.contains(stationEdge) == false) {
+            if (incursion.name != stationEdge.source.name) {
+              edges.add(stationEdge);
+            } else {
+              //print("source is ${stationEdge.source.name}");
+
+              //print("incursion is ${incursion.name}");
+              ////print(stationEdge.destination.name);
+            }
+          }
+        } else if (stationIndex == lineData.length - 1) {
+          Edge stationEdge = Edge(
+              source: station,
+              destination: lineData[stationIndex - 1],
+              weight: _distance(station, lineData[stationIndex - 1]));
+
+          if (edges.contains(stationEdge) == false) {
+            if (incursion.name != stationEdge.source.name) {
+              edges.add(stationEdge);
+            } else {
+              //print("source is ${stationEdge.source.name}");
+
+              //print("incursion is ${incursion.name}");
+              ////print(stationEdge.destination.name);
+            }
+          }
+        } else {
+          Edge stationEdge = Edge(
+              source: station,
+              destination: lineData[stationIndex - 1],
+              weight: _distance(station, lineData[stationIndex - 1]));
+
+          if (edges.contains(stationEdge) == false) {
+            if (incursion.name != stationEdge.source.name) {
+              edges.add(stationEdge);
+            } else {
+              //print(stationEdge.source.name);
+              ////print(stationEdge.destination.name);
+            }
+          }
+          stationEdge = Edge(
+              source: station,
+              destination: lineData[stationIndex + 1],
+              weight: _distance(station, lineData[stationIndex + 1]));
+
           if (edges.contains(stationEdge) == false) {
             if (incursion.name != stationEdge.source.name) {
               edges.add(stationEdge);
@@ -538,32 +714,49 @@ ShortestPathResult findShortestPath(
   distances[start] = 0;
   queue.add(start);
 
+  List<Station> path = [end];
+
+  List<int> routeInterchanges = [];
+  List<Station> routeIncursions = [];
+
+  double distance = distances[end] ?? 0;
   while (queue.isNotEmpty) {
     final current = queue.removeFirst();
+
     if (current == end) {
-      List<Station> path = [end];
       while (parents[path.last] != null) {
         path.add(parents[path.last]!);
       }
       path = path.reversed.toList();
-      final distance = distances[end]!;
-      //print("");
-      //print("Path");
+
+      //Check if destination reached before it goes around and comeback
+      int destIndex = -1;
+      int i = 0;
       path.forEach((element) {
-        //print(element.name);
+        if (element.name == end.name && destIndex == -1) {
+          destIndex = i;
+        }
+        i++;
       });
-      //print("");
+      if (destIndex != -1) {
+        path = path.sublist(0, destIndex + 1);
+      }
+
+      print("Path");
+      path.forEach((element) {
+        print(element.name);
+      });
+
       //Get Same Line Direction
       Station? directionStart;
       Station? directionEnd;
-      List<int> routeInterchanges = [];
-      List<Station> routeIncursions = [];
       //print("");
       //print("Total Incursions");
       bool isIncursion = false;
 
       Set<String> prevIntersection = {};
-      for (var i = 0; i < path.length; i++) {
+
+      for (var i = 0; i < path.length - 1; i++) {
         List<String>? prevLines;
         List<String>? currLines;
         List<String>? nextLines;
@@ -614,29 +807,27 @@ ShortestPathResult findShortestPath(
           isIncursion = false;
 
           prevIntersection = intersection;
-        } else {
-          if (end.name != path[i].name &&
-              start.name != path[i].name &&
-              end.name != path[i + 1].name &&
-              start.name != path[i + 1].name) {
-            routeIncursions.add(path[i + 1]);
-            ////print(path[i+1].name);
+        } else if (i != path.length - 1) {
+          if ((path[i].isFob == true && path[i + 1].isFob == false) ||
+              (path[i].isFob == false && path[i + 1].isFob == false)) {
+            if (end.name != path[i].name &&
+                start.name != path[i].name &&
+                end.name != path[i + 1].name &&
+                start.name != path[i + 1].name) {
+              routeIncursions.add(path[i + 1]);
+
+              ////print(path[i+1].name);
+            }
+
+            routeInterchanges.add(i);
+            //print(path[i].name);
+            prevIntersection = set3;
           }
-          routeInterchanges.add(i);
-          //print(path[i].name);
-          prevIntersection = set3;
         }
       }
       //print("asd");
       //Get Directions
       List<MetroDirection> directions = [];
-      MetroRoute metroRoute = getMetroRoute(path, routeInterchanges, metroData);
-      return ShortestPathResult(
-          path: path,
-          incursions: routeIncursions,
-          distance: distance,
-          numInterchanges: routeInterchanges.length,
-          route: metroRoute);
     }
     if (visited.contains(current)) {
       continue;
@@ -657,12 +848,23 @@ ShortestPathResult findShortestPath(
     }
   }
 
+  print("final path");
+  path.forEach((element) {
+    print(element.name);
+  });
+  print("");
+  MetroRoute metroRoute = MetroRoute.initial();
+  try {
+    metroRoute = getMetroRoute(path, routeInterchanges, metroData);
+  } catch (e) {
+    print("Invalid Route");
+  }
   return ShortestPathResult(
-      path: [],
-      incursions: [],
-      distance: double.infinity,
-      numInterchanges: 0,
-      route: MetroRoute.initial());
+      path: path,
+      incursions: routeIncursions,
+      distance: distance,
+      numInterchanges: routeInterchanges.length,
+      route: metroRoute);
 }
 
 ShortestPathResult findMinIntPath(
@@ -685,21 +887,39 @@ ShortestPathResult findMinIntPath(
   interchanges[start] = 0;
   queue.add(start);
 
+  List<int> routeInterchanges = [];
+  List<Station> path = [end];
+
+  final numInterchanges = interchanges[end] ?? 0;
+  final distance = distances[end] ?? 0;
+
   while (queue.isNotEmpty) {
     final current = queue.removeFirst();
     if (current == end) {
-      List<Station> path = [end];
       while (parents[path.last] != null) {
         path.add(parents[path.last]!);
       }
       path = path.reversed.toList();
-      final numInterchanges = interchanges[end]!;
-      final distance = distances[end]!;
+
+      //Check if destination reached before it goes around and comeback
+      int destIndex = -1;
+      int i = 0;
+      path.forEach((element) {
+        print(element.name);
+        print("____");
+        if (element.name == end.name && destIndex == -1) {
+          destIndex = i;
+        }
+        i++;
+      });
+      print(destIndex);
+      if (destIndex != -1) {
+        path = path.sublist(0, destIndex + 1);
+      }
 
       //Get Same Line Direction
       Station? directionStart;
       Station? directionEnd;
-      List<int> routeInterchanges = [];
       List<Station> routeIncursions = [];
       Set<String> prevIntersection = {};
       for (var i = 0; i < path.length; i++) {
@@ -728,7 +948,8 @@ ShortestPathResult findMinIntPath(
         Set<String> intersection2 = set2.intersection(set3);
         Set<String> intersection = intersection1.intersection(intersection2);
 
-        if (prevIntersection.intersection(intersection).isNotEmpty) {
+        if (prevIntersection.intersection(intersection).isNotEmpty &&
+            i != path.length - 1) {
           //Same Direction
           ////print(intersection.first);
           routeIncursions.add(path[i + 1]);
@@ -737,16 +958,6 @@ ShortestPathResult findMinIntPath(
         }
         prevIntersection = intersection;
       }
-
-      //Get Directions
-      List<MetroDirection> directions = [];
-      MetroRoute metroRoute = getMetroRoute(path, routeInterchanges, metroData);
-      return ShortestPathResult(
-          path: path,
-          incursions: [],
-          distance: distance,
-          numInterchanges: numInterchanges,
-          route: metroRoute);
     }
     if (visited.contains(current)) {
       continue;
@@ -779,12 +990,25 @@ ShortestPathResult findMinIntPath(
     }
   }
 
+  print("final int path");
+  path.forEach((element) {
+    print(element.name);
+  });
+  print("");
+  MetroRoute metroRoute = MetroRoute.initial();
+  //Get Directions
+  List<MetroDirection> directions = [];
+  try {
+    metroRoute = getMetroRoute(path, routeInterchanges, metroData);
+  } catch (e) {
+    print("Invalid Route");
+  }
   return ShortestPathResult(
-      path: [],
+      path: path,
       incursions: [],
-      distance: double.infinity,
-      numInterchanges: 0,
-      route: MetroRoute.initial());
+      distance: distance,
+      numInterchanges: numInterchanges,
+      route: metroRoute);
 }
 
 getMetroRoute(List<Station> path, List<int> interchanges,
@@ -861,7 +1085,9 @@ getMetroRoute(List<Station> path, List<int> interchanges,
   //     interchanges = [];
   //   }
   // }
-
+  print("Interchanges");
+  print(interchanges.isEmpty);
+  print(interchanges);
   //Get Transit Direction
   if (interchanges.isEmpty == true) {
     Station start = path.first;
@@ -882,7 +1108,10 @@ getMetroRoute(List<Station> path, List<int> interchanges,
       stations = stations.getRange(0, 33).toList();
       stations.addAll(metroData["data"]["line_4"]["stations"]);
     } else {
-      //print("FARESS");
+      //If FOB
+      if (commonLines.isEmpty) {
+        end = path[path.length - 2];
+      }
       line = start.lines.where((item) => end.lines.contains(item)).first;
       stations = metroData["data"][line]["stations"];
     }
@@ -968,7 +1197,7 @@ getMetroRoute(List<Station> path, List<int> interchanges,
           travelMode: "WALKING",
           vehicleType: "BRIDGE",
           metro: "DMRC",
-          departureName: arrivalName,
+          departureName: path.last.name,
           arrivalName: path.last.name,
           currLineName: metroData["data"][line]["name"],
           currLineColour:
@@ -989,6 +1218,7 @@ getMetroRoute(List<Station> path, List<int> interchanges,
       List<Station> direction = [];
       if (i == 0) {
         int end = interchanges[i];
+
         int start = 0;
         direction = path.getRange(start, end + 1).toList();
         direction.forEach((element) {
@@ -1017,12 +1247,24 @@ getMetroRoute(List<Station> path, List<int> interchanges,
             .where((item) => direction.last.lines.contains(item))
             .toList();
         //line = path[start].lines.where((item) => direction.last.lines.contains(item)).first;
+        bool isFobIncluded = false;
         if (commonLines.isEmpty == true) {
-          line = "line_3";
+          //It is FOB
+          isFobIncluded = true;
+          //Find common lines using last befor station
+          commonLines = path[start]
+              .lines
+              .where((item) =>
+                  direction[direction.length - 2].lines.contains(item))
+              .toList();
+          line = commonLines.first;
         } else {
           line = commonLines.first;
         }
         stations = metroData["data"][line]["stations"];
+        print(path[start].name);
+        print(path[start].id);
+        print(direction.last.name);
         stations.forEach((element) {
           if (element["place_id"] == path[start].id) {
             startIndex = stations.indexOf(element);
@@ -1033,6 +1275,8 @@ getMetroRoute(List<Station> path, List<int> interchanges,
             arrivalName = stations[endIndex]["name"];
           }
         });
+
+        //Handle Blue Branch condition
         if ((path[start].lines.contains("line_4") == true &&
                     direction.last.lines.contains("line_3") == true) &&
                 endIndex <= 33 &&
@@ -1107,6 +1351,40 @@ getMetroRoute(List<Station> path, List<int> interchanges,
             headsign: headsign,
             stations: stations);
         routeDirections.add(transit);
+        if (isFobIncluded == true) {
+          MetroDirection bridge = MetroDirection(
+              platform: "",
+              stops: 0,
+              travelMode: "WALKING",
+              vehicleType: "BRIDGE",
+              metro: "DMRC",
+              departureName: arrivalName,
+              arrivalName: direction.last.name,
+              currLineName: metroData["data"][line]["name"],
+              currLineColour:
+                  int.parse("0XFF${metroData["data"][line]["colour_code"]}"),
+              interchange: direction.last.name,
+              duration: "",
+              headsign: "",
+              stations: []);
+          routeDirections.add(bridge);
+        } else {
+          MetroDirection transitInterchange = MetroDirection(
+              platform: "",
+              stops: 0,
+              travelMode: "WALKING",
+              vehicleType: "WALKING",
+              metro: "DMRC",
+              departureName: "",
+              arrivalName: "",
+              currLineName: "",
+              currLineColour: 000000,
+              interchange: direction.last.name,
+              duration: "",
+              headsign: "",
+              stations: []);
+          routeDirections.add(transitInterchange);
+        }
       } else {
         int end = interchanges[i];
         int start = interchanges[i - 1];
@@ -1211,6 +1489,9 @@ getMetroRoute(List<Station> path, List<int> interchanges,
             }
           }
         }
+        print("Direction");
+        print(departureName);
+        print(arrivalName);
         MetroDirection transit = MetroDirection(
             platform: transitPlatform,
             stops: stops,
@@ -1227,6 +1508,22 @@ getMetroRoute(List<Station> path, List<int> interchanges,
             headsign: headsign,
             stations: stations);
         routeDirections.add(transit);
+
+        MetroDirection transitInterchange = MetroDirection(
+            platform: "",
+            stops: 0,
+            travelMode: "WALKING",
+            vehicleType: "WALKING",
+            metro: "DMRC",
+            departureName: "",
+            arrivalName: "",
+            currLineName: "",
+            currLineColour: 000000,
+            interchange: direction.last.name,
+            duration: "",
+            headsign: "",
+            stations: []);
+        routeDirections.add(transitInterchange);
       }
 
       ////print("");
@@ -1234,21 +1531,6 @@ getMetroRoute(List<Station> path, List<int> interchanges,
       ////print(direction.last.name);
       ////print("");
 
-      MetroDirection transit = MetroDirection(
-          platform: "",
-          stops: 0,
-          travelMode: "WALKING",
-          vehicleType: "WALKING",
-          metro: "DMRC",
-          departureName: "",
-          arrivalName: "",
-          currLineName: "",
-          currLineColour: 000000,
-          interchange: direction.last.name,
-          duration: "",
-          headsign: "",
-          stations: []);
-      routeDirections.add(transit);
       // String line = direction.first.lines.where((item) => direction.last.lines.contains(item)).toString();
       // //print("");
       // //print(line);
@@ -1413,8 +1695,9 @@ getMetroRoute(List<Station> path, List<int> interchanges,
     }
   }
 
-  //print("Distance covered: $routeDistance");
-  fare += fareCalculator(routeDistance.toInt());
+  print("Distance covered: $routeDistance");
+  fare = fareCalculator(routeDistance.toInt());
+  print("₹${fare.toString()}");
   metro = MetroRoute(
       routeCost: "₹${fare.toString()}", route: routeDirections, data: '');
   return metro;

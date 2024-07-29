@@ -1,16 +1,26 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:app/features/destination/data/models/dest_metro.dart';
 import 'package:app/features/from_search/data/models/from_fav_recom.dart';
 import 'package:app/features/from_search/data/models/from_metro.dart';
+import 'package:app/features/from_search/data/models/from_search_info.dart';
+import 'package:app/features/to_search/data/models/dest_search_info.dart';
 import 'package:app/features/to_search/data/models/to_fav_recom.dart';
+import 'package:app/widgets/popups/enable_notifications.dart';
+import 'package:app/widgets/popups/success.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:isar/isar.dart';
 import 'package:app/features/from_search/data/models/from_recommendation.dart';
 import 'package:app/features/from_search/data/repositories/from_search_repository.dart';
 import 'package:app/features/home/data/models/directions.dart';
+import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 
 part 'from_search_state.dart';
 
@@ -57,6 +67,14 @@ class FromSearchCubit extends Cubit<FromSearchState> {
     return stationSuggestions;
   }
 
+  late Mixpanel mixpanel;
+  Future<void> initMixpanel() async {
+    mixpanel = await Mixpanel.init(dotenv.env["MIXPANEL_PROJECT_ID"].toString(),
+        trackAutomaticEvents: false);
+    //Track event
+    mixpanel.track("openedFromSearchPage");
+  }
+
   Future<void> updateSavedFromRecommendation(
       FromRecommendation recommendation, bool isFavourite) async {
     String placeId = recommendation.placeId;
@@ -66,7 +84,9 @@ class FromSearchCubit extends Cubit<FromSearchState> {
           SavedFromRecommendationSchema,
           SavedToRecommendationSchema,
           SavedFromMetroSchema,
-          SavedDestMetroSchema
+          SavedDestMetroSchema,
+          FromSearchInfoSchema,
+          DestSearchInfoSchema
         ]);
     //Check place id exists in From recommendations
     final savedRecommendation = await isar.savedFromRecommendations
@@ -83,10 +103,184 @@ class FromSearchCubit extends Cubit<FromSearchState> {
     }
   }
 
-  getSearchRecommendations(String location) async {
+  RewardedAd? rewardedAd;
+  int numRewardedLoadAttempts = 0;
+
+  void initialisationAds() {
+    MobileAds.instance.updateRequestConfiguration(RequestConfiguration());
+    _createRewardedAd();
+  }
+
+  void _createRewardedAd() {
+    AdRequest request = const AdRequest();
+    int maxFailedLoadAttempts = 3;
+    RewardedAd.load(
+        adUnitId: "ca-app-pub-8353447747212760/1167847364",
+        request: request,
+        rewardedAdLoadCallback: RewardedAdLoadCallback(
+          onAdLoaded: (RewardedAd ad) {
+            print('$ad loaded.');
+            rewardedAd = ad;
+            numRewardedLoadAttempts = 0;
+          },
+          onAdFailedToLoad: (LoadAdError error) {
+            print('RewardedAd failed to load: $error');
+            rewardedAd = null;
+            numRewardedLoadAttempts += 1;
+            if (numRewardedLoadAttempts < maxFailedLoadAttempts) {
+              _createRewardedAd();
+            }
+          },
+        ));
+  }
+
+  void showRewardedAd(BuildContext context) {
+    if (rewardedAd == null) {
+      print('Warning: attempt to show rewarded before loaded.');
+      return;
+    }
+    rewardedAd!.fullScreenContentCallback = FullScreenContentCallback(
+      onAdShowedFullScreenContent: (RewardedAd ad) =>
+          print('ad onAdShowedFullScreenContent.'),
+      onAdDismissedFullScreenContent: (RewardedAd ad) {
+        print('$ad onAdDismissedFullScreenContent.');
+        ad.dispose();
+        _createRewardedAd();
+      },
+      onAdFailedToShowFullScreenContent: (RewardedAd ad, AdError error) {
+        print('$ad onAdFailedToShowFullScreenContent: $error');
+        ad.dispose();
+        _createRewardedAd();
+      },
+    );
+
+    rewardedAd!.setImmersiveMode(true);
+    rewardedAd!.show(onUserEarnedReward: (AdWithoutView ad, RewardItem reward) {
+      print('$ad with reward $RewardItem(${reward.amount}, ${reward.type})');
+      updateFromSearchLimit();
+      emit(state.copyWith(isRewardGranted: true));
+    });
+    rewardedAd = null;
+  }
+
+  Future<bool> checkFromSearchLimit(BuildContext context) async {
+    Isar isar = Isar.getInstance() ??
+        await Isar.open([
+          DirectionsSchema,
+          SavedFromRecommendationSchema,
+          SavedToRecommendationSchema,
+          SavedFromMetroSchema,
+          SavedDestMetroSchema,
+          FromSearchInfoSchema,
+          DestSearchInfoSchema
+        ]);
+    int totalFavourites = await isar.savedFromRecommendations
+        .filter()
+        .isFavouriteEqualTo(true)
+        .count();
+
+    int totalRecommendations = await isar.savedFromRecommendations.count();
+
+    FromSearchInfo? fromSearchInfo;
+
+    bool reachedLimit = false;
+
+    print(isar.fromSearchInfos);
+    bool isBlank = isar.fromSearchInfos.isBlank ?? false;
+
+    if (isBlank) {
+      reachedLimit = false;
+
+      fromSearchInfo = FromSearchInfo()
+        ..id = 1
+        ..isLimitreached = false
+        ..startedAt = DateTime.now()
+        ..updatedAt = DateTime.now()
+        ..totalFavourites = totalFavourites
+        ..totalRecommendations = totalRecommendations;
+    } else {
+      await isar.fromSearchInfos.get(1).then((info) {
+        fromSearchInfo = info;
+      });
+      int newSavedSourceLocations =
+          totalRecommendations - (fromSearchInfo?.totalRecommendations ?? 0);
+      print(newSavedSourceLocations);
+      print("New Searches");
+      if (newSavedSourceLocations >= 50) {
+        reachedLimit = true;
+      } else {
+        reachedLimit = false;
+      }
+
+      fromSearchInfo = FromSearchInfo()
+        ..id = 1
+        ..isLimitreached = reachedLimit
+        ..startedAt = fromSearchInfo?.startedAt
+        ..updatedAt = DateTime.now()
+        ..totalFavourites = fromSearchInfo?.totalFavourites
+        ..totalRecommendations = fromSearchInfo?.totalRecommendations;
+    }
+
+    // if (totalRecommendations >= 50) {
+    //   reachedLimit = true;
+    // } else {
+    //   if (isBlank == true) {
+    //   } else {
+    //     }
+    await isar.writeTxn(() async {
+      await isar.fromSearchInfos.put(fromSearchInfo!);
+    });
+
+    print(totalRecommendations);
+    print(totalFavourites);
+    print(reachedLimit);
+    return reachedLimit;
+  }
+
+  Future<void> updateFromSearchLimit() async {
+    Isar isar = Isar.getInstance() ??
+        await Isar.open([
+          DirectionsSchema,
+          SavedFromRecommendationSchema,
+          SavedToRecommendationSchema,
+          SavedFromMetroSchema,
+          SavedDestMetroSchema,
+          FromSearchInfoSchema,
+          DestSearchInfoSchema
+        ]);
+    int totalFavourites = await isar.savedFromRecommendations
+        .filter()
+        .isFavouriteEqualTo(true)
+        .count();
+
+    int totalRecommendations = await isar.savedFromRecommendations.count();
+
+    FromSearchInfo? fromSearchInfo;
+    await isar.fromSearchInfos.get(1).then((info) {
+      fromSearchInfo = info;
+    });
+    fromSearchInfo = FromSearchInfo()
+      ..id = 1
+      ..isLimitreached = false
+      ..startedAt = fromSearchInfo?.startedAt
+      ..updatedAt = DateTime.now()
+      ..totalFavourites = totalFavourites
+      ..totalRecommendations = totalRecommendations;
+
+    await isar.writeTxn(() async {
+      await isar.fromSearchInfos.put(fromSearchInfo!);
+    });
+    reachedLimit = false;
+    searchLimitChecked = false;
+  }
+
+  bool reachedLimit = false;
+  bool searchLimitChecked = false;
+  getSearchRecommendations(String location, BuildContext context) async {
     emit(state.copyWith(
         stationStatus: FromSearchStationStatus.loading,
         placeStatus: FromSearchPlaceStatus.loading));
+
     List<FromRecommendation> predictions = [];
     List<FromRecommendation> stationSuggestions = [];
 
@@ -98,9 +292,14 @@ class FromSearchCubit extends Cubit<FromSearchState> {
           SavedFromRecommendationSchema,
           SavedToRecommendationSchema,
           SavedFromMetroSchema,
-          SavedDestMetroSchema
+          SavedDestMetroSchema,
+          FromSearchInfoSchema,
+          DestSearchInfoSchema
         ]);
-
+    if (searchLimitChecked == false) {
+      // ignore: use_build_context_synchronously
+      reachedLimit = await checkFromSearchLimit(context);
+    }
     //Suggested Places
     //Check for saved places
 
@@ -125,8 +324,39 @@ class FromSearchCubit extends Cubit<FromSearchState> {
     //Add all fav saved recommendations
     predictions.addAll(favSavedPredictions);
     predictions.addAll(nonFavSavedPredictions);
+
+    await isar.savedFromRecommendations.count().then((totalRecommendations) {
+      print("search limit checked");
+      print(searchLimitChecked);
+      if (reachedLimit == true && searchLimitChecked == false) {
+        showDialog(
+            // ignore: use_build_context_synchronously
+            context: context,
+            builder: (BuildContext context) {
+              return SearchLimitReachedPopup(
+                title: "Warning",
+                message:
+                    "You've reached your limit for searching source locations online. Please watch a 5-second ad to unlock additional searches.\n\n Alternatively, you can continue searching from the $totalRecommendations saved recommendations available right now.",
+                action: "Back",
+                actionFunc: () {
+                  Navigator.pop(context);
+                  showRewardedAd(context);
+
+                  //launchUrl(Uri.parse("https://www.threads.net/@viratgsingh"));
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute<void>(
+                  //     builder: (BuildContext context) => const HomePa,
+                  //   ),
+                  // );
+                },
+              );
+            });
+        searchLimitChecked = true;
+      }
+    });
     //Get new places
-    if (predictions.isEmpty == true) {
+    if (predictions.isEmpty == true && reachedLimit == false) {
       await fromSearchRepository
           .getSearchRecommendations(location)
           .then((value) async {
@@ -147,6 +377,37 @@ class FromSearchCubit extends Cubit<FromSearchState> {
         }
       });
     }
+    // else if (predictions.isEmpty == true && reachedLimit == true) {
+    //   await isar.savedFromRecommendations.count().then((totalRecommendations) {
+    //     print("search limit checked");
+    //     print(searchLimitChecked);
+    //     if (searchLimitChecked == false) {
+    //       showDialog(
+    //           // ignore: use_build_context_synchronously
+    //           context: context,
+    //           builder: (BuildContext context) {
+    //             return SearchLimitReachedPopup(
+    //               title: "Warning",
+    //               message:
+    //                   "You've reached your limit for searching source locations online. Please watch a 5-second ad to unlock additional searches.\n\n Alternatively, you can continue searching from the $totalRecommendations saved recommendations available right now.",
+    //               action: "Back",
+    //               actionFunc: () async {
+    //                 Navigator.pop(context);
+    //                 showRewardedAd(context);
+    //                 //launchUrl(Uri.parse("https://www.threads.net/@viratgsingh"));
+    //                 // Navigator.push(
+    //                 //   context,
+    //                 //   MaterialPageRoute<void>(
+    //                 //     builder: (BuildContext context) => const HomePa,
+    //                 //   ),
+    //                 // );
+    //               },
+    //             );
+    //           });
+    //           searchLimitChecked = true;
+    //     }
+    //   });
+    //}
     emit(state.copyWith(
         stationStatus: FromSearchStationStatus.loaded,
         placeStatus: FromSearchPlaceStatus.loaded,

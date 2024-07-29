@@ -1,9 +1,7 @@
-import 'package:app/features/destination/presentation/widgets/errors/main.dart';
-import 'package:app/features/destination/presentation/widgets/warnings/main.dart';
 import 'package:app/features/from_search/presentation/pages/from_search.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:material_floating_search_bar/material_floating_search_bar.dart';
+import 'package:material_floating_search_bar_2/material_floating_search_bar_2.dart';
 import 'package:app/features/from_search/data/models/from_metro.dart';
 import 'package:app/features/to_search/presentation/pages/to_search.dart';
 
@@ -35,6 +33,7 @@ class SearchAppBar extends StatelessWidget {
       onTap: () {
         if (isDest) {
           //if (lat != 0 && lng != 0) {
+          //Track event
           Navigator.push<void>(
             context,
             MaterialPageRoute<void>(
@@ -45,7 +44,9 @@ class SearchAppBar extends StatelessWidget {
                   fromMetro: fromMetro,
                   isOffline: isOffline,
                   lat: lat,
-                  lng: lng),
+                  lng: lng,
+                  initialToSearch: title,
+                  ),
             ),
           );
           //}
@@ -77,7 +78,7 @@ class SearchAppBar extends StatelessWidget {
             context,
             MaterialPageRoute<void>(
               builder: (BuildContext context) =>
-                  FromSearchPage(isOffline: isOffline),
+                  FromSearchPage(isOffline: isOffline, initialFromSearch: title,),
             ),
           );
         }
@@ -161,11 +162,15 @@ class SearchAppBar extends StatelessWidget {
                 },
               ),
               title != ""
-                  ? Text(
-                      title ?? "",
-                      style: GoogleFonts.notoSans(
-                          color: Theme.of(context).hintColor, fontSize: 14),
-                    )
+                  ? Container(
+                    width: MediaQuery.of(context).size.width-100,
+                    child: Text(
+                        title ?? "",
+                        overflow: TextOverflow.ellipsis,
+                        style: GoogleFonts.notoSans(
+                            color: Theme.of(context).hintColor, fontSize: 14),
+                      ),
+                  )
                   : Text(
                       isDest
                           ? "Destination Station/Location"

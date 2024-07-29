@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:material_floating_search_bar/material_floating_search_bar.dart';
+import 'package:material_floating_search_bar_2/material_floating_search_bar_2.dart';
 import 'package:app/features/from_search/data/models/from_metro.dart';
 import 'package:app/features/to_search/presentation/pages/to_search.dart';
 // Import for Android features.

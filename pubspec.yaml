@@ -15,10 +15,10 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.0+21
+version: 1.1.0+26
 
 environment:
-  sdk: ">=2.17.5 <3.0.0"
+  sdk: ">=2.17.5 <4.0.0"
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -47,7 +47,7 @@ dependencies:
   photo_view: ^0.15.0
 
   #fonts
-  google_fonts: ^3.0.1
+  google_fonts: ^4.0.4
   
   #maps
   flutter_google_places_sdk: ^0.3.2+2
@@ -57,7 +57,7 @@ dependencies:
   isar_flutter_libs: ^3.0.5 # contains Isar Core
 
   #update
-  in_app_update: ^4.0.1
+  in_app_update: ^4.2.3
   
   #feedback
   #wiredash: ^1.5.0
@@ -65,7 +65,7 @@ dependencies:
 
   #search
   algolia: ^1.1.1
-  material_floating_search_bar: ^0.3.7
+  material_floating_search_bar_2: ^0.5.0
 
   #location
   geolocator: ^9.0.2
@@ -78,7 +78,9 @@ dependencies:
 
   #Device id
   device_info_plus: ^8.1.0
-  
+
+  #Tracking
+  mixpanel_flutter: ^2.2.0
 
   #ads
   google_mobile_ads: ^2.3.0
@@ -158,27 +160,27 @@ flutter:
     #- assets/images/google_logo.png
 
     #metro logos
-    - assets/images/dmrc.png
+    #- assets/images/dmrc.png
     
     #infocards
-    - assets/images/nearest.png
-    - assets/images/parking.png
-    - assets/images/interchange.png
+    #- assets/images/nearest.png
+    #- assets/images/parking.png
+    #- assets/images/interchange.png
     #- assets/images/disable_friendly.png
     #- assets/images/rating.png
     #- assets/images/reviews.png
-    - assets/images/operational_from.png
-    - assets/images/operational_to.png
-    - assets/images/destination.png
+    #- assets/images/operational_from.png
+    #- assets/images/operational_to.png
+    #- assets/images/destination.png
     - assets/images/dotted_line.png
-    - assets/images/transit.png
+    #- assets/images/transit.png
     - assets/images/metrotrot.png
-    - assets/images/metro_line.png
-    - assets/images/no_directions.png
+    #- assets/images/metro_line.png
+    #- assets/images/no_directions.png
     # - assets/images/onboarding_1.gif
     # - assets/images/onboarding_2.gif
     # - assets/images/onboarding_3.gif
-    - assets/images/location_permission.png
+    #- assets/images/location_permission.png
     # - assets/images/welcome.gif
 
     #data

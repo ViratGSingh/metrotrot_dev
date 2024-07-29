@@ -2,20 +2,23 @@
 import 'dart:convert';
 import 'dart:math';
 import 'package:app/features/destination/data/models/dest_metro.dart';
-import 'package:app/features/destination/presentation/widgets/errors/main.dart';
 import 'package:app/features/from_search/data/models/from_fav_recom.dart';
 import 'package:app/features/to_search/data/models/dest_tap_data.dart';
 import 'package:app/features/to_search/data/models/to_fav_recom.dart';
 import 'package:app/models/location.dart';
+import 'package:app/widgets/popups/warning.dart';
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import 'package:in_app_update/in_app_update.dart';
 import 'package:isar/isar.dart';
+import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:app/features/from_search/data/models/from_metro.dart';
 import 'package:app/features/home/data/models/directions.dart';
@@ -146,6 +149,12 @@ class HomeCubit extends Cubit<HomeState> {
   //         isOffline: isOffline),
   //   );
   // }
+  late Mixpanel mixpanel;
+  Future<void> initMixpanel() async {
+    mixpanel = await Mixpanel.init(dotenv.env["MIXPANEL_PROJECT_ID"].toString(),
+        trackAutomaticEvents: false);
+    mixpanel.track("openedHomePage");
+  }
 
   saveDestinationInfo(
       String userId,
@@ -321,7 +330,7 @@ class HomeCubit extends Cubit<HomeState> {
           SavedFromRecommendationSchema,
           SavedToRecommendationSchema,
           SavedFromMetroSchema,
-          SavedDestMetroSchema
+          SavedDestMetroSchema,
         ]);
     if (isOffline == false) {
       //Check in saved source locations
@@ -482,10 +491,13 @@ class HomeCubit extends Cubit<HomeState> {
         endStations.add(lineData["stations"].last["name"]);
         colourCodes.add(lineData["colour_code"]);
       });
+      fromName = metroStation["name"];
+      fromAddress = metroStation["address"];
       nearbyMetro = FromMetro(
           fromName: fromName,
           fromAddress: fromAddress,
-          businessStatus: metroStation["is_interchange"] == true ? "Yes" : "No",
+          businessStatus:
+              "Yes", //metroStation["is_interchange"] == true ? "Yes" : "No",
           fromLat: metroStation["coordinates"]["lat"],
           fromLng: metroStation["coordinates"]["lng"],
           lat: metroStation["coordinates"]["lat"],
@@ -503,6 +515,7 @@ class HomeCubit extends Cubit<HomeState> {
           endStations: endStations);
 
       distance = "0";
+      print(nearbyMetro.fromName);
     }
 
     // if (isOffline == true) {
@@ -544,6 +557,42 @@ class HomeCubit extends Cubit<HomeState> {
         distance: distance,
       ),
     );
+  }
+
+  // Method to check for update
+  void checkForUpdate() async {
+    // Check for update
+    var updateAvailableResult = await InAppUpdate.checkForUpdate();
+    if (updateAvailableResult.updateAvailability ==
+        UpdateAvailability.updateAvailable) {
+      // If an update is available, initiate the update process
+      InAppUpdate.performImmediateUpdate();
+    }
+  }
+
+  void showLocationErrorInfo(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return WarningPopup(
+            title: "Error!",
+            popupColor: Colors.red,
+            popupIcon: Icons.warning,
+            message:
+                "Source and Destination metro station is the same, change either of them to get its metro route.",
+            action: "Back",
+            actionFunc: () async {
+              Navigator.pop(context);
+              //launchUrl(Uri.parse("https://www.threads.net/@viratgsingh"));
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute<void>(
+              //     builder: (BuildContext context) => const HomePa,
+              //   ),
+              // );
+            },
+          );
+        });
   }
 
   void exchangePoints(FromMetro source, DestMetro destination) {
@@ -768,6 +817,9 @@ class HomeCubit extends Cubit<HomeState> {
         endStations.add(lineData["stations"].last["name"]);
         colourCodes.add(lineData["colour_code"]);
       });
+
+      destName = metroStation["name"];
+      destAddress = metroStation["address"];
       nearbyMetro = DestMetro(
           destName: destName,
           destAddress: destAddress,

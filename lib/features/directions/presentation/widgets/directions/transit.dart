@@ -33,179 +33,187 @@ class DirectionTransit extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
       ),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              padding: EdgeInsets.only(right: 4),
-              height: 110,
-              child: Align(
-                alignment: Alignment.topCenter,
-                child: Stack(
+        Padding(
+          padding: const EdgeInsets.only(left:10),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                padding: EdgeInsets.only(right: 4),
+                height: 110,
+                child: Align(
                   alignment: Alignment.topCenter,
-                  clipBehavior: Clip.none,
-                  children: [
-                    Container(
-                      //color: Colors.black,
-                      height: 110,
-                      padding: EdgeInsets.only(top: 10),
-                      child: VerticalDivider(
-                        color: Color(lineColor),
-                        thickness: 8,
-                      ),
-                    ),
-                    Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        Icon(
-                          Icons.circle,
-                          size: 18,
+                  child: Stack(
+                    alignment: Alignment.topCenter,
+                    clipBehavior: Clip.none,
+                    children: [
+                      Container(
+                        //color: Colors.black,
+                        height: 110,
+                        padding: EdgeInsets.only(top: 10),
+                        child: VerticalDivider(
                           color: Color(lineColor),
-                          //color: Color(lineColor),
+                          thickness: 8,
                         ),
-                        Icon(
-                          Icons.circle,
-                          size: 10,
-                          color: Colors.white,
-                          //color: Color(lineColor),
-                        ),
-                      ],
-                    ),
-                  ],
+                      ),
+                      Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          Icon(
+                            Icons.circle,
+                            size: 18,
+                            color: Color(lineColor),
+                            //color: Color(lineColor),
+                          ),
+                          Icon(
+                            Icons.circle,
+                            size: 10,
+                            color: Colors.white,
+                            //color: Color(lineColor),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  departure,
-                  style: GoogleFonts.notoSans(
-                      fontSize: 14, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(height: 2),
-                Container(
-                  padding: EdgeInsets.all(5),
-                  //height: 30,
-                  decoration: BoxDecoration(
-                    color: Color(lineColor),
-                    borderRadius: BorderRadius.circular(4),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    departure,
+                    style: GoogleFonts.notoSans(
+                        fontSize: 14, fontWeight: FontWeight.bold),
                   ),
-                  child: Text(
-                    currLine,
-                    style:
-                        GoogleFonts.notoSans(fontSize: 10, color: Colors.white),
-                  ),
-                ),
-                SizedBox(height: 2),
-                Text(
-                  "Towards $headsign",
-                  style: GoogleFonts.notoSans(
-                    fontSize: 12,
-                    color: Color.fromARGB(255, 124, 124, 124),
-                  ),
-                ),
-                SizedBox(
-                  height: 4,
-                ),
-                Row(
-                  children: [
-                    Row(
-                      children: [
-                        const Icon(
-                          Icons.logout,
-                          size: 18,
-                          color: Color.fromARGB(255, 157, 157, 157),
-                        ),
-                        Text(
-                          " ${platform.toString()}",
-                          style: GoogleFonts.notoSans(
-                              color: Color.fromARGB(255, 124, 124, 124),
-                              fontSize: 12),
-                        ),
-                      ],
+                  SizedBox(height: 2),
+                  Container(
+                    padding: EdgeInsets.all(5),
+                    //height: 30,
+                    decoration: BoxDecoration(
+                      color: Color(lineColor),
+                      borderRadius: BorderRadius.circular(4),
                     ),
-                    SizedBox(width: 15),
-                    Row(
-                      children: [
-                        const Icon(
-                          Icons.directions_subway_outlined,
-                          size: 18,
-                          color: Color.fromARGB(255, 157, 157, 157),
-                        ),
-                        Text(
-                          " ${stops.toString()} Stops",
-                          style: GoogleFonts.notoSans(
-                              //fontWeight: FontWeight.bold,
-                              color: Color.fromARGB(255, 157, 157, 157),
-                              fontSize: 12),
-                        ),
-                      ],
+                    child: Text(
+                      currLine,
+                      style:
+                          GoogleFonts.notoSans(fontSize: 10, color: Colors.white),
                     ),
-                  ],
-                ),
-              ],
-            ),
-          ],
-        ),
-        MetroLine(
-          stationsData: stations.sublist(2, stations.length - 1),
-          lineName: currLine,
-          colourCode: lineColor,
-          departure: stations.sublist(1, stations.length - 1).first["name"],
-          arrival: stations.sublist(1, stations.length - 1).last["name"],
-        ),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            Container(
-              padding: EdgeInsets.only(left: 0, right: 4),
-              height: 40,
-              child: Align(
-                alignment: Alignment.topCenter,
-                child: Stack(
-                  alignment: Alignment.bottomCenter,
-                  clipBehavior: Clip.none,
-                  children: [
-                    Container(
-                      //color: Colors.black,
-                      height: 40,
-                      padding: EdgeInsets.only(bottom: 10),
-                      child: VerticalDivider(
-                        color: Color(lineColor),
-                        thickness: 8,
+                  ),
+                  SizedBox(height: 2),
+                  Text(
+                    "Towards $headsign",
+                    style: GoogleFonts.notoSans(
+                      fontSize: 12,
+                      color: Color.fromARGB(255, 124, 124, 124),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 4,
+                  ),
+                  Row(
+                    children: [
+                      Row(
+                        children: [
+                          const Icon(
+                            Icons.logout,
+                            size: 18,
+                            color: Color.fromARGB(255, 157, 157, 157),
+                          ),
+                          Text(
+                            " ${platform.toString()}",
+                            style: GoogleFonts.notoSans(
+                                color: Color.fromARGB(255, 124, 124, 124),
+                                fontSize: 12),
+                          ),
+                        ],
                       ),
-                    ),
-                    Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        Icon(
-                          Icons.circle,
-                          size: 18,
+                      SizedBox(width: 15),
+                      Row(
+                        children: [
+                          const Icon(
+                            Icons.directions_subway_outlined,
+                            size: 18,
+                            color: Color.fromARGB(255, 157, 157, 157),
+                          ),
+                          Text(
+                            " ${stops.toString()} Stops",
+                            style: GoogleFonts.notoSans(
+                                //fontWeight: FontWeight.bold,
+                                color: Color.fromARGB(255, 157, 157, 157),
+                                fontSize: 12),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+        stations.isNotEmpty
+          ? MetroLine(
+              stationsData: stations,
+              lineName: currLine,
+              colourCode: lineColor,
+              departure: stations.first["name"],
+              arrival: stations.last["name"],
+            ):const SizedBox.shrink()
+        ,
+        
+        Padding(
+          padding: const EdgeInsets.only(left:10),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Container(
+                padding: EdgeInsets.only(left: 0, right: 4),
+                height: 40,
+                child: Align(
+                  alignment: Alignment.topCenter,
+                  child: Stack(
+                    alignment: Alignment.bottomCenter,
+                    clipBehavior: Clip.none,
+                    children: [
+                      Container(
+                        //color: Colors.black,
+                        height: 40,
+                        padding: EdgeInsets.only(bottom: 10),
+                        child: VerticalDivider(
                           color: Color(lineColor),
-                          //color: Color(lineColor),
+                          thickness: 8,
                         ),
-                        Icon(
-                          Icons.circle,
-                          size: 10,
-                          color: Colors.white,
-                          //color: Color(lineColor),
-                        ),
-                      ],
-                    ),
-                  ],
+                      ),
+                      Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          Icon(
+                            Icons.circle,
+                            size: 18,
+                            color: Color(lineColor),
+                            //color: Color(lineColor),
+                          ),
+                          Icon(
+                            Icons.circle,
+                            size: 10,
+                            color: Colors.white,
+                            //color: Color(lineColor),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            Text(
-              arrival,
-              style: GoogleFonts.notoSans(
-                  fontSize: 14, fontWeight: FontWeight.bold),
-            ),
-          ],
+              Text(
+                arrival,
+                style: GoogleFonts.notoSans(
+                    fontSize: 14, fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
         ),
       ]),
     );

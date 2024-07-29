@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class ErrorPopup extends StatelessWidget {
+class SuccessPopup extends StatelessWidget {
   final String title;
   final String message;
   final Function actionFunc;
   final String action;
-  ErrorPopup(
+  const SuccessPopup(
       {super.key,
       required this.title,
       required this.message,
@@ -16,21 +16,22 @@ class ErrorPopup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      iconPadding: EdgeInsets.all(0),
+      iconPadding: const EdgeInsets.all(0),
       icon: Container(
         height: 90,
-        decoration: BoxDecoration(
-          color: Colors.red,
-          borderRadius: BorderRadius.circular(10.0),
+        decoration: const BoxDecoration(
+          color: Color(0xFF5C913B),
+          borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10) ),
+      
         ),
-        child: Icon(
-          Icons.dangerous_outlined,
+        child: const Icon(
+          Icons.check_circle_outline,
           color: Colors.white,
           size: 72.0,
         ),
       ),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
       content: Column(
         mainAxisSize: MainAxisSize.min,
@@ -45,9 +46,9 @@ class ErrorPopup extends StatelessWidget {
             title,
             textAlign: TextAlign.center,
             style: GoogleFonts.notoSans(
-                color: Colors.black, fontSize: 24, fontWeight: FontWeight.bold),
+                color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
           ),
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
           Text(
@@ -62,28 +63,28 @@ class ErrorPopup extends StatelessWidget {
       ),
       actionsAlignment: MainAxisAlignment.spaceEvenly,
       actions: <Widget>[
-        TextButton(
-          style: ButtonStyle(
-            fixedSize: MaterialStateProperty.all(
-              Size(MediaQuery.of(context).size.width / 3, 45),
-            ),
-          ),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          child: Text(
-            "Close",
-            textAlign: TextAlign.center,
-            style: GoogleFonts.notoSans(
-                color: Colors.black, fontSize: 14, fontWeight: FontWeight.w400),
-          ),
-        ),
+        // TextButton(
+        //   style: ButtonStyle(
+        //     fixedSize: MaterialStateProperty.all(
+        //       Size(MediaQuery.of(context).size.width / 3, 45),
+        //     ),
+        //   ),
+        //   onPressed: () {
+        //     Navigator.of(context).pop();
+        //   },
+        //   child: Text(
+        //     "Close",
+        //     textAlign: TextAlign.center,
+        //     style: GoogleFonts.notoSans(
+        //         color: Colors.black, fontSize: 14, fontWeight: FontWeight.w400),
+        //   ),
+        // ),
         ElevatedButton(
           style: ButtonStyle(
               fixedSize: MaterialStateProperty.all(
-                  Size(MediaQuery.of(context).size.width / 3, 45)),
+                  Size(2*MediaQuery.of(context).size.width / 3, 45)),
               backgroundColor: MaterialStateProperty.all(
-                Color(0xFFF7B500),
+              const Color(0xFF5C913B),//  Color(0xFFF2C423),
               )),
           onPressed: () => actionFunc(),
           child: Text(

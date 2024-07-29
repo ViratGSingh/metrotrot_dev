@@ -1,7 +1,15 @@
 import 'dart:convert';
 import 'package:app/features/destination/data/models/dest_metro.dart';
 import 'package:app/features/from_search/data/models/from_fav_recom.dart';
+import 'package:app/features/from_search/data/models/from_search_info.dart';
+import 'package:app/features/to_search/data/models/dest_search_info.dart';
 import 'package:app/features/to_search/data/models/to_fav_recom.dart';
+import 'package:app/widgets/popups/enable_notifications.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 import 'package:uuid/uuid.dart';
 import 'package:app/features/from_search/data/models/from_metro.dart';
 import 'package:app/features/to_search/data/models/dest_tap_data.dart';
@@ -87,12 +95,193 @@ class ToSearchCubit extends Cubit<ToSearchState> {
     return stationSuggestions;
   }
 
+  RewardedAd? rewardedAd;
+  int numRewardedLoadAttempts = 0;
+
+  void initialisationAds() {
+    MobileAds.instance.updateRequestConfiguration(RequestConfiguration());
+    _createRewardedAd();
+  }
+
+  void _createRewardedAd() {
+    AdRequest request = const AdRequest();
+    int maxFailedLoadAttempts = 3;
+    RewardedAd.load(
+        adUnitId: "ca-app-pub-8353447747212760/1167847364",
+        request: request,
+        rewardedAdLoadCallback: RewardedAdLoadCallback(
+          onAdLoaded: (RewardedAd ad) {
+            print('$ad loaded.');
+            rewardedAd = ad;
+            numRewardedLoadAttempts = 0;
+          },
+          onAdFailedToLoad: (LoadAdError error) {
+            print('RewardedAd failed to load: $error');
+            rewardedAd = null;
+            numRewardedLoadAttempts += 1;
+            if (numRewardedLoadAttempts < maxFailedLoadAttempts) {
+              _createRewardedAd();
+            }
+          },
+        ));
+  }
+
+  void showRewardedAd(BuildContext context) {
+    if (rewardedAd == null) {
+      print('Warning: attempt to show rewarded before loaded.');
+      return;
+    }
+    rewardedAd!.fullScreenContentCallback = FullScreenContentCallback(
+      onAdShowedFullScreenContent: (RewardedAd ad) =>
+          print('ad onAdShowedFullScreenContent.'),
+      onAdDismissedFullScreenContent: (RewardedAd ad) {
+        print('$ad onAdDismissedFullScreenContent.');
+        ad.dispose();
+        _createRewardedAd();
+      },
+      onAdFailedToShowFullScreenContent: (RewardedAd ad, AdError error) {
+        print('$ad onAdFailedToShowFullScreenContent: $error');
+        ad.dispose();
+        _createRewardedAd();
+      },
+    );
+
+    rewardedAd!.setImmersiveMode(true);
+    rewardedAd!.show(onUserEarnedReward: (AdWithoutView ad, RewardItem reward) {
+      print('$ad with reward $RewardItem(${reward.amount}, ${reward.type})');
+      updateDestSearchLimit();
+      emit(state.copyWith(isRewardGranted: true));
+    });
+    rewardedAd = null;
+  }
+
+  Future<bool> checkDestSearchLimit(BuildContext context) async {
+    Isar isar = Isar.getInstance() ??
+        await Isar.open([
+          DirectionsSchema,
+          SavedFromRecommendationSchema,
+          SavedToRecommendationSchema,
+          SavedFromMetroSchema,
+          SavedDestMetroSchema,
+          FromSearchInfoSchema,
+          DestSearchInfoSchema
+        ]);
+    int totalFavourites = await isar.savedToRecommendations
+        .filter()
+        .isFavouriteEqualTo(true)
+        .count();
+
+    int totalRecommendations = await isar.savedToRecommendations.count();
+
+    DestSearchInfo? destSearchInfo;
+
+    bool isLimitReached = false;
+
+    bool isBlank = isar.destSearchInfos.isBlank ?? false;
+
+    if (isBlank) {
+      isLimitReached = false;
+
+      destSearchInfo = DestSearchInfo()
+        ..id = 1
+        ..isLimitreached = false
+        ..startedAt = DateTime.now()
+        ..updatedAt = DateTime.now()
+        ..totalFavourites = totalFavourites
+        ..totalRecommendations = totalRecommendations;
+    } else {
+      await isar.destSearchInfos.get(1).then((info) {
+        destSearchInfo = info;
+      });
+      int newSavedDestLocations =
+          totalRecommendations - (destSearchInfo?.totalRecommendations ?? 0);
+      print(newSavedDestLocations);
+      print("New Searches");
+      if (newSavedDestLocations >= 50) {
+        isLimitReached = true;
+      } else {
+        isLimitReached = false;
+      }
+
+      destSearchInfo = DestSearchInfo()
+        ..id = 1
+        ..isLimitreached = isLimitReached
+        ..startedAt = destSearchInfo?.startedAt
+        ..updatedAt = DateTime.now()
+        ..totalFavourites = destSearchInfo?.totalFavourites
+        ..totalRecommendations = destSearchInfo?.totalRecommendations;
+    }
+
+    // if (totalRecommendations >= 50) {
+    //   reachedLimit = true;
+    // } else {
+    //   if (isBlank == true) {
+    //   } else {
+    //     }
+    await isar.writeTxn(() async {
+      await isar.destSearchInfos.put(destSearchInfo!);
+    });
+
+    print(totalRecommendations);
+    print(totalFavourites);
+    print(isLimitReached);
+    return isLimitReached;
+  }
+
+  Future<void> updateDestSearchLimit() async {
+    Isar isar = Isar.getInstance() ??
+        await Isar.open([
+          DirectionsSchema,
+          SavedFromRecommendationSchema,
+          SavedToRecommendationSchema,
+          SavedFromMetroSchema,
+          SavedDestMetroSchema,
+          FromSearchInfoSchema,
+          DestSearchInfoSchema
+        ]);
+    int totalFavourites = await isar.savedToRecommendations
+        .filter()
+        .isFavouriteEqualTo(true)
+        .count();
+
+    int totalRecommendations = await isar.savedToRecommendations.count();
+
+    DestSearchInfo? destSearchInfo;
+    await isar.destSearchInfos.get(1).then((info) {
+      destSearchInfo = info;
+    });
+    destSearchInfo = DestSearchInfo()
+      ..id = 1
+      ..isLimitreached = false
+      ..startedAt = destSearchInfo?.startedAt
+      ..updatedAt = DateTime.now()
+      ..totalFavourites = totalFavourites
+      ..totalRecommendations = totalRecommendations;
+
+    await isar.writeTxn(() async {
+      await isar.destSearchInfos.put(destSearchInfo!);
+    });
+    reachedLimit = false;
+    searchLimitChecked = false;
+  }
+
+  bool reachedLimit = false;
+  bool searchLimitChecked = false;
+
+  late Mixpanel mixpanel;
+  Future<void> initMixpanel() async {
+    mixpanel = await Mixpanel.init(dotenv.env["MIXPANEL_PROJECT_ID"].toString(),
+        trackAutomaticEvents: false);
+    mixpanel.track("openedDestSearchPage");
+  }
+
   getSearchRecommendations(
       //String userId, String fromPlaceId,
       String location,
       bool isOffline,
       double lat,
-      double lng) async {
+      double lng,
+      BuildContext context) async {
     emit(state.copyWith(
         stationStatus: ToSearchStationStatus.loading,
         placeStatus: ToSearchPlaceStatus.loading));
@@ -109,6 +298,12 @@ class ToSearchCubit extends Cubit<ToSearchState> {
           SavedFromMetroSchema,
           SavedDestMetroSchema
         ]);
+
+    if (searchLimitChecked == false) {
+      // ignore: use_build_context_synchronously
+      print("check limit");
+      reachedLimit = await checkDestSearchLimit(context);
+    }
 
     //Suggested Places
     //Check for saved places
@@ -134,6 +329,39 @@ class ToSearchCubit extends Cubit<ToSearchState> {
     //Add all fav saved recommendations
     predictions.addAll(favSavedPredictions);
     predictions.addAll(nonFavSavedPredictions);
+
+    await isar.savedToRecommendations.count().then((totalRecommendations) {
+      print("search limit checked");
+      print(searchLimitChecked);
+      print(reachedLimit);
+      if (reachedLimit == true && searchLimitChecked == false) {
+        showDialog(
+            // ignore: use_build_context_synchronously
+            context: context,
+            builder: (BuildContext context) {
+              return SearchLimitReachedPopup(
+                title: "Warning",
+                message:
+                    "You've reached your limit for searching source locations online. Please watch a 5-second ad to unlock additional searches.\n\n Alternatively, you can continue searching from the $totalRecommendations saved recommendations available right now.",
+                action: "Back",
+                actionFunc: () {
+                  Navigator.pop(context);
+                  showRewardedAd(context);
+
+                  //launchUrl(Uri.parse("https://www.threads.net/@viratgsingh"));
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute<void>(
+                  //     builder: (BuildContext context) => const HomePa,
+                  //   ),
+                  // );
+                },
+              );
+            });
+        searchLimitChecked = true;
+      }
+    });
+
     //Get new places
     if (predictions.isEmpty == true) {
       await toSearchRepository

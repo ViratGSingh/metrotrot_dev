@@ -15,6 +15,7 @@ import 'package:app/features/directions/presentation/widgets/instructions/end.da
 import 'package:app/features/directions/presentation/widgets/instructions/interchange.dart';
 import 'package:app/features/directions/presentation/widgets/instructions/start.dart';
 import 'package:app/features/directions/presentation/widgets/instructions/transit.dart';
+import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 
 class MetroDirections extends StatefulWidget {
   final String routeCost;
@@ -23,9 +24,11 @@ class MetroDirections extends StatefulWidget {
   final String fromDistance;
   final String toDistance;
   final DestMetro destMetro;
+  final Mixpanel mixpanel;
   final UserPriorityStatus priority;
   const MetroDirections(
       {Key? key,
+      required this.mixpanel,
       required this.routeCost,
       required this.fromDistance,
       required this.toDistance,
@@ -51,10 +54,15 @@ class _MetroDirectionsState extends State<MetroDirections> {
     if (direction.travelMode == "WALKING" &&
         direction.vehicleType == "BRIDGE") {
       MetroDirection prevDir = directions[dirIndex - 1];
+      bool isBridgeEnd = false;
+      if (direction.arrivalName == direction.departureName) {
+        isBridgeEnd = true;
+      }
 
       String header = "Change lines using FOB";
       return DirectionInter(
           isBridge: true,
+          isBridgeEnd: isBridgeEnd,
           header: header,
           newStation: direction.arrivalName,
           interchangeStation: direction.interchange,
@@ -63,9 +71,22 @@ class _MetroDirectionsState extends State<MetroDirections> {
           currLine: direction.currLineName,
           currLineColor: direction.currLineColour);
     }
-    if (direction.travelMode == "WALKING" && dirIndex == 0) {
-      MetroDirection nextDir = directions[dirIndex + 1];
-      return DirectionStart(fromStation: nextDir.departureName);
+    if (direction.travelMode == "WALKING" && (dirIndex == 0)) {
+      //MetroDirection nextDir = directions[dirIndex + 1];
+      return DirectionStart(
+        mixpanel:widget.mixpanel,
+        fromStation: direction.arrivalName,
+        fromName: direction.departureName,
+      );
+    }
+    if (direction.travelMode == "WALKING" &&
+        (dirIndex == directions.length - 1)) {
+      //MetroDirection nextDir = directions[dirIndex + 1];
+      return DirectionEnd(
+        mixpanel:widget.mixpanel,
+        toStation: direction.departureName,
+        toName: direction.arrivalName,
+      );
     }
     if (direction.travelMode == "WALKING" &&
         dirIndex != directions.length &&
@@ -82,12 +103,12 @@ class _MetroDirectionsState extends State<MetroDirections> {
       String currLine = currDir.currLineName;
       String header = "";
       bool isBridge = false;
+      bool isBridgeEnd = false;
       if (prevName == currName) {
-        header = "Change lines in";
+        header = "Change here";
       } else {
         isBridge = true;
-        header = "Change lines using FOB";
-        ;
+        header = "Change here using FOB";
       }
 
       return DirectionInter(
@@ -98,6 +119,7 @@ class _MetroDirectionsState extends State<MetroDirections> {
           prevLine: prevLine,
           prevLineColor: prevLineColor,
           currLine: currLine,
+          isBridgeEnd: isBridgeEnd,
           currLineColor: currLineColor);
     }
 
@@ -116,7 +138,16 @@ class _MetroDirectionsState extends State<MetroDirections> {
         }
         i++;
       });
-      filteredStations = direction.stations.sublist(startIndex, endIndex + 1);
+      if (startIndex < endIndex) {
+        filteredStations =
+            direction.stations.sublist(startIndex, endIndex + 1).toList();
+      } else {
+        filteredStations =
+            direction.stations.sublist(endIndex, startIndex + 1).toList();
+      }
+      filteredStations.remove(filteredStations.first);
+      filteredStations.remove(filteredStations.last);
+
       return DirectionTransit(
           platform: direction.platform,
           stops: direction.stops,
@@ -242,33 +273,33 @@ class _MetroDirectionsState extends State<MetroDirections> {
   @override
   Widget build(BuildContext context) {
     ValueNotifier<int> i = ValueNotifier<int>(0);
+
     selectedValue = widget.priority == UserPriorityStatus.stops ? "0" : "1";
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       child: Column(
         // crossAxisAlignment: CrossAxisAlignment.center,
         // mainAxisAlignment: MainAxisAlignment.center,
         children: widget.directions
-            .map((direction) => Padding(
-                  padding: EdgeInsets.only(top: 5, bottom: 5),
-                  child: Container(
-                      width: MediaQuery.of(context).size.width,
-                      // decoration: BoxDecoration(
-                      //     color: Colors.white,
-                      //     borderRadius: BorderRadius.circular(10),
-                      //     boxShadow: [
-                      //       BoxShadow(
-                      //         offset: Offset(0, 4),
-                      //         blurRadius: 4,
-                      //         color: Colors.black.withOpacity(0.25),
-                      //       )
-                      //     ]),
-                      child: formatDirection(
-                          direction,
-                          widget
-                              .directions) //controller.formatDirection(direction),
-                      ),
-                ))
+            .map(
+              (direction) => Container(
+                  width: MediaQuery.of(context).size.width,
+                  // decoration: BoxDecoration(
+                  //     color: Colors.white,
+                  //     borderRadius: BorderRadius.circular(10),
+                  //     boxShadow: [
+                  //       BoxShadow(
+                  //         offset: Offset(0, 4),
+                  //         blurRadius: 4,
+                  //         color: Colors.black.withOpacity(0.25),
+                  //       )
+                  //     ]),
+                  child: formatDirection(
+                      direction,
+                      widget
+                          .directions) //controller.formatDirection(direction),
+                  ),
+            )
             .toList(),
       ),
     );

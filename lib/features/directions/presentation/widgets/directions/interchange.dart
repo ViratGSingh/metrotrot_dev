@@ -10,6 +10,7 @@ class DirectionInter extends StatelessWidget {
   String header;
   bool isBridge;
   String newStation;
+  bool isBridgeEnd;
   DirectionInter(
       {Key? key,
       required this.isBridge,
@@ -19,89 +20,214 @@ class DirectionInter extends StatelessWidget {
       required this.prevLine,
       required this.prevLineColor,
       required this.currLine,
-      required this.currLineColor})
+      required this.currLineColor,
+      this.isBridgeEnd=false
+      })
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(15),
-      decoration: BoxDecoration(
-          image: DecorationImage(
-              image: isBridge==false?AssetImage("assets/images/interchange.png"):AssetImage("assets/images/nearest.png"),
-              alignment: Alignment.bottomCenter),
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
-          boxShadow: [
-            BoxShadow(
-              offset: Offset(0, 4),
-              blurRadius: 4,
-              color: Colors.black.withOpacity(0.25),
-            )
-          ]),
-      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Text(header, style: GoogleFonts.notoSans(fontSize: 14)),
-        isBridge==false?Text(
-          interchangeStation,
-          style:
-              GoogleFonts.notoSans(fontSize: 16, fontWeight: FontWeight.bold),
-        ): Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-            Text(
-            interchangeStation,
-            style:
-                GoogleFonts.notoSans(fontSize: 16, fontWeight: FontWeight.bold),
-          ),
-          Icon(Icons.arrow_downward_outlined),
-          Text(
-            newStation,
-            style:
-                GoogleFonts.notoSans(fontSize: 16, fontWeight: FontWeight.bold),
-          )
-          ]),
-        
-        Padding(
-          padding: EdgeInsets.only(top: 20),
-          child: Container(
-            padding: EdgeInsets.all(5),
-            //height: 30,
-            decoration: BoxDecoration(
-              color: Color(prevLineColor),
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Text(
-              prevLine,
-              style: GoogleFonts.notoSans(fontSize: 14, color: Colors.white),
-            ),
-          ),
-        ),
+    return Column(
+      children: isBridgeEnd==true?[
         Container(
-          padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
-          height: 50,
-          width: 20,
-          child: Image.asset(
-            "assets/images/dotted_line.png",
-            fit: BoxFit.cover,
-            color: Colors.black.withOpacity(0.4),
+          padding: EdgeInsets.fromLTRB(10,15,0,15),
+          decoration: BoxDecoration(
+              // image: DecorationImage(
+              //     image: isBridge==false?AssetImage("assets/images/interchange.png"):AssetImage("assets/images/nearest.png"),
+              //     alignment: Alignment.bottomCenter),
+              // color: Colors.white,
+              // borderRadius: BorderRadius.circular(10),
+              // border: Border.all(color: Colors.grey.shade300)
+              // boxShadow: [
+              //   BoxShadow(
+              //     offset: Offset(0, 4),
+              //     blurRadius: 4,
+              //     color: Colors.black.withOpacity(0.25),
+              //   )
+              // ]
+              ),
+          child: Row(
+            children: [
+              Icon(Icons.swap_vert),
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                Text(header, style: GoogleFonts.notoSans(fontSize: 14)),
+                Container(
+                  width: 2*MediaQuery.of(context).size.width/3+40,
+                  child: isBridge==false?Text(
+                    "Move towards $currLine",
+                    style:
+                        GoogleFonts.notoSans(fontSize: 14, fontWeight: FontWeight.bold),
+                  ): Text(
+                    "Move towards $newStation",
+                    style:
+                        GoogleFonts.notoSans(fontSize: 14, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                // Column(
+                //     crossAxisAlignment: CrossAxisAlignment.start,
+                //     children: [
+                //     Text(
+                //     interchangeStation,
+                //     style:
+                //         GoogleFonts.notoSans(fontSize: 16, fontWeight: FontWeight.bold),
+                //   ),
+                //   Icon(Icons.arrow_downward_outlined),
+                //   Text(
+                //     newStation,
+                //     style:
+                //         GoogleFonts.notoSans(fontSize: 16, fontWeight: FontWeight.bold),
+                //   )
+                //   ]),
+                
+                // Padding(
+                //   padding: EdgeInsets.only(top: 0),
+                //   child: Container(
+                //     padding: EdgeInsets.all(5),
+                //     //height: 30,
+                //     decoration: BoxDecoration(
+                //       color: Color(currLineColor),
+                //       borderRadius: BorderRadius.circular(8),
+                //     ),
+                //     child: Text(
+                //       currLine,
+                //       style: GoogleFonts.notoSans(fontSize: 14, color: Colors.white),
+                //     ),
+                //   ),
+                // ),
+              ]),
+            ],
           ),
         ),
         Padding(
-          padding: EdgeInsets.only(top: 0),
-          child: Container(
-            padding: EdgeInsets.all(5),
-            //height: 30,
-            decoration: BoxDecoration(
-              color: Color(currLineColor),
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Text(
-              currLine,
-              style: GoogleFonts.notoSans(fontSize: 14, color: Colors.white),
-            ),
+              padding: const EdgeInsets.only(left:10),
+              child: Row(
+                children: [
+                  Container(
+                    padding: EdgeInsets.only(right: 4),
+                    height: 20,
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        // Container(
+                        //   //color: Colors.black,
+                        //   height: 20,
+                        //   child: VerticalDivider(
+                        //     color: Colors.red,
+                        //     thickness: 8,
+                        //   ),
+                        // ),
+                        Container(
+                          child: Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              Icon(
+                                Icons.circle,
+                                size: 18,
+                                color: Color(prevLineColor),
+                                //color: Color(lineColor),
+                              ),
+                              Icon(
+                                Icons.circle,
+                                size: 10,
+                                color: Colors.white,
+                                //color: Color(lineColor),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    height: 20,
+                    width: MediaQuery.of(context).size.width / 2,
+                    child: Text(
+                              newStation,
+                              style: GoogleFonts.notoSans(
+                                color: Colors.black,
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold
+                              ),
+                            )
+                          
+                            ),
+                    
+                  
+                ],
+              ),
+            )
+      ]:[
+        Container(
+          padding: EdgeInsets.fromLTRB(10,15,0,15),
+          decoration: BoxDecoration(
+              // image: DecorationImage(
+              //     image: isBridge==false?AssetImage("assets/images/interchange.png"):AssetImage("assets/images/nearest.png"),
+              //     alignment: Alignment.bottomCenter),
+              // color: Colors.white,
+              // borderRadius: BorderRadius.circular(10),
+              // border: Border.all(color: Colors.grey.shade300)
+              // boxShadow: [
+              //   BoxShadow(
+              //     offset: Offset(0, 4),
+              //     blurRadius: 4,
+              //     color: Colors.black.withOpacity(0.25),
+              //   )
+              // ]
+              ),
+          child: Row(
+            children: [
+              Icon(Icons.swap_vert),
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                Text(header, style: GoogleFonts.notoSans(fontSize: 14)),
+                Container(
+                  width: 2*MediaQuery.of(context).size.width/3+40,
+                  child: isBridge==false?Text(
+                    "Move towards $currLine",
+                    style:
+                        GoogleFonts.notoSans(fontSize: 14, fontWeight: FontWeight.bold),
+                  ): Text(
+                    "Move towards $newStation",
+                    style:
+                        GoogleFonts.notoSans(fontSize: 14, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                // Column(
+                //     crossAxisAlignment: CrossAxisAlignment.start,
+                //     children: [
+                //     Text(
+                //     interchangeStation,
+                //     style:
+                //         GoogleFonts.notoSans(fontSize: 16, fontWeight: FontWeight.bold),
+                //   ),
+                //   Icon(Icons.arrow_downward_outlined),
+                //   Text(
+                //     newStation,
+                //     style:
+                //         GoogleFonts.notoSans(fontSize: 16, fontWeight: FontWeight.bold),
+                //   )
+                //   ]),
+                
+                // Padding(
+                //   padding: EdgeInsets.only(top: 0),
+                //   child: Container(
+                //     padding: EdgeInsets.all(5),
+                //     //height: 30,
+                //     decoration: BoxDecoration(
+                //       color: Color(currLineColor),
+                //       borderRadius: BorderRadius.circular(8),
+                //     ),
+                //     child: Text(
+                //       currLine,
+                //       style: GoogleFonts.notoSans(fontSize: 14, color: Colors.white),
+                //     ),
+                //   ),
+                // ),
+              ]),
+            ],
           ),
         ),
-      ]),
+      ],
     );
   }
 }

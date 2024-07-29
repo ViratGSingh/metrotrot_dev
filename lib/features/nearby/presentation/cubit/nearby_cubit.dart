@@ -6,7 +6,9 @@ import 'package:app/models/location.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 part 'nearby_state.dart';
@@ -14,6 +16,12 @@ part 'nearby_state.dart';
 class NearbyCubit extends Cubit<NearbyState> {
   final NearbyRepository nearbyRepository;
   NearbyCubit({required this.nearbyRepository}) : super(NearbyState.initial());
+
+  late Mixpanel mixpanel;
+  Future<void> initMixpanel() async {
+    mixpanel = await Mixpanel.init(dotenv.env["MIXPANEL_PROJECT_ID"].toString(),
+        trackAutomaticEvents: false);
+  }
 
   Future<List<Map<String, dynamic>>> findClosestStations(
       List<Map<String, dynamic>> locations, Location userLocation) async {

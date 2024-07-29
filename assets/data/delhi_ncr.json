@@ -1353,7 +1353,7 @@
         },
         {
           "place_id": "OnrML%2f8a9k%2bqWFENfc3%2bfg%3d%3d",
-          "name": "Huda City Centre",
+          "name": "Millenium City Centre Gurugram",
           "address": "Gurgaon - Delhi Expy, Sector 29, Gurugram, Haryana 122007",
           "coordinates": {
             "lat": 28.4592,
@@ -2329,10 +2329,15 @@
               "towards_end":"Platform 1"
             }
           },
-          "is_interchange": true,
+          "is_interchange": false,
           "interchange_data": {
-            "count": 2,
-            "lines": ["line_3", "line_12"]
+            "count": 1,
+            "lines": ["line_3"]
+          },
+          "is_fob":true,
+          "fob_data":{
+            "line":"line_12",
+            "index":0
           }
         },
         {
@@ -4098,10 +4103,15 @@
               "towards_end":"Platform 1"
             }
           },
-          "is_interchange": true,
+          "is_interchange": false,
           "interchange_data": {
-            "count": 2,
-            "lines": ["line_7","line_10"]
+            "count": 1,
+            "lines": ["line_7"]
+          },
+          "is_fob":true,
+          "fob_data":{
+            "line":"line_10",
+            "index":2
           }
         },
         {
@@ -5362,19 +5372,20 @@
             "lng": 77.1590951
           },
            "platforms":{
-            "line_3":{
-              "towards_start":"Platform 2",
-              "towards_end":"Platform 1"
-            },
             "line_10":{
               "towards_start":"Platform 4",
               "towards_end":"Platform 3"
             }
           },
-          "is_interchange": true,
+          "is_interchange": false,
           "interchange_data": {
-            "count": 2,
-            "lines": ["line_7","line_10"]
+            "count": 1,
+            "lines": ["line_10"]
+          },
+          "is_fob":true,
+          "fob_data":{
+            "line":"line_7",
+            "index":11
           }
         },
         {
@@ -5690,16 +5701,17 @@
             "line_12":{
               "towards_start":"Platform 4",
               "towards_end":"Platform 3"
-            },
-            "line_3":{
-              "towards_start":"Platform 2",
-              "towards_end":"Platform 1"
             }
           },
-          "is_interchange": true,
+          "is_interchange": false,
           "interchange_data": {
-            "count": 2,
-            "lines": ["line_3", "line_12"]
+            "count": 1,
+            "lines": ["line_12"]
+          },
+          "is_fob":true,
+          "fob_data":{
+            "line":"line_3",
+            "index":45
           }
         },
         {

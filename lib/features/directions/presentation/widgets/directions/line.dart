@@ -53,20 +53,79 @@ class _MetroLineState extends State<MetroLine> {
     super.initState();
   }
 
-  bool isExpanded = false;
+  bool isExpanded = true;
   @override
   Widget build(BuildContext context) {
     // final c = Get.put(
     //   HomeController(),
     // );
     int i = 0;
-    ValueNotifier<bool> isEnd = ValueNotifier<bool>(false);
-    List data = widget.stationsData;
+    List data = widget.stationsData.sublist(1,widget.stationsData.length);
 
-    return Container(
+    return widget.stationsData.length==1?
+    Padding(
+              padding: const EdgeInsets.only(left:10),
+              child: Row(
+                children: [
+                  Container(
+                    padding: EdgeInsets.only(right: 4),
+                    height: 20,
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        Container(
+                          //color: Colors.black,
+                          height: 20,
+                          child: VerticalDivider(
+                            color: Color(widget.colourCode),
+                            thickness: 8,
+                          ),
+                        ),
+                        Container(
+                          child: Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              Icon(
+                                Icons.circle,
+                                size: 18,
+                                color: Color(widget.colourCode),
+                                //color: Color(lineColor),
+                              ),
+                              Icon(
+                                Icons.circle,
+                                size: 10,
+                                color: Colors.white,
+                                //color: Color(lineColor),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    height: 20,
+                    width: MediaQuery.of(context).size.width / 2,
+                    child: Text(
+                              widget.departure,
+                              style: GoogleFonts.notoSans(
+                                color: Colors.black,
+                                fontSize: 14,
+                              ),
+                            )
+                          
+                            ),
+                    
+                  
+                ],
+              ),
+            )
+    :
+    Container(
       decoration: BoxDecoration(
         border: Border.all(
-          color: Colors.grey,
+          color: Colors.grey.shade300,
           width: 2.0,
         ),
         borderRadius: BorderRadius.circular(8.0),
@@ -82,201 +141,193 @@ class _MetroLineState extends State<MetroLine> {
           shape: RoundedRectangleBorder(),
           style: ListTileStyle.drawer,
           child: ExpansionTile(
+            initiallyExpanded: true,
             onExpansionChanged: (value) {
               setState(() {
                 isExpanded = value;
               });
             },
-            title: Row(
-              children: [
-                Container(
-                  padding: EdgeInsets.only(right: 4),
-                  height: 50,
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Container(
-                        //color: Colors.black,
-                        height: 50,
-                        child: VerticalDivider(
-                          color: Color(widget.colourCode),
-                          thickness: 8,
-                        ),
-                      ),
-                      Container(
-                        padding:
-                            EdgeInsets.only(top: isExpanded == true ? 20 : 0),
-                        child: Stack(
-                          alignment: Alignment.center,
-                          children: [
-                            Icon(
-                              Icons.circle,
-                              size: 18,
-                              color: Color(widget.colourCode),
-                              //color: Color(lineColor),
-                            ),
-                            Icon(
-                              Icons.circle,
-                              size: 10,
-                              color: Colors.white,
-                              //color: Color(lineColor),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  alignment: Alignment.centerLeft,
-                  height: 50,
-                  padding: EdgeInsets.only(top: isExpanded == true ? 20 : 0),
-                  width: MediaQuery.of(context).size.width / 2,
-                  child: FittedBox(
-                    child: isExpanded == true
-                        ? Text(
-                            widget.departure,
-                            style: GoogleFonts.notoSans(
-                              color: Colors.black,
-                              fontSize: 14,
-                            ),
-                          )
-                        : RichText(
-                            text: TextSpan(
-                              children: [
-                                TextSpan(
-                                  text: widget.departure,
-                                  style: GoogleFonts.notoSans(
-                                      color: Colors.black,
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                TextSpan(
-                                  text: " - ",
-                                  style: GoogleFonts.notoSans(
-                                      color: Colors.black,
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                TextSpan(
-                                  text: widget.arrival,
-                                  style: GoogleFonts.notoSans(
-                                      color: Colors.black,
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ],
-                            ),
+            title: Padding(
+              padding: const EdgeInsets.only(left:8),
+              child: Row(
+                children: [
+                  Container(
+                    padding: EdgeInsets.only(right: 4),
+                    height: 50,
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        Container(
+                          //color: Colors.black,
+                          height: 50,
+                          child: VerticalDivider(
+                            color: Color(widget.colourCode),
+                            thickness: 8,
                           ),
+                        ),
+                        Container(
+                          padding:
+                              EdgeInsets.only(top: isExpanded == true ? 20 : 0),
+                          child: Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              Icon(
+                                Icons.circle,
+                                size: 18,
+                                color: Color(widget.colourCode),
+                                //color: Color(lineColor),
+                              ),
+                              Icon(
+                                Icons.circle,
+                                size: 10,
+                                color: Colors.white,
+                                //color: Color(lineColor),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    height: 50,
+                    padding: EdgeInsets.only(top: isExpanded == true ? 20 : 0),
+                    width: MediaQuery.of(context).size.width / 2,
+                    child: FittedBox(
+                      child: isExpanded == true
+                          ? Text(
+                              widget.departure,
+                              style: GoogleFonts.notoSans(
+                                color: Colors.black,
+                                fontSize: 14,
+                              ),
+                            )
+                          : Text(
+                              "Stations in Between",
+                              style: GoogleFonts.notoSans(
+                                color: Colors.black,
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold
+                              ),
+                            )
+                          ,
+                    ),
+                  ),
+                ],
+              ),
             ),
             tilePadding: EdgeInsets.zero,
             childrenPadding: EdgeInsets.zero,
             children: data.map((station) {
               if (i == (widget.stationsData.length - 1)) {
                 i += 1;
-                return Row(
-                  children: [
-                    Container(
-                      padding: EdgeInsets.only(right: 4),
-                      height: 40,
-                      child: Stack(
+                return Padding(
+                  padding: const EdgeInsets.only(left:8),
+                  child: Row(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.only(right: 4),
+                        height: 40,
+                        child: Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            Container(
+                              //color: Colors.black,
+                              height: 40,
+                              child: VerticalDivider(
+                                color: Color(widget.colourCode),
+                                thickness: 8,
+                              ),
+                            ),
+                            Container(
+                              padding: EdgeInsets.only(bottom: 10),
+                              child: Stack(
+                                alignment: Alignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.circle,
+                                    size: 18,
+                                    color: Color(widget.colourCode),
+                                    //color: Color(lineColor),
+                                  ),
+                                  Icon(
+                                    Icons.circle,
+                                    size: 10,
+                                    color: Colors.white,
+                                    //color: Color(lineColor),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
                         alignment: Alignment.center,
-                        children: [
-                          Container(
-                            //color: Colors.black,
-                            height: 40,
-                            child: VerticalDivider(
-                              color: Color(widget.colourCode),
-                              thickness: 8,
-                            ),
-                          ),
-                          Container(
-                            padding: EdgeInsets.only(bottom: 10),
-                            child: Stack(
-                              alignment: Alignment.center,
-                              children: [
-                                Icon(
-                                  Icons.circle,
-                                  size: 18,
-                                  color: Color(widget.colourCode),
-                                  //color: Color(lineColor),
-                                ),
-                                Icon(
-                                  Icons.circle,
-                                  size: 10,
-                                  color: Colors.white,
-                                  //color: Color(lineColor),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      alignment: Alignment.center,
-                      height: 40,
-                      padding: EdgeInsets.only(bottom: 10),
-                      child: Text(
-                        station["name"],
-                        style: GoogleFonts.notoSans(
-                            fontSize: 14, fontWeight: FontWeight.normal),
-                      ),
-                    )
-                  ],
+                        height: 40,
+                        padding: EdgeInsets.only(bottom: 10),
+                        child: Text(
+                          station["name"],
+                          style: GoogleFonts.notoSans(
+                              fontSize: 14, fontWeight: FontWeight.normal),
+                        ),
+                      )
+                    ],
+                  ),
                 );
               } else {
                 i += 1;
-                return Row(
-                  children: [
-                    Container(
-                      padding: EdgeInsets.only(right: 4),
-                      height: 30,
-                      child: Stack(
+                return Padding(
+                  padding: const EdgeInsets.only(left:8),
+                  child: Row(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.only(right: 4),
+                        height: 30,
+                        child: Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            Container(
+                              //color: Colors.black,
+                              height: 30,
+                              child: VerticalDivider(
+                                color: Color(widget.colourCode),
+                                thickness: 8,
+                              ),
+                            ),
+                            Container(
+                              child: Stack(
+                                alignment: Alignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.circle,
+                                    size: 18,
+                                    color: Color(widget.colourCode),
+                                    //color: Color(lineColor),
+                                  ),
+                                  Icon(
+                                    Icons.circle,
+                                    size: 10,
+                                    color: Colors.white,
+                                    //color: Color(lineColor),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
                         alignment: Alignment.center,
-                        children: [
-                          Container(
-                            //color: Colors.black,
-                            height: 30,
-                            child: VerticalDivider(
-                              color: Color(widget.colourCode),
-                              thickness: 8,
-                            ),
-                          ),
-                          Container(
-                            child: Stack(
-                              alignment: Alignment.center,
-                              children: [
-                                Icon(
-                                  Icons.circle,
-                                  size: 18,
-                                  color: Color(widget.colourCode),
-                                  //color: Color(lineColor),
-                                ),
-                                Icon(
-                                  Icons.circle,
-                                  size: 10,
-                                  color: Colors.white,
-                                  //color: Color(lineColor),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      alignment: Alignment.center,
-                      height: 30,
-                      child: Text(
-                        station["name"],
-                        style: GoogleFonts.notoSans(fontSize: 14),
-                      ),
-                    )
-                  ],
+                        height: 30,
+                        child: Text(
+                          station["name"],
+                          style: GoogleFonts.notoSans(fontSize: 14),
+                        ),
+                      )
+                    ],
+                  ),
                 );
               }
             }).toList(),
