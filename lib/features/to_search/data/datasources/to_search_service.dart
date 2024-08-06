@@ -20,8 +20,7 @@ class ToSearchService {
           "input": location,
           "language": "en",
           "region": "in",
-          // "locationrestriction":
-          //     "circle:50000@${lat.toString()},${lng.toString()}",
+          "locationrestriction": "circle:52000@28.4020,76.8260",
           "key": apiKey
         });
 

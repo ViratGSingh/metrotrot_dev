@@ -363,7 +363,7 @@ class ToSearchCubit extends Cubit<ToSearchState> {
     });
 
     //Get new places
-    if (predictions.isEmpty == true) {
+    if (predictions.isEmpty == true && reachedLimit == false) {
       await toSearchRepository
           .getSearchRecommendations(location)
           .then((value) async {

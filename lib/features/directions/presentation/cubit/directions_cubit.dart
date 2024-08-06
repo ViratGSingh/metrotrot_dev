@@ -226,47 +226,48 @@ class DirectionsCubit extends Cubit<DirectionsState> {
     //       .findFirst();
     //   route = MetroRoute.fromJson(offRoute!.directions.toString());
     //}¯
-    if (fromMetro.fromName != fromMetro.name) {
-      List<MetroDirection> updRouteData = [];
-      if (route.route.first.departureName.toLowerCase() !=
-          fromMetro.fromName.toLowerCase()) {
-        updRouteData.add(
-          MetroDirection(
-              platform: "",
-              stops: 0,
-              travelMode: "WALKING",
-              vehicleType: "WALKING",
-              metro: "DMRC",
-              departureName: fromMetro.fromName,
-              arrivalName: fromMetro.name,
-              currLineName: "",
-              currLineColour: 000000,
-              interchange: "",
-              duration: "",
-              headsign: "",
-              stations: []),
-        );
-      }
-      updRouteData.addAll(route.route);
-      if (route.route.last.arrivalName.toLowerCase() !=
-          toMetro.destName.toLowerCase()) {
-        updRouteData.add(MetroDirection(
+    //if (fromMetro.fromName != fromMetro.name) {
+    List<MetroDirection> updRouteData = [];
+    if (route.route.first.departureName.toLowerCase() !=
+        fromMetro.fromName.toLowerCase()) {
+      updRouteData.add(
+        MetroDirection(
             platform: "",
             stops: 0,
             travelMode: "WALKING",
             vehicleType: "WALKING",
             metro: "DMRC",
-            departureName: toMetro.name,
-            arrivalName: toMetro.destName,
+            departureName: fromMetro.fromName,
+            arrivalName: fromMetro.name,
             currLineName: "",
             currLineColour: 000000,
             interchange: "",
             duration: "",
             headsign: "",
-            stations: []));
-        route.route = updRouteData;
-      }
+            stations: []),
+      );
     }
+    updRouteData.addAll(route.route);
+    if (route.route.last.arrivalName.toLowerCase() !=
+        toMetro.destName.toLowerCase()) {
+      updRouteData.add(MetroDirection(
+          platform: "",
+          stops: 0,
+          travelMode: "WALKING",
+          vehicleType: "WALKING",
+          metro: "DMRC",
+          departureName: toMetro.name,
+          arrivalName: toMetro.destName,
+          currLineName: "",
+          currLineColour: 000000,
+          interchange: "",
+          duration: "",
+          headsign: "",
+          stations: []));
+    }
+
+    route.route = updRouteData;
+    //}
     emit(state.copyWith(
         status: DirectionsStatus.loaded,
         routeData: route,
