@@ -1,5 +1,7 @@
+import 'dart:io';
 import 'dart:math';
-
+import 'dart:convert';
+import 'dart:collection';
 import 'package:app/features/directions/data/models/route_direction.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -99,10 +101,16 @@ class DirectionsCubit extends Cubit<DirectionsState> {
               lines: []));
 
       ////print(metroStations.length);
-
-      ShortestPathResult shortestRoute =
+      ShortestPathResult shortestRoute = ShortestPathResult(
+        path:[], distance: 0, incursions: [], numInterchanges: 0, route: route);
+      if(priority==UserPriorityStatus.interchanges){
+         //AltGraph altGraphData = await loadGraphData(metroData);
+         shortestRoute = findLeastInterchangePath(metroGraph,startStation!,endStation!,metroData);
+         //findTop10PathsWithUniqueFirstInterchanges(altGraphData, startStation!, endStation!);
+      }else{
+        shortestRoute =
           findShortestPath(metroGraph, startStation!, endStation!, metroData);
-      //findMinIntPath(metroGraph, startStation!, endStation!, metroData);
+      }//findMinIntPath(metroGraph, startStation!, endStation!, metroData);
       routes.add(shortestRoute);
       route = shortestRoute.route;
       List<Station> incursions = shortestRoute.incursions;
@@ -303,6 +311,8 @@ class DirectionsCubit extends Cubit<DirectionsState> {
     return bestRouteIndex;
   }
 
+  
+
   getLeastInterchangesRoute(List<int> stopsList, List<int> interchangesList) {
     //For least interchanges priority
     int leastInterchanges = interchangesList.reduce(min);
@@ -409,6 +419,263 @@ class Station {
         "fobStationIndex": fobStationIndex
       };
 }
+class AltEdge {
+  Station source;
+  Station destination;
+  double weight;
+  int interchanges;
+
+  AltEdge({
+    required this.source,
+    required this.destination,
+    required this.weight,
+    this.interchanges = 0,
+  });
+}
+
+class AltGraph {
+  List<Station> stations;
+  List<AltEdge> edges;
+
+  AltGraph({required this.stations, required this.edges});
+
+  List<AltEdge> getEdges(Station station) {
+    return edges.where((edge) => edge.source.name == station.name).toList();
+  }
+}
+
+class PathInfo implements Comparable<PathInfo> {
+  List<Station> path;
+  List<Station> interchanges;
+  int get interchangeCount => interchanges.length;
+
+  PathInfo({required this.path, required this.interchanges});
+
+  @override
+  int compareTo(PathInfo other) {
+    return interchangeCount.compareTo(other.interchangeCount);
+  }
+}
+
+
+ShortestPathResult findLeastInterchangePath(Graph graph, Station start, Station end, Map<String, dynamic> metroData) {
+  //Check if both have same line in common
+  final set1 = start.lines.toSet();
+  bool isSameLine = set1.intersection(end.lines.toSet()).isNotEmpty;
+  // //Check for blue branch condition
+  List<dynamic> blueLineData = metroData["data"]["line_3"]["stations"];
+
+  List<String> beforeBlueBranchPointStations = [];
+  bool reachedBranchPt = false;
+  for( dynamic stationData in blueLineData){
+    if(stationData["name"]!="Yamuna Bank" && reachedBranchPt==false){
+    beforeBlueBranchPointStations.add(stationData["name"]);
+    }else{
+      reachedBranchPt = true;
+    }
+  }
+
+  // }
+  if(isSameLine){
+    ShortestPathResult route = findShortestPath(graph, start, end, metroData);
+    return route;
+  }else{
+    //Find list of interchange stations in start station's lines
+    List<ShortestPathResult> totalPathInfos = [];
+    List<Station> totalFirstInterchanges = [];
+    List<String> totalLines = start.lines;
+    if(totalLines.contains("line_4")){
+      totalLines.add("line_3");
+    }
+    List<Station> totalStations = graph.stations;
+    for (String line in totalLines){
+      for(Station station in totalStations){
+        if(
+          station.lines.contains(line) && 
+          station.isInterchange && 
+          station!=start &&
+          totalFirstInterchanges.contains(station)==false
+          ){
+            //Check blue branch line condition
+            if(start.lines.contains("line_4") && 
+            station.lines.contains("line_3") &&
+            beforeBlueBranchPointStations.contains(station.name)==false
+            ){
+              if(station.name!="Yamuna Bank"){
+                totalFirstInterchanges.add(station);
+              }
+
+            }else{
+                totalFirstInterchanges.add(station);
+            }
+
+        }
+      }
+    }
+    //Find paths from each of them
+    for(Station firstInterchangeStation in totalFirstInterchanges){
+      ShortestPathResult pathData = findShortestPath(graph, firstInterchangeStation, end, metroData);
+      totalPathInfos.add(pathData);
+    }
+    //Sort paths according to interchanges count
+    totalPathInfos.sort((a, b) => a.numInterchanges.compareTo(b.numInterchanges));
+    totalPathInfos.forEach((pathInfo){
+      print("First Interchange");
+      print(pathInfo.path.first.name);
+      print("Path");
+      print(pathInfo.path.map((station) => station.name).join(" -> "));
+      print("Total Interchanges");
+      print(pathInfo.numInterchanges);
+      print("");
+    });
+    
+    ShortestPathResult bestFirstInterchangePathInfo = totalPathInfos.first;
+    //Find pathinfo from start to first interchange station
+    Station bestFirstInterchange = bestFirstInterchangePathInfo.path.first;
+    List<Station> initialPath = [];
+    if(set1.intersection(bestFirstInterchange.lines.toSet()).isNotEmpty){
+    String initialLine = set1.intersection(bestFirstInterchange.lines.toSet()).first;
+    List<dynamic> initialLineData = metroData["data"][initialLine]["stations"];
+    List<Station> initialLineInfo = [];
+    int startStationIndex = 0;
+    int bestFirstInterchangeIndex = 0;
+    int i = 0;
+    for(dynamic stationData in initialLineData){
+        List<dynamic> dynamicLines = stationData["interchange_data"]["lines"];
+        List<String> lines = dynamicLines.map((e) => e.toString()).toList();
+        if(start.name==stationData["name"]){
+          startStationIndex = i;
+        }
+        if(bestFirstInterchange.name==stationData["name"]){
+          bestFirstInterchangeIndex = i;
+        }
+        Station stationInfo = Station(
+            id: stationData["place_id"],
+            name: stationData["name"],
+            latitude: stationData["coordinates"]["lat"],
+            longitude: stationData["coordinates"]["lng"],
+            isInterchange: stationData["is_interchange"],
+            isFob: stationData.containsKey("is_fob") == true ? true : false,
+            fobLine: stationData.containsKey("fob_data") == true
+                ? stationData["fob_data"]["line"]
+                : "",
+            fobStationIndex: stationData.containsKey("fob_data") == true
+                ? stationData["fob_data"]["index"]
+                : -1,
+            lines: lines);
+            initialLineInfo.add(stationInfo);
+        i++;
+    }
+    if(startStationIndex<bestFirstInterchangeIndex){
+      if(bestFirstInterchangeIndex<initialLineInfo.length-1){
+      initialLineInfo =  initialLineInfo.sublist(startStationIndex,bestFirstInterchangeIndex+1);
+      }else{
+      initialLineInfo =  initialLineInfo.sublist(startStationIndex);
+      }
+    }else{
+      if(startStationIndex<initialLineInfo.length-1){
+      initialLineInfo = initialLineInfo.sublist(bestFirstInterchangeIndex,startStationIndex+1);
+      }else{
+      initialLineInfo = initialLineInfo.sublist(bestFirstInterchangeIndex);
+      }
+      initialLineInfo = initialLineInfo.reversed.toList();
+      //initialLineInfo = initialLineInfo.toList();
+    }
+    initialPath.addAll(initialLineInfo);
+    print("Station Indexes");
+    print(initialPath.map((station) => station.name).join(" -> "));
+    }else{
+      ShortestPathResult initialRoute = findShortestPath(graph, start, bestFirstInterchange, metroData);
+      initialPath = initialRoute.path;
+    }
+
+    List<Station> leastInterchangePath = initialPath;
+    leastInterchangePath.addAll(bestFirstInterchangePathInfo.path.sublist(1)); 
+    double leastInterchangePathDistance = 0;
+    Station previousStation = leastInterchangePath.first;
+    for(Station station in leastInterchangePath){
+      if(station!=leastInterchangePath.first){
+        double stationDistance = _distance(previousStation, station);
+        leastInterchangePathDistance += stationDistance;
+      }else{
+        previousStation = station;
+      }
+
+    }
+
+    //Find route interchanges in this path
+    List<int> routeInterchanges = [];
+    Station? directionStart;
+    Set<String> prevIntersection = {};
+
+      for (var i = 0; i < leastInterchangePath.length - 1; i++) {
+        List<String>? prevLines;
+        List<String>? currLines;
+        List<String>? nextLines;
+        if (i == 0) {
+          prevLines = leastInterchangePath[i].lines;
+          currLines = leastInterchangePath[i].lines;
+          nextLines = leastInterchangePath[i + 1].lines;
+          directionStart = leastInterchangePath[i];
+        } else if (i != leastInterchangePath.length - 1) {
+          prevLines = leastInterchangePath[i - 1].lines;
+          currLines = leastInterchangePath[i].lines;
+          nextLines = leastInterchangePath[i + 1].lines;
+        } else if (i == leastInterchangePath.length - 1) {
+          prevLines = leastInterchangePath[i - 1].lines;
+          currLines = leastInterchangePath[i].lines;
+          nextLines = leastInterchangePath[i].lines;
+        }
+        Set<String> set1 = Set.from(prevLines!);
+        Set<String> set2 = Set.from(currLines!);
+        Set<String> set3 = Set.from(nextLines!);
+
+        Set<String> intersection = set1.intersection(set2).intersection(set3);
+
+        Set<String> checkPrevLines = {};
+        //print("------");
+        if (prevIntersection.isEmpty != true) {
+          //print(prevIntersection);
+          checkPrevLines = prevIntersection.intersection(intersection);
+        } else {
+          checkPrevLines = intersection;
+        }
+        //print(intersection);
+        //print("------");
+        if (checkPrevLines.isNotEmpty) {
+          prevIntersection = intersection;
+        } else if (i != leastInterchangePath.length - 1) {
+          if ((leastInterchangePath[i].isFob == true && leastInterchangePath[i + 1].isFob == false) ||
+              (leastInterchangePath[i].isFob == false && leastInterchangePath[i + 1].isFob == false)) {
+            
+
+            routeInterchanges.add(i);
+            //print(path[i].name);
+            prevIntersection = set3;
+          }
+        }
+      }
+    
+    //Combine initial and least interchange path info
+    MetroRoute leastInterchangeRoute = getMetroRoute(leastInterchangePath, routeInterchanges, metroData);
+    ShortestPathResult leastInterchangePathInfo = ShortestPathResult(
+      path: leastInterchangePath, 
+      distance: leastInterchangePathDistance, 
+      incursions: [], 
+      numInterchanges: bestFirstInterchangePathInfo.numInterchanges+1, 
+      route: leastInterchangeRoute
+      );
+      return leastInterchangePathInfo;
+
+  }
+}
+
+
+
+
+
+
+
 
 class Edge {
   Station source;
@@ -429,10 +696,24 @@ class Graph {
   }
 }
 
-double _distance(Station a, Station b) {
-  final dx = a.latitude - b.latitude;
-  final dy = a.longitude - b.longitude;
-  return dx * dx + dy * dy;
+double _distance(Station station1, Station station2) {
+
+  const double earthRadius = 6371; // Radius of the Earth in kilometers
+
+  double lat1Rad = station1.latitude * (pi / 180);
+  double lon1Rad = station1.longitude * (pi / 180);
+  double lat2Rad = station2.latitude * (pi / 180);
+  double lon2Rad = station2.longitude * (pi / 180);
+
+  double dLat = lat2Rad - lat1Rad;
+  double dLon = lon2Rad - lon1Rad;
+
+  double a = sin(dLat / 2) * sin(dLat / 2) +
+      cos(lat1Rad) * cos(lat2Rad) * sin(dLon / 2) * sin(dLon / 2);
+  double c = 2 * atan2(sqrt(a), sqrt(1  
+ - a));
+
+  return earthRadius * c; // Distance in kilometers
 }
 
 Graph createGraphFromJson(List<Station> stations,
@@ -706,6 +987,7 @@ class PriorityQueue<Station> {
 
 ShortestPathResult findShortestPath(
     Graph graph, Station start, Station end, Map<String, dynamic> metroData) {
+  
   final Map<Station, double> distances = {};
   final Map<Station, Station> parents = {};
   final Set<Station> visited = {};
@@ -729,6 +1011,7 @@ ShortestPathResult findShortestPath(
         path.add(parents[path.last]!);
       }
       path = path.reversed.toList();
+      print(path.map((station) => station.name).join(" -> "));
 
       //Check if destination reached before it goes around and comeback
       int destIndex = -1;
