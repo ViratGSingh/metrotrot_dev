@@ -438,10 +438,12 @@ class _HomePageState extends State<HomePage> {
                                   },
                                   icon: Icons.favorite,
                                   title: "Favourites"),
-                              // ServiceTile(
-                              //     onTap: () {},
-                              //     icon: Icons.currency_rupee,
-                              //     title: "Fare"),
+                              ServiceTile(
+                                  onTap: () {
+                                    context.read<HomeCubit>().navigateToListing();
+                                  },
+                                  icon: Icons.rate_review,
+                                  title: "Feedback"),
                               // ServiceTile(
                               //     onTap: () {},
                               //     icon: Icons.access_time_filled,

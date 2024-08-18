@@ -16,6 +16,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import 'package:in_app_review/in_app_review.dart';
 import 'package:in_app_update/in_app_update.dart';
 import 'package:isar/isar.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
@@ -24,6 +25,7 @@ import 'package:app/features/from_search/data/models/from_metro.dart';
 import 'package:app/features/home/data/models/directions.dart';
 import 'package:app/features/home/data/repositories/home_repository.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:in_app_review/in_app_review.dart';
 part 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
@@ -155,6 +157,12 @@ class HomeCubit extends Cubit<HomeState> {
         trackAutomaticEvents: false);
     mixpanel.track("openedHomePage");
   }
+
+  Future<void> navigateToListing() async {
+    final InAppReview inAppReview = InAppReview.instance;
+    inAppReview.openStoreListing();
+  }
+
 
   saveDestinationInfo(
       String userId,
