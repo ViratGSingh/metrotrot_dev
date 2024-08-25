@@ -6,6 +6,7 @@ import 'package:app/features/from_search/data/models/from_fav_recom.dart';
 import 'package:app/features/to_search/data/models/dest_tap_data.dart';
 import 'package:app/features/to_search/data/models/to_fav_recom.dart';
 import 'package:app/models/location.dart';
+import 'package:app/widgets/popups/premium.dart';
 import 'package:app/widgets/popups/warning.dart';
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -589,6 +590,30 @@ class HomeCubit extends Cubit<HomeState> {
             message:
                 "Source and Destination metro station is the same, change either of them to get its metro route.",
             action: "Back",
+            actionFunc: () async {
+              Navigator.pop(context);
+              //launchUrl(Uri.parse("https://www.threads.net/@viratgsingh"));
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute<void>(
+              //     builder: (BuildContext context) => const HomePa,
+              //   ),
+              // );
+            },
+          );
+        });
+  }
+
+  void showPremium(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return PremiumPopup(
+            title: "Premium",
+            popupColor: Color(0xFFFFBB23),
+            message:
+                "Source and Destination metro station is the same, change either of them to get its metro route.",
+            action: "Continue",
             actionFunc: () async {
               Navigator.pop(context);
               //launchUrl(Uri.parse("https://www.threads.net/@viratgsingh"));

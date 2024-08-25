@@ -13,6 +13,7 @@ import 'package:app/features/home/presentation/widgets/nearestFrom.dart';
 import 'package:app/features/home/presentation/widgets/search_appbar.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:app/features/directions/presentation/pages/directions.dart';
+import 'package:lottie/lottie.dart';
 
 class HomePage extends StatefulWidget {
   final bool isFromSearch;
@@ -47,7 +48,7 @@ class _HomePageState extends State<HomePage> {
           .getFromNearbyMetro(widget.placeId, widget.isFromOffline);
     }
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<HomeCubit>().checkForUpdate();
+      //context.read<HomeCubit>().checkForUpdate();
     });
 
     super.initState();
@@ -222,6 +223,29 @@ class _HomePageState extends State<HomePage> {
                       child: Column(
                         children: [
                           //Title
+                          // Row(
+                          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          //   children: [
+                          //     Text("Dilli",
+                          //     style: GoogleFonts.pacifico(
+                          //       fontSize: 42,
+                          //       color: Color(0xFFFFBB23)
+                          //     ),
+                          //     ),
+                          //     InkWell(
+                          //       onTap: (){
+                          //         return context.read<HomeCubit>().showPremium(context);
+                          //       },
+                          //       child: Container(
+                          //         width: 40,
+                          //         height: 40,
+                          //         child: 
+                          //                   Lottie.asset('assets/animations/rotating_star.json'),
+                          //       ),
+                          //     )
+
+                          //   ],
+                          // ),
                           Padding(
                               padding: const EdgeInsets.only(bottom: 20),
                               child: Image.asset(

@@ -15,7 +15,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.1.3+29
+version: 1.1.4+30
 
 environment:
   sdk: ">=2.17.5 <4.0.0"
@@ -46,7 +46,8 @@ dependencies:
   dropdown_button2: ^2.1.3
   photo_view: ^0.15.0
   in_app_review: ^2.0.9
-  shared_preferences: ^2.2.3
+  #shared_preferences: ^2.2.3
+  lottie: ^3.0.0
 
   #fonts
   google_fonts: ^4.0.4
@@ -145,7 +146,7 @@ flutter:
     - .env
 
     # Profile
-    - assets/images/user.png
+    #- assets/images/user.png
     
     #metrotrot login
     #- assets/images/metrotrot_login.gif
@@ -177,6 +178,7 @@ flutter:
     - assets/images/dotted_line.png
     #- assets/images/transit.png
     - assets/images/metrotrot.png
+    - assets/images/mobile_ads.png
     #- assets/images/metro_line.png
     #- assets/images/no_directions.png
     # - assets/images/onboarding_1.gif
@@ -187,6 +189,10 @@ flutter:
 
     #data
     - assets/data/delhi_ncr.json
+
+    #animations
+    #- assets/animations/rotating_star.json
+    #- assets/animations/no_ads.json
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

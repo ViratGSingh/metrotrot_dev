@@ -127,6 +127,7 @@ class ToSearchCubit extends Cubit<ToSearchState> {
   }
 
   void showRewardedAd(BuildContext context) {
+    mixpanel.track("startDestRewardedAd");
     if (rewardedAd == null) {
       print('Warning: attempt to show rewarded before loaded.');
       return;
@@ -150,6 +151,7 @@ class ToSearchCubit extends Cubit<ToSearchState> {
     rewardedAd!.show(onUserEarnedReward: (AdWithoutView ad, RewardItem reward) {
       print('$ad with reward $RewardItem(${reward.amount}, ${reward.type})');
       updateDestSearchLimit();
+      mixpanel.track("finishDestRewardedAd");
       emit(state.copyWith(isRewardGranted: true));
     });
     rewardedAd = null;
@@ -197,7 +199,7 @@ class ToSearchCubit extends Cubit<ToSearchState> {
           totalRecommendations - (destSearchInfo?.totalRecommendations ?? 0);
       print(newSavedDestLocations);
       print("New Searches");
-      if (newSavedDestLocations >= 50) {
+      if (newSavedDestLocations >= 20) {
         isLimitReached = true;
       } else {
         isLimitReached = false;
@@ -342,7 +344,7 @@ class ToSearchCubit extends Cubit<ToSearchState> {
               return SearchLimitReachedPopup(
                 title: "Warning",
                 message:
-                    "You've reached your limit for searching source locations online. Please watch a 5-second ad to unlock additional searches.\n\n Alternatively, you can continue searching from the $totalRecommendations saved recommendations available right now.",
+                    "You've reached your limit for searching source locations online. Please watch a 5-second ad to unlock additional searches.", //\n\n Alternatively, you can continue searching from the $totalRecommendations saved recommendations available right now.",
                 action: "Back",
                 actionFunc: () {
                   Navigator.pop(context);

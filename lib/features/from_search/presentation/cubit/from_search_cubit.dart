@@ -135,6 +135,7 @@ class FromSearchCubit extends Cubit<FromSearchState> {
   }
 
   void showRewardedAd(BuildContext context) {
+    mixpanel.track("startFromRewardedAd");
     if (rewardedAd == null) {
       print('Warning: attempt to show rewarded before loaded.');
       return;
@@ -158,6 +159,7 @@ class FromSearchCubit extends Cubit<FromSearchState> {
     rewardedAd!.show(onUserEarnedReward: (AdWithoutView ad, RewardItem reward) {
       print('$ad with reward $RewardItem(${reward.amount}, ${reward.type})');
       updateFromSearchLimit();
+      mixpanel.track("finishFromRewardedAd");
       emit(state.copyWith(isRewardGranted: true));
     });
     rewardedAd = null;
@@ -206,7 +208,7 @@ class FromSearchCubit extends Cubit<FromSearchState> {
           totalRecommendations - (fromSearchInfo?.totalRecommendations ?? 0);
       print(newSavedSourceLocations);
       print("New Searches");
-      if (newSavedSourceLocations >= 50) {
+      if (newSavedSourceLocations >= 20) {
         reachedLimit = true;
       } else {
         reachedLimit = false;
@@ -332,11 +334,12 @@ class FromSearchCubit extends Cubit<FromSearchState> {
         showDialog(
             // ignore: use_build_context_synchronously
             context: context,
+            barrierDismissible: false,
             builder: (BuildContext context) {
               return SearchLimitReachedPopup(
                 title: "Warning",
                 message:
-                    "You've reached your limit for searching source locations online. Please watch a 5-second ad to unlock additional searches.\n\n Alternatively, you can continue searching from the $totalRecommendations saved recommendations available right now.",
+                    "You've reached your limit for searching source locations online. Please watch a 5-second ad to unlock additional searches.", //\n\n Alternatively, you can continue searching from the $totalRecommendations saved recommendations available right now.",
                 action: "Back",
                 actionFunc: () {
                   Navigator.pop(context);

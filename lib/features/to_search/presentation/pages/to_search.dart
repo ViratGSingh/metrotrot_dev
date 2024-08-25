@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:app/features/home/presentation/pages/home.dart';
 import 'package:app/widgets/popups/success.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +21,7 @@ class ToSearchPage extends StatefulWidget {
       {super.key,
       this.isOffline = false,
       this.userId = "",
-      this.initialToSearch="",
+      this.initialToSearch = "",
       required this.isGuest,
       required this.distance,
       required this.fromMetro,
@@ -30,6 +32,9 @@ class ToSearchPage extends StatefulWidget {
   State<ToSearchPage> createState() => _ToSearchPageState();
 }
 
+ValueNotifier<bool> _isTyping = ValueNotifier(false);
+Timer? _typingTimer;
+
 class _ToSearchPageState extends State<ToSearchPage> {
   TextEditingController toSearchController = TextEditingController();
 
@@ -38,10 +43,10 @@ class _ToSearchPageState extends State<ToSearchPage> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<ToSearchCubit>().initMixpanel();
     });
-    
+
     toSearchController.text = widget.initialToSearch;
-      context.read<ToSearchCubit>().searchLimitChecked = false;
-      context.read<ToSearchCubit>().initialisationAds();
+    context.read<ToSearchCubit>().searchLimitChecked = false;
+    context.read<ToSearchCubit>().initialisationAds();
     context.read<ToSearchCubit>().getSearchRecommendations(
         //widget.userId,
         //widget.fromMetro.placeId,
@@ -49,9 +54,43 @@ class _ToSearchPageState extends State<ToSearchPage> {
         widget.isOffline,
         widget.lat,
         widget.lng,
-        context
-        );
+        context);
+    _isTyping.addListener(() {
+      if (_isTyping.value == true) {
+        // User has started typing
+        print("User started typing");
+        print("");
+      } else {
+        // User has stopped typing
+        print("User stopped typing");
+        print("");
+      }
+    });
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _cancelTypingTimer();
+  }
+
+  void _startTypingTimer() {
+    _cancelTypingTimer();
+    _typingTimer = Timer(Duration(milliseconds: 400), () {
+      _isTyping.value = false;
+      context.read<ToSearchCubit>().getSearchRecommendations(
+          //widget.userId,
+          //widget.fromMetro.placeId,
+          toSearchController.text,
+          widget.isOffline,
+          widget.lat,
+          widget.lng,
+          context);
+    });
+  }
+
+  void _cancelTypingTimer() {
+    _typingTimer?.cancel();
   }
 
   @override
@@ -59,32 +98,30 @@ class _ToSearchPageState extends State<ToSearchPage> {
     return SafeArea(
       child: BlocConsumer<ToSearchCubit, ToSearchState>(
         listener: (context, state) {
-          
-          if(state.isRewardGranted==true){
-                showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return SuccessPopup(
-                  title: "Congratulations!",
-                  message:
-                      "You've unlocked advanced online search capabilities for faster and more accurate results. Enjoy your enhanced search experience.",
-                  action: "Continue",
-                  actionFunc: () async {
-                    Navigator.pop(context);
-                    //launchUrl(Uri.parse("https://www.threads.net/@viratgsingh"));
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute<void>(
-                    //     builder: (BuildContext context) => const HomePa,
-                    //   ),
-                    // );
-                  },
-                );
-              });
+          if (state.isRewardGranted == true) {
+            showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return SuccessPopup(
+                    title: "Congratulations!",
+                    message:
+                        "You've unlocked advanced online search capabilities for faster and more accurate results. Enjoy your enhanced search experience.",
+                    action: "Continue",
+                    actionFunc: () async {
+                      Navigator.pop(context);
+                      //launchUrl(Uri.parse("https://www.threads.net/@viratgsingh"));
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute<void>(
+                      //     builder: (BuildContext context) => const HomePa,
+                      //   ),
+                      // );
+                    },
+                  );
+                });
 
-                state.isRewardGranted = false;
+            state.isRewardGranted = false;
           }
-
         },
         builder: (context, state) {
           return Scaffold(
@@ -98,15 +135,8 @@ class _ToSearchPageState extends State<ToSearchPage> {
                     controller: toSearchController,
                     autofocus: true,
                     onChanged: (location) {
-                      context.read<ToSearchCubit>().getSearchRecommendations(
-                          //widget.userId,
-                          //widget.fromMetro.placeId,
-                          toSearchController.text,
-                          widget.isOffline,
-                          widget.lat,
-                          widget.lng,
-                          context
-                          );
+                      _isTyping.value = true;
+                      _startTypingTimer();
                       // if (location.isNotEmpty == true) {
 
                       // }
@@ -162,18 +192,19 @@ class _ToSearchPageState extends State<ToSearchPage> {
                                       child: ListTile(
                                         style: ListTileStyle.list,
                                         onTap: () async {
-                                           if (isFavourite.value == true) {
-                                          context
-                                              .read<ToSearchCubit>()
-                                              .mixpanel
-                                              .track(
-                                                  "tappedFavDestSearchRecomPlace");
-                                        } else {
-                                          context
-                                              .read<ToSearchCubit>()
-                                              .mixpanel
-                                              .track("tappedDestSearchRecomPlace");
-                                        }
+                                          if (isFavourite.value == true) {
+                                            context
+                                                .read<ToSearchCubit>()
+                                                .mixpanel
+                                                .track(
+                                                    "tappedFavDestSearchRecomPlace");
+                                          } else {
+                                            context
+                                                .read<ToSearchCubit>()
+                                                .mixpanel
+                                                .track(
+                                                    "tappedDestSearchRecomPlace");
+                                          }
                                           // context
                                           //     .read<ToSearchCubit>()
                                           //     .saveDestinationInfo(
@@ -224,18 +255,19 @@ class _ToSearchPageState extends State<ToSearchPage> {
                                         ),
                                         trailing: InkWell(
                                           onTap: () {
-                                              if (isFavourite.value == true) {
-                                          context
-                                              .read<ToSearchCubit>()
-                                              .mixpanel
-                                              .track(
-                                                  "removedFavDestSearchRecomPlace");
-                                        } else {
-                                          context
-                                              .read<ToSearchCubit>()
-                                              .mixpanel
-                                              .track("addedFavDestSearchRecomPlace");
-                                        }
+                                            if (isFavourite.value == true) {
+                                              context
+                                                  .read<ToSearchCubit>()
+                                                  .mixpanel
+                                                  .track(
+                                                      "removedFavDestSearchRecomPlace");
+                                            } else {
+                                              context
+                                                  .read<ToSearchCubit>()
+                                                  .mixpanel
+                                                  .track(
+                                                      "addedFavDestSearchRecomPlace");
+                                            }
                                             context
                                                 .read<ToSearchCubit>()
                                                 .updateDestFavRecommendation(
@@ -308,10 +340,9 @@ class _ToSearchPageState extends State<ToSearchPage> {
                                   style: ListTileStyle.list,
                                   onTap: () async {
                                     context
-                                              .read<ToSearchCubit>()
-                                              .mixpanel
-                                              .track(
-                                                  "tappedDestSearchRecomStation");
+                                        .read<ToSearchCubit>()
+                                        .mixpanel
+                                        .track("tappedDestSearchRecomStation");
                                     // context
                                     //     .read<ToSearchCubit>()
                                     //     .saveDestinationInfo(

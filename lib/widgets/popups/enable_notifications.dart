@@ -46,13 +46,15 @@ class SearchLimitReachedPopup extends StatelessWidget {
             title,
             textAlign: TextAlign.center,
             style: GoogleFonts.notoSans(
-                color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
+                color: Colors.black, fontSize: 22, fontWeight: FontWeight.bold),
           ),
           const SizedBox(
             height: 5,
           ),
-          // Image.asset("assets/images/allow_notifications_graphic.png",
-          //     height: 120),
+
+                      Image.asset("assets/images/mobile_ads.png",
+                          fit: BoxFit.cover,
+                          height: MediaQuery.of(context).size.height / 3),
           const SizedBox(
             height: 5,
           ),
@@ -154,12 +156,12 @@ class SearchLimitReachedPopup extends StatelessWidget {
                     )),
                 onPressed: () => actionFunc(),
                 child: Text(
-                  "Watch Ad",
+                  "Continue",
                   textAlign: TextAlign.center,
                   style: GoogleFonts.notoSans(
                       color: Colors.white,
                       fontSize: 14,
-                      fontWeight: FontWeight.w400),
+                      fontWeight: FontWeight.bold),
                 ),
               ),
             ),

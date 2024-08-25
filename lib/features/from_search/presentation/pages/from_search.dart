@@ -1,4 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:async';
+
 import 'package:app/widgets/popups/success.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,6 +20,9 @@ class FromSearchPage extends StatefulWidget {
   State<FromSearchPage> createState() => _FromSearchPageState();
 }
 
+ValueNotifier<bool> _isTyping = ValueNotifier(false);
+Timer? _typingTimer;
+
 class _FromSearchPageState extends State<FromSearchPage> {
   TextEditingController fromSearchController = TextEditingController();
   @override
@@ -33,7 +38,37 @@ class _FromSearchPageState extends State<FromSearchPage> {
           .read<FromSearchCubit>()
           .getSearchRecommendations(fromSearchController.text, context);
     });
+    _isTyping.addListener(() {
+      if (_isTyping.value == true) {
+        // User has started typing
+        print("User started typing");
+        print("");
+      } else {
+        // User has stopped typing
+        print("User stopped typing");
+        print("");
+      }
+    });
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _cancelTypingTimer();
+  }
+
+  void _startTypingTimer() {
+    _cancelTypingTimer();
+    _typingTimer = Timer(Duration(milliseconds: 400), () {
+      _isTyping.value = false;
+      context
+          .read<FromSearchCubit>()
+          .getSearchRecommendations(fromSearchController.text, context);
+    });
+  }
+
+  void _cancelTypingTimer() {
+    _typingTimer?.cancel();
   }
 
   @override
@@ -64,6 +99,7 @@ class _FromSearchPageState extends State<FromSearchPage> {
               });
           state.isRewardGranted = false;
         }
+
         // TODO: implement listener
       }, builder: (context, state) {
         return Scaffold(
@@ -73,20 +109,25 @@ class _FromSearchPageState extends State<FromSearchPage> {
             backgroundColor: Colors.white,
             title: Container(
               width: MediaQuery.of(context).size.width - 100,
-              child: TextFormField(
-                  controller: fromSearchController,
-                  autofocus: true,
-                  onChanged: (location) {
-                    context.read<FromSearchCubit>().getSearchRecommendations(
-                        fromSearchController.text, context);
-                  },
-                  decoration: InputDecoration(
-                      hintStyle:
-                          Theme.of(context).inputDecorationTheme.hintStyle,
-                      hintText: "Where are you?",
-                      contentPadding: EdgeInsets.fromLTRB(0, 5, 0, 0)),
-                  style: Theme.of(context).textTheme.bodyMedium,
-                  cursorColor: Colors.blue),
+              child: ValueListenableBuilder(
+                  valueListenable: _isTyping,
+                  builder: (context, value, _) {
+                    return TextFormField(
+                        controller: fromSearchController,
+                        autofocus: true,
+                        onChanged: (location) {
+                          _isTyping.value = true;
+                          _startTypingTimer();
+                        },
+                        decoration: InputDecoration(
+                            hintStyle: Theme.of(context)
+                                .inputDecorationTheme
+                                .hintStyle,
+                            hintText: "Where are you?",
+                            contentPadding: EdgeInsets.fromLTRB(0, 5, 0, 0)),
+                        style: Theme.of(context).textTheme.bodyMedium,
+                        cursorColor: Colors.blue);
+                  }),
             ),
             leading: IconButton(
               onPressed: () {
@@ -141,7 +182,8 @@ class _FromSearchPageState extends State<FromSearchPage> {
                                           context
                                               .read<FromSearchCubit>()
                                               .mixpanel
-                                              .track("tappedFromSearchRecomPlace");
+                                              .track(
+                                                  "tappedFromSearchRecomPlace");
                                         }
                                         Navigator.push<void>(
                                           context,
@@ -167,17 +209,18 @@ class _FromSearchPageState extends State<FromSearchPage> {
                                       trailing: InkWell(
                                         onTap: () {
                                           if (isFavourite.value == true) {
-                                          context
-                                              .read<FromSearchCubit>()
-                                              .mixpanel
-                                              .track(
-                                                  "removedFavFromSearchRecomPlace");
-                                        } else {
-                                          context
-                                              .read<FromSearchCubit>()
-                                              .mixpanel
-                                              .track("addedFavFromSearchRecomPlace");
-                                        }
+                                            context
+                                                .read<FromSearchCubit>()
+                                                .mixpanel
+                                                .track(
+                                                    "removedFavFromSearchRecomPlace");
+                                          } else {
+                                            context
+                                                .read<FromSearchCubit>()
+                                                .mixpanel
+                                                .track(
+                                                    "addedFavFromSearchRecomPlace");
+                                          }
                                           context
                                               .read<FromSearchCubit>()
                                               .updateSavedFromRecommendation(
@@ -249,12 +292,11 @@ class _FromSearchPageState extends State<FromSearchPage> {
                               child: ListTile(
                                 style: ListTileStyle.list,
                                 onTap: () async {
-                                    context
-                                              .read<FromSearchCubit>()
-                                              .mixpanel
-                                              .track(
-                                                  "tappedFromSearchRecomStation");
-                                        
+                                  context
+                                      .read<FromSearchCubit>()
+                                      .mixpanel
+                                      .track("tappedFromSearchRecomStation");
+
                                   Navigator.push<void>(
                                     context,
                                     MaterialPageRoute<void>(
