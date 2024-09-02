@@ -5,6 +5,7 @@ import 'package:app/features/destination/data/models/dest_metro.dart';
 import 'package:app/features/from_search/data/models/from_fav_recom.dart';
 import 'package:app/features/from_search/data/models/from_metro.dart';
 import 'package:app/features/from_search/data/models/from_search_info.dart';
+import 'package:app/features/home/presentation/pages/home.dart';
 import 'package:app/features/to_search/data/models/dest_search_info.dart';
 import 'package:app/features/to_search/data/models/to_fav_recom.dart';
 import 'package:app/widgets/popups/enable_notifications.dart';
@@ -21,7 +22,8 @@ import 'package:app/features/from_search/data/models/from_recommendation.dart';
 import 'package:app/features/from_search/data/repositories/from_search_repository.dart';
 import 'package:app/features/home/data/models/directions.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
-
+import 'package:purchases_flutter/purchases_flutter.dart';
+import 'package:purchases_ui_flutter/purchases_ui_flutter.dart';
 part 'from_search_state.dart';
 
 class FromSearchCubit extends Cubit<FromSearchState> {
@@ -111,6 +113,18 @@ class FromSearchCubit extends Cubit<FromSearchState> {
     _createRewardedAd();
   }
 
+  void checkUserPremiumStatus() async {
+    await initPlatformState();
+    CustomerInfo purchaserInfo = await Purchases.restorePurchases();
+    _handleCustomerUpdate(purchaserInfo);
+  }
+
+  void _handleCustomerUpdate(CustomerInfo purchaserInfo) {
+    if (purchaserInfo.entitlements.all["Premium Access"]?.isActive == true) {
+      updateSearchLimit();
+    }
+  }
+
   void _createRewardedAd() {
     AdRequest request = const AdRequest();
     int maxFailedLoadAttempts = 3;
@@ -134,7 +148,7 @@ class FromSearchCubit extends Cubit<FromSearchState> {
         ));
   }
 
-  void showRewardedAd(BuildContext context) {
+  void showRewardedAd(BuildContext context, String destinationId) {
     mixpanel.track("startFromRewardedAd");
     if (rewardedAd == null) {
       print('Warning: attempt to show rewarded before loaded.');
@@ -157,10 +171,20 @@ class FromSearchCubit extends Cubit<FromSearchState> {
 
     rewardedAd!.setImmersiveMode(true);
     rewardedAd!.show(onUserEarnedReward: (AdWithoutView ad, RewardItem reward) {
-      print('$ad with reward $RewardItem(${reward.amount}, ${reward.type})');
-      updateFromSearchLimit();
-      mixpanel.track("finishFromRewardedAd");
-      emit(state.copyWith(isRewardGranted: true));
+      // print('$ad with reward $RewardItem(${reward.amount}, ${reward.type})');
+      // updateSearchLimit();
+      // mixpanel.track("finishFromRewardedAd");
+      // emit(state.copyWith(isRewardGranted: true));
+      Navigator.push<void>(
+        context,
+        MaterialPageRoute<void>(
+          builder: (BuildContext context) => HomePage(
+            isFromSearch: true,
+            placeId: destinationId,
+            isFromOffline: false,
+          ),
+        ),
+      );
     });
     rewardedAd = null;
   }
@@ -181,7 +205,10 @@ class FromSearchCubit extends Cubit<FromSearchState> {
         .isFavouriteEqualTo(true)
         .count();
 
-    int totalRecommendations = await isar.savedFromRecommendations.count();
+    int totalFromRecommendations = await isar.savedFromRecommendations.count();
+    int totalDestRecommendations = await isar.savedToRecommendations.count();
+    int totalRecommendations =
+        totalFromRecommendations + totalDestRecommendations;
 
     FromSearchInfo? fromSearchInfo;
 
@@ -199,16 +226,18 @@ class FromSearchCubit extends Cubit<FromSearchState> {
         ..startedAt = DateTime.now()
         ..updatedAt = DateTime.now()
         ..totalFavourites = totalFavourites
-        ..totalRecommendations = totalRecommendations;
+        ..totalRecommendations = totalFromRecommendations;
     } else {
       await isar.fromSearchInfos.get(1).then((info) {
         fromSearchInfo = info;
       });
-      int newSavedSourceLocations =
-          totalRecommendations - (fromSearchInfo?.totalRecommendations ?? 0);
+      DestSearchInfo? destSearchInfo = await isar.destSearchInfos.get(1);
+      int newSavedSourceLocations = totalRecommendations -
+          (fromSearchInfo?.totalRecommendations ?? 0) -
+          (destSearchInfo?.totalRecommendations ?? 0);
       print(newSavedSourceLocations);
       print("New Searches");
-      if (newSavedSourceLocations >= 20) {
+      if (newSavedSourceLocations >= 50) {
         reachedLimit = true;
       } else {
         reachedLimit = false;
@@ -233,13 +262,45 @@ class FromSearchCubit extends Cubit<FromSearchState> {
       await isar.fromSearchInfos.put(fromSearchInfo!);
     });
 
-    print(totalRecommendations);
-    print(totalFavourites);
-    print(reachedLimit);
     return reachedLimit;
   }
 
-  Future<void> updateFromSearchLimit() async {
+  Future<void> initPlatformState() async {
+    await Purchases.setDebugLogsEnabled(true);
+    PurchasesConfiguration configuration;
+    configuration = PurchasesConfiguration(dotenv.env["REVENUECAT_API_KEY"].toString());
+    await Purchases.configure(configuration);
+  }
+
+  Future<void> showPremiumPackage() async {
+    try {
+      Offerings offerings = await Purchases.getOfferings();
+      if (offerings.getOffering("Premium Access")?.availablePackages != null) {
+        // Display packages for sale
+        Offering? premium_offering = offerings.getOffering("Premium Access");
+
+        await RevenueCatUI.presentPaywall(
+                offering: premium_offering, displayCloseButton: true)
+            .then((result) {
+          if (result == PaywallResult.purchased) {
+            updateSearchLimit();
+            mixpanel.track("finishFromPremiumPurchase");
+            emit(state.copyWith(isRewardGranted: true));
+          }
+        });
+      }
+    } on PlatformException catch (e) {
+      // optional error handling
+      var errorCode = PurchasesErrorHelper.getErrorCode(e);
+      if (errorCode == PurchasesErrorCode.purchaseCancelledError) {
+        print("show payment cancelled dialog");
+      } else if (errorCode == PurchasesErrorCode.paymentPendingError) {
+        print("show payment is pending dialog");
+      }
+    }
+  }
+
+  Future<void> updateSearchLimit() async {
     Isar isar = Isar.getInstance() ??
         await Isar.open([
           DirectionsSchema,
@@ -250,12 +311,36 @@ class FromSearchCubit extends Cubit<FromSearchState> {
           FromSearchInfoSchema,
           DestSearchInfoSchema
         ]);
-    int totalFavourites = await isar.savedFromRecommendations
+    int totalFavourites = await isar.savedToRecommendations
         .filter()
         .isFavouriteEqualTo(true)
         .count();
 
-    int totalRecommendations = await isar.savedFromRecommendations.count();
+    int totalRecommendations = await isar.savedToRecommendations.count();
+
+    DestSearchInfo? destSearchInfo;
+    await isar.destSearchInfos.get(1).then((info) {
+      destSearchInfo = info;
+    });
+    destSearchInfo = DestSearchInfo()
+      ..id = 1
+      ..isLimitreached = false
+      ..startedAt = destSearchInfo?.startedAt
+      ..updatedAt = DateTime.now()
+      ..totalFavourites = totalFavourites
+      ..totalRecommendations = totalRecommendations;
+
+    await isar.writeTxn(() async {
+      await isar.destSearchInfos.put(destSearchInfo!);
+    });
+
+    //Update From Search Info
+    totalFavourites = await isar.savedFromRecommendations
+        .filter()
+        .isFavouriteEqualTo(true)
+        .count();
+
+    totalRecommendations = await isar.savedFromRecommendations.count();
 
     FromSearchInfo? fromSearchInfo;
     await isar.fromSearchInfos.get(1).then((info) {
@@ -323,6 +408,23 @@ class FromSearchCubit extends Cubit<FromSearchState> {
         nonFavSavedPredictions.add(updSavedRecommendation);
       }
     }
+
+    //Check in Destinations
+    final savedToRecommendations = await isar.savedToRecommendations
+        .filter()
+        .destContentContains(location, caseSensitive: false)
+        .findAll();
+    for (SavedToRecommendation savedRecommendation in savedToRecommendations) {
+      FromRecommendation updSavedRecommendation = FromRecommendation(
+          placeId: savedRecommendation.placeId ?? "",
+          main: savedRecommendation.main ?? "",
+          secondary: savedRecommendation.secondary ?? "",
+          isFavourite: false);
+      if (nonFavSavedPredictions.contains(updSavedRecommendation) == false) {
+        nonFavSavedPredictions.add(updSavedRecommendation);
+      }
+    }
+
     //Add all fav saved recommendations
     predictions.addAll(favSavedPredictions);
     predictions.addAll(nonFavSavedPredictions);
@@ -331,30 +433,31 @@ class FromSearchCubit extends Cubit<FromSearchState> {
       print("search limit checked");
       print(searchLimitChecked);
       if (reachedLimit == true && searchLimitChecked == false) {
-        showDialog(
-            // ignore: use_build_context_synchronously
-            context: context,
-            barrierDismissible: false,
-            builder: (BuildContext context) {
-              return SearchLimitReachedPopup(
-                title: "Warning",
-                message:
-                    "You've reached your limit for searching source locations online. Please watch a 5-second ad to unlock additional searches.", //\n\n Alternatively, you can continue searching from the $totalRecommendations saved recommendations available right now.",
-                action: "Back",
-                actionFunc: () {
-                  Navigator.pop(context);
-                  showRewardedAd(context);
+        showPremiumPackage();
+        // showDialog(
+        //     // ignore: use_build_context_synchronously
+        //     context: context,
+        //     barrierDismissible: false,
+        //     builder: (BuildContext context) {
+        //       return SearchLimitReachedPopup(
+        //         title: "Warning",
+        //         message:
+        //             "You've reached your limit for searching source locations online. Please watch a 5-second ad to unlock additional searches.", //\n\n Alternatively, you can continue searching from the $totalRecommendations saved recommendations available right now.",
+        //         action: "Back",
+        //         actionFunc: () {
+        //           Navigator.pop(context);
+        //           showRewardedAd(context);
 
-                  //launchUrl(Uri.parse("https://www.threads.net/@viratgsingh"));
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute<void>(
-                  //     builder: (BuildContext context) => const HomePa,
-                  //   ),
-                  // );
-                },
-              );
-            });
+        //           //launchUrl(Uri.parse("https://www.threads.net/@viratgsingh"));
+        //           // Navigator.push(
+        //           //   context,
+        //           //   MaterialPageRoute<void>(
+        //           //     builder: (BuildContext context) => const HomePa,
+        //           //   ),
+        //           // );
+        //         },
+        //       );
+        //     });
         searchLimitChecked = true;
       }
     });

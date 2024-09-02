@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
+import 'dart:io';
 import 'dart:math';
 import 'package:app/features/destination/data/models/dest_metro.dart';
 import 'package:app/features/from_search/data/models/from_fav_recom.dart';
@@ -25,8 +26,10 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:app/features/from_search/data/models/from_metro.dart';
 import 'package:app/features/home/data/models/directions.dart';
 import 'package:app/features/home/data/repositories/home_repository.dart';
+import 'package:purchases_ui_flutter/purchases_ui_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:in_app_review/in_app_review.dart';
+import 'package:purchases_flutter/purchases_flutter.dart';
 part 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
@@ -164,6 +167,27 @@ class HomeCubit extends Cubit<HomeState> {
     inAppReview.openStoreListing();
   }
 
+
+
+Future<void> initPlatformState() async {
+  await Purchases.setDebugLogsEnabled(true);
+  PurchasesConfiguration configuration;
+  configuration = PurchasesConfiguration(dotenv.env["REVENUECAT_API_KEY"].toString());
+  await Purchases.configure(configuration);
+}
+
+Future<void> showPremiumPackage() async {
+ try {
+  Offerings offerings = await Purchases.getOfferings();
+  if (offerings.getOffering("Premium Access")?.availablePackages!=null) {
+    // Display packages for sale
+    Offering? premium_offering = offerings.getOffering("Premium Access");
+    await RevenueCatUI.presentPaywall(offering:premium_offering);
+  }
+} on PlatformException catch (e) {
+	// optional error handling
+}
+}
 
   saveDestinationInfo(
       String userId,

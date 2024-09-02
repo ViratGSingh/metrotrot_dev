@@ -158,6 +158,12 @@ class _MyAppState extends State<MyApp> {
         child: MaterialApp(
             title: 'MetroTrot',
             debugShowCheckedModeBanner: false,
+            builder: (context, child) {
+                  return MediaQuery(
+                    data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+                    child: child!,
+                  );
+                },
             theme: ThemeData(
               colorScheme:
                   ColorScheme.fromSeed(seedColor: Colors.white).copyWith(

@@ -35,7 +35,8 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     //WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<HomeCubit>().initMixpanel();
+    context.read<HomeCubit>().initPlatformState();
+    context.read<HomeCubit>().initMixpanel();
     //});
     if (widget.isFromSearch == false && widget.placeId != "") {
       //context.read<HomeCubit>().checkUserLocation(false);
@@ -223,45 +224,45 @@ class _HomePageState extends State<HomePage> {
                       child: Column(
                         children: [
                           //Title
-                          // Row(
-                          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          //   children: [
-                          //     Text("Dilli",
-                          //     style: GoogleFonts.pacifico(
-                          //       fontSize: 42,
-                          //       color: Color(0xFFFFBB23)
-                          //     ),
-                          //     ),
-                          //     InkWell(
-                          //       onTap: (){
-                          //         return context.read<HomeCubit>().showPremium(context);
-                          //       },
-                          //       child: Container(
-                          //         width: 40,
-                          //         height: 40,
-                          //         child: 
-                          //                   Lottie.asset('assets/animations/rotating_star.json'),
-                          //       ),
-                          //     )
-
-                          //   ],
-                          // ),
-                          Padding(
-                              padding: const EdgeInsets.only(bottom: 20),
-                              child: Image.asset(
-                                "assets/images/metrotrot_header_alt.png",
-                                height: 42,
-                              )
-                              // Row(
-                              //   children: [
-                              //     Text(
-                              //       "Dilli",
-                              //       style: GoogleFonts.pacifico(
-                              //           color: Color(0xFFFFBB23), fontSize: 36),
-                              //     )
-                              //   ],
-                              // ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text("Dilli",
+                              style: GoogleFonts.pacifico(
+                                fontSize: 48,
+                                color: Color(0xFFFFBB23)
                               ),
+                              ),
+                              // InkWell(
+                              //   onTap: (){
+                              //     context.read<HomeCubit>().showPremiumPackage();
+                              //   },
+                              //   child: Container(
+                              //     width: 40,
+                              //     height: 40,
+                              //     child:
+                              //               Lottie.asset('assets/animations/rotating_star.json'),
+                              //   ),
+                              // )
+
+                            ],
+                          ),
+                          // Padding(
+                          //     padding: const EdgeInsets.only(bottom: 20),
+                          //     child: Image.asset(
+                          //       "assets/images/metrotrot_header_alt.png",
+                          //       height: 42,
+                          //     )
+                          //     // Row(
+                          //     //   children: [
+                          //     //     Text(
+                          //     //       "Dilli",
+                          //     //       style: GoogleFonts.pacifico(
+                          //     //           color: Color(0xFFFFBB23), fontSize: 36),
+                          //     //     )
+                          //     //   ],
+                          //     // ),
+                          //     ),
 
                           //From-To Route
                           SearchAppBar(
@@ -299,7 +300,10 @@ class _HomePageState extends State<HomePage> {
                                     onPressed: () {
                                       context.read<HomeCubit>().exchangePoints(
                                           state.fromData, state.toData);
-                                      context.read<HomeCubit>().mixpanel.track("pressedSwapBtn");
+                                      context
+                                          .read<HomeCubit>()
+                                          .mixpanel
+                                          .track("pressedSwapBtn");
                                     },
                                     style: ButtonStyle(
                                       padding: MaterialStatePropertyAll(
@@ -322,7 +326,6 @@ class _HomePageState extends State<HomePage> {
                             ],
                           ),
                           SearchAppBar(
-                            
                               title: state.toData.destName,
                               userId: state.user == null
                                   ? "guest"
@@ -348,7 +351,10 @@ class _HomePageState extends State<HomePage> {
                                 .read<HomeCubit>()
                                 .showLocationErrorInfo(context);
                           } else {
-                            context.read<HomeCubit>().mixpanel.track("openedDirectionsPage");
+                            context
+                                .read<HomeCubit>()
+                                .mixpanel
+                                .track("openedDirectionsPage");
                             Navigator.push<void>(
                               context,
                               MaterialPageRoute<void>(
@@ -425,7 +431,10 @@ class _HomePageState extends State<HomePage> {
                             children: [
                               ServiceTile(
                                   onTap: () {
-                                    context.read<HomeCubit>().mixpanel.track("openedMapPage");
+                                    context
+                                        .read<HomeCubit>()
+                                        .mixpanel
+                                        .track("openedMapPage");
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute<void>(
@@ -438,7 +447,10 @@ class _HomePageState extends State<HomePage> {
                                   title: "Map"),
                               ServiceTile(
                                   onTap: () {
-                                    context.read<HomeCubit>().mixpanel.track("openedNearbyPage");
+                                    context
+                                        .read<HomeCubit>()
+                                        .mixpanel
+                                        .track("openedNearbyPage");
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute<void>(
@@ -451,7 +463,10 @@ class _HomePageState extends State<HomePage> {
                                   title: "Nearby"),
                               ServiceTile(
                                   onTap: () {
-                                    context.read<HomeCubit>().mixpanel.track("openedFavouritesPage");
+                                    context
+                                        .read<HomeCubit>()
+                                        .mixpanel
+                                        .track("openedFavouritesPage");
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute<void>(
@@ -464,7 +479,9 @@ class _HomePageState extends State<HomePage> {
                                   title: "Favourites"),
                               ServiceTile(
                                   onTap: () {
-                                    context.read<HomeCubit>().navigateToListing();
+                                    context
+                                        .read<HomeCubit>()
+                                        .navigateToListing();
                                   },
                                   icon: Icons.rate_review,
                                   title: "Feedback"),

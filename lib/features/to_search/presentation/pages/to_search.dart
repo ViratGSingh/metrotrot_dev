@@ -40,6 +40,7 @@ class _ToSearchPageState extends State<ToSearchPage> {
 
   @override
   void initState() {
+    context.read<ToSearchCubit>().checkUserPremiumStatus();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<ToSearchCubit>().initMixpanel();
     });
@@ -232,17 +233,27 @@ class _ToSearchPageState extends State<ToSearchPage> {
                                           //     ),
                                           //   ),
                                           // );
-                                          Navigator.push<void>(
-                                            context,
-                                            MaterialPageRoute<void>(
-                                              builder: (BuildContext context) =>
-                                                  HomePage(
-                                                isFromSearch: false,
-                                                placeId: destinationId,
-                                                isFromOffline: false,
+                                          if (context
+                                                  .read<ToSearchCubit>()
+                                                  .reachedLimit ==
+                                              true) {
+                                                context
+                                                .read<ToSearchCubit>().showRewardedAd(context,destinationId);
+                                            
+                                          } else {
+                                            Navigator.push<void>(
+                                              context,
+                                              MaterialPageRoute<void>(
+                                                builder:
+                                                    (BuildContext context) =>
+                                                        HomePage(
+                                                  isFromSearch: false,
+                                                  placeId: destinationId,
+                                                  isFromOffline: false,
+                                                ),
                                               ),
-                                            ),
-                                          );
+                                            );
+                                          }
                                         },
                                         contentPadding: EdgeInsets.all(0),
                                         leading: const Padding(

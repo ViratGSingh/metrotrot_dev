@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:app/features/destination/data/models/dest_metro.dart';
 import 'package:app/features/from_search/data/models/from_fav_recom.dart';
 import 'package:app/features/from_search/data/models/from_search_info.dart';
+import 'package:app/features/home/presentation/pages/home.dart';
 import 'package:app/features/to_search/data/models/dest_search_info.dart';
 import 'package:app/features/to_search/data/models/to_fav_recom.dart';
 import 'package:app/widgets/popups/enable_notifications.dart';
@@ -10,6 +11,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
+import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:uuid/uuid.dart';
 import 'package:app/features/from_search/data/models/from_metro.dart';
 import 'package:app/features/to_search/data/models/dest_tap_data.dart';
@@ -23,7 +25,7 @@ import 'package:isar/isar.dart';
 import 'package:app/features/home/data/models/directions.dart';
 import 'package:app/features/to_search/data/models/recommendation.dart';
 import 'package:app/features/to_search/data/repositories/from_search_repository.dart';
-
+import 'package:purchases_ui_flutter/purchases_ui_flutter.dart';
 part 'to_search_state.dart';
 
 class ToSearchCubit extends Cubit<ToSearchState> {
@@ -126,7 +128,47 @@ class ToSearchCubit extends Cubit<ToSearchState> {
         ));
   }
 
-  void showRewardedAd(BuildContext context) {
+  Future<void> initPlatformState() async {
+    await Purchases.setDebugLogsEnabled(true);
+    PurchasesConfiguration configuration;
+    configuration = PurchasesConfiguration(dotenv.env["REVENUECAT_API_KEY"].toString());
+    await Purchases.configure(configuration);
+  }
+
+  Future<void> showPremiumPackage() async {
+    try {
+      Offerings offerings = await Purchases.getOfferings();
+      if (offerings.getOffering("Premium Access")?.availablePackages != null) {
+        // Display packages for sale
+        Offering? premiumOffering = offerings.getOffering("Premium Access");
+        await RevenueCatUI.presentPaywall(
+                offering: premiumOffering, displayCloseButton: true)
+            .then((result) {
+          if (result == PaywallResult.purchased) {
+            updateSearchLimit();
+            mixpanel.track("finishDestPremiumPurchase");
+            emit(state.copyWith(isRewardGranted: true));
+          }
+        });
+      }
+    } on PlatformException catch (e) {
+      // optional error handling
+    }
+  }
+  void checkUserPremiumStatus() async {
+    await initPlatformState();
+    CustomerInfo purchaserInfo = await Purchases.restorePurchases();
+    _handleCustomerUpdate(purchaserInfo);
+  }
+
+  void _handleCustomerUpdate(CustomerInfo purchaserInfo) {
+    if (purchaserInfo.entitlements.all["Premium Access"]?.isActive == true) {
+      updateSearchLimit();
+    }
+  }
+
+
+  void showRewardedAd(BuildContext context, String destinationId) {
     mixpanel.track("startDestRewardedAd");
     if (rewardedAd == null) {
       print('Warning: attempt to show rewarded before loaded.');
@@ -149,10 +191,20 @@ class ToSearchCubit extends Cubit<ToSearchState> {
 
     rewardedAd!.setImmersiveMode(true);
     rewardedAd!.show(onUserEarnedReward: (AdWithoutView ad, RewardItem reward) {
-      print('$ad with reward $RewardItem(${reward.amount}, ${reward.type})');
-      updateDestSearchLimit();
-      mixpanel.track("finishDestRewardedAd");
-      emit(state.copyWith(isRewardGranted: true));
+      // print('$ad with reward $RewardItem(${reward.amount}, ${reward.type})');
+      // updateDestSearchLimit();
+      // mixpanel.track("finishDestRewardedAd");
+      // emit(state.copyWith(isRewardGranted: true));
+      Navigator.push<void>(
+        context,
+        MaterialPageRoute<void>(
+          builder: (BuildContext context) => HomePage(
+            isFromSearch: false,
+            placeId: destinationId,
+            isFromOffline: false,
+          ),
+        ),
+      );
     });
     rewardedAd = null;
   }
@@ -173,7 +225,10 @@ class ToSearchCubit extends Cubit<ToSearchState> {
         .isFavouriteEqualTo(true)
         .count();
 
-    int totalRecommendations = await isar.savedToRecommendations.count();
+    int totalFromRecommendations = await isar.savedFromRecommendations.count();
+    int totalDestRecommendations = await isar.savedToRecommendations.count();
+    int totalRecommendations =
+        totalFromRecommendations + totalDestRecommendations;
 
     DestSearchInfo? destSearchInfo;
 
@@ -190,16 +245,18 @@ class ToSearchCubit extends Cubit<ToSearchState> {
         ..startedAt = DateTime.now()
         ..updatedAt = DateTime.now()
         ..totalFavourites = totalFavourites
-        ..totalRecommendations = totalRecommendations;
+        ..totalRecommendations = totalDestRecommendations;
     } else {
       await isar.destSearchInfos.get(1).then((info) {
         destSearchInfo = info;
       });
-      int newSavedDestLocations =
-          totalRecommendations - (destSearchInfo?.totalRecommendations ?? 0);
+      FromSearchInfo? fromSearchInfo = await isar.fromSearchInfos.get(1);
+      int newSavedDestLocations = totalRecommendations -
+          (destSearchInfo?.totalRecommendations ?? 0) -
+          (fromSearchInfo?.totalRecommendations ?? 0);
       print(newSavedDestLocations);
       print("New Searches");
-      if (newSavedDestLocations >= 20) {
+      if (newSavedDestLocations >= 50) {
         isLimitReached = true;
       } else {
         isLimitReached = false;
@@ -224,13 +281,10 @@ class ToSearchCubit extends Cubit<ToSearchState> {
       await isar.destSearchInfos.put(destSearchInfo!);
     });
 
-    print(totalRecommendations);
-    print(totalFavourites);
-    print(isLimitReached);
     return isLimitReached;
   }
 
-  Future<void> updateDestSearchLimit() async {
+  Future<void> updateSearchLimit() async {
     Isar isar = Isar.getInstance() ??
         await Isar.open([
           DirectionsSchema,
@@ -262,6 +316,30 @@ class ToSearchCubit extends Cubit<ToSearchState> {
 
     await isar.writeTxn(() async {
       await isar.destSearchInfos.put(destSearchInfo!);
+    });
+
+    //Update From Search Info
+    totalFavourites = await isar.savedFromRecommendations
+        .filter()
+        .isFavouriteEqualTo(true)
+        .count();
+
+    totalRecommendations = await isar.savedFromRecommendations.count();
+
+    FromSearchInfo? fromSearchInfo;
+    await isar.fromSearchInfos.get(1).then((info) {
+      fromSearchInfo = info;
+    });
+    fromSearchInfo = FromSearchInfo()
+      ..id = 1
+      ..isLimitreached = false
+      ..startedAt = fromSearchInfo?.startedAt
+      ..updatedAt = DateTime.now()
+      ..totalFavourites = totalFavourites
+      ..totalRecommendations = totalRecommendations;
+
+    await isar.writeTxn(() async {
+      await isar.fromSearchInfos.put(fromSearchInfo!);
     });
     reachedLimit = false;
     searchLimitChecked = false;
@@ -328,6 +406,24 @@ class ToSearchCubit extends Cubit<ToSearchState> {
         nonFavSavedPredictions.add(updSavedRecommendation);
       }
     }
+
+    //Check in Source Locations
+    final savedFromRecommendations = await isar.savedFromRecommendations
+        .filter()
+        .fromContentContains(location, caseSensitive: false)
+        .findAll();
+    for (SavedFromRecommendation savedRecommendation
+        in savedFromRecommendations) {
+      ToRecommendation updSavedRecommendation = ToRecommendation(
+          placeId: savedRecommendation.placeId ?? "",
+          main: savedRecommendation.main ?? "",
+          secondary: savedRecommendation.secondary ?? "",
+          isFavourite: false);
+      if (nonFavSavedPredictions.contains(updSavedRecommendation) == false) {
+        nonFavSavedPredictions.add(updSavedRecommendation);
+      }
+    }
+
     //Add all fav saved recommendations
     predictions.addAll(favSavedPredictions);
     predictions.addAll(nonFavSavedPredictions);
@@ -337,29 +433,30 @@ class ToSearchCubit extends Cubit<ToSearchState> {
       print(searchLimitChecked);
       print(reachedLimit);
       if (reachedLimit == true && searchLimitChecked == false) {
-        showDialog(
-            // ignore: use_build_context_synchronously
-            context: context,
-            builder: (BuildContext context) {
-              return SearchLimitReachedPopup(
-                title: "Warning",
-                message:
-                    "You've reached your limit for searching source locations online. Please watch a 5-second ad to unlock additional searches.", //\n\n Alternatively, you can continue searching from the $totalRecommendations saved recommendations available right now.",
-                action: "Back",
-                actionFunc: () {
-                  Navigator.pop(context);
-                  showRewardedAd(context);
+        showPremiumPackage();
+        // showDialog(
+        //     // ignore: use_build_context_synchronously
+        //     context: context,
+        //     builder: (BuildContext context) {
+        //       return SearchLimitReachedPopup(
+        //         title: "Warning",
+        //         message:
+        //             "You've reached your limit for searching source locations online. Please watch a 5-second ad to unlock additional searches.", //\n\n Alternatively, you can continue searching from the $totalRecommendations saved recommendations available right now.",
+        //         action: "Back",
+        //         actionFunc: () {
+        //           Navigator.pop(context);
+        //           showRewardedAd(context);
 
-                  //launchUrl(Uri.parse("https://www.threads.net/@viratgsingh"));
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute<void>(
-                  //     builder: (BuildContext context) => const HomePa,
-                  //   ),
-                  // );
-                },
-              );
-            });
+        //           //launchUrl(Uri.parse("https://www.threads.net/@viratgsingh"));
+        //           // Navigator.push(
+        //           //   context,
+        //           //   MaterialPageRoute<void>(
+        //           //     builder: (BuildContext context) => const HomePa,
+        //           //   ),
+        //           // );
+        //         },
+        //       );
+        //     });
         searchLimitChecked = true;
       }
     });
