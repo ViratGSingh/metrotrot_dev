@@ -12,4 +12,10 @@ class FromSearchRepository {
 
     return predictions;
   }
+
+  Future<Map<String, dynamic>> fetchNearestMetro(String placeId) async {
+    final nearestMetro = await fromSearchService.getNearestMetro(placeId);
+
+    return nearestMetro;
+  }
 }

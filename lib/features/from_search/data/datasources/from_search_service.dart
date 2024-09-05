@@ -9,6 +9,31 @@ class FromSearchService {
 
   FromSearchService({required this.httpClient});
 
+
+  Future<Map<String, dynamic>> getNearestMetro(String placeId) async {
+    Map<String, dynamic> locationInfo = {};
+    //Get coordinates
+    final String apiKey = dotenv.env["MAPS_API_KEY"].toString();
+    final String apiHost = dotenv.env["MAPS_API_HOST"].toString();
+    final Uri placeReqUri = Uri(
+        scheme: 'https',
+        host: apiHost,
+        path: "/maps/api/place/details/json",
+        queryParameters: {
+          "place_id": placeId,
+          "key": apiKey,
+          "fields": "formatted_address,name,geometry"
+        });
+    final http.Response placeResp = await httpClient.get(placeReqUri);
+    final Map<String, dynamic> placeData = json.decode(placeResp.body);
+    if (placeData.containsKey("result") == true) {
+      locationInfo = placeData["result"];
+      print(placeData);
+    }
+    return locationInfo;
+  }
+
+
   Future getSearchRecommendations(String location) async {
     final String apiKey = dotenv.env["MAPS_API_KEY"].toString();
     //Find locations according to string

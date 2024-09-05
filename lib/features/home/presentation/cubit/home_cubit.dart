@@ -371,6 +371,12 @@ Future<void> showPremiumPackage() async {
           .filter()
           .placeIdEqualTo(placeId)
           .findFirst();
+
+      final savedDestMetro = await isar.savedDestMetros
+          .filter()
+          .placeIdEqualTo(placeId)
+          .findFirst();
+      
       if (savedFromMetro != null) {
         nearbyMetro = FromMetro(
             businessStatus: savedFromMetro.businessStatus ?? "",
@@ -398,7 +404,37 @@ Future<void> showPremiumPackage() async {
           nearbyMetro.lat,
           nearbyMetro.lng,
         ).toStringAsFixed(0);
-      } else {
+      }else if(savedDestMetro!=null){
+
+        nearbyMetro = FromMetro(
+            businessStatus: savedDestMetro.businessStatus ?? "",
+            fromLat: savedDestMetro.destLat ?? 0,
+            fromLng: savedDestMetro.destLng ?? 0,
+            lat: savedDestMetro.nearbyMetroLat ?? 0,
+            lng: savedDestMetro.nearbyMetroLng ?? 0,
+            name: savedDestMetro.name ?? "",
+            fromName: savedDestMetro.destName ?? "",
+            fromAddress: savedDestMetro.destAddress ?? "",
+            placeId: savedDestMetro.placeId ?? "",
+            rating: savedDestMetro.rating ?? "",
+            userRatingsTotal: savedDestMetro.userRatingsTotal ?? "",
+            vicinity: savedDestMetro.vicinity ?? "",
+            data: savedDestMetro.data ?? "",
+            metro: savedDestMetro.metro ?? "",
+            lines: savedDestMetro.lines ?? [],
+            startStations: savedDestMetro.startStations ?? [],
+            endStations: savedDestMetro.endStations ?? [],
+            colourCodes: savedDestMetro.colourCodes ?? []);
+        
+
+        distance = Geolocator.distanceBetween(
+          nearbyMetro.fromLat,
+          nearbyMetro.fromLng,
+          nearbyMetro.lat,
+          nearbyMetro.lng,
+        ).toStringAsFixed(0);
+
+      }else {
         //Get info if not saved
         Map<String, dynamic> placeInfo =
             await homeRepository.fetchFromNearestMetro(placeId);
@@ -720,6 +756,10 @@ Future<void> showPremiumPackage() async {
         ]);
     if (isOffline == false) {
       //Check in saved source locations
+      final savedFromMetro = await isar.savedFromMetros
+          .filter()
+          .placeIdEqualTo(placeId)
+          .findFirst();
       final savedDestMetro = await isar.savedDestMetros
           .filter()
           .placeIdEqualTo(placeId)
@@ -751,7 +791,34 @@ Future<void> showPremiumPackage() async {
                 nearbyMetro.destLat,
                 nearbyMetro.destLng)
             .toStringAsFixed(0);
-      } else {
+      } else if(savedFromMetro!=null){
+         nearbyMetro = DestMetro(
+            businessStatus: savedFromMetro.businessStatus ?? "",
+            destLat: savedFromMetro.fromLat ?? 0,
+            destLng: savedFromMetro.fromLng ?? 0,
+            nearbyMetroLat: savedFromMetro.lat ?? 0,
+            nearbyMetroLng: savedFromMetro.lng ?? 0,
+            name: savedFromMetro.name ?? "",
+            destName: savedFromMetro.fromName ?? "",
+            destAddress: savedFromMetro.fromAddress ?? "",
+            placeId: savedFromMetro.placeId ?? "",
+            rating: savedFromMetro.rating ?? "",
+            userRatingsTotal: savedFromMetro.userRatingsTotal ?? "",
+            vicinity: savedFromMetro.vicinity ?? "",
+            data: savedFromMetro.data ?? "",
+            metro: savedFromMetro.metro ?? "",
+            lines: savedFromMetro.lines ?? [],
+            startStations: savedFromMetro.startStations ?? [],
+            endStations: savedFromMetro.endStations ?? [],
+            colourCodes: savedFromMetro.colourCodes ?? []);
+
+        distance = Geolocator.distanceBetween(
+                nearbyMetro.nearbyMetroLat,
+                nearbyMetro.nearbyMetroLng,
+                nearbyMetro.destLat,
+                nearbyMetro.destLng)
+            .toStringAsFixed(0);
+      }else {
         Map<String, dynamic> placeInfo =
             await homeRepository.fetchFromNearestMetro(placeId);
         print(placeInfo);

@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-
+import 'dart:math';
 import 'package:app/features/destination/data/models/dest_metro.dart';
 import 'package:app/features/from_search/data/models/from_fav_recom.dart';
 import 'package:app/features/from_search/data/models/from_metro.dart';
@@ -8,6 +8,7 @@ import 'package:app/features/from_search/data/models/from_search_info.dart';
 import 'package:app/features/home/presentation/pages/home.dart';
 import 'package:app/features/to_search/data/models/dest_search_info.dart';
 import 'package:app/features/to_search/data/models/to_fav_recom.dart';
+import 'package:app/models/location.dart';
 import 'package:app/widgets/popups/enable_notifications.dart';
 import 'package:app/widgets/popups/success.dart';
 import 'package:bloc/bloc.dart';
@@ -363,10 +364,175 @@ class FromSearchCubit extends Cubit<FromSearchState> {
 
   bool reachedLimit = false;
   bool searchLimitChecked = false;
+
+  double distance(Location a, Location b) {
+    const R = 6371; // Radius of the earth in km
+    final dLat = _toRadians(b.latitude - a.latitude);
+    final dLon = _toRadians(b.longitude - a.longitude);
+    final lat1 = _toRadians(a.latitude);
+    final lat2 = _toRadians(b.latitude);
+
+    final x = sin(dLat / 2) * sin(dLat / 2) +
+        sin(dLon / 2) * sin(dLon / 2) * cos(lat1) * cos(lat2);
+    final y = 2 * atan2(sqrt(x), sqrt(1 - x));
+    final distanceInKm = R * y; // Distance in km
+
+    return distanceInKm;
+  }
+
+  double _toRadians(double degrees) {
+    return degrees * (pi / 180);
+  }
+
+  Map<String, dynamic> findClosestStation(
+      List<Map<String, dynamic>> locations, Location userLocation) {
+    Map<String, dynamic> closestLocation = {};
+    double minDistance = double.infinity;
+
+    for (var i = 0; i < locations.length; i++) {
+      final Location stationLoc = Location(locations[i]["coordinates"]["lat"],
+          locations[i]["coordinates"]["lng"]);
+      final distanceToLocation = distance(userLocation, stationLoc);
+      //print(locations[i]);
+      if (distanceToLocation < minDistance) {
+        closestLocation = locations[i];
+        minDistance = distanceToLocation;
+        closestLocation["distance"] = minDistance;
+      }
+    }
+
+    return closestLocation;
+  }
+
+  Future<void> backgroundSavedInfo(
+      String placeId, String destName, String destAddress) async {
+    Isar isar = Isar.getInstance() ??
+        await Isar.open([
+          DirectionsSchema,
+          SavedFromRecommendationSchema,
+          SavedToRecommendationSchema,
+          SavedFromMetroSchema,
+          SavedDestMetroSchema,
+          FromSearchInfoSchema,
+          DestSearchInfoSchema
+        ]);
+    List<SavedFromMetro> savedFromPlaceInfo =
+        await isar.savedFromMetros.filter().placeIdEqualTo(placeId).findAll();
+    
+    List<SavedDestMetro> savedDestPlaceInfo =
+        await isar.savedDestMetros.filter().placeIdEqualTo(placeId).findAll();
+        
+    if (savedFromPlaceInfo.isEmpty && savedDestPlaceInfo.isEmpty) {
+      Map<String, dynamic> placeInfo =
+          await fromSearchRepository.fetchNearestMetro(placeId);
+      double lat = placeInfo["geometry"]["location"]["lat"];
+      double lng = placeInfo["geometry"]["location"]["lng"];
+      // destName = placeInfo["name"];
+      // destAddress = placeInfo["formatted_address"];
+
+      final metroResp =
+          await rootBundle.loadString('assets/data/delhi_ncr.json');
+      final metroData = json.decode(metroResp);
+      int metroLines = metroData["total_lines"];
+      //print(metroLines);
+      final userLocation = Location(lat, lng); // User's location
+      List<Map<String, dynamic>> metroStations = [];
+      for (var i = 1; i <= metroLines; i++) {
+        List lineData = metroData["data"]["line_${i.toString()}"]["stations"];
+        lineData.forEach((element) {
+          Map<String, dynamic> stationData = element;
+          metroStations.add(stationData);
+        });
+        //metroStations.addAll(lineData);
+      }
+      final coordinatesToCheck = metroStations;
+
+      final closestLocation =
+          findClosestStation(coordinatesToCheck, userLocation);
+      //print(
+      //    'Closest location is: (${closestLocation["name"]}, ${closestLocation["address"]})');
+      List lineKeys = closestLocation["interchange_data"]["lines"];
+      List<String> lines = [];
+      List<String> startStations = [];
+      List<String> endStations = [];
+      List<String> colourCodes = [];
+      lineKeys.forEach((element) {
+        Map<String, dynamic> lineData = metroData["data"][element];
+        lines.add(lineData["name"]);
+        startStations.add(lineData["stations"][0]["name"]);
+        endStations.add(lineData["stations"].last["name"]);
+        colourCodes.add(lineData["colour_code"]);
+      });
+
+      //Save the destination location info
+      SavedDestMetro formattedDestMetro = SavedDestMetro()
+        ..destName = destName
+        ..destAddress = destAddress
+        ..businessStatus =
+            closestLocation["is_interchange"] == true ? "Yes" : "No"
+        ..destLat = lat
+        ..destLng = lng
+        ..nearbyMetroLat = closestLocation["coordinates"]["lat"]
+        ..nearbyMetroLng = closestLocation["coordinates"]["lng"]
+        ..name = closestLocation["name"]
+        ..placeId = placeId
+        ..rating = ""
+        ..userRatingsTotal = ""
+        ..vicinity = closestLocation["address"]
+        ..data = ""
+        ..metro = metroData["name"]
+        ..lines = lines
+        ..colourCodes = colourCodes
+        ..startStations = startStations
+        ..endStations = endStations
+        ..destContent = destName;
+
+      await isar.writeTxn(() async {
+        await isar.savedDestMetros.put(formattedDestMetro);
+      });
+
+      SavedFromMetro formattedFromMetro = SavedFromMetro()
+          ..fromName = destName
+          ..fromAddress = destAddress
+          ..businessStatus =
+              closestLocation["is_interchange"] == true ? "Yes" : "No"
+          ..fromLat = lat
+          ..fromLng = lng
+          ..lat = closestLocation["coordinates"]["lat"]
+          ..lng = closestLocation["coordinates"]["lng"]
+          ..name = closestLocation["name"]
+          ..placeId = placeId
+          ..rating = ""
+          ..userRatingsTotal = ""
+          ..vicinity = closestLocation["address"]
+          ..data = ""
+          ..metro = metroData["name"]
+          ..lines = lines
+          ..colourCodes = colourCodes
+          ..startStations = startStations
+          ..endStations = endStations
+          ..fromContent = destName;
+        await isar.writeTxn(() async {
+          await isar.savedFromMetros.put(formattedFromMetro);
+        });
+    }
+  }
+
+
   getSearchRecommendations(String location, BuildContext context) async {
     emit(state.copyWith(
         stationStatus: FromSearchStationStatus.loading,
         placeStatus: FromSearchPlaceStatus.loading));
+    if(location==""){
+        emit(state.copyWith(
+          stationStatus: FromSearchStationStatus.loaded,
+          placeStatus: FromSearchPlaceStatus.loaded,
+          locations: [],
+          stations: []
+          ),
+        );
+    }
+    else{
 
     List<FromRecommendation> predictions = [];
     List<FromRecommendation> stationSuggestions = [];
@@ -514,10 +680,16 @@ class FromSearchCubit extends Cubit<FromSearchState> {
     //     }
     //   });
     //}
+    for (FromRecommendation prediction in predictions) {
+        backgroundSavedInfo(
+            prediction.placeId, prediction.main, prediction.secondary);
+      }
+    await Future.delayed(Duration(milliseconds: 800));
     emit(state.copyWith(
         stationStatus: FromSearchStationStatus.loaded,
         placeStatus: FromSearchPlaceStatus.loaded,
         locations: predictions.take(5).toList(),
         stations: stationSuggestions.take(5).toList()));
+  }
   }
 }

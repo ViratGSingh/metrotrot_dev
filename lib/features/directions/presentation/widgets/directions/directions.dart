@@ -11,10 +11,6 @@ import 'package:app/features/directions/presentation/widgets/directions/intercha
 import 'package:app/features/directions/presentation/widgets/directions/line.dart';
 import 'package:app/features/directions/presentation/widgets/directions/start.dart';
 import 'package:app/features/directions/presentation/widgets/directions/transit.dart';
-import 'package:app/features/directions/presentation/widgets/instructions/end.dart';
-import 'package:app/features/directions/presentation/widgets/instructions/interchange.dart';
-import 'package:app/features/directions/presentation/widgets/instructions/start.dart';
-import 'package:app/features/directions/presentation/widgets/instructions/transit.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 
 class MetroDirections extends StatefulWidget {
@@ -187,88 +183,88 @@ class _MetroDirectionsState extends State<MetroDirections> {
     return icons;
   }
 
-  getInstructions(int step, List<MetroDirection> directions) {
-    MetroDirection direction = directions[step.toInt()];
+  // getInstructions(int step, List<MetroDirection> directions) {
+  //   MetroDirection direction = directions[step.toInt()];
 
-    if (direction.travelMode == "WALKING" &&
-        direction.vehicleType == "BRIDGE") {
-      MetroDirection prevDir = directions[step.toInt() - 1];
-      String prevName = prevDir.arrivalName;
-      String prevLine = prevDir.currLineName;
+  //   if (direction.travelMode == "WALKING" &&
+  //       direction.vehicleType == "BRIDGE") {
+  //     MetroDirection prevDir = directions[step.toInt() - 1];
+  //     String prevName = prevDir.arrivalName;
+  //     String prevLine = prevDir.currLineName;
 
-      return InterInstruction(
-        currStation: direction.arrivalName,
-        isBridge: true,
-        interchange: prevName,
-        prevLine: prevLine.toLowerCase(),
-        currLine: direction.currLineName.toLowerCase(),
-        //bannerAd: bannerAd,
-      );
-    }
-    if (direction.travelMode == "WALKING" && step == 0) {
-      String firstStation = directions[1].departureName;
-      return StartInstruction(
-        station: firstStation, //direction.departureName
-        distance: widget.fromDistance,
-        //bannerAd: bannerAd,
-      );
-    }
-    if (direction.travelMode == "WALKING" &&
-        step != directions.length &&
-        step != 0) {
-      MetroDirection prevDir = directions[step.toInt() - 1];
-      String prevName = prevDir.arrivalName;
-      MetroDirection nextDir = directions[step.toInt() + 1];
-      String currName = nextDir.departureName;
-      String prevLine = prevDir.currLineName;
-      String currLine = nextDir.currLineName;
-      String interStation = direction.interchange;
-      bool isBridge = false;
-      if (prevName != currName) {
-        isBridge = true;
-      } else {
-        currName = "";
-      }
-      return InterInstruction(
-        currStation: currName,
-        isBridge: isBridge,
-        interchange: interStation,
-        prevLine: prevLine.toLowerCase(),
-        currLine: currLine.toLowerCase(),
-        //bannerAd: bannerAd,
-      );
-    }
+  //     return InterInstruction(
+  //       currStation: direction.arrivalName,
+  //       isBridge: true,
+  //       interchange: prevName,
+  //       prevLine: prevLine.toLowerCase(),
+  //       currLine: direction.currLineName.toLowerCase(),
+  //       //bannerAd: bannerAd,
+  //     );
+  //   }
+  //   if (direction.travelMode == "WALKING" && step == 0) {
+  //     String firstStation = directions[1].departureName;
+  //     return StartInstruction(
+  //       station: firstStation, //direction.departureName
+  //       distance: widget.fromDistance,
+  //       //bannerAd: bannerAd,
+  //     );
+  //   }
+  //   if (direction.travelMode == "WALKING" &&
+  //       step != directions.length &&
+  //       step != 0) {
+  //     MetroDirection prevDir = directions[step.toInt() - 1];
+  //     String prevName = prevDir.arrivalName;
+  //     MetroDirection nextDir = directions[step.toInt() + 1];
+  //     String currName = nextDir.departureName;
+  //     String prevLine = prevDir.currLineName;
+  //     String currLine = nextDir.currLineName;
+  //     String interStation = direction.interchange;
+  //     bool isBridge = false;
+  //     if (prevName != currName) {
+  //       isBridge = true;
+  //     } else {
+  //       currName = "";
+  //     }
+  //     return InterInstruction(
+  //       currStation: currName,
+  //       isBridge: isBridge,
+  //       interchange: interStation,
+  //       prevLine: prevLine.toLowerCase(),
+  //       currLine: currLine.toLowerCase(),
+  //       //bannerAd: bannerAd,
+  //     );
+  //   }
 
-    if (direction.travelMode == "TRANSIT") {
-      String arrStation = direction.arrivalName;
-      String depStation = direction.departureName;
-      String duration = direction.duration;
-      int colourCode = direction.currLineColour;
-      String lineName = direction.currLineName;
-      List stations = direction.stations;
+  //   if (direction.travelMode == "TRANSIT") {
+  //     String arrStation = direction.arrivalName;
+  //     String depStation = direction.departureName;
+  //     String duration = direction.duration;
+  //     int colourCode = direction.currLineColour;
+  //     String lineName = direction.currLineName;
+  //     List stations = direction.stations;
 
-      if (stations.isEmpty == true) {
-        return TransitInstruction(
-            headsign: direction.headsign,
-            depStation: depStation,
-            arrStation: arrStation,
-            duration: duration);
-      } else {
-        return MetroLine(
-          stationsData: stations,
-          lineName: lineName,
-          colourCode: colourCode,
-          departure: depStation,
-          arrival: arrStation,
-        );
-      }
-      // return Text(
-      //   "Get in the metro rail heading towards ${directions[step.toInt()]["transit_details"]["headsign"]} from $depStation and travel to $arrStation, which would take $duration to reach.",
-      //   style: TextStyle(fontSize: 18),
-      //   textAlign: TextAlign.center,
-      // );
-    }
-  }
+  //     if (stations.isEmpty == true) {
+  //       return TransitInstruction(
+  //           headsign: direction.headsign,
+  //           depStation: depStation,
+  //           arrStation: arrStation,
+  //           duration: duration);
+  //     } else {
+  //       return MetroLine(
+  //         stationsData: stations,
+  //         lineName: lineName,
+  //         colourCode: colourCode,
+  //         departure: depStation,
+  //         arrival: arrStation,
+  //       );
+  //     }
+  //     // return Text(
+  //     //   "Get in the metro rail heading towards ${directions[step.toInt()]["transit_details"]["headsign"]} from $depStation and travel to $arrStation, which would take $duration to reach.",
+  //     //   style: TextStyle(fontSize: 18),
+  //     //   textAlign: TextAlign.center,
+  //     // );
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {

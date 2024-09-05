@@ -7,6 +7,7 @@ import 'package:app/features/destination/data/models/dest_metro.dart';
 import 'package:app/features/directions/presentation/cubit/directions_cubit.dart';
 import 'package:app/features/directions/presentation/widgets/directions/directions.dart';
 import 'package:app/features/from_search/data/models/from_metro.dart';
+import 'package:lottie/lottie.dart';
 
 class DirectionsPage extends StatefulWidget {
   final FromMetro fromMetro;
@@ -341,8 +342,12 @@ class _DirectionsPageState extends State<DirectionsPage> {
                   //     padding: EdgeInsets.all(15),
                   //     child: ErrorDirections(),
                   //   )
-                  : const Center(
-                      child: CircularProgressIndicator(),
+                  : Center(
+                      child: Container(
+                                  height: MediaQuery.of(context).size.height/2,
+                                  child:
+                                            Lottie.asset('assets/animations/train_loading.json'),
+                                ),
                     )),
         );
       },

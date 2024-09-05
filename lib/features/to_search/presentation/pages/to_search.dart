@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:app/features/from_search/data/models/from_metro.dart';
 import 'package:app/features/to_search/presentation/cubit/to_search_cubit.dart';
+import 'package:lottie/lottie.dart';
 
 class ToSearchPage extends StatefulWidget {
   final String userId;
@@ -127,53 +128,107 @@ class _ToSearchPageState extends State<ToSearchPage> {
         builder: (context, state) {
           return Scaffold(
             appBar: AppBar(
-              automaticallyImplyLeading: true,
+              automaticallyImplyLeading: false,
               titleSpacing: 0,
+              centerTitle: true,
+              toolbarHeight: 80,
               backgroundColor: Colors.white,
-              title: Container(
-                width: MediaQuery.of(context).size.width - 100,
-                child: TextFormField(
-                    controller: toSearchController,
-                    autofocus: true,
-                    onChanged: (location) {
-                      _isTyping.value = true;
-                      _startTypingTimer();
-                      // if (location.isNotEmpty == true) {
-
-                      // }
-                    },
-                    decoration: InputDecoration(
-                        hintStyle:
-                            Theme.of(context).inputDecorationTheme.hintStyle,
-                        hintText: "Where to?",
-                        contentPadding: EdgeInsets.fromLTRB(0, 5, 0, 0)),
-                    style: Theme.of(context).textTheme.bodyMedium,
-                    cursorColor: Colors.blue),
-              ),
-              leading: IconButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                icon: const Icon(
-                  Icons.arrow_back,
-                  color: Colors.black,
+              elevation: 0,
+              title: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+                child: Container(
+                  width: MediaQuery.of(context).size.width - 20,
+                  decoration: BoxDecoration(
+                    //color: Colors.tealAccent,
+                    border: Border.all(
+                      color: Colors.black.withOpacity(0.25),
+                    ),
+                    borderRadius: BorderRadius.circular(32),
+                  ),
+                  child: Row(
+                    children: [
+                      SizedBox(width: 8),
+                      IconButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        icon: const Icon(
+                          Icons.arrow_back,
+                          color: Colors.black,
+                        ),
+                      ),
+                      SizedBox(width: 4),
+                      Container(
+                        width: MediaQuery.of(context).size.width - 150,
+                        height: 52,
+                        child: TextFormField(
+                            controller: toSearchController,
+                            autofocus: true,
+                            onChanged: (location) {
+                              _isTyping.value = true;
+                              _startTypingTimer();
+                              // if (location.isNotEmpty == true) {
+                  
+                              // }
+                            },
+                            decoration: InputDecoration(
+                                disabledBorder: InputBorder.none,
+                                border: InputBorder.none,
+                                errorBorder: InputBorder.none,
+                                enabledBorder: InputBorder.none,
+                                focusedBorder: InputBorder.none,
+                                focusedErrorBorder: InputBorder.none,
+                                hintStyle: Theme.of(context)
+                                    .inputDecorationTheme
+                                    .hintStyle,
+                                hintText: "Where to?",
+                                contentPadding: EdgeInsets.fromLTRB(0, 5, 0, 0)),
+                            style: Theme.of(context).textTheme.bodyMedium,
+                            cursorColor: Colors.blue),
+                      ),
+                      SizedBox(width: 6),
+                      IconButton(
+                          onPressed: () {
+                            toSearchController.text = "";
+                            context.read<ToSearchCubit>().getSearchRecommendations(
+                                //widget.userId,
+                                //widget.fromMetro.placeId,
+                                toSearchController.text,
+                                widget.isOffline,
+                                widget.lat,
+                                widget.lng,
+                                context);
+                          },
+                          icon: Icon(Icons.cancel_outlined, color: Colors.black))
+                    ],
+                  ),
                 ),
               ),
+              // leading: IconButton(
+              //   onPressed: () {
+              //     Navigator.of(context).pop();
+              //   },
+              //   icon: const Icon(
+              //     Icons.arrow_back,
+              //     color: Colors.black,
+              //   ),
+              // ),
             ),
-            body: SingleChildScrollView(
+            body: state.placeStatus == ToSearchPlaceStatus.loaded
+                      ? SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(10, 10, 0, 0),
-                    child: Text(
-                      "Suggested Places",
-                      style: TextStyle(color: Colors.grey),
-                    ),
-                  ),
+                  // Padding(
+                  //   padding: const EdgeInsets.fromLTRB(10, 10, 0, 0),
+                  //   child: Text(
+                  //     "Suggested Places",
+                  //     style: TextStyle(color: Colors.grey),
+                  //   ),
+                  // ),
                   state.placeStatus == ToSearchPlaceStatus.loaded
                       ? Padding(
-                          padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.fromLTRB(10, 0, 10, 8),
                           child: ListView(
                             physics: NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
@@ -233,14 +288,7 @@ class _ToSearchPageState extends State<ToSearchPage> {
                                           //     ),
                                           //   ),
                                           // );
-                                          if (context
-                                                  .read<ToSearchCubit>()
-                                                  .reachedLimit ==
-                                              true) {
-                                                context
-                                                .read<ToSearchCubit>().showRewardedAd(context,destinationId);
-                                            
-                                          } else {
+                                          
                                             Navigator.push<void>(
                                               context,
                                               MaterialPageRoute<void>(
@@ -253,9 +301,9 @@ class _ToSearchPageState extends State<ToSearchPage> {
                                                 ),
                                               ),
                                             );
-                                          }
+                                          
                                         },
-                                        contentPadding: EdgeInsets.all(0),
+                                        contentPadding: EdgeInsets.all(5),
                                         leading: const Padding(
                                           padding:
                                               EdgeInsets.only(top: 5, left: 15),
@@ -305,16 +353,26 @@ class _ToSearchPageState extends State<ToSearchPage> {
                                             ),
                                           ),
                                         ),
-                                        subtitle: Text(
-                                          secondaryAddr,
-                                          style: GoogleFonts.notoSans(
-                                              fontSize: 12,
-                                              color: Colors.grey.shade700),
+                                        subtitle: SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width -
+                                                150,
+                                          child: Text(
+                                            secondaryAddr,
+                                            style: GoogleFonts.notoSans(
+                                                fontSize: 12,
+                                                color: Colors.grey.shade700),
+                                          ),
                                         ),
-                                        title: Text(
-                                          mainAddr,
-                                          style: GoogleFonts.notoSans(
-                                              fontSize: 14),
+                                        title: SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width -
+                                                150,
+                                          child: Text(
+                                            mainAddr,
+                                            style: GoogleFonts.notoSans(
+                                                fontSize: 14),
+                                          ),
                                         ),
                                       ),
                                     );
@@ -325,17 +383,17 @@ class _ToSearchPageState extends State<ToSearchPage> {
                       : const Center(
                           child: CircularProgressIndicator(),
                         ),
-                  Divider(height: 10),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(10, 10, 0, 0),
-                    child: Text(
-                      "Suggested Stations",
-                      style: TextStyle(color: Colors.grey),
-                    ),
-                  ),
+                  // Divider(height: 10),
+                  // Padding(
+                  //   padding: const EdgeInsets.fromLTRB(10, 10, 0, 0),
+                  //   child: Text(
+                  //     "Suggested Stations",
+                  //     style: TextStyle(color: Colors.grey),
+                  //   ),
+                  // ),
                   state.stationStatus == ToSearchStationStatus.loaded
                       ? Padding(
-                          padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.fromLTRB(10, 0, 10, 8),
                           child: ListView(
                             physics: NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
@@ -411,15 +469,25 @@ class _ToSearchPageState extends State<ToSearchPage> {
                                   //     //     Color(int.parse("0xff${recom["line_color_code"]}")),
                                   //   ),
                                   // ),
-                                  subtitle: Text(
-                                    secondaryAddr,
-                                    style: GoogleFonts.notoSans(
-                                        fontSize: 12,
-                                        color: Colors.grey.shade700),
+                                  subtitle: Container(
+                                        width:
+                                            MediaQuery.of(context).size.width -
+                                                150,
+                                    child: Text(
+                                      secondaryAddr,
+                                      style: GoogleFonts.notoSans(
+                                          fontSize: 12,
+                                          color: Colors.grey.shade700),
+                                    ),
                                   ),
-                                  title: Text(
-                                    mainAddr,
-                                    style: GoogleFonts.notoSans(fontSize: 14),
+                                  title: SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width -
+                                                150,
+                                    child: Text(
+                                      mainAddr,
+                                      style: GoogleFonts.notoSans(fontSize: 14),
+                                    ),
                                   ),
                                 ),
                               );
@@ -431,7 +499,14 @@ class _ToSearchPageState extends State<ToSearchPage> {
                         ),
                 ],
               ),
-            ),
+            ):Center(
+                        child: Container(
+                                  height: MediaQuery.of(context).size.height/2,
+                                  child:
+                                            Lottie.asset('assets/animations/dest_search_loading.json'),
+                                ),
+                              
+                      ),
           );
         },
       ),

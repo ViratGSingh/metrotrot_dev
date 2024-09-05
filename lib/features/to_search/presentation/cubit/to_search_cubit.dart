@@ -5,9 +5,11 @@ import 'package:app/features/from_search/data/models/from_search_info.dart';
 import 'package:app/features/home/presentation/pages/home.dart';
 import 'package:app/features/to_search/data/models/dest_search_info.dart';
 import 'package:app/features/to_search/data/models/to_fav_recom.dart';
+import 'package:app/models/location.dart';
 import 'package:app/widgets/popups/enable_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
@@ -20,6 +22,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import 'dart:math';
 import 'package:flutter/services.dart';
 import 'package:isar/isar.dart';
 import 'package:app/features/home/data/models/directions.dart';
@@ -131,7 +134,8 @@ class ToSearchCubit extends Cubit<ToSearchState> {
   Future<void> initPlatformState() async {
     await Purchases.setDebugLogsEnabled(true);
     PurchasesConfiguration configuration;
-    configuration = PurchasesConfiguration(dotenv.env["REVENUECAT_API_KEY"].toString());
+    configuration =
+        PurchasesConfiguration(dotenv.env["REVENUECAT_API_KEY"].toString());
     await Purchases.configure(configuration);
   }
 
@@ -155,6 +159,7 @@ class ToSearchCubit extends Cubit<ToSearchState> {
       // optional error handling
     }
   }
+
   void checkUserPremiumStatus() async {
     await initPlatformState();
     CustomerInfo purchaserInfo = await Purchases.restorePurchases();
@@ -166,7 +171,6 @@ class ToSearchCubit extends Cubit<ToSearchState> {
       updateSearchLimit();
     }
   }
-
 
   void showRewardedAd(BuildContext context, String destinationId) {
     mixpanel.track("startDestRewardedAd");
@@ -355,6 +359,160 @@ class ToSearchCubit extends Cubit<ToSearchState> {
     mixpanel.track("openedDestSearchPage");
   }
 
+  double distance(Location a, Location b) {
+    const R = 6371; // Radius of the earth in km
+    final dLat = _toRadians(b.latitude - a.latitude);
+    final dLon = _toRadians(b.longitude - a.longitude);
+    final lat1 = _toRadians(a.latitude);
+    final lat2 = _toRadians(b.latitude);
+
+    final x = sin(dLat / 2) * sin(dLat / 2) +
+        sin(dLon / 2) * sin(dLon / 2) * cos(lat1) * cos(lat2);
+    final y = 2 * atan2(sqrt(x), sqrt(1 - x));
+    final distanceInKm = R * y; // Distance in km
+
+    return distanceInKm;
+  }
+
+  double _toRadians(double degrees) {
+    return degrees * (pi / 180);
+  }
+
+  Map<String, dynamic> findClosestStation(
+      List<Map<String, dynamic>> locations, Location userLocation) {
+    Map<String, dynamic> closestLocation = {};
+    double minDistance = double.infinity;
+
+    for (var i = 0; i < locations.length; i++) {
+      final Location stationLoc = Location(locations[i]["coordinates"]["lat"],
+          locations[i]["coordinates"]["lng"]);
+      final distanceToLocation = distance(userLocation, stationLoc);
+      //print(locations[i]);
+      if (distanceToLocation < minDistance) {
+        closestLocation = locations[i];
+        minDistance = distanceToLocation;
+        closestLocation["distance"] = minDistance;
+      }
+    }
+
+    return closestLocation;
+  }
+
+  Future<void> backgroundSavedInfo(
+      String placeId, String destName, String destAddress) async {
+    Isar isar = Isar.getInstance() ??
+        await Isar.open([
+          DirectionsSchema,
+          SavedFromRecommendationSchema,
+          SavedToRecommendationSchema,
+          SavedFromMetroSchema,
+          SavedDestMetroSchema,
+          FromSearchInfoSchema,
+          DestSearchInfoSchema
+        ]);
+    List<SavedFromMetro> savedFromPlaceInfo =
+        await isar.savedFromMetros.filter().placeIdEqualTo(placeId).findAll();
+    
+    List<SavedDestMetro> savedDestPlaceInfo =
+        await isar.savedDestMetros.filter().placeIdEqualTo(placeId).findAll();
+     
+    if (savedFromPlaceInfo.isEmpty && savedDestPlaceInfo.isEmpty) {
+      Map<String, dynamic> placeInfo =
+          await toSearchRepository.fetchNearestMetro(placeId);
+      print(placeInfo);
+      double lat = placeInfo["geometry"]["location"]["lat"];
+      double lng = placeInfo["geometry"]["location"]["lng"];
+      // destName = placeInfo["name"];
+      // destAddress = placeInfo["formatted_address"];
+
+      final metroResp =
+          await rootBundle.loadString('assets/data/delhi_ncr.json');
+      final metroData = json.decode(metroResp);
+      int metroLines = metroData["total_lines"];
+      //print(metroLines);
+      final userLocation = Location(lat, lng); // User's location
+      List<Map<String, dynamic>> metroStations = [];
+      for (var i = 1; i <= metroLines; i++) {
+        List lineData = metroData["data"]["line_${i.toString()}"]["stations"];
+        lineData.forEach((element) {
+          Map<String, dynamic> stationData = element;
+          metroStations.add(stationData);
+        });
+        //metroStations.addAll(lineData);
+      }
+      final coordinatesToCheck = metroStations;
+
+      final closestLocation =
+          findClosestStation(coordinatesToCheck, userLocation);
+      //print(
+      //    'Closest location is: (${closestLocation["name"]}, ${closestLocation["address"]})');
+      List lineKeys = closestLocation["interchange_data"]["lines"];
+      List<String> lines = [];
+      List<String> startStations = [];
+      List<String> endStations = [];
+      List<String> colourCodes = [];
+      lineKeys.forEach((element) {
+        Map<String, dynamic> lineData = metroData["data"][element];
+        lines.add(lineData["name"]);
+        startStations.add(lineData["stations"][0]["name"]);
+        endStations.add(lineData["stations"].last["name"]);
+        colourCodes.add(lineData["colour_code"]);
+      });
+
+      //Save the destination location info
+      SavedDestMetro formattedDestMetro = SavedDestMetro()
+        ..destName = destName
+        ..destAddress = destAddress
+        ..businessStatus =
+            closestLocation["is_interchange"] == true ? "Yes" : "No"
+        ..destLat = lat
+        ..destLng = lng
+        ..nearbyMetroLat = closestLocation["coordinates"]["lat"]
+        ..nearbyMetroLng = closestLocation["coordinates"]["lng"]
+        ..name = closestLocation["name"]
+        ..placeId = placeId
+        ..rating = ""
+        ..userRatingsTotal = ""
+        ..vicinity = closestLocation["address"]
+        ..data = ""
+        ..metro = metroData["name"]
+        ..lines = lines
+        ..colourCodes = colourCodes
+        ..startStations = startStations
+        ..endStations = endStations
+        ..destContent = destName;
+
+      await isar.writeTxn(() async {
+        await isar.savedDestMetros.put(formattedDestMetro);
+      });
+
+      SavedFromMetro formattedFromMetro = SavedFromMetro()
+          ..fromName = destName
+          ..fromAddress = destAddress
+          ..businessStatus =
+              closestLocation["is_interchange"] == true ? "Yes" : "No"
+          ..fromLat = lat
+          ..fromLng = lng
+          ..lat = closestLocation["coordinates"]["lat"]
+          ..lng = closestLocation["coordinates"]["lng"]
+          ..name = closestLocation["name"]
+          ..placeId = placeId
+          ..rating = ""
+          ..userRatingsTotal = ""
+          ..vicinity = closestLocation["address"]
+          ..data = ""
+          ..metro = metroData["name"]
+          ..lines = lines
+          ..colourCodes = colourCodes
+          ..startStations = startStations
+          ..endStations = endStations
+          ..fromContent = destName;
+        await isar.writeTxn(() async {
+          await isar.savedFromMetros.put(formattedFromMetro);
+        });
+    }
+  }
+
   getSearchRecommendations(
       //String userId, String fromPlaceId,
       String location,
@@ -367,127 +525,140 @@ class ToSearchCubit extends Cubit<ToSearchState> {
         placeStatus: ToSearchPlaceStatus.loading));
     List<ToRecommendation> predictions = [];
     List<ToRecommendation> stationSuggestions = [];
+    if (location == "") {
+      emit(state.copyWith(
+          stationStatus: ToSearchStationStatus.loaded,
+          placeStatus: ToSearchPlaceStatus.loaded,
+          locations: predictions.take(5).toList(),
+          stations: stationSuggestions.take(5).toList()));
+    } else {
+      stationSuggestions = await getSuggestedStations(location);
+      //print(stationSuggestions);
+      Isar isar = Isar.getInstance() ??
+          await Isar.open([
+            DirectionsSchema,
+            SavedFromRecommendationSchema,
+            SavedToRecommendationSchema,
+            SavedFromMetroSchema,
+            SavedDestMetroSchema
+          ]);
 
-    stationSuggestions = await getSuggestedStations(location);
-    //print(stationSuggestions);
-    Isar isar = Isar.getInstance() ??
-        await Isar.open([
-          DirectionsSchema,
-          SavedFromRecommendationSchema,
-          SavedToRecommendationSchema,
-          SavedFromMetroSchema,
-          SavedDestMetroSchema
-        ]);
-
-    if (searchLimitChecked == false) {
-      // ignore: use_build_context_synchronously
-      print("check limit");
-      reachedLimit = await checkDestSearchLimit(context);
-    }
-
-    //Suggested Places
-    //Check for saved places
-
-    List<ToRecommendation> favSavedPredictions = [];
-    List<ToRecommendation> nonFavSavedPredictions = [];
-    final savedRecommendations = await isar.savedToRecommendations
-        .filter()
-        .destContentContains(location, caseSensitive: false)
-        .findAll();
-    for (SavedToRecommendation savedRecommendation in savedRecommendations) {
-      ToRecommendation updSavedRecommendation = ToRecommendation(
-          placeId: savedRecommendation.placeId ?? "",
-          main: savedRecommendation.main ?? "",
-          secondary: savedRecommendation.secondary ?? "",
-          isFavourite: savedRecommendation.isFavourite ?? false);
-      if (updSavedRecommendation.isFavourite == true) {
-        favSavedPredictions.add(updSavedRecommendation);
-      } else {
-        nonFavSavedPredictions.add(updSavedRecommendation);
+      if (searchLimitChecked == false) {
+        // ignore: use_build_context_synchronously
+        print("check limit");
+        reachedLimit = await checkDestSearchLimit(context);
       }
-    }
 
-    //Check in Source Locations
-    final savedFromRecommendations = await isar.savedFromRecommendations
-        .filter()
-        .fromContentContains(location, caseSensitive: false)
-        .findAll();
-    for (SavedFromRecommendation savedRecommendation
-        in savedFromRecommendations) {
-      ToRecommendation updSavedRecommendation = ToRecommendation(
-          placeId: savedRecommendation.placeId ?? "",
-          main: savedRecommendation.main ?? "",
-          secondary: savedRecommendation.secondary ?? "",
-          isFavourite: false);
-      if (nonFavSavedPredictions.contains(updSavedRecommendation) == false) {
-        nonFavSavedPredictions.add(updSavedRecommendation);
+      //Suggested Places
+      //Check for saved places
+
+      List<ToRecommendation> favSavedPredictions = [];
+      List<ToRecommendation> nonFavSavedPredictions = [];
+      final savedRecommendations = await isar.savedToRecommendations
+          .filter()
+          .destContentContains(location, caseSensitive: false)
+          .findAll();
+      for (SavedToRecommendation savedRecommendation in savedRecommendations) {
+        ToRecommendation updSavedRecommendation = ToRecommendation(
+            placeId: savedRecommendation.placeId ?? "",
+            main: savedRecommendation.main ?? "",
+            secondary: savedRecommendation.secondary ?? "",
+            isFavourite: savedRecommendation.isFavourite ?? false);
+        if (updSavedRecommendation.isFavourite == true) {
+          favSavedPredictions.add(updSavedRecommendation);
+        } else {
+          nonFavSavedPredictions.add(updSavedRecommendation);
+        }
       }
-    }
 
-    //Add all fav saved recommendations
-    predictions.addAll(favSavedPredictions);
-    predictions.addAll(nonFavSavedPredictions);
-
-    await isar.savedToRecommendations.count().then((totalRecommendations) {
-      print("search limit checked");
-      print(searchLimitChecked);
-      print(reachedLimit);
-      if (reachedLimit == true && searchLimitChecked == false) {
-        showPremiumPackage();
-        // showDialog(
-        //     // ignore: use_build_context_synchronously
-        //     context: context,
-        //     builder: (BuildContext context) {
-        //       return SearchLimitReachedPopup(
-        //         title: "Warning",
-        //         message:
-        //             "You've reached your limit for searching source locations online. Please watch a 5-second ad to unlock additional searches.", //\n\n Alternatively, you can continue searching from the $totalRecommendations saved recommendations available right now.",
-        //         action: "Back",
-        //         actionFunc: () {
-        //           Navigator.pop(context);
-        //           showRewardedAd(context);
-
-        //           //launchUrl(Uri.parse("https://www.threads.net/@viratgsingh"));
-        //           // Navigator.push(
-        //           //   context,
-        //           //   MaterialPageRoute<void>(
-        //           //     builder: (BuildContext context) => const HomePa,
-        //           //   ),
-        //           // );
-        //         },
-        //       );
-        //     });
-        searchLimitChecked = true;
+      //Check in Source Locations
+      final savedFromRecommendations = await isar.savedFromRecommendations
+          .filter()
+          .fromContentContains(location, caseSensitive: false)
+          .findAll();
+      for (SavedFromRecommendation savedRecommendation
+          in savedFromRecommendations) {
+        ToRecommendation updSavedRecommendation = ToRecommendation(
+            placeId: savedRecommendation.placeId ?? "",
+            main: savedRecommendation.main ?? "",
+            secondary: savedRecommendation.secondary ?? "",
+            isFavourite: false);
+        if (nonFavSavedPredictions.contains(updSavedRecommendation) == false) {
+          nonFavSavedPredictions.add(updSavedRecommendation);
+        }
       }
-    });
 
-    //Get new places
-    if (predictions.isEmpty == true && reachedLimit == false) {
-      await toSearchRepository
-          .getSearchRecommendations(location)
-          .then((value) async {
-        predictions = value;
-        for (ToRecommendation recommendation in predictions) {
-          SavedToRecommendation newPlace = SavedToRecommendation()
-            ..placeId = recommendation.placeId
-            ..main = recommendation.main
-            ..secondary = recommendation.secondary
-            ..totaltaps = 1
-            ..firstTapDate = DateTime.now()
-            ..lastTapDate = DateTime.now()
-            ..isFavourite = false
-            ..destContent = recommendation.main;
-          await isar.writeTxn(() async {
-            await isar.savedToRecommendations.put(newPlace);
-          });
+      //Add all fav saved recommendations
+      predictions.addAll(favSavedPredictions);
+      predictions.addAll(nonFavSavedPredictions);
+
+      await isar.savedToRecommendations.count().then((totalRecommendations) {
+        print("search limit checked");
+        print(searchLimitChecked);
+        print(reachedLimit);
+        if (reachedLimit == true && searchLimitChecked == false) {
+          showPremiumPackage();
+          // showDialog(
+          //     // ignore: use_build_context_synchronously
+          //     context: context,
+          //     builder: (BuildContext context) {
+          //       return SearchLimitReachedPopup(
+          //         title: "Warning",
+          //         message:
+          //             "You've reached your limit for searching source locations online. Please watch a 5-second ad to unlock additional searches.", //\n\n Alternatively, you can continue searching from the $totalRecommendations saved recommendations available right now.",
+          //         action: "Back",
+          //         actionFunc: () {
+          //           Navigator.pop(context);
+          //           showRewardedAd(context);
+
+          //           //launchUrl(Uri.parse("https://www.threads.net/@viratgsingh"));
+          //           // Navigator.push(
+          //           //   context,
+          //           //   MaterialPageRoute<void>(
+          //           //     builder: (BuildContext context) => const HomePa,
+          //           //   ),
+          //           // );
+          //         },
+          //       );
+          //     });
+          searchLimitChecked = true;
         }
       });
+
+      //Get new places
+      if (predictions.isEmpty == true && reachedLimit == false) {
+        await toSearchRepository
+            .getSearchRecommendations(location)
+            .then((value) async {
+          predictions = value;
+          for (ToRecommendation recommendation in predictions) {
+            SavedToRecommendation newPlace = SavedToRecommendation()
+              ..placeId = recommendation.placeId
+              ..main = recommendation.main
+              ..secondary = recommendation.secondary
+              ..totaltaps = 1
+              ..firstTapDate = DateTime.now()
+              ..lastTapDate = DateTime.now()
+              ..isFavourite = false
+              ..destContent = recommendation.main;
+            await isar.writeTxn(() async {
+              await isar.savedToRecommendations.put(newPlace);
+            });
+          }
+        });
+      }
+      for (ToRecommendation prediction in predictions) {
+        backgroundSavedInfo(
+            prediction.placeId, prediction.main, prediction.secondary);
+      }
+
+      await Future.delayed(Duration(milliseconds: 800));
+      emit(state.copyWith(
+          stationStatus: ToSearchStationStatus.loaded,
+          placeStatus: ToSearchPlaceStatus.loaded,
+          locations: predictions.take(5).toList(),
+          stations: stationSuggestions.take(5).toList()));
     }
-    emit(state.copyWith(
-        stationStatus: ToSearchStationStatus.loaded,
-        placeStatus: ToSearchPlaceStatus.loaded,
-        locations: predictions.take(5).toList(),
-        stations: stationSuggestions.take(5).toList()));
   }
 
   saveDestinationInfo(
