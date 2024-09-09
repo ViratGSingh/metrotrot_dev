@@ -64,4 +64,40 @@ class ToSearchService {
       rethrow;
     }
   }
+
+  Future<List<ToRecommendation>> getAltSearchRecommendations(
+      String location) async {
+    final String apiKey = dotenv.env["OLA_MAPS_API_KEY"].toString();
+    final String apiHost = dotenv.env["OLA_MAPS_API_HOST"].toString();
+    //Find locations according to string
+    final Uri requestUri = Uri(
+        scheme: 'https',
+        host: apiHost,
+        path: "/places/v1/autocomplete",
+        queryParameters: {
+          "input": location,
+          // "language": "en",
+          // "region": "in",
+          //"locationrestriction": "circle:52000@28.4020,76.8260",
+          "api_key": apiKey
+        });
+
+    try {
+      final http.Response response = await httpClient.get(requestUri);
+
+      final responseBody = json.decode(response.body);
+      print(responseBody);
+      final List<dynamic> locations = responseBody["predictions"];
+      List<ToRecommendation> formattedLocs = [];
+      locations.forEach((element) {
+        ToRecommendation formattedLoc =
+            ToRecommendation.fromJson(json.encode(element));
+        formattedLocs.add(formattedLoc);
+      });
+
+      return formattedLocs;
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

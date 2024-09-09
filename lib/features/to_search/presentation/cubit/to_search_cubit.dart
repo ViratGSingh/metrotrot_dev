@@ -13,6 +13,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:uuid/uuid.dart';
 import 'package:app/features/from_search/data/models/from_metro.dart';
@@ -39,6 +40,7 @@ class ToSearchCubit extends Cubit<ToSearchState> {
   Future<void> updateDestFavRecommendation(
       ToRecommendation recommendation, bool isFavourite) async {
     String placeId = recommendation.placeId;
+    final dir = await getApplicationDocumentsDirectory();
     Isar isar = Isar.getInstance() ??
         await Isar.open([
           DirectionsSchema,
@@ -46,7 +48,7 @@ class ToSearchCubit extends Cubit<ToSearchState> {
           SavedToRecommendationSchema,
           SavedFromMetroSchema,
           SavedDestMetroSchema
-        ]);
+        ], directory: dir.path);
     //Check place id exists in From recommendations
     final savedRecommendation = await isar.savedToRecommendations
         .filter()
@@ -214,6 +216,7 @@ class ToSearchCubit extends Cubit<ToSearchState> {
   }
 
   Future<bool> checkDestSearchLimit(BuildContext context) async {
+    final dir = await getApplicationDocumentsDirectory();
     Isar isar = Isar.getInstance() ??
         await Isar.open([
           DirectionsSchema,
@@ -223,7 +226,7 @@ class ToSearchCubit extends Cubit<ToSearchState> {
           SavedDestMetroSchema,
           FromSearchInfoSchema,
           DestSearchInfoSchema
-        ]);
+        ], directory: dir.path);
     int totalFavourites = await isar.savedToRecommendations
         .filter()
         .isFavouriteEqualTo(true)
@@ -289,6 +292,7 @@ class ToSearchCubit extends Cubit<ToSearchState> {
   }
 
   Future<void> updateSearchLimit() async {
+    final dir = await getApplicationDocumentsDirectory();
     Isar isar = Isar.getInstance() ??
         await Isar.open([
           DirectionsSchema,
@@ -298,7 +302,7 @@ class ToSearchCubit extends Cubit<ToSearchState> {
           SavedDestMetroSchema,
           FromSearchInfoSchema,
           DestSearchInfoSchema
-        ]);
+        ], directory: dir.path);
     int totalFavourites = await isar.savedToRecommendations
         .filter()
         .isFavouriteEqualTo(true)
@@ -398,8 +402,8 @@ class ToSearchCubit extends Cubit<ToSearchState> {
     return closestLocation;
   }
 
-  Future<void> backgroundSavedInfo(
-      String placeId, String destName, String destAddress) async {
+  Future<void> altBackgroundSavedInfo(ToRecommendation prediction) async {
+    final dir = await getApplicationDocumentsDirectory();
     Isar isar = Isar.getInstance() ??
         await Isar.open([
           DirectionsSchema,
@@ -409,13 +413,130 @@ class ToSearchCubit extends Cubit<ToSearchState> {
           SavedDestMetroSchema,
           FromSearchInfoSchema,
           DestSearchInfoSchema
-        ]);
+        ], directory: dir.path);
+    List<SavedFromMetro> savedFromPlaceInfo = await isar.savedFromMetros
+        .filter()
+        .placeIdEqualTo(prediction.placeId)
+        .findAll();
+
+    List<SavedDestMetro> savedDestPlaceInfo = await isar.savedDestMetros
+        .filter()
+        .placeIdEqualTo(prediction.placeId)
+        .findAll();
+
+    if (savedFromPlaceInfo.isEmpty && savedDestPlaceInfo.isEmpty) {
+      double lat = prediction.lat;
+      double lng = prediction.lng;
+      // destName = placeInfo["name"];
+      // destAddress = placeInfo["formatted_address"];
+
+      final metroResp =
+          await rootBundle.loadString('assets/data/delhi_ncr.json');
+      final metroData = json.decode(metroResp);
+      int metroLines = metroData["total_lines"];
+      //print(metroLines);
+      final userLocation = Location(lat, lng); // User's location
+      List<Map<String, dynamic>> metroStations = [];
+      for (var i = 1; i <= metroLines; i++) {
+        List lineData = metroData["data"]["line_${i.toString()}"]["stations"];
+        lineData.forEach((element) {
+          Map<String, dynamic> stationData = element;
+          metroStations.add(stationData);
+        });
+        //metroStations.addAll(lineData);
+      }
+      final coordinatesToCheck = metroStations;
+
+      final closestLocation =
+          findClosestStation(coordinatesToCheck, userLocation);
+      //print(
+      //    'Closest location is: (${closestLocation["name"]}, ${closestLocation["address"]})');
+      List lineKeys = closestLocation["interchange_data"]["lines"];
+      List<String> lines = [];
+      List<String> startStations = [];
+      List<String> endStations = [];
+      List<String> colourCodes = [];
+      lineKeys.forEach((element) {
+        Map<String, dynamic> lineData = metroData["data"][element];
+        lines.add(lineData["name"]);
+        startStations.add(lineData["stations"][0]["name"]);
+        endStations.add(lineData["stations"].last["name"]);
+        colourCodes.add(lineData["colour_code"]);
+      });
+
+      //Save the destination location info
+      SavedDestMetro formattedDestMetro = SavedDestMetro()
+        ..destName = prediction.main
+        ..destAddress = prediction.secondary
+        ..businessStatus =
+            closestLocation["is_interchange"] == true ? "Yes" : "No"
+        ..destLat = lat
+        ..destLng = lng
+        ..nearbyMetroLat = closestLocation["coordinates"]["lat"]
+        ..nearbyMetroLng = closestLocation["coordinates"]["lng"]
+        ..name = closestLocation["name"]
+        ..placeId = prediction.placeId
+        ..rating = ""
+        ..userRatingsTotal = ""
+        ..vicinity = closestLocation["address"]
+        ..data = ""
+        ..metro = metroData["name"]
+        ..lines = lines
+        ..colourCodes = colourCodes
+        ..startStations = startStations
+        ..endStations = endStations
+        ..destContent = prediction.main;
+
+      await isar.writeTxn(() async {
+        await isar.savedDestMetros.put(formattedDestMetro);
+      });
+
+      SavedFromMetro formattedFromMetro = SavedFromMetro()
+        ..fromName = prediction.main
+        ..fromAddress = prediction.secondary
+        ..businessStatus =
+            closestLocation["is_interchange"] == true ? "Yes" : "No"
+        ..fromLat = lat
+        ..fromLng = lng
+        ..lat = closestLocation["coordinates"]["lat"]
+        ..lng = closestLocation["coordinates"]["lng"]
+        ..name = closestLocation["name"]
+        ..placeId = prediction.placeId
+        ..rating = ""
+        ..userRatingsTotal = ""
+        ..vicinity = closestLocation["address"]
+        ..data = ""
+        ..metro = metroData["name"]
+        ..lines = lines
+        ..colourCodes = colourCodes
+        ..startStations = startStations
+        ..endStations = endStations
+        ..fromContent = prediction.main;
+      await isar.writeTxn(() async {
+        await isar.savedFromMetros.put(formattedFromMetro);
+      });
+    }
+  }
+
+  Future<void> backgroundSavedInfo(
+      String placeId, String destName, String destAddress) async {
+    final dir = await getApplicationDocumentsDirectory();
+    Isar isar = Isar.getInstance() ??
+        await Isar.open([
+          DirectionsSchema,
+          SavedFromRecommendationSchema,
+          SavedToRecommendationSchema,
+          SavedFromMetroSchema,
+          SavedDestMetroSchema,
+          FromSearchInfoSchema,
+          DestSearchInfoSchema
+        ], directory: dir.path);
     List<SavedFromMetro> savedFromPlaceInfo =
         await isar.savedFromMetros.filter().placeIdEqualTo(placeId).findAll();
-    
+
     List<SavedDestMetro> savedDestPlaceInfo =
         await isar.savedDestMetros.filter().placeIdEqualTo(placeId).findAll();
-     
+
     if (savedFromPlaceInfo.isEmpty && savedDestPlaceInfo.isEmpty) {
       Map<String, dynamic> placeInfo =
           await toSearchRepository.fetchNearestMetro(placeId);
@@ -487,29 +608,29 @@ class ToSearchCubit extends Cubit<ToSearchState> {
       });
 
       SavedFromMetro formattedFromMetro = SavedFromMetro()
-          ..fromName = destName
-          ..fromAddress = destAddress
-          ..businessStatus =
-              closestLocation["is_interchange"] == true ? "Yes" : "No"
-          ..fromLat = lat
-          ..fromLng = lng
-          ..lat = closestLocation["coordinates"]["lat"]
-          ..lng = closestLocation["coordinates"]["lng"]
-          ..name = closestLocation["name"]
-          ..placeId = placeId
-          ..rating = ""
-          ..userRatingsTotal = ""
-          ..vicinity = closestLocation["address"]
-          ..data = ""
-          ..metro = metroData["name"]
-          ..lines = lines
-          ..colourCodes = colourCodes
-          ..startStations = startStations
-          ..endStations = endStations
-          ..fromContent = destName;
-        await isar.writeTxn(() async {
-          await isar.savedFromMetros.put(formattedFromMetro);
-        });
+        ..fromName = destName
+        ..fromAddress = destAddress
+        ..businessStatus =
+            closestLocation["is_interchange"] == true ? "Yes" : "No"
+        ..fromLat = lat
+        ..fromLng = lng
+        ..lat = closestLocation["coordinates"]["lat"]
+        ..lng = closestLocation["coordinates"]["lng"]
+        ..name = closestLocation["name"]
+        ..placeId = placeId
+        ..rating = ""
+        ..userRatingsTotal = ""
+        ..vicinity = closestLocation["address"]
+        ..data = ""
+        ..metro = metroData["name"]
+        ..lines = lines
+        ..colourCodes = colourCodes
+        ..startStations = startStations
+        ..endStations = endStations
+        ..fromContent = destName;
+      await isar.writeTxn(() async {
+        await isar.savedFromMetros.put(formattedFromMetro);
+      });
     }
   }
 
@@ -534,6 +655,7 @@ class ToSearchCubit extends Cubit<ToSearchState> {
     } else {
       stationSuggestions = await getSuggestedStations(location);
       //print(stationSuggestions);
+      final dir = await getApplicationDocumentsDirectory();
       Isar isar = Isar.getInstance() ??
           await Isar.open([
             DirectionsSchema,
@@ -541,7 +663,7 @@ class ToSearchCubit extends Cubit<ToSearchState> {
             SavedToRecommendationSchema,
             SavedFromMetroSchema,
             SavedDestMetroSchema
-          ]);
+          ], directory: dir.path);
 
       if (searchLimitChecked == false) {
         // ignore: use_build_context_synchronously
@@ -563,6 +685,8 @@ class ToSearchCubit extends Cubit<ToSearchState> {
             placeId: savedRecommendation.placeId ?? "",
             main: savedRecommendation.main ?? "",
             secondary: savedRecommendation.secondary ?? "",
+            lat: savedRecommendation.lat ?? 0,
+            lng: savedRecommendation.lng ?? 0,
             isFavourite: savedRecommendation.isFavourite ?? false);
         if (updSavedRecommendation.isFavourite == true) {
           favSavedPredictions.add(updSavedRecommendation);
@@ -582,6 +706,8 @@ class ToSearchCubit extends Cubit<ToSearchState> {
             placeId: savedRecommendation.placeId ?? "",
             main: savedRecommendation.main ?? "",
             secondary: savedRecommendation.secondary ?? "",
+            lat: savedRecommendation.lat ?? 0,
+            lng: savedRecommendation.lng ?? 0,
             isFavourite: false);
         if (nonFavSavedPredictions.contains(updSavedRecommendation) == false) {
           nonFavSavedPredictions.add(updSavedRecommendation);
@@ -628,7 +754,7 @@ class ToSearchCubit extends Cubit<ToSearchState> {
       //Get new places
       if (predictions.isEmpty == true && reachedLimit == false) {
         await toSearchRepository
-            .getSearchRecommendations(location)
+            .getAltSearchRecommendations(location)
             .then((value) async {
           predictions = value;
           for (ToRecommendation recommendation in predictions) {
@@ -637,6 +763,8 @@ class ToSearchCubit extends Cubit<ToSearchState> {
               ..main = recommendation.main
               ..secondary = recommendation.secondary
               ..totaltaps = 1
+              ..lat = recommendation.lat
+              ..lng = recommendation.lng
               ..firstTapDate = DateTime.now()
               ..lastTapDate = DateTime.now()
               ..isFavourite = false
@@ -648,8 +776,12 @@ class ToSearchCubit extends Cubit<ToSearchState> {
         });
       }
       for (ToRecommendation prediction in predictions) {
-        backgroundSavedInfo(
-            prediction.placeId, prediction.main, prediction.secondary);
+        if (prediction.lat != 0 && prediction.lng != 0) {
+          altBackgroundSavedInfo(prediction);
+        } else {
+          backgroundSavedInfo(
+              prediction.placeId, prediction.main, prediction.secondary);
+        }
       }
 
       await Future.delayed(Duration(milliseconds: 800));

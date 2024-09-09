@@ -22,6 +22,7 @@ import 'package:in_app_review/in_app_review.dart';
 import 'package:in_app_update/in_app_update.dart';
 import 'package:isar/isar.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:app/features/from_search/data/models/from_metro.dart';
 import 'package:app/features/home/data/models/directions.dart';
@@ -357,6 +358,8 @@ Future<void> showPremiumPackage() async {
 
     String fromName = "";
     String fromAddress = "";
+
+  final dir = await getApplicationDocumentsDirectory();
     Isar isar = Isar.getInstance() ??
         await Isar.open([
           DirectionsSchema,
@@ -364,7 +367,9 @@ Future<void> showPremiumPackage() async {
           SavedToRecommendationSchema,
           SavedFromMetroSchema,
           SavedDestMetroSchema,
-        ]);
+        ],
+        directory: dir.path
+        );
     if (isOffline == false) {
       //Check in saved source locations
       final savedFromMetro = await isar.savedFromMetros
@@ -746,6 +751,8 @@ Future<void> showPremiumPackage() async {
     DestMetro nearbyMetro = DestMetro.initial();
     String destName = "";
     String destAddress = "";
+
+  final dir = await getApplicationDocumentsDirectory();
     Isar isar = Isar.getInstance() ??
         await Isar.open([
           DirectionsSchema,
@@ -753,7 +760,9 @@ Future<void> showPremiumPackage() async {
           SavedToRecommendationSchema,
           SavedFromMetroSchema,
           SavedDestMetroSchema
-        ]);
+        ],
+        directory: dir.path
+        );
     if (isOffline == false) {
       //Check in saved source locations
       final savedFromMetro = await isar.savedFromMetros

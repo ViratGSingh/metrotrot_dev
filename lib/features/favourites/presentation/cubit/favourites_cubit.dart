@@ -9,6 +9,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:isar/isar.dart';
 import 'package:meta/meta.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
+import 'package:path_provider/path_provider.dart';
 
 part 'favourites_state.dart';
 
@@ -19,6 +20,7 @@ class FavouritesCubit extends Cubit<FavouritesState> {
   Future<void> unFavSavedFromRecommendation(
       SavedFromRecommendation recommendation) async {
     String placeId = recommendation.placeId??"";
+    final dir = await getApplicationDocumentsDirectory();
     Isar isar = Isar.getInstance() ??
         await Isar.open([
           DirectionsSchema,
@@ -26,7 +28,9 @@ class FavouritesCubit extends Cubit<FavouritesState> {
           SavedToRecommendationSchema,
           SavedFromMetroSchema,
           SavedDestMetroSchema
-        ]);
+        ],
+        directory: dir.path
+        );
     //Check place id exists in From recommendations
     final favSavedFromRecommendation = await isar.savedFromRecommendations
         .filter()
@@ -46,6 +50,8 @@ class FavouritesCubit extends Cubit<FavouritesState> {
       SavedToRecommendation recommendation) async {
     String placeId = recommendation.placeId??"";
     SavedToRecommendation? favSavedToRecommendation;
+
+  final dir = await getApplicationDocumentsDirectory();
     Isar isar = Isar.getInstance() ??
         await Isar.open([
           DirectionsSchema,
@@ -53,7 +59,9 @@ class FavouritesCubit extends Cubit<FavouritesState> {
           SavedToRecommendationSchema,
           SavedFromMetroSchema,
           SavedDestMetroSchema
-        ]);
+        ],
+        directory: dir.path
+        );
     //Check place id exists in From recommendations
     favSavedToRecommendation = await isar.savedToRecommendations
         .filter()
@@ -76,6 +84,8 @@ class FavouritesCubit extends Cubit<FavouritesState> {
     List<SavedToRecommendation> favSavedToRecommemdations = [];
 
     //print(stationSuggestions);
+
+  final dir = await getApplicationDocumentsDirectory();
     Isar isar = Isar.getInstance() ??
         await Isar.open([
           DirectionsSchema,
@@ -83,7 +93,9 @@ class FavouritesCubit extends Cubit<FavouritesState> {
           SavedToRecommendationSchema,
           SavedFromMetroSchema,
           SavedDestMetroSchema
-        ]);
+        ],
+        directory: dir.path
+        );
 
     //Suggested Places
     //Check for saved places

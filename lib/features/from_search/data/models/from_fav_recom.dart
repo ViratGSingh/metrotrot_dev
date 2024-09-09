@@ -13,6 +13,8 @@ class SavedFromRecommendation {
   int? totaltaps;
   DateTime? firstTapDate;
   DateTime? lastTapDate;
+  double? lat;
+  double? lng;
   late String fromContent;
 
   @Index(type: IndexType.value, caseSensitive: false)

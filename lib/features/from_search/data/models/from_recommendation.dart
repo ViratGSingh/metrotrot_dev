@@ -6,21 +6,25 @@ class FromRecommendation extends Equatable {
   final String main;
   final String secondary;
   final String placeId;
+  final double lat;
+  final double lng;
   final bool isFavourite;
   const FromRecommendation(
       {required this.placeId,
       required this.main,
       required this.secondary,
+      this.lat=0,
+      this.lng=0,
       this.isFavourite = false});
 
   @override
   List<Object> get props {
-    return [placeId, main, secondary, isFavourite];
+    return [placeId, main, secondary, lat, lng, isFavourite];
   }
 
   factory FromRecommendation.initial() {
     return const FromRecommendation(
-        placeId: "", main: "", secondary: "", isFavourite: false);
+        placeId: "", main: "", secondary: "",lat: 0, lng: 0,  isFavourite: false);
   }
 
   String toJson() => json.encode(toMap());
@@ -30,6 +34,8 @@ class FromRecommendation extends Equatable {
       'place_id': placeId,
       'main': main,
       'secondary': secondary,
+      'lat':lat,
+      'lng':lng,
       'isFavourite': isFavourite
     };
   }
@@ -37,6 +43,8 @@ class FromRecommendation extends Equatable {
   factory FromRecommendation.fromMap(Map<String, dynamic> map) {
     String main;
     String secondary;
+    double lat = 0;
+    double lng = 0;
     if (map.containsKey("structured_formatting") == false) {
       main = map["name"];
       secondary = map["vicinity"];
@@ -53,10 +61,16 @@ class FromRecommendation extends Equatable {
     if (map.containsKey("is_favourite") == true) {
       isFavourite = map["is_favourite"];
     }
+    if (map.containsKey("geometry") == true) {
+      lat = map["geometry"]["location"]["lat"];
+      lng = map["geometry"]["location"]["lng"];
+    }
     return FromRecommendation(
         placeId: map['place_id'] as String,
         main: main,
         secondary: secondary,
+        lat:lat,
+        lng:lng,
         isFavourite: isFavourite);
   }
 

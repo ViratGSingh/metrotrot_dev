@@ -7,7 +7,7 @@ part of 'from_fav_recom.dart';
 // **************************************************************************
 
 // coverage:ignore-file
-// ignore_for_file: duplicate_ignore, non_constant_identifier_names, constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast, prefer_const_constructors, lines_longer_than_80_chars, require_trailing_commas, inference_failure_on_function_invocation, unnecessary_parenthesis, unnecessary_raw_strings, unnecessary_null_checks, join_return_with_assignment, prefer_final_locals, avoid_js_rounded_ints, avoid_positional_boolean_parameters
+// ignore_for_file: duplicate_ignore, non_constant_identifier_names, constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast, prefer_const_constructors, lines_longer_than_80_chars, require_trailing_commas, inference_failure_on_function_invocation, unnecessary_parenthesis, unnecessary_raw_strings, unnecessary_null_checks, join_return_with_assignment, prefer_final_locals, avoid_js_rounded_ints, avoid_positional_boolean_parameters, always_specify_types
 
 extension GetSavedFromRecommendationCollection on Isar {
   IsarCollection<SavedFromRecommendation> get savedFromRecommendations =>
@@ -43,23 +43,33 @@ const SavedFromRecommendationSchema = CollectionSchema(
       name: r'lastTapDate',
       type: IsarType.dateTime,
     ),
-    r'main': PropertySchema(
+    r'lat': PropertySchema(
       id: 5,
+      name: r'lat',
+      type: IsarType.double,
+    ),
+    r'lng': PropertySchema(
+      id: 6,
+      name: r'lng',
+      type: IsarType.double,
+    ),
+    r'main': PropertySchema(
+      id: 7,
       name: r'main',
       type: IsarType.string,
     ),
     r'placeId': PropertySchema(
-      id: 6,
+      id: 8,
       name: r'placeId',
       type: IsarType.string,
     ),
     r'secondary': PropertySchema(
-      id: 7,
+      id: 9,
       name: r'secondary',
       type: IsarType.string,
     ),
     r'totaltaps': PropertySchema(
-      id: 8,
+      id: 10,
       name: r'totaltaps',
       type: IsarType.long,
     )
@@ -89,7 +99,7 @@ const SavedFromRecommendationSchema = CollectionSchema(
   getId: _savedFromRecommendationGetId,
   getLinks: _savedFromRecommendationGetLinks,
   attach: _savedFromRecommendationAttach,
-  version: '3.0.5',
+  version: '3.1.0+1',
 );
 
 int _savedFromRecommendationEstimateSize(
@@ -138,10 +148,12 @@ void _savedFromRecommendationSerialize(
   writer.writeStringList(offsets[2], object.fromContentWords);
   writer.writeBool(offsets[3], object.isFavourite);
   writer.writeDateTime(offsets[4], object.lastTapDate);
-  writer.writeString(offsets[5], object.main);
-  writer.writeString(offsets[6], object.placeId);
-  writer.writeString(offsets[7], object.secondary);
-  writer.writeLong(offsets[8], object.totaltaps);
+  writer.writeDouble(offsets[5], object.lat);
+  writer.writeDouble(offsets[6], object.lng);
+  writer.writeString(offsets[7], object.main);
+  writer.writeString(offsets[8], object.placeId);
+  writer.writeString(offsets[9], object.secondary);
+  writer.writeLong(offsets[10], object.totaltaps);
 }
 
 SavedFromRecommendation _savedFromRecommendationDeserialize(
@@ -156,10 +168,12 @@ SavedFromRecommendation _savedFromRecommendationDeserialize(
   object.id = id;
   object.isFavourite = reader.readBoolOrNull(offsets[3]);
   object.lastTapDate = reader.readDateTimeOrNull(offsets[4]);
-  object.main = reader.readStringOrNull(offsets[5]);
-  object.placeId = reader.readStringOrNull(offsets[6]);
-  object.secondary = reader.readStringOrNull(offsets[7]);
-  object.totaltaps = reader.readLongOrNull(offsets[8]);
+  object.lat = reader.readDoubleOrNull(offsets[5]);
+  object.lng = reader.readDoubleOrNull(offsets[6]);
+  object.main = reader.readStringOrNull(offsets[7]);
+  object.placeId = reader.readStringOrNull(offsets[8]);
+  object.secondary = reader.readStringOrNull(offsets[9]);
+  object.totaltaps = reader.readLongOrNull(offsets[10]);
   return object;
 }
 
@@ -181,12 +195,16 @@ P _savedFromRecommendationDeserializeProp<P>(
     case 4:
       return (reader.readDateTimeOrNull(offset)) as P;
     case 5:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readDoubleOrNull(offset)) as P;
     case 6:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readDoubleOrNull(offset)) as P;
     case 7:
       return (reader.readStringOrNull(offset)) as P;
     case 8:
+      return (reader.readStringOrNull(offset)) as P;
+    case 9:
+      return (reader.readStringOrNull(offset)) as P;
+    case 10:
       return (reader.readLongOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -1043,6 +1061,174 @@ extension SavedFromRecommendationQueryFilter on QueryBuilder<
   }
 
   QueryBuilder<SavedFromRecommendation, SavedFromRecommendation,
+      QAfterFilterCondition> latIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'lat',
+      ));
+    });
+  }
+
+  QueryBuilder<SavedFromRecommendation, SavedFromRecommendation,
+      QAfterFilterCondition> latIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'lat',
+      ));
+    });
+  }
+
+  QueryBuilder<SavedFromRecommendation, SavedFromRecommendation,
+      QAfterFilterCondition> latEqualTo(
+    double? value, {
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'lat',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<SavedFromRecommendation, SavedFromRecommendation,
+      QAfterFilterCondition> latGreaterThan(
+    double? value, {
+    bool include = false,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'lat',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<SavedFromRecommendation, SavedFromRecommendation,
+      QAfterFilterCondition> latLessThan(
+    double? value, {
+    bool include = false,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'lat',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<SavedFromRecommendation, SavedFromRecommendation,
+      QAfterFilterCondition> latBetween(
+    double? lower,
+    double? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'lat',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<SavedFromRecommendation, SavedFromRecommendation,
+      QAfterFilterCondition> lngIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'lng',
+      ));
+    });
+  }
+
+  QueryBuilder<SavedFromRecommendation, SavedFromRecommendation,
+      QAfterFilterCondition> lngIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'lng',
+      ));
+    });
+  }
+
+  QueryBuilder<SavedFromRecommendation, SavedFromRecommendation,
+      QAfterFilterCondition> lngEqualTo(
+    double? value, {
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'lng',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<SavedFromRecommendation, SavedFromRecommendation,
+      QAfterFilterCondition> lngGreaterThan(
+    double? value, {
+    bool include = false,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'lng',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<SavedFromRecommendation, SavedFromRecommendation,
+      QAfterFilterCondition> lngLessThan(
+    double? value, {
+    bool include = false,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'lng',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<SavedFromRecommendation, SavedFromRecommendation,
+      QAfterFilterCondition> lngBetween(
+    double? lower,
+    double? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'lng',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<SavedFromRecommendation, SavedFromRecommendation,
       QAfterFilterCondition> mainIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -1650,6 +1836,34 @@ extension SavedFromRecommendationQuerySortBy
   }
 
   QueryBuilder<SavedFromRecommendation, SavedFromRecommendation, QAfterSortBy>
+      sortByLat() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'lat', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SavedFromRecommendation, SavedFromRecommendation, QAfterSortBy>
+      sortByLatDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'lat', Sort.desc);
+    });
+  }
+
+  QueryBuilder<SavedFromRecommendation, SavedFromRecommendation, QAfterSortBy>
+      sortByLng() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'lng', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SavedFromRecommendation, SavedFromRecommendation, QAfterSortBy>
+      sortByLngDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'lng', Sort.desc);
+    });
+  }
+
+  QueryBuilder<SavedFromRecommendation, SavedFromRecommendation, QAfterSortBy>
       sortByMain() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'main', Sort.asc);
@@ -1779,6 +1993,34 @@ extension SavedFromRecommendationQuerySortThenBy on QueryBuilder<
   }
 
   QueryBuilder<SavedFromRecommendation, SavedFromRecommendation, QAfterSortBy>
+      thenByLat() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'lat', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SavedFromRecommendation, SavedFromRecommendation, QAfterSortBy>
+      thenByLatDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'lat', Sort.desc);
+    });
+  }
+
+  QueryBuilder<SavedFromRecommendation, SavedFromRecommendation, QAfterSortBy>
+      thenByLng() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'lng', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SavedFromRecommendation, SavedFromRecommendation, QAfterSortBy>
+      thenByLngDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'lng', Sort.desc);
+    });
+  }
+
+  QueryBuilder<SavedFromRecommendation, SavedFromRecommendation, QAfterSortBy>
       thenByMain() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'main', Sort.asc);
@@ -1873,6 +2115,20 @@ extension SavedFromRecommendationQueryWhereDistinct on QueryBuilder<
   }
 
   QueryBuilder<SavedFromRecommendation, SavedFromRecommendation, QDistinct>
+      distinctByLat() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'lat');
+    });
+  }
+
+  QueryBuilder<SavedFromRecommendation, SavedFromRecommendation, QDistinct>
+      distinctByLng() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'lng');
+    });
+  }
+
+  QueryBuilder<SavedFromRecommendation, SavedFromRecommendation, QDistinct>
       distinctByMain({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'main', caseSensitive: caseSensitive);
@@ -1941,6 +2197,20 @@ extension SavedFromRecommendationQueryProperty on QueryBuilder<
       lastTapDateProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'lastTapDate');
+    });
+  }
+
+  QueryBuilder<SavedFromRecommendation, double?, QQueryOperations>
+      latProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'lat');
+    });
+  }
+
+  QueryBuilder<SavedFromRecommendation, double?, QQueryOperations>
+      lngProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'lng');
     });
   }
 

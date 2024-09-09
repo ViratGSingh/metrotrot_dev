@@ -32,6 +32,7 @@ import 'package:isar/isar.dart';
 import 'package:app/features/home/data/models/directions.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:path_provider/path_provider.dart';
 
 void main() async {
   await dotenv.load(fileName: '.env');
@@ -39,6 +40,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // initializing the firebase app
   await Firebase.initializeApp();
+  final dir = await getApplicationDocumentsDirectory();
   Isar isar = Isar.getInstance() ??
       await Isar.open([
         DirectionsSchema,
@@ -48,7 +50,9 @@ void main() async {
         SavedDestMetroSchema,
         FromSearchInfoSchema,
         DestSearchInfoSchema
-      ]);
+      ],
+      directory: dir.path
+      );
   // int totalDirections = await isar.directions.count();
 
   // print(FirebaseAuth.instance.currentUser);
