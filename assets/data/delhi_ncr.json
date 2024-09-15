@@ -5139,26 +5139,6 @@
           }
         },
         {
-          "place_id": "B7P1lybnn0264NeVqOEwBQ%3d%3d",
-          "name": "Jasola Vihar Shaheen Bagh",
-          "address": "Shaheen Bagh, Jasola Vihar, New Delhi, Delhi 110025",
-          "coordinates": {
-            "lat": 28.545983,
-            "lng": 77.2940719
-          },
-          "platforms":{
-            "line_8":{
-              "towards_start":"Platform 2",
-              "towards_end":"Platform 1"
-            }
-          },
-          "is_interchange": false,
-          "interchange_data": {
-            "count": 1,
-            "lines": ["line_8"]
-          }
-        },
-        {
           "place_id": "X65oVQbYOkKe7TmdhJfIpw%3d%3d",
           "name": "Kalindi Kunj",
           "address": "Madanpur Khadar, New Delhi, Delhi 110076",

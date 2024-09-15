@@ -228,8 +228,9 @@ class _HomePageState extends State<HomePage> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text("Dilli",
-                              style: GoogleFonts.pacifico(
+                              style: TextStyle(
                                 fontSize: 48,
+                                fontFamily: "Pacifico",
                                 color: Color(0xFFFFBB23)
                               ),
                               ),

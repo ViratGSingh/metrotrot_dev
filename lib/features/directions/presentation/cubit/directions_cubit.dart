@@ -1421,10 +1421,10 @@ getMetroRoute(List<Station> path, List<int> interchanges,
     if (startIndex > endIndex) {
       headsign = stations.first["name"];
       stations = stations.reversed.toList();
-      stops = startIndex - endIndex + 1;
+      stops = startIndex - endIndex + 0;
     } else {
       headsign = stations.last["name"];
-      stops = endIndex - startIndex + 1;
+      stops = endIndex - startIndex + 0;
     }
     double transitDistance = 0;
     for (var j = 0; j <= path.length - 2; j++) {
@@ -1591,10 +1591,10 @@ getMetroRoute(List<Station> path, List<int> interchanges,
         if (startIndex > endIndex) {
           headsign = stations.first["name"];
           stations = stations.reversed.toList();
-          stops = startIndex - endIndex + 1;
+          stops = startIndex - endIndex + 0;
         } else {
           headsign = stations.last["name"];
-          stops = endIndex - startIndex + 1;
+          stops = endIndex - startIndex + 0;
         }
 
         if (line == "line_10") {
@@ -1738,10 +1738,10 @@ getMetroRoute(List<Station> path, List<int> interchanges,
         if (startIndex > endIndex) {
           headsign = stations.first["name"];
           stations = stations.reversed.toList();
-          stops = startIndex - endIndex + 1;
+          stops = startIndex - endIndex + 0;
         } else {
           headsign = stations.last["name"];
-          stops = endIndex - startIndex + 1;
+          stops = endIndex - startIndex + 0;
         }
 
         double transitDistance = 0;
@@ -1904,10 +1904,10 @@ getMetroRoute(List<Station> path, List<int> interchanges,
     if (startIndex > endIndex) {
       headsign = stations.first["name"];
       stations = stations.reversed.toList();
-      stops = startIndex - endIndex + 1;
+      stops = startIndex - endIndex + 0;
     } else {
       headsign = stations.last["name"];
-      stops = endIndex - startIndex + 1;
+      stops = endIndex - startIndex + 0;
     }
 
     double transitDistance = 0;
@@ -1982,8 +1982,23 @@ getMetroRoute(List<Station> path, List<int> interchanges,
   print("Distance covered: $routeDistance");
   fare = fareCalculator(routeDistance.toInt());
   print("₹${fare.toString()}");
+
+    int totalStations = 0;
+    int totalInterchanges = 0;
+    //Total Stations
+    routeDirections.forEach((direction) {
+      totalStations+=direction.stops;
+    });
+    
+    //Total interchanges
+    routeDirections.forEach((direction) {
+      totalInterchanges+=direction.stations.isEmpty?1:0;
+    });
   metro = MetroRoute(
-      routeCost: "₹${fare.toString()}", route: routeDirections, data: '');
+      routeCost: "₹${fare.toString()}", route: routeDirections, data: '',
+      totalInterchanges: totalInterchanges,
+      totalStations: totalStations
+      );
   return metro;
 }
 

@@ -73,6 +73,7 @@ class _FavouritesPageState extends State<FavouritesPage> {
                   toolbarHeight: 0,
                   bottom: TabBar(
                       indicatorColor: Color(0xFFFFBB23),
+                      indicatorSize: TabBarIndicatorSize.tab,
                       onTap: (value) {
                         setState(() {
                           tabIndex = value;

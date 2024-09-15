@@ -9,18 +9,22 @@ class MetroRoute extends Equatable {
   final String routeCost;
   List<MetroDirection> route;
   String data;
+  int totalStations;
+  int totalInterchanges;
 
   MetroRoute({
     required this.routeCost,
     required this.route,
     required this.data,
+    required this.totalStations,
+    required this.totalInterchanges
   });
 
   @override
   List<Object> get props => [routeCost, route, data];
 
   factory MetroRoute.initial() {
-    return MetroRoute(routeCost: "", route: [], data: "");
+    return MetroRoute(routeCost: "", route: [], data: "", totalStations: 0, totalInterchanges: 0);
   }
 
   factory MetroRoute.fromMap(Map<String, dynamic> map) {
@@ -64,7 +68,10 @@ class MetroRoute extends Equatable {
       }
     }
     return MetroRoute(
-        routeCost: routeCost, route: directions, data: json.encode(map));
+        routeCost: routeCost, route: directions, data: json.encode(map),
+        totalStations: 0,
+        totalInterchanges:0 
+        );
   }
 
   factory MetroRoute.fromJson(String source) =>

@@ -53,7 +53,7 @@ class _MetroLineState extends State<MetroLine> {
     super.initState();
   }
 
-  bool isExpanded = true;
+  bool isExpanded = false;
   @override
   Widget build(BuildContext context) {
     // final c = Get.put(
@@ -141,7 +141,7 @@ class _MetroLineState extends State<MetroLine> {
           shape: RoundedRectangleBorder(),
           style: ListTileStyle.drawer,
           child: ExpansionTile(
-            initiallyExpanded: true,
+            initiallyExpanded: false,
             onExpansionChanged: (value) {
               setState(() {
                 isExpanded = value;
