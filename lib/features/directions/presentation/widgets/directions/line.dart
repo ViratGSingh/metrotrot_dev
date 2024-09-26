@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:toggle_switch/toggle_switch.dart';
 
 class MetroLine extends StatefulWidget {
   int colourCode;
@@ -8,14 +7,16 @@ class MetroLine extends StatefulWidget {
   List stationsData;
   String departure;
   String arrival;
+  bool isHindi;
   MetroLine({
-    Key? key,
+    super.key,
     required this.colourCode,
     required this.lineName,
     required this.stationsData,
     required this.departure,
     required this.arrival,
-  }) : super(key: key);
+    required this.isHindi
+  });
   @override
   State<MetroLine> createState() => _MetroLineState();
 }
@@ -46,7 +47,7 @@ class _MetroLineState extends State<MetroLine> {
 
   @override
   void initState() {
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       // Scroll to a certain position after the widget is built
       //scrollToPosition();
     });
@@ -68,12 +69,12 @@ class _MetroLineState extends State<MetroLine> {
               child: Row(
                 children: [
                   Container(
-                    padding: EdgeInsets.only(right: 4),
+                    padding: const EdgeInsets.only(right: 4),
                     height: 20,
                     child: Stack(
                       alignment: Alignment.center,
                       children: [
-                        Container(
+                        SizedBox(
                           //color: Colors.black,
                           height: 20,
                           child: VerticalDivider(
@@ -91,7 +92,7 @@ class _MetroLineState extends State<MetroLine> {
                                 color: Color(widget.colourCode),
                                 //color: Color(lineColor),
                               ),
-                              Icon(
+                              const Icon(
                                 Icons.circle,
                                 size: 10,
                                 color: Colors.white,
@@ -133,12 +134,12 @@ class _MetroLineState extends State<MetroLine> {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(8.0),
         child: ListTileTheme(
-          contentPadding: EdgeInsets.all(0),
+          contentPadding: const EdgeInsets.all(0),
           dense: true,
           horizontalTitleGap: 0.0,
           minLeadingWidth: 0,
           minVerticalPadding: 0,
-          shape: RoundedRectangleBorder(),
+          shape: const RoundedRectangleBorder(),
           style: ListTileStyle.drawer,
           child: ExpansionTile(
             initiallyExpanded: false,
@@ -152,12 +153,12 @@ class _MetroLineState extends State<MetroLine> {
               child: Row(
                 children: [
                   Container(
-                    padding: EdgeInsets.only(right: 4),
+                    padding: const EdgeInsets.only(right: 4),
                     height: 50,
                     child: Stack(
                       alignment: Alignment.center,
                       children: [
-                        Container(
+                        SizedBox(
                           //color: Colors.black,
                           height: 50,
                           child: VerticalDivider(
@@ -177,7 +178,7 @@ class _MetroLineState extends State<MetroLine> {
                                 color: Color(widget.colourCode),
                                 //color: Color(lineColor),
                               ),
-                              Icon(
+                              const Icon(
                                 Icons.circle,
                                 size: 10,
                                 color: Colors.white,
@@ -204,7 +205,7 @@ class _MetroLineState extends State<MetroLine> {
                               ),
                             )
                           : Text(
-                              "Stations in Between",
+                              widget.isHindi?"सभी ${widget.stationsData.length} स्टॉप दिखाएं":"Stations in Between",
                               style: GoogleFonts.notoSans(
                                 color: Colors.black,
                                 fontSize: 14,
@@ -227,12 +228,12 @@ class _MetroLineState extends State<MetroLine> {
                   child: Row(
                     children: [
                       Container(
-                        padding: EdgeInsets.only(right: 4),
+                        padding: const EdgeInsets.only(right: 4),
                         height: 40,
                         child: Stack(
                           alignment: Alignment.center,
                           children: [
-                            Container(
+                            SizedBox(
                               //color: Colors.black,
                               height: 40,
                               child: VerticalDivider(
@@ -241,7 +242,7 @@ class _MetroLineState extends State<MetroLine> {
                               ),
                             ),
                             Container(
-                              padding: EdgeInsets.only(bottom: 10),
+                              padding: const EdgeInsets.only(bottom: 10),
                               child: Stack(
                                 alignment: Alignment.center,
                                 children: [
@@ -251,7 +252,7 @@ class _MetroLineState extends State<MetroLine> {
                                     color: Color(widget.colourCode),
                                     //color: Color(lineColor),
                                   ),
-                                  Icon(
+                                  const Icon(
                                     Icons.circle,
                                     size: 10,
                                     color: Colors.white,
@@ -266,9 +267,9 @@ class _MetroLineState extends State<MetroLine> {
                       Container(
                         alignment: Alignment.center,
                         height: 40,
-                        padding: EdgeInsets.only(bottom: 10),
+                        padding: const EdgeInsets.only(bottom: 10),
                         child: Text(
-                          station["name"],
+                          station[widget.isHindi?"native_name":"name"],
                           style: GoogleFonts.notoSans(
                               fontSize: 14, fontWeight: FontWeight.normal),
                         ),
@@ -283,12 +284,12 @@ class _MetroLineState extends State<MetroLine> {
                   child: Row(
                     children: [
                       Container(
-                        padding: EdgeInsets.only(right: 4),
+                        padding: const EdgeInsets.only(right: 4),
                         height: 30,
                         child: Stack(
                           alignment: Alignment.center,
                           children: [
-                            Container(
+                            SizedBox(
                               //color: Colors.black,
                               height: 30,
                               child: VerticalDivider(
@@ -306,7 +307,7 @@ class _MetroLineState extends State<MetroLine> {
                                     color: Color(widget.colourCode),
                                     //color: Color(lineColor),
                                   ),
-                                  Icon(
+                                  const Icon(
                                     Icons.circle,
                                     size: 10,
                                     color: Colors.white,
@@ -322,7 +323,7 @@ class _MetroLineState extends State<MetroLine> {
                         alignment: Alignment.center,
                         height: 30,
                         child: Text(
-                          station["name"],
+                          station[widget.isHindi?"native_name":"name"],
                           style: GoogleFonts.notoSans(fontSize: 14),
                         ),
                       )

@@ -1,14 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:app/features/directions/presentation/cubit/directions_cubit.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:app/features/destination/data/models/dest_metro.dart';
 import 'package:app/features/directions/data/models/route_direction.dart';
 import 'package:app/features/directions/presentation/widgets/directions/end.dart';
-import 'package:dropdown_button2/src/dropdown_button2.dart';
 import 'package:app/features/directions/presentation/widgets/directions/interchange.dart';
-import 'package:app/features/directions/presentation/widgets/directions/line.dart';
 import 'package:app/features/directions/presentation/widgets/directions/start.dart';
 import 'package:app/features/directions/presentation/widgets/directions/transit.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
@@ -22,8 +18,9 @@ class MetroDirections extends StatefulWidget {
   final DestMetro destMetro;
   final Mixpanel mixpanel;
   final UserPriorityStatus priority;
+  final bool isHindi;
   const MetroDirections(
-      {Key? key,
+      {super.key,
       required this.mixpanel,
       required this.routeCost,
       required this.fromDistance,
@@ -31,8 +28,9 @@ class MetroDirections extends StatefulWidget {
       required this.destMetro,
       required this.destination,
       required this.directions,
-      required this.priority})
-      : super(key: key);
+      required this.priority,
+      required this.isHindi
+      });
 
   @override
   State<MetroDirections> createState() => _MetroDirectionsState();
@@ -45,6 +43,35 @@ class _MetroDirectionsState extends State<MetroDirections> {
   }
 
   String? selectedValue;
+
+  getNativeLineName(String line){
+    if(line == "Red Line"){
+      return "रेड लाइन";
+    }else if(line == "Yellow Line"){
+      return "येलो लाइन";
+    }else if(line == "Blue Line"){
+      return "ब्लू लाइन";
+    }else if(line == "Blue Line - Branch"){
+      return "ब्लू लाइन - रैन्च";
+    }else if(line == "Green Line"){
+      return "ग्रीन लाइन";
+    }else if(line == "Violet Line"){
+      return "वॉयलेट लाइन";
+    }else if(line == "Pink Line"){
+      return "पिंक लाइन";
+    }else if(line == "Magenta Line"){
+      return "मेजेंटा लाइन";
+    }else if(line == "Grey Line"){
+      return "ग्रे लाइन";
+    }else if(line == "Airport Express - Orange Line"){
+      return "एयरपोर्ट एक्सप्रेस - ऑरेंज लाइन";
+    }else if(line == "Rapid Metro - RMGL"){
+      return "रैपिड मेट्रो - आरएमजीएल";
+    }else if(line == "Aqua Line"){
+      return "अक्वा लाइन";
+    }
+  }
+
   formatDirection(MetroDirection direction, List<MetroDirection> directions) {
     int dirIndex = directions.indexOf(direction);
     if (direction.travelMode == "WALKING" &&
@@ -55,10 +82,23 @@ class _MetroDirectionsState extends State<MetroDirections> {
         isBridgeEnd = true;
       }
 
-      String header = "Change lines using FOB";
+
+      String header = widget.isHindi?"यहां बदलें using FOB":"Change lines using FOB";
+      String currName = direction.arrivalName;
+
+      if(widget.isHindi){
+        for(int i=0; i<prevDir.stations.length; i++){
+          if(prevDir.stations[i]==currName){
+            currName = prevDir.stations[i]["native_name"];
+          }
+        }
+      }
+
+      
       return DirectionInter(
           isBridge: true,
           isBridgeEnd: isBridgeEnd,
+          isHindi: widget.isHindi,
           header: header,
           newStation: direction.arrivalName,
           interchangeStation: direction.interchange,
@@ -101,14 +141,24 @@ class _MetroDirectionsState extends State<MetroDirections> {
       bool isBridge = false;
       bool isBridgeEnd = false;
       if (prevName == currName) {
-        header = "Change here";
+        header = widget.isHindi?"यहां बदलें":"Change here";
       } else {
         isBridge = true;
-        header = "Change here using FOB";
+        header = widget.isHindi?"यहां बदलें using FOB":"Change here using FOB";
+      }
+
+      if(widget.isHindi){
+        for(int i=0; i<currDir.stations.length; i++){
+          if(currDir.stations[i]==currName){
+            currName = currDir.stations[i]["native_name"];
+          }
+        }
+        currLine = getNativeLineName(currLine);
       }
 
       return DirectionInter(
           newStation: currName,
+          isHindi: widget.isHindi,
           isBridge: isBridge,
           header: header,
           interchangeStation: direction.interchange,
@@ -126,14 +176,27 @@ class _MetroDirectionsState extends State<MetroDirections> {
       int endIndex = 0;
       filteredStations = direction.stations.sublist(startIndex, endIndex);
       int i = 0;
-      direction.stations.forEach((element) {
+      String transitDeparture = "";
+      String transitArrival = "";
+      String transitHeadsign = "";
+      String transitPlatform = "";
+
+      transitPlatform = direction.platform;
+      if(widget.isHindi){
+       transitPlatform = transitPlatform.replaceAll("Platform","प्लेटफार्म नंबर");
+      }
+      for (var element in direction.stations) {
         if (element["name"] == direction.departureName) {
           startIndex = i;
+          transitDeparture = element[widget.isHindi?"native_name":"name"];
         } else if (element["name"] == direction.arrivalName) {
           endIndex = i;
+          transitArrival = element[widget.isHindi?"native_name":"name"];
+        } else if (element["name"] == direction.headsign) {
+          transitHeadsign = element[widget.isHindi?"native_name":"name"];
         }
         i++;
-      });
+      }
       if (startIndex < endIndex) {
         filteredStations =
             direction.stations.sublist(startIndex, endIndex + 1).toList();
@@ -145,12 +208,13 @@ class _MetroDirectionsState extends State<MetroDirections> {
       filteredStations.remove(filteredStations.last);
 
       return DirectionTransit(
-          platform: direction.platform,
+          isHindi: widget.isHindi,
+          platform: transitPlatform, // direction.platform,
           stops: direction.stops,
           duration: direction.duration,
-          headsign: direction.headsign,
-          departure: direction.departureName,
-          arrival: direction.arrivalName,
+          headsign: transitHeadsign, // direction.headsign,
+          departure: transitDeparture,// direction.departureName,
+          arrival: transitArrival, // direction.arrivalName,
           currLine: direction.currLineName,
           stations: filteredStations,
           lineColor: direction.currLineColour);
@@ -160,7 +224,7 @@ class _MetroDirectionsState extends State<MetroDirections> {
   getCarouselIcons(int step, int totalDirections) {
     List<Widget> icons = [];
     for (double i = 0; i < totalDirections; i++) {
-      Color defColor = Color(0xff000000);
+      Color defColor = const Color(0xff000000);
       int defSize = 10;
       if (i == step) {
         icons.add(
@@ -175,7 +239,7 @@ class _MetroDirectionsState extends State<MetroDirections> {
           Icon(
             Icons.circle,
             size: 10,
-            color: Color(0xff000000).withOpacity(0.4),
+            color: const Color(0xff000000).withOpacity(0.4),
           ),
         );
       }
@@ -278,7 +342,7 @@ class _MetroDirectionsState extends State<MetroDirections> {
         // mainAxisAlignment: MainAxisAlignment.center,
         children: widget.directions
             .map(
-              (direction) => Container(
+              (direction) => SizedBox(
                   width: MediaQuery.of(context).size.width,
                   // decoration: BoxDecoration(
                   //     color: Colors.white,

@@ -7,11 +7,13 @@
   "data": {
     "line_1":{
       "name": "Red Line",
+      "native_name": "रेड लाइन",
       "colour_code": "DC3545",
       "stations":[
         {
           "place_id": "F56%2fW4VexU6tHL1eX3F7kg%3d%3d",
           "name": "Shaheed Sthal",
+          "native_name": "शहीद स्थल",
           "address": "Shaheed Sthal (New Bus Adda, Sector 7, Islam Nagar Village, Madhopura, Ghaziabad, Uttar Pradesh 201003",
           "coordinates": {
             "lat": 28.6706257,
@@ -32,6 +34,7 @@
         {
           "place_id": "zLTIvfNDI0er0OqUe1E2Tg%3d%3d",
           "name": "Hindon River",
+          "native_name": "हिंडन रिवर",
           "address": "Sewa Nagar, Ghaziabad, Uttar Pradesh 201003",
           "coordinates": {
             "lat": 28.6734197,
@@ -52,6 +55,7 @@
         {
           "place_id": "j5lRVnlScU2ATZ56Wmd1kw%3d%3d",
           "name": "Arthala",
+          "native_name": "अर्थला",
           "address": "Anand Industrial Estate, Mohan Nagar, Ghaziabad, Uttar Pradesh 201007",
           "coordinates": {
             "lat": 28.6769317,
@@ -72,6 +76,7 @@
         {
           "place_id": "gTNQDLxQ%2fEKzlar5KlRxFQ%3d%3d",
           "name": "Mohan Nagar",
+          "native_name": "मोहन नगर",
           "address": "Mohan Nagar, Ghaziabad, Uttar Pradesh 201007",
           "coordinates": {
             "lat": 28.6784847,
@@ -92,6 +97,7 @@
         {
           "place_id": "Tnpi9w3SiEq8hq7i15hDfw%3d%3d",
           "name": "Shyam Park",
+          "native_name":"श्याम पार्क",
           "address": "Shyam Park Main, Rajendra Nagar, Ghaziabad, Uttar Pradesh 201007",
           "coordinates": {
             "lat": 28.6782047,
@@ -112,6 +118,7 @@
         {
           "place_id": "x9b7K%2fOO2UmV1vFJgkhyow%3d%3d",
           "name": "Major Mohit Sharma Rajendra Nagar",
+          "native_name": "मेजर मोहित शर्मा राजेन्द्र नगर",
           "address": "Prakash Industrial Estate, Sahibabad Industrial Area Site 4, Sahibabad, Ghaziabad, Uttar Pradesh 201005",
           "coordinates": {
             "lat": 28.6776247,
@@ -132,6 +139,7 @@
         {
           "place_id": "DMeocgWHIECfxiHp6OT56g%3d%3d",
           "name": "Raj Bagh",
+          "native_name": "राज बाग़",
           "address": "132/9, Grand Trunk Rd, Prakash Industrial Estate, Sahibabad Industrial Area Site 4, Raj Bagh, Ghaziabad, Uttar Pradesh 201005",
           "coordinates": {
             "lat": 28.6770347,
@@ -152,6 +160,7 @@
         {
           "place_id": "4A5yyjr2l0WkK4OLO1bSew%3d%3d",
           "name": "Shaheed Nagar",
+          "native_name": "शहीद नगर",
           "address": "Prakash Industrial Estate, Sahibabad Industrial Area Site 4, Ghaziabad, Uttar Pradesh 201006",
           "coordinates": {
             "lat": 28.6766367,
@@ -172,6 +181,7 @@
         {
           "place_id": "WnGhRuUt%2fEa2g0Qui74U8A%3d%3d",
           "name": "Dilshad Garden",
+          "native_name": "दिलशाद गार्डन",
           "address": "Grand Trunk Rd, Jhilmil Industrial Area, Dilshad Garden, New Delhi, Delhi 110095",
           "coordinates": {
             "lat": 28.6759025,
@@ -192,6 +202,7 @@
         {
           "place_id": "knNgEIJNpEOzGKh0oJB0Mg%3d%3d",
           "name": "Jhilmil",
+          "native_name": "झिलमिल",
           "address": "Grand Trunk Rd, Jhilmil Industrial Area, Dilshad Garden, New Delhi, Delhi 110095",
           "coordinates": {
             "lat": 28.6757647,
@@ -212,6 +223,7 @@
         {
           "place_id": "qxPyAzgbyUaBano981fVaA%3d%3d",
           "name": "Mansarovar Park",
+          "native_name": "मानसरोवर पार्क",
           "address": "Shahdara Flyover, Jhilmil Industrial Area, Shahdara, New Delhi, Delhi 110095",
           "coordinates": {
             "lat": 28.6755707,
@@ -232,6 +244,7 @@
         {
           "place_id": "CUshSsXi2Ue3SIDtR5tkdg%3d%3d",
           "name": "Shahdara",
+          "native_name": "शाहदरा",
           "address": "Shahdara, New Delhi, Delhi 110032",
           "coordinates": {
             "lat": 28.6734547,
@@ -252,6 +265,7 @@
         {
           "place_id": "cium3yogaUaT2jnQecwgpQ%3d%3d",
           "name": "Welcome",
+          "native_name": "वेलकम",
           "address": "North Kanti Nagar, Block A, Silampur, Shahdara, New Delhi, Delhi 110031",
           "coordinates": {
             "lat": 28.6717662,
@@ -276,6 +290,7 @@
         {
           "place_id": "PxIF4by980iWMwi7XfAsWA%3d%3d",
           "name": "Seelampur",
+          "native_name": "सीलमपुर",
           "address": "Seelampur Gali, New Seelampur, Seelampur, Shahdara, New Delhi, Delhi 110053",
           "coordinates": {
             "lat": 28.6698047,
@@ -296,6 +311,7 @@
         {
           "place_id": "meKCdYOnEUiyWtrh4eXydw%3d%3d",
           "name": "Shastri Park",
+          "native_name": "शास्त्री पार्क",
           "address": "Metro Vihar, Shastri Park, Shahdara, Delhi, 110053",
           "coordinates": {
             "lat": 28.668306,
@@ -316,6 +332,7 @@
         {
           "place_id": "8XxL6%2fC2eEOh1eZAkN%2fy2A%3d%3d",
           "name": "Kashmere Gate",
+          "native_name": "कश्मीरी गेट",
           "address": "Lothian Rd, Inter State Bus Terminal, Kashmere Gate, New Delhi, Delhi 110006",
           "coordinates": {
             "lat": 28.6674747,
@@ -344,6 +361,7 @@
         {
           "place_id": "93l6IjAkvEGNeaKP0VBNzw%3d%3d",
           "name": "Tis Hazari",
+          "native_name": "तीस हज़ारी",
           "address": "Bhiku Ram Jain Marg, Kamla Nehru Ridge, Civil Lines, New Delhi, Delhi 110054",
           "coordinates": {
             "lat": 28.6671947,
@@ -364,6 +382,7 @@
         {
           "place_id": "IwkeIsVAeUay606fw1R8zg%3d%3d",
           "name": "Pulbangash",
+          "native_name": "पुलबंगश",
           "address": "Aram Ganj, Sabzi Mandi Old, New Delhi, Delhi 110006",
           "coordinates": {
             "lat": 28.6664047,
@@ -384,6 +403,7 @@
         {
           "place_id": "dopT25J2XEigGK6Ej9ui%2bQ%3d%3d",
           "name": "Pratap Nagar",
+          "native_name": "प्रताप नगर",
           "address": "Vir Banda Bairagi Marg, Azad Nagar, Gulabi Bagh, New Delhi, Delhi 110007",
           "coordinates": {
             "lat": 28.6666197,
@@ -404,6 +424,7 @@
         {
           "place_id": "TP4M856xSk%2bPL3x%2fxNCpWg%3d%3d",
           "name": "Shastri Nagar",
+          "native_name": "शास्त्री नगर",
           "address": "Shri balaji madical.ltd, E2/202, Block C, Subhadra Colony, Shastri Nagar, New Delhi, Delhi 110052",
           "coordinates": {
             "lat": 28.6702482,
@@ -424,6 +445,7 @@
         {
           "place_id": "ImjMe7N2a0aqJwNL4veYfg%3d%3d",
           "name": "Inderlok",
+          "native_name": "इन्द्रलोक",
           "address": "Maharaj Nar Singh Marg, Shastri Nagar, New Delhi, Delhi 110035",
           "coordinates": {
             "lat": 28.6734411,
@@ -448,6 +470,7 @@
         {
           "place_id": "ONL82u2IlEWknbtte8Kuqw%3d%3d",
           "name": "Kanhaiya Nagar",
+          "native_name": "कन्हैया नगर",
           "address": "Block F, JJ Colony Wazirpur, Ashok Vihar, New Delhi, Delhi 110034",
           "coordinates": {
             "lat": 28.6823747,
@@ -468,6 +491,7 @@
         {
           "place_id": "f3V4F8UHOkmjGhXuOq7v9w%3d%3d",
           "name": "Keshav Puram",
+          "native_name": "केशव पुरम",
           "address": "New Delhi, Maharaja Nahar Singh Marg, Pocket F, Phase 1, Ashok Vihar, Delhi, 110034",
           "coordinates": {
             "lat": 28.6875557,
@@ -488,6 +512,7 @@
         {
           "place_id": "BPjUOA0ErE6M%2bkZ6WMI5eQ%3d%3d",
           "name": "Netaji Subhash Place",
+          "native_name": "नेताजी सुभाष प्लेस",
           "address": "Guru Govind Singh College, Pitampura, New Delhi, Delhi 110034",
           "coordinates": {
             "lat": 28.6960547,
@@ -512,6 +537,7 @@
         {
           "place_id": "cs4pC7B%2b1EOYZukCf%2baSsw%3d%3d",
           "name": "Kohat Enclave",
+          "native_name": "कोहाट एन्क्लेव",
           "address": "Lala Jagat Narayan Marg, Block KD, Dakshini Pitampura, Pitam Pura, New Delhi, Delhi 110034",
           "coordinates": {
             "lat": 28.6974617,
@@ -532,6 +558,7 @@
         {
           "place_id": "uccx2beGV0qzwJTu0vumuw%3d%3d",
           "name": "Pitampura",
+          "native_name": "पीतमपुरा",
           "address": "Block CD, Dakshini Pitampura, Pitam Pura, New Delhi, Delhi 110034",
           "coordinates": {
             "lat": 28.7031147,
@@ -552,6 +579,7 @@
         {
           "place_id": "pr6IqgucK06OQBYvTMuZbA%3d%3d",
           "name": "Rohini East",
+          "native_name": "रोहिणी पूर्व",
           "address": "Bhagawan Mahavir Marg, Pocket 12, Sector 14, Rohini, New Delhi, Delhi 110085",
           "coordinates": {
             "lat": 28.7076717,
@@ -572,6 +600,7 @@
         {
           "place_id": "DLfnQwXQ40GQSc6db5bYgg%3d%3d",
           "name": "Rohini West",
+          "native_name": "रोहिणी पश्चिम",
           "address": "Bhagawan M, Bhagwan Mahavir Marg, Swarn Jayanti Park, Sector 10, Rohini, Delhi, 110085",
           "coordinates": {
             "lat": 28.7148737,
@@ -592,6 +621,7 @@
         {
           "place_id": "W9mRS7jjbkme%2bhXluP49zA%3d%3d",
           "name": "Rithala",
+          "native_name": "रिठाला",
           "address": "Bhagwan Mahavir Marg, Varun Kunj, Rithala, Rohini, New Delhi, Delhi 110085",
           "coordinates": {
             "lat": 28.7197827,
@@ -613,11 +643,13 @@
     },
     "line_2":{
       "name":"Yellow Line",
+      "native_name": "येलो लाइन",
       "colour_code":"FFC107",
       "stations":[
         {
           "place_id": "rHRE8YHya0CBKtGlarRQBA%3d%3d",
           "name": "Samaypur Badli",
+          "native_name": "समयपुर बादली",
           "address": "Samaypur Horizon plant, Bawana Rd, Suraj Park, Badli, Rohini, New Delhi, Delhi 110042",
           "coordinates": {
             "lat": 28.7433903,
@@ -638,6 +670,7 @@
         {
           "place_id": "kdPEUr7GDkKfAjmWwxkWcg%3d%3d",
           "name": "Rohini Sector - 18, 19",
+          "native_name": "रोहिणी सेक्टर-18, 19",
           "address": "Block C, Sector 19, Rohini, Delhi, 110089",
           "coordinates": {
             "lat": 28.7383847,
@@ -658,6 +691,7 @@
         {
           "place_id": "DwtAQosN%2fUmGeCTnSlMfnA%3d%3d",
           "name": "Haiderpur Badli Mor",
+          "native_name": "हैदरपुर बादली मोड़",
           "address": "C and D Block, Shalimar Place Site, Shalimar Bagh, Delhi, 110088",
           "coordinates": {
             "lat": 28.7300062,
@@ -678,6 +712,7 @@
         {
           "place_id": "JlgIZaU7f0O8WhUBPpYQQA%3d%3d",
           "name": "Jahangirpuri",
+          "native_name": "जहांगीरपुरी",
           "address": "Grand Trunk Rd, New Delhi, Delhi 110033",
           "coordinates": {
             "lat": 28.7258647,
@@ -698,6 +733,7 @@
         {
           "place_id": "GAJPIG61T0C3Xtx9BpFFrw%3d%3d",
           "name": "Adarsh Nagar",
+          "native_name": "आदर्श नगर",
           "address": "Adarsh Nagar Metro Station, New Delhi, Delhi, 110033",
           "coordinates": {
             "lat": 28.71645,
@@ -718,6 +754,7 @@
         {
           "place_id": "BT0Cg5xk3UuVH3AAUNLhYw%3d%3d",
           "name": "Azadpur",
+          "native_name": "आज़ादपुर",
           "address": "G, 85, Sector 23 Rd, Vijay vihar Phase I, Pocket 5, Sector-24, Rohini, Delhi, 110085",
           "coordinates": {
             "lat": 28.70702,
@@ -742,6 +779,7 @@
         {
           "place_id": "GwfyMIcI%2fc0m90rBW8yO4Rg%3d%3d",
           "name": "Model Town",
+          "native_name": "मॉडल टाउन",
           "address": "Shalimar Bagh, New Delhi, Delhi",
           "coordinates": {
             "lat": 28.7028569,
@@ -762,6 +800,7 @@
         {
           "place_id": "N2yklYPIJkSS013pD9PFEQ%3d%3d",
           "name": "Guru Teg Bahadur Nagar",
+          "native_name": "गुरु तेग बहादुर नगर",
           "address": "65, Ring Rd, Outram Lines, GTB Nagar, New Delhi, Delhi 110009",
           "coordinates": {
             "lat": 28.698384,
@@ -782,6 +821,7 @@
         {
           "place_id": "HsKQ6FFYMkyOKteS8yCDng%3d%3d",
           "name": "Vishwavidyalaya",
+          "native_name": "विश्वविद्यालय",
           "address": "Delhi, 110007",
           "coordinates": {
             "lat": 28.6952077,
@@ -802,6 +842,7 @@
         {
           "place_id": "5LeB1r4BskKYrY6QwMP4zg%3d%3d",
           "name": "Vidhan Sabha",
+          "native_name": "विधान सभा",
           "address": "Mudrika Marg, Khyber Pass, Civil Line, New Delhi 110054",
           "coordinates": {
             "lat": 28.6872568,
@@ -822,6 +863,7 @@
         {
           "place_id": "8P3NRyJEr02oDyfuN8mErg%3d%3d",
           "name": "Civil Lines",
+          "native_name": "सिविल लाइंस",
           "address": "Sham Nath Marg, Railway Colony, Civil Lines, New Delhi, Delhi 110054",
           "coordinates": {
             "lat": 28.67734,
@@ -842,6 +884,7 @@
         {
           "place_id": "8XxL6%2fC2eEOh1eZAkN%2fy2A%3d%3d",
           "name": "Kashmere Gate",
+          "native_name": "कश्मीरी गेट",
           "address": "Lothian Rd, Inter State Bus Terminal, Kashmere Gate, New Delhi, Delhi 110006",
           "coordinates": {
             "lat": 28.6674747,
@@ -870,6 +913,7 @@
         {
           "place_id": "jjJYPofAykWodZQJOS3dkw%3d%3d",
           "name": "Chandni Chowk",
+          "native_name": "चांदनी चौक",
           "address": "Kaccha Bagh Area, Old Delhi, New Delhi, Delhi 110006",
           "coordinates": {
             "lat": 28.6588312,
@@ -890,6 +934,7 @@
         {
           "place_id": "VHdPAZVF10uNqSprEZR83w%3d%3d",
           "name": "Chawri Bazar",
+          "native_name": "चावड़ी बाज़ार",
           "address": "Ajmere Gate Rd, Bazar Sirkiwalan, Chawri Bazar, Old Delhi, New Delhi, Delhi 110006",
           "coordinates": {
             "lat": 28.6488047,
@@ -910,6 +955,7 @@
         {
           "place_id": "sQAlAUDZJUy%2fo4UkmRHrMg%3d%3d",
           "name": "New Delhi",
+          "native_name": "नई दिल्ली",
           "address": "Ajmeri Gate, New Delhi, Delhi 110006",
           "coordinates": {
             "lat": 28.6437255,
@@ -934,6 +980,7 @@
         {
           "place_id": "LmCdGcqN9UWUjiRwhsmmDg%3d%3d",
           "name": "Rajiv Chowk",
+          "native_name": "राजीव चौक",
           "address": "Block F, Connaught Place, New Delhi, Delhi 110001",
           "coordinates": {
             "lat": 28.631576,
@@ -958,6 +1005,7 @@
         {
           "place_id": "4sLIGcvWqkW3S0Bu5uDtzA%3d%3d",
           "name": "Patel Chowk",
+          "native_name": "पटेल चौक",
           "address": "Ashoka Road, Sansad Marg, Crossing, New Delhi, Delhi 110001",
           "coordinates": {
             "lat": 28.6233506,
@@ -978,6 +1026,7 @@
         {
           "place_id": "6Lxfl2fQj0uoW9bNwD5MIA%3d%3d",
           "name": "Central Secretariat",
+          "native_name": "केन्द्रीय सचिवालय",
           "address": "Rafi Ahmed Kidwai Marg, Kartavya Path, Central Secretariat, New Delhi, Delhi 110001",
           "coordinates": {
             "lat": 28.6151511,
@@ -1002,6 +1051,7 @@
         {
           "place_id": "ROamkHBvdkyMZor3xdTjNw%3d%3d",
           "name": "Udyog Bhawan",
+          "native_name": "उद्योग भवन",
           "address": "Rafi Ahmed Kidwai Marg, Kartavya Path, Central Secretariat, New Delhi, Delhi 110001",
           "coordinates": {
             "lat": 28.6107147,
@@ -1022,6 +1072,7 @@
         {
           "place_id": "4JZ93%2frN3UeXtPyHSjrzug%3d%3d",
           "name": "Lok Kalyan Marg",
+          "native_name": "लोक कल्याण मार्ग",
           "address": "Tees January Road Area, Tughlak Road Area, New Delhi, Delhi 110001",
           "coordinates": {
             "lat": 28.5976622,
@@ -1042,6 +1093,7 @@
         {
           "place_id": "yZxfp2rHR0O8fBUEdekL%2fQ%3d%3d",
           "name": "Jor Bagh",
+          "native_name": "जोर बाग़",
           "address": "Sri Aurobindo Marg, Safdarjung Airport Area, Jor Bagh, New Delhi, Delhi 110003",
           "coordinates": {
             "lat": 28.5858949,
@@ -1062,6 +1114,7 @@
         {
           "place_id": "FtnTWPRinUyuiV4223jQ4Q%3d%3d",
           "name": "Dilli Haat - INA",
+          "native_name": "दिल्ली हाट - आईएनए",
           "address": "Sri Aurobindo Marg, Aviation Colony, INA Colony, New Delhi, Delhi 110023",
           "coordinates": {
             "lat": 28.5744541,
@@ -1084,8 +1137,30 @@
           }
         },
         {
+          "place_id": "ChIJ4xSw42TiDDkRJE5d1T7MoU0",
+          "name": "AIIMS",
+          "native_name": "एम्स",
+          "address": "Sri Aurobindo Marg, Safdarjung Campus, Ansari Nagar East, New Delhi, Delhi, India",
+          "coordinates": {
+            "lat": 28.5677999,
+            "lng": 77.2077599
+          },
+          "platforms":{
+            "line_2":{
+              "towards_start":"Platform 2",
+              "towards_end":"Platform 1"
+            }
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_2"]
+          }
+        },
+        {
           "place_id": "nzPfculKHEWnHCtgeAQAhw%3d%3d",
           "name": "Green Park",
+          "native_name": "ग्रीन पार्क",
           "address": "Sri Aurobindo Marg, Block Q, Green Park Extension, Green Park, New Delhi, Delhi 110016",
           "coordinates": {
             "lat": 28.5598225,
@@ -1106,6 +1181,7 @@
         {
           "place_id": "WJvE6WYkd0KNJjQMAxorig%3d%3d",
           "name": "Hauz Khas",
+          "native_name": "हौज़ ख़ास",
           "address": "Jia Sarai, Gamal Abdel Nasser Marg, Block F, Deer Park, Hauz Khas, New Delhi, Delhi 110016",
           "coordinates": {
             "lat": 28.5439551,
@@ -1130,6 +1206,7 @@
         {
           "place_id": "z3wa9EVcQEOUZ4dN9DP3Qg%3d%3d",
           "name": "Malviya Nagar",
+          "native_name": "मालवीय नगर",
           "address": "Press Enclave Marg, Block A, Shivalik Colony, Saket, New Delhi, Delhi 110017",
           "coordinates": {
             "lat": 28.5289947,
@@ -1150,6 +1227,7 @@
         {
           "place_id": "thnxdGBXp0Gzox3OEHzQaw%3d%3d",
           "name": "Saket",
+          "native_name": "साकेत",
           "address": "Mehrauli - Badarpur Rd, Block A, DDA Flats, Saket, New Delhi, Delhi 110030",
           "coordinates": {
             "lat": 28.5211312,
@@ -1170,6 +1248,7 @@
         {
           "place_id": "DyInt0L3nkmXo3IHy%2f37BA%3d%3d",
           "name": "Qutab Minar",
+          "native_name": "कुतुब मीनार",
           "address": "Qutab Minar Metro Station, Mittal Garden, Sainik Farm, New Delhi, Delhi 110030",
           "coordinates": {
             "lat": 28.51302,
@@ -1190,6 +1269,7 @@
         {
           "place_id": "kESX2Jdgi0mkD5O7q2bLpQ%3d%3d",
           "name": "Chhatarpur",
+          "native_name": "छतरपुर",
           "address": "Chattarpur Metro Station, Mehrauli-Gurgaon Road, New Delhi, 110070",
           "coordinates": {
             "lat": 28.5067936,
@@ -1210,6 +1290,7 @@
         {
           "place_id": "fAuHN98JQ02XN9jDbkDRxw%3d%3d",
           "name": "Sultanpur",
+          "native_name": "सुल्तानपुर",
           "address": "NH 236, Sultanpur, New Delhi, Delhi 110030",
           "coordinates": {
             "lat": 28.4991572,
@@ -1230,6 +1311,7 @@
         {
           "place_id": "rwdXP3Zob0unHwJ%2b7h%2fsWg%3d%3d",
           "name": "Ghitorni",
+          "native_name": "घिटोरनी",
           "address": "Gadaipur, DLF Farms, New Delhi, Delhi 110030",
           "coordinates": {
             "lat": 28.4938187,
@@ -1250,6 +1332,7 @@
         {
           "place_id": "hYVUo4cEKESXm8MvixocIQ%3d%3d",
           "name": "Arjan Garh",
+          "native_name": "अर्जन गढ़",
           "address": "National Highway 236, 1, Aya Nagar, Aya Nagar Phase New, Aya Nagar Phase 2, Aya Nagar, New Delhi, Delhi 110047",
           "coordinates": {
             "lat": 28.4808847,
@@ -1270,6 +1353,7 @@
         {
           "place_id": "7SdKJSctQU%2b96Ubz1gQweQ%3d%3d",
           "name": "Guru Dronacharya",
+          "native_name": "गुरु द्रोणाचार्य",
           "address": "NH236, Garden Estate, DLF Phase 3, Sector 26, Gurugram, Haryana 122002",
           "coordinates": {
             "lat": 28.481954,
@@ -1290,6 +1374,7 @@
         {
           "place_id": "VRuIB1RxoU2XwqE7HBc94w%3d%3d",
           "name": "Sikanderpur",
+          "native_name": "सिकंदरपुर",
           "address": "A Block, DLF Phase 1, Sector 28, Gurugram, Haryana 122022",
           "coordinates": {
             "lat": 28.4813147,
@@ -1314,6 +1399,7 @@
         {
           "place_id": "kGQ4Vw1BUUaXZYNAlA2Awg%3d%3d",
           "name": "M.G. Road",
+          "native_name": "एम.जी. रोड",
           "address": "Maruti Housing Colony, Sector 25, Gurugram, Haryana 122022",
           "coordinates": {
             "lat": 28.4795747,
@@ -1334,6 +1420,7 @@
         {
           "place_id": "Fmrzwr1Al0uEoHcYsLNmvg%3d%3d",
           "name": "Iffco Chowk",
+          "native_name": "इफको चौक",
           "address": "Sector 29, Gurugram, Haryana 122002",
           "coordinates": {
             "lat": 28.47224,
@@ -1354,6 +1441,7 @@
         {
           "place_id": "OnrML%2f8a9k%2bqWFENfc3%2bfg%3d%3d",
           "name": "Millenium City Centre Gurugram",
+          "native_name": "मिलेनियम सिटी सेंटर गुरूग्राम",
           "address": "Gurgaon - Delhi Expy, Sector 29, Gurugram, Haryana 122007",
           "coordinates": {
             "lat": 28.4592,
@@ -1376,11 +1464,13 @@
     },
     "line_3": {
       "name": "Blue Line",
+      "native_name": "ब्लू लाइन",
       "colour_code": "3B76C0",
       "stations": [
         {
           "place_id": "BRiyD1FtX0GQrnPoWQog9Q",
           "name": "Dwarka Sector - 21",
+          "native_name":"द्वारका सेक्टर - 21",
           "address": "Metro Station-Dwarka Sector 21, Sector 21, Dwarka, New Delhi, Delhi 110077",
           "coordinates": {
             "lat": 28.5522057,
@@ -1405,6 +1495,7 @@
         {
           "place_id": "Bua7N1HgfUOXMloRilqNfA",
           "name": "Dwarka Sector - 8",
+          "native_name":"द्द्वारका सेक्टर - 8",
           "address": "Sector 8 Dwarka, Dwarka, New Delhi, Delhi 110077",
           "coordinates": {
             "lat": 28.5656826,
@@ -1425,6 +1516,7 @@
         {
           "place_id": "zC8cewsJTUuBEpX7QdSYAQ%3d%3d",
           "name": "Dwarka Sector - 9",
+          "native_name":"द्वारका सेक्टर - 9",
           "address": "Dwarka Sector 9, Dwarka, New Delhi, Delhi 110075",
           "coordinates": {
             "lat": 28.5742847,
@@ -1445,6 +1537,7 @@
         {
           "place_id": "9t3pJwEXWE2BlB4G%2fgnGaQ%3d%3d",
           "name": "Dwarka Sector - 10",
+          "native_name":"द्वारका सेक्टर - 10",
           "address": "Dwarka Shree Ramlila Society ,Ramlila Ground New 110075, Sector 10 Dwarka, Dwarka, Delhi",
           "coordinates": {
             "lat": 28.581129,
@@ -1465,6 +1558,7 @@
         {
           "place_id": "ifGog%2bra%2fk6sLoSF5bkdxQ%3d%3d",
           "name": "Dwarka Sector - 11",
+          "native_name":"द्वारका सेक्टर - 11",
           "address": "Sector 11 Dwarka, Dwarka, New Delhi, Delhi 110075",
           "coordinates": {
             "lat": 28.586366,
@@ -1485,6 +1579,7 @@
         {
           "place_id": "HI1Y%2bG6E8EKwKtLGI7SJYg%3d%3d",
           "name": "Dwarka Sector - 12",
+          "native_name":"द्वारका सेक्टर - 12",
           "address": "Pocket 8, Block B, Sector 12 Dwarka, Dwarka, New Delhi, Delhi 110078",
           "coordinates": {
             "lat": 28.5923147,
@@ -1505,6 +1600,7 @@
         {
           "place_id": "doP7HvRxj0qvssQYL%2fvaDA%3d%3d",
           "name": "Dwarka Sector - 13",
+          "native_name": "द्वारका सेक्टर - 13",
           "address": "Sector 13, Dwarka, Delhi, 110075",
           "coordinates": {
             "lat": 28.5972486,
@@ -1525,6 +1621,7 @@
         {
           "place_id": "jpvhRxWGcUGfGis9THPfXg%3d%3d",
           "name": "Dwarka Sector - 14",
+          "native_name":"द्वारका सेक्टर - 14",
           "address": "Pocket 1, Sector 14 Dwarka, Dwarka, Delhi, 110075",
           "coordinates": {
             "lat": 28.6016187,
@@ -1545,6 +1642,7 @@
         {
           "place_id": "OK8doXUQpEKkOUroK4uqLQ%3d%3d",
           "name": "Dwarka",
+          "native_name":"द्वारका",
           "address": "Nand Vihar, Sector 16A, Dwarka, New Delhi, Delhi 110078",
           "coordinates": {
             "lat": 28.6149247,
@@ -1569,6 +1667,7 @@
         {
           "place_id": "QZJkbh1PEUmovSM2BHS5Fw%3d%3d",
           "name": "Dwarka Mor",
+          "native_name":"द्वारका मोड़",
           "address": "B-Block, Nangli Dairy Extn. Ph-II, 110043, Dwaraka Marg, Bhagwati Garden, Baprola, New Delhi, Delhi 110066",
           "coordinates": {
             "lat": 28.6192985,
@@ -1589,6 +1688,7 @@
         {
           "place_id": "Nre6x43QNkGVkACdgvmi5w%3d%3d",
           "name": "Nawada",
+          "native_name":"नवादा",
           "address": "icici bank A TM opposit Hanuman Mandir New, Kiran Garden, Uttam Nagar, Delhi, 110059",
           "coordinates": {
             "lat": 28.6202647,
@@ -1610,6 +1710,7 @@
         {
           "place_id": "ftYorov0iUiEO7mZ8REjDg%3d%3d",
           "name": "Uttam Nagar West",
+          "native_name": "उत्तम नगर पश्चिम",
           "address": "Najafgarh Road, Param Puri, Uttam Nagar, New Delhi, Delhi 110059",
           "coordinates": {
             "lat": 28.6217589,
@@ -1630,6 +1731,7 @@
         {
           "place_id": "gBYCgiFa%2fUCl263%2faRKlLA%3d%3d",
           "name": "Uttam Nagar East",
+          "native_name":"उत्तम नगर पूर्व",
           "address": "shish ram park A-62/3, Chatrapati, Shivaji Marg, Block D, JJ Colony, Uttam Nagar, New Delhi, Delhi 110059",
           "coordinates": {
             "lat": 28.62481,
@@ -1650,6 +1752,7 @@
         {
           "place_id": "1oImZJcTYUGvhWrEgUvNZg%3d%3d",
           "name": "Janak Puri West",
+          "native_name":"जनकपुरी पश्चिम",
           "address": "Janakpuri District Center, Janakpuri, Delhi, 110018",
           "coordinates": {
             "lat": 28.6297207,
@@ -1674,6 +1777,7 @@
         {
           "place_id": "aw5F%2fYsgh0WBMALx0LjD4w%3d%3d",
           "name": "Janak Puri East",
+          "native_name": "जनकपुरी पूर्व",
           "address": "Nangli Jalib, Janakpuri, New Delhi, Delhi 110058",
           "coordinates": {
             "lat": 28.6330647,
@@ -1694,6 +1798,7 @@
         {
           "place_id": "7aFni0aCt0%2bWg7o5P9b2%2bA%3d%3d",
           "name": "Tilak Nagar",
+          "native_name":"तिलक नगर",
           "address": "Block 3, Tilak Nagar, Delhi, 110018",
           "coordinates": {
             "lat": 28.6369843,
@@ -1714,6 +1819,7 @@
         {
           "place_id": "Sd3D5yc5HUWn9ir82Ou%2fxA%3d%3d",
           "name": "Subhash Nagar",
+          "native_name": "सुभाष नगर",
           "address": "Najafgarh Rd, Meenakshi Garden, Ashok Nagar, New Delhi, Delhi 110018",
           "coordinates": {
             "lat": 28.6403947,
@@ -1734,6 +1840,7 @@
         {
           "place_id": "M4pdT1nqoEqK4WUqY0%2fWSg%3d%3d",
           "name": "Tagore Garden",
+          "native_name":"टैगोर गार्डन",
           "address": "Najafgarh Rd, Block BF, Rajouri Garden Extension, Rajouri Garden, New Delhi, Delhi 110027",
           "coordinates": {
             "lat": 28.6437587,
@@ -1754,6 +1861,7 @@
         {
           "place_id": "1bUAoDp9RUqzI31DLJ1ZcA%3d%3d",
           "name": "Rajouri Garden",
+          "native_name":"राजौरी गार्डन",
           "address": "Najafgarh Rd, Shivaji Place, Vishal Enclave, Tagore Garden Extension, New Delhi, Delhi 110018",
           "coordinates": {
             "lat": 28.649019,
@@ -1778,6 +1886,7 @@
         {
           "place_id": "GwNZy7xoPkGdSp3TF9M4vA%3d%3d",
           "name": "Ramesh Nagar",
+          "native_name":"रमेश नगर",
           "address": "Ramesh Nagar, C Block, Ramesh Nagar, New Delhi, Delhi 110015",
           "coordinates": {
             "lat": 28.6527547,
@@ -1798,6 +1907,7 @@
         {
           "place_id": "L1TSq9Jy40GvSSua2BJZbg%3d%3d",
           "name": "Moti Nagar",
+          "native_name":"मोती नगर",
           "address": "Najafgarh Rd, DLE Industrial Area, Kirti Nagar, Delhi, 110015",
           "coordinates": {
             "lat": 28.6579647,
@@ -1818,6 +1928,7 @@
         {
           "place_id": "bwd%2bDvFLm0OhYMxMBVHHXA%3d%3d",
           "name": "Kirti Nagar",
+          "native_name":"कीर्ति नगर",
           "address": "Karampura Flyover, Block 1, Kirti Nagar Industrial Area, Kirti Nagar, New Delhi, Delhi 110015",
           "coordinates": {
             "lat": 28.6556811,
@@ -1842,6 +1953,7 @@
         {
           "place_id": "USmmSWbcVkqBprcFG7R0rw%3d%3d",
           "name": "Shadipur",
+          "native_name": "शादीपुर",
           "address": "Patel Rd, Block W, West Patel Nagar, Delhi",
           "coordinates": {
             "lat": 28.6512267,
@@ -1862,6 +1974,7 @@
         {
           "place_id": "S%2ftNokuJfkyAtDj3GWqM9A%3d%3d",
           "name": "Patel Nagar",
+          "native_name":"पटेल नगर",
           "address": "Patel Rd, Block 2, West Patel Nagar, Patel Nagar, New Delhi, Delhi 110008",
           "coordinates": {
             "lat": 28.6450366,
@@ -1882,6 +1995,7 @@
         {
           "place_id": "1OXc6x5uWE%2b4ThalmkbWlg%3d%3d",
           "name": "Rajendra Place",
+          "native_name": "राजेन्द्र प्लेस",
           "address": "Uttam Singh Narula Marg, Rajinder Nagar, New Delhi, Delhi 110060",
           "coordinates": {
             "lat": 28.6425347,
@@ -1902,6 +2016,7 @@
         {
           "place_id": "LSVjU7RVU0qOBMUPz9pPoQ%3d%3d",
           "name": "Karol Bagh",
+          "native_name": "करोल बाग़",
           "address": "Block 1, WEA, Karol Bagh, Delhi, 110005",
           "coordinates": {
             "lat": 28.6442637,
@@ -1922,6 +2037,7 @@
         {
           "place_id": "Y822HnH5fUC013hVb901Eg%3d%3d",
           "name": "Jhandewalan",
+          "native_name": "झंडेवालान",
           "address": "Doctor Bhim Rao Ambedkar Marg, Block E 1, Jhandewalan Extension, Jhandewalan, New Delhi, Delhi 110005",
           "coordinates": {
             "lat": 28.6442947,
@@ -1942,6 +2058,7 @@
         {
           "place_id": "o1DvpEtgd0agqydszciVzA%3d%3d",
           "name": "Ramakrishna Ashram Marg",
+          "native_name": "रामकृष्ण आश्रम मार्ग",
           "address": "Bharat Nagar, Paharganj, New Delhi, Delhi 110055",
           "coordinates": {
             "lat": 28.6392447,
@@ -1962,6 +2079,7 @@
         {
           "place_id": "LmCdGcqN9UWUjiRwhsmmDg%3d%3d",
           "name": "Rajiv Chowk",
+          "native_name": "राजीव चौक",
           "address": "Block F, Connaught Place, New Delhi, Delhi 110001",
           "coordinates": {
             "lat": 28.631576,
@@ -1986,6 +2104,7 @@
         {
           "place_id": "6FJVBBgaXU%2boHCbvbRtYiA%3d%3d",
           "name": "Barakhamba Road",
+          "native_name":"बाराखंबा रोड",
           "address": "Barakhamba Rd, Barakhamba, New Delhi, Delhi 110001",
           "coordinates": {
             "lat": 28.6299447,
@@ -2006,6 +2125,7 @@
         {
           "place_id": "SUO%2bs7VsT0e%2fPGyzHpanaw%3d%3d",
           "name": "Mandi House",
+          "native_name": "मंडी हाउस",
           "address": "New Delhi, Delhi 110001",
           "coordinates": {
             "lat": 28.6259038,
@@ -2030,6 +2150,7 @@
         {
           "place_id": "SZfx0XzMAM0OTlCOi%2fueaJg%3d%3d",
           "name": "Supreme Court",
+          "native_name":"सुप्रीम कोर्ट",
           "address": "Appu Ghar, Pragati Maidan, New Delhi, Delhi 110001",
           "coordinates": {
             "lat": 28.6231801,
@@ -2050,6 +2171,7 @@
         {
           "place_id": "eI6rRH%2f4MUae5SRr8K7Qow%3d%3d",
           "name": "Indraprastha",
+          "native_name":"इन्द्रप्रस्थ",
           "address": "Mahatma Gandhi Rd, Gas Turbine Power Station, IP Estate, New Delhi, Delhi 110002",
           "coordinates": {
             "lat": 28.6205547,
@@ -2070,6 +2192,7 @@
         {
           "place_id": "TOvJPV46gEKYHQ1IOAKk4Q%3d%3d",
           "name": "Yamuna Bank",
+          "native_name": "यमुना बैंक",
           "address": "Yamuna Bank, New Delhi, Delhi 110092",
           "coordinates": {
             "lat": 28.62333,
@@ -2094,6 +2217,7 @@
         {
           "place_id": "iYvY1U5E0EKssIjqN%2fcD3Q%3d%3d",
           "name": "Akshardam",
+          "native_name": "अक्षरधाम",
           "address": "Noida Link Rd, Ganesh Nagar, New Delhi, Delhi 110092",
           "coordinates": {
             "lat": 28.6179673,
@@ -2114,6 +2238,7 @@
         {
           "place_id": "My0UtHGYEE28bvins%2bcWyA%3d%3d",
           "name": "Mayur Vihar - 1",
+          "native_name": "मयूर विहार - 1",
           "address": "Pocket 4, Mayur Vihar, New Delhi, Delhi 110091",
           "coordinates": {
             "lat": 28.6042306,
@@ -2134,6 +2259,7 @@
         {
           "place_id": "IEWttqFePEGWM5u%2bwWR0CA%3d%3d",
           "name": "Mayur Vihar Extension",
+          "native_name": "मयूर विहार एक्सटेंशन",
           "address": "Mayur Vihar, New Delhi, Delhi 110091",
           "coordinates": {
             "lat": 28.5942247,
@@ -2154,6 +2280,7 @@
         {
           "place_id": "BMCKyyNF4UaxZlf0TRbkqA%3d%3d",
           "name": "New Ashok Nagar",
+          "native_name": "न्यू अशोक नगर",
           "address": "A-706, Block B, New Ashok Nagar, New Delhi, Delhi 110096",
           "coordinates": {
             "lat": 28.5891647,
@@ -2174,6 +2301,7 @@
         {
           "place_id": "TkxVFnbD4k6PJ3Pxhhbisg%3d%3d",
           "name": "Noida Sector - 15",
+          "native_name": "नोएडा सेक्टर - 15",
           "address": "H8M6+WPC, A Block, Sector 2, Noida, Uttar Pradesh 201301",
           "coordinates": {
             "lat": 28.5848247,
@@ -2194,6 +2322,7 @@
         {
           "place_id": "lsABPslZl0%2bF7AB%2bnySIUw%3d%3d",
           "name": "Noida Sector - 16",
+          "native_name": "नोएडा सेक्टर - 16",
           "address": "Captain Vijyant Thapar Marg, Block A, Sector 3, Noida, Uttar Pradesh 201301",
           "coordinates": {
             "lat": 28.5782353,
@@ -2214,6 +2343,7 @@
         {
           "place_id": "XdbNEK8gdUuvftQkrjMHYQ%3d%3d",
           "name": "Noida Sector - 18",
+          "native_name": "नोएडा सेक्टर - 18",
           "address": "Captain Vijyant Thapar Marg, Noida Sector 18, Pocket E, Sector 27, Noida, Uttar Pradesh 201301",
           "coordinates": {
             "lat": 28.5707557,
@@ -2234,6 +2364,7 @@
         {
           "place_id": "M76MynA8VUKJtPhlKCvgbg%3d%3d",
           "name": "Botanical Garden",
+          "native_name": "बॉटेनिकल गार्डन",
           "address": "Captain Vijyant Thapar Marg, Sector 38, Noida, Uttar Pradesh 201301",
           "coordinates": {
             "lat": 28.5640378,
@@ -2258,6 +2389,7 @@
         {
           "place_id": "yKUK8iUcQky2BDXjNiWKKw%3d%3d",
           "name": "Golf Course",
+          "native_name": "गोल्फ कोर्स",
           "address": "Captain Shashi Kant Sharma Marg, Noida Golf Course, Sector 37, Noida, Uttar Pradesh 201303",
           "coordinates": {
             "lat": 28.5671947,
@@ -2278,6 +2410,7 @@
         {
           "place_id": "zSoo4LMs9ku2fE4YtO%2b%2fvg%3d%3d",
           "name": "Noida City Centre",
+          "native_name":"नोएडा सिटी सेंटर",
           "address": "Sector 39A, Sector 32, Noida, Uttar Pradesh 201303",
           "coordinates": {
             "lat": 28.5746747,
@@ -2298,6 +2431,7 @@
         {
           "place_id": "vtebD5vbhkCW9Px7CUbSkQ%3d%3d",
           "name": "Sector - 34 Noida",
+          "native_name": "सेक्टर - 34 नोएडा",
           "address": "Kendriya Vihar, Sector 51, Noida, Uttar Pradesh 201307",
           "coordinates": {
             "lat": 28.580118,
@@ -2318,6 +2452,7 @@
         {
           "place_id": "SW0yoD9BfU6Vs%2bC8jbz5Fw%3d%3d",
           "name": "Sector - 52 Noida",
+          "native_name": "सेक्टर - 52 नोएडा",
           "address": "Block E, Sector 51, Noida, Uttar Pradesh 201301",
           "coordinates": {
             "lat": 28.5867,
@@ -2343,6 +2478,7 @@
         {
           "place_id": "LIhM7iqn8kOTMmwfuBICQw%3d%3d",
           "name": "Sector - 61 Noida",
+          "native_name":"सेक्टर - 61 नोएडा",
           "address": "H9XC+2W6, Vishwakarma Rd, Block D, Sector 71, Noida, Uttar Pradesh 201307",
           "coordinates": {
             "lat": 28.5975347,
@@ -2363,6 +2499,7 @@
         {
           "place_id": "IuF%2bQkEncEeso1Yicd0C6Q%3d%3d",
           "name": "Sector - 59 Noida",
+          "native_name":"सेक्टर - 59 नोएडा",
           "address": "A Block, Sector 59, Noida, Uttar Pradesh 201301",
           "coordinates": {
             "lat": 28.606493,
@@ -2383,6 +2520,7 @@
         {
           "place_id": "KLFOKEfit0aUTNz%2fDD%2f3%2bA%3d%3d",
           "name": "Sector - 62 Noida",
+          "native_name":"सेक्टर - 62 नोएडा",
           "address": "Phase 2, Industrial Area, Sector 62, Noida, Uttar Pradesh 201301",
           "coordinates": {
             "lat": 28.6169997,
@@ -2403,6 +2541,7 @@
         {
           "place_id": "9PgfAchSUUGIGAxVO1kzSA%3d%3d",
           "name": "Noida Electronic City",
+          "native_name": "नोएडा इलेक्ट्रॉनिक सिटी",
           "address": "H Block, Sector 62, Noida, Uttar Pradesh 201301",
           "coordinates": {
             "lat": 28.6279457,
@@ -2424,11 +2563,13 @@
     },
     "line_4": {
       "name": "Blue Line - Branch",
+      "native_name": "ब्लू लाइन - रैन्च",
       "colour_code": "3B76C0",
       "stations": [
         {
           "place_id": "TOvJPV46gEKYHQ1IOAKk4Q%3d%3d",
           "name": "Yamuna Bank",
+          "native_name": "यमुना बैंक",
           "address": "Yamuna Bank, New Delhi, Delhi 110092",
           "coordinates": {
             "lat": 28.62333,
@@ -2453,6 +2594,7 @@
         {
           "place_id": "JqBam2MuWES%2bcHhbLV84AA%3d%3d",
           "name": "Laxmi Nagar",
+          "native_name": "लक्ष्मी नगर",
           "address": "Veer Savarkar Block, Block H, Sector 18, Kavi Nagar, Ghaziabad, Uttar Pradesh 110092",
           "coordinates": {
             "lat": 28.6306847,
@@ -2473,6 +2615,7 @@
         {
           "place_id": "VzmmZmr%2f8kKm1LPT6dbjMA%3d%3d",
           "name": "Nirman Vihar",
+          "native_name":"निर्माण विहार",
           "address": "Laxmi Nagar Commercial Complex, Swasthya Vihar, Delhi, 110092",
           "coordinates": {
             "lat": 28.6370347,
@@ -2493,6 +2636,7 @@
         {
           "place_id": "HO6mHSLQI0%2bNdiesqbRIVQ%3d%3d",
           "name": "Preet Vihar",
+          "native_name":"प्रीत विहार",
           "address": "Vikas Marg, New Rajdhani Enclave, Swasthya Vihar, New Delhi, Delhi 110092",
           "coordinates": {
             "lat": 28.6417147,
@@ -2513,6 +2657,7 @@
         {
           "place_id": "6bTiPwtf9E%2beLFP9XkKetg%3d%3d",
           "name": "Karkarduma",
+          "native_name":"कड़कड़डुमा",
           "address": "J8X4+96W, Vikash Marg Rd, Arya Nagar, C Block, Preet Vihar, Delhi, 110092",
           "coordinates": {
             "lat": 28.6484843,
@@ -2537,6 +2682,7 @@
         {
           "place_id": "7fAkkcUDVEeQwSTFij7sbw%3d%3d",
           "name": "Anand Vihar ISBT",
+          "native_name": "आनंद विहार आईएसबीटी",
           "address": "Isbt Anand Vihar, Anand Vihar, New Delhi, Delhi 110092",
           "coordinates": {
             "lat": 28.6469574,
@@ -2561,6 +2707,7 @@
         {
           "place_id": "ECfb%2f7CGvUCiumGyhNn2xg%3d%3d",
           "name": "Kaushambi",
+          "native_name":"कौशांबी",
           "address": "Dabur India Limited Office, Kaushambi, Ghaziabad, Uttar Pradesh 201012",
           "coordinates": {
             "lat": 28.6454749,
@@ -2581,6 +2728,7 @@
         {
           "place_id": "UC9qRZFsX0O9A8nz2nMKTQ%3d%3d",
           "name": "Vaishali",
+          "native_name":"वैशाली",
           "address": "Madan Mohan Malviya Marg, Gaur Ganga 2, Phase 1, Sector 4, Vaishali, Ghaziabad, Uttar Pradesh 201010",
           "coordinates": {
             "lat": 28.6498447,
@@ -2603,11 +2751,13 @@
     },
     "line_5": {
       "name": "Green Line",
+      "native_name": "ग्रीन लाइन",
       "colour_code": "198754",
       "stations":[
         {
           "place_id": "bwd%2bDvFLm0OhYMxMBVHHXA%3d%3d",
           "name": "Kirti Nagar",
+          "native_name": "कीर्ति नगर",
           "address": "Karampura Flyover, Block 1, Kirti Nagar Industrial Area, Kirti Nagar, New Delhi, Delhi 110015",
           "coordinates": {
             "lat": 28.6556811,
@@ -2632,6 +2782,7 @@
         {
           "place_id": "7Wclg2S8ck%2bBwqQwY5X76A%3d%3d",
           "name": "Satguru Ram Singh Marg",
+          "native_name": "सतगुरु राम सिंह मार्ग",
           "address": "Block B, Najafgarh Road Industrial Area, New Delhi, Delhi 110008",
           "coordinates": {
             "lat": 28.6621347,
@@ -2652,6 +2803,7 @@
         {
           "place_id": "ImjMe7N2a0aqJwNL4veYfg%3d%3d",
           "name": "Inderlok",
+          "native_name": "इन्द्रलोक",
           "address": "Maharaj Nar Singh Marg, Shastri Nagar, New Delhi, Delhi 110035",
           "coordinates": {
             "lat": 28.6734411,
@@ -2676,6 +2828,7 @@
         {
           "place_id": "z3Wjxy%2fCykilkZzOVApbZg%3d%3d",
           "name": "Ashok Park Main",
+          "native_name": "अशोक पार्क मेन",
           "address": "Rohtak Rd, Manohar Park, Block D, East Punjabi Bagh, Punjabi Bagh, New Delhi, Delhi 110026",
           "coordinates": {
             "lat": 28.6716215,
@@ -2696,6 +2849,7 @@
         {
           "place_id": "r74eX0M900CE7DuYWRWj7Q%3d%3d",
           "name": "Punjabi Bagh",
+          "native_name": "पंजाबी बाग़",
           "address": "Rohtak Rd, Railway Colony, East Punjabi Bagh, Punjabi Bagh, New Delhi, Delhi 110026",
           "coordinates": {
             "lat": 28.6729338,
@@ -2716,6 +2870,7 @@
         {
           "place_id": "Yz445Ojx3U22P1rC1Tpmxw%3d%3d",
           "name": "Punjabi Bagh West",
+          "native_name": "पंजाबी बाग़ पश्चिम",
           "address": "Punjabi Bagh Chowk, West Punjabi Bagh, Punjabi Bagh, New Delhi, Delhi 110026",
           "coordinates": {
             "lat": 28.6727447,
@@ -2740,6 +2895,7 @@
         {
           "place_id": "XVDjVblLzEWHczD%2fwPDiGw%3d%3d",
           "name": "Shivaji Park",
+          "native_name": "शिवाजी पार्क",
           "address": "Rohtak Rd, Block S, Shivaji Park, Punjabi Bagh, New Delhi, Delhi 110026",
           "coordinates": {
             "lat": 28.6749437,
@@ -2760,6 +2916,7 @@
         {
           "place_id": "6FJqQhLr0EydtuMuSzpzQw%3d%3d",
           "name": "Madipur",
+          "native_name": "मादीपुर",
           "address": "Madipur JJ Colony, Madhuban Enclave, Paschim Vihar, Delhi, 110063",
           "coordinates": {
             "lat": 28.6763447,
@@ -2780,6 +2937,7 @@
         {
           "place_id": "OE8%2f59ySx0azm89kXW07ew%3d%3d",
           "name": "Paschim Vihar East",
+          "native_name": "पश्चिम विहार (पूर्व)",
           "address": "Rohtak Rd, Shiva Enclave, Paschim Vihar, New Delhi, Delhi 110063",
           "coordinates": {
             "lat": 28.6772747,
@@ -2800,6 +2958,7 @@
         {
           "place_id": "FOXso7ILoEmYKMnxjUtNNg%3d%3d",
           "name": "Paschim Vihar West",
+          "native_name": "पश्चिम विहार (पश्चिम)",
           "address": "M4H2+9W7, Paschim Vihar West Metro Station, Block A 1, Ashirwad, Paschim Vihar, New Delhi, Delhi 110063",
           "coordinates": {
             "lat": 28.6784048,
@@ -2820,26 +2979,7 @@
         {
           "place_id": "d3GmQzTZAU6t83X9LZJzSA%3d%3d",
           "name": "Peeragarhi",
-          "address": "Rohtak Rd, Peera Garhi, Peeragarhi Village, Paschim Vihar, New Delhi, Delhi 110087",
-          "coordinates": {
-            "lat": 28.6796579,
-            "lng": 77.090202
-          },
-          "platforms":{
-            "line_5":{
-              "towards_start":"Platform 2",
-              "towards_end":"Platform 1"
-            }
-          },
-          "is_interchange": false,
-          "interchange_data": {
-            "count": 1,
-            "lines": ["line_5"]
-          }
-        },
-        {
-          "place_id": "4usPF%2bkV5k6H1PkszOLXRQ%3d%3d",
-          "name": "Peeragarhi",
+          "native_name": "पीरागढ़ी",
           "address": "Rohtak Rd, Peera Garhi, Peeragarhi Village, Paschim Vihar, New Delhi, Delhi 110087",
           "coordinates": {
             "lat": 28.6796579,
@@ -2860,6 +3000,7 @@
         {
           "place_id": "gjxmzmhO80e9HoRhLs1cZw%3d%3d",
           "name": "Udyog Nagar",
+          "native_name": "उद्योग नगर",
           "address": "Rohtak Rd, Block A, Jwalapuri, Paschim Vihar, New Delhi, Delhi 110041",
           "coordinates": {
             "lat": 28.6810527,
@@ -2880,6 +3021,7 @@
         {
           "place_id": "5AHE2Qn7BU%2bROxi4KE%2fZVw%3d%3d",
           "name": "Maharaja Surajmal Stadium",
+          "native_name": "महाराजा सूरजमल स्टेडियम",
           "address": "Rohtak Rd, Nangloi, New Delhi, Delhi 110041",
           "coordinates": {
             "lat": 28.6818247,
@@ -2900,6 +3042,7 @@
         {
           "place_id": "WW8kGy%2ba4EORR8j01%2fiwXw%3d%3d",
           "name": "Nangloi",
+          "native_name": "नांगलोई",
           "address": "Kirari Extension 2, JJ Colony No 1, Nangloi, New Delhi, Delhi 110041",
           "coordinates": {
             "lat": 28.6823347,
@@ -2920,6 +3063,7 @@
         {
           "place_id": "guCT49c61kejZ5p4WpIjJA%3d%3d",
           "name": "Nangloi Railway Station",
+          "native_name": "नांगलोई रेलवे स्टेशन",
           "address": "Rohtak Rd, Tyagi Colony, Nangloi Extension, Nangloi, New Delhi, Delhi 110041",
           "coordinates": {
             "lat": 28.6821377,
@@ -2940,6 +3084,7 @@
         {
           "place_id": "PkCcZG4SxESDK3kWMhwaSg%3d%3d",
           "name": "Rajdhani Park",
+          "native_name": "राजधानी पार्क",
           "address": "NH 10, Gulshan Park, Mundka, New Delhi, Delhi 110041",
           "coordinates": {
             "lat": 28.6822841,
@@ -2960,26 +3105,7 @@
         {
           "place_id": "irTQhr%2fJREuf57kJVWFikw%3d%3d",
           "name": "Mundka",
-          "address": "NH 10, West Cabin Block, Mundka, New Delhi, Delhi 110041",
-          "coordinates": {
-            "lat": 28.6823947,
-            "lng": 77.0277651
-          },
-          "platforms":{
-            "line_5":{
-              "towards_start":"Platform 2",
-              "towards_end":"Platform 1"
-            }
-          },
-          "is_interchange": false,
-          "interchange_data": {
-            "count": 1,
-            "lines": ["line_5"]
-          }
-        },
-        {
-          "place_id": "irTQhr%2fJREuf57kJVWFikw%3d%3d",
-          "name": "Mundka",
+          "native_name": "मुंडका",
           "address": "NH 10, West Cabin Block, Mundka, New Delhi, Delhi 110041",
           "coordinates": {
             "lat": 28.6823947,
@@ -3000,6 +3126,7 @@
         {
           "place_id": "fvFPiiW7OEuBS6r21CA7TA%3d%3d",
           "name": "Mundka Industrial Area (MIA)",
+          "native_name": "मुंडका इंडस्ट्रियल एरिया (एमआईए)",
           "address": "Mundka Industrial Area, Mundka, Delhi, 110081",
           "coordinates": {
             "lat": 28.6835409,
@@ -3020,6 +3147,7 @@
         {
           "place_id": "36w%2fW3rOekKHyv5LdEjsYA%3d%3d",
           "name": "Ghevra Metro Station",
+          "native_name": "घेवरा मेट्रो स्टेशन",
           "address": "Block C, Tyagi Vihar, Ghevra, Delhi, 110081",
           "coordinates": {
             "lat": 28.6852417,
@@ -3040,6 +3168,7 @@
         {
           "place_id": "nJUEn2fo9Uyg5QAscw5zTA%3d%3d",
           "name": "Tikri Kalan",
+          "native_name": "टिकरी कलां",
           "address": "Netaji Subhash Vihar, Delhi, 110072",
           "coordinates": {
             "lat": 28.6868847,
@@ -3060,6 +3189,7 @@
         {
           "place_id": "ztmsMp6otUusm2rAj90%2fbQ%3d%3d",
           "name": "Tikri Border",
+          "native_name": "टिकरी बॉर्डर",
           "address": "Tikri Kalan, Delhi, 110072",
           "coordinates": {
             "lat": 28.688025,
@@ -3080,6 +3210,7 @@
         {
           "place_id": "hmBc31nlVEiBqM%2bk%2bORbRQ%3d%3d",
           "name": "Pandit Shree Ram Sharma",
+          "native_name": "पंडित श्री राम शर्मा",
           "address": "MIE Part-B, Bahadurgarh, Haryana 124507",
           "coordinates": {
             "lat": 28.6892467,
@@ -3100,6 +3231,7 @@
         {
           "place_id": "Xlec3zfs8066KFKpge%2bjjA%3d%3d",
           "name": "Bahadurgarh City",
+          "native_name": "बहादुरगढ़ सिटी",
           "address": "Ram Nagar, Bahadurgarh, Haryana 124507",
           "coordinates": {
             "lat": 28.6907447,
@@ -3120,6 +3252,7 @@
         {
           "place_id": "Owa9CYU5pEST39wMF75VeA%3d%3d",
           "name": "Brig. Hoshiar Singh",
+          "native_name": "ब्रिगेडियर होशियार सिंह",
           "address": "Old Industrial Area, Bahadurgarh, Haryana 124507",
           "coordinates": {
             "lat": 28.6974147,
@@ -3141,11 +3274,13 @@
     },
     "line_6":{
       "name":"Violet Line",
+      "native_name": "वॉयलेट लाइन",
       "colour_code":"6f42c1",
       "stations":[
         {
           "place_id": "8XxL6%2fC2eEOh1eZAkN%2fy2A%3d%3d",
           "name": "Kashmere Gate",
+          "native_name": "कश्मीरी गेट",
           "address": "Lothian Rd, Inter State Bus Terminal, Kashmere Gate, New Delhi, Delhi 110006",
           "coordinates": {
             "lat": 28.6674747,
@@ -3174,6 +3309,7 @@
         {
           "place_id": "AH9WR%2bHtKkSL0ak3nN9cZA%3d%3d",
           "name": "Lal Quila",
+          "native_name": "लाल किला",
           "address": "Angoori Bagh Rd, Netaji Subash Place, Lajpat Rai Market, Chandni Chowk, New Delhi, Delhi 110006",
           "coordinates": {
             "lat": 28.6568598,
@@ -3194,6 +3330,7 @@
         {
           "place_id": "c449UzmH2kWNcSbRGMxmPQ%3d%3d",
           "name": "Jama Masjid",
+          "native_name": "जामा मस्जिद",
           "address": "Meena Bazar, Meena Bazaar, Jama Masjid, Chandni Chowk, New Delhi, Delhi 110006",
           "coordinates": {
             "lat": 28.6495547,
@@ -3214,6 +3351,7 @@
         {
           "place_id": "5YCG31HxlkCjF1w%2fPEd45A%3d%3d",
           "name": "Delhi Gate",
+          "native_name": "दिल्ली गेट",
           "address": "Asaf Ali Rd, Chatta lal Miya, Chandni Mahal, Chandni Chowk, New Delhi, Delhi 110002",
           "coordinates": {
             "lat": 28.64008,
@@ -3234,6 +3372,7 @@
         {
           "place_id": "k2L6iH%2bcakWuPt4aE%2b%2bCOA%3d%3d",
           "name": "ITO",
+          "native_name": "आईटीओ",
           "address": "Rajendra Bhawan, 110002, T Sohanlal Marg, Rajendra Place, New Delhi, Delhi 110008",
           "coordinates": {
             "lat": 28.6283947,
@@ -3254,6 +3393,7 @@
         {
           "place_id": "SUO%2bs7VsT0e%2fPGyzHpanaw%3d%3d",
           "name": "Mandi House",
+          "native_name": "मंडी हाउस",
           "address": "New Delhi, Delhi 110001",
           "coordinates": {
             "lat": 28.6259038,
@@ -3278,6 +3418,7 @@
         {
           "place_id": "TBjWGZrms0COW%2fB%2b71Xoaw%3d%3d",
           "name": "Janpath",
+          "native_name": "जनपथ",
           "address": "Jantar Mantar Road, Janpath, Connaught Place, New Delhi, Delhi 110001",
           "coordinates": {
             "lat": 28.6250657,
@@ -3298,6 +3439,7 @@
         {
           "place_id": "6Lxfl2fQj0uoW9bNwD5MIA%3d%3d",
           "name": "Central Secretariat",
+          "native_name": "केन्द्रीय सचिवालय",
           "address": "Rafi Ahmed Kidwai Marg, Kartavya Path, Central Secretariat, New Delhi, Delhi 110001",
           "coordinates": {
             "lat": 28.6151511,
@@ -3322,6 +3464,7 @@
         {
           "place_id": "7K5BMAgACUWziil57kGrlQ%3d%3d",
           "name": "Khan Market",
+          "native_name": "खान मार्केट",
           "address": "Sujan Sing Park North, Sujan Singh Park, New Delhi, Delhi 110003",
           "coordinates": {
             "lat": 28.6021557,
@@ -3342,6 +3485,7 @@
         {
           "place_id": "3hFN06svbEKBEKfi9izhJg%3d%3d",
           "name": "Jln Stadium",
+          "native_name": "जे.एल.एन. स्टेडियम",
           "address": "CGO Complex, Pragati Vihar, New Delhi, Delhi 110003",
           "coordinates": {
             "lat": 28.5893677,
@@ -3362,6 +3506,7 @@
         {
           "place_id": "omyyLL54kECzKwU5nzQU7A%3d%3d",
           "name": "Jangpura",
+          "native_name": "जंगपुरा",
           "address": "Jangpura, Jungpura Extension, Pragati Vihar, New Delhi, Delhi 110014",
           "coordinates": {
             "lat": 28.5833099,
@@ -3382,6 +3527,7 @@
         {
           "place_id": "ZQ9kO8Kx5Emf8vsFldvjEg%3d%3d",
           "name": "Lajpat Nagar",
+          "native_name": "लाजपत नगर",
           "address": "Lala Lajpat Rai Rd, Block A, Lajpat Nagar II, Lajpat Nagar, New Delhi, Delhi 110024",
           "coordinates": {
             "lat": 28.5707181,
@@ -3406,6 +3552,7 @@
         {
           "place_id": "MRlDI4ajIkqgB0ZaskNWMw%3d%3d",
           "name": "Moolchand",
+          "native_name": "मूलचंद",
           "address": "Lala Lajpat Rai Marg, Vikram Vihar, Lajpat Nagar IV, Lajpat Nagar, New Delhi, Delhi 110048",
           "coordinates": {
             "lat": 28.5640167,
@@ -3426,6 +3573,7 @@
         {
           "place_id": "o8vmrhxaG0O05HR23fd4Nw%3d%3d",
           "name": "Kailash Colony",
+          "native_name": "कैलाश कॉलोनी",
           "address": "Block E, East of Kailash, New Delhi, Delhi 110048",
           "coordinates": {
             "lat": 28.5553921,
@@ -3446,6 +3594,7 @@
         {
           "place_id": "CVBKS3ZdQkWYpQstgKW%2bew%3d%3d",
           "name": "Nehru Place",
+          "native_name": "नेहरू प्लेस",
           "address": "Nehru Place, New Delhi, Delhi 110019",
           "coordinates": {
             "lat": 28.5514077,
@@ -3466,6 +3615,7 @@
         {
           "place_id": "My4Z5CzzT0e8gBQ3PCAUNA%3d%3d",
           "name": "Kalkaji Mandir",
+          "native_name": "कालकाजी मंदिर",
           "address": "Block 9, Kalkaji, New Delhi, Delhi 110019",
           "coordinates": {
             "lat": 28.5494547,
@@ -3490,6 +3640,7 @@
         {
           "place_id": "1zebnsTVskCZ5jLEFle0Gg%3d%3d",
           "name": "Govindpuri",
+          "native_name": "गोविंद पुरी",
           "address": "Ma Anandmayee Marg, NSIC Estate, Balaji Estate, Kalkaji, New Delhi, Delhi 110019",
           "coordinates": {
             "lat": 28.5444,
@@ -3510,6 +3661,7 @@
         {
           "place_id": "UGP7SzdGhUqlcyqKYXgW1Q%3d%3d",
           "name": "Harkesh Nagar Okhla",
+          "native_name": "हरकेश नगर ओखला",
           "address": "Okhla Phase II, Okhla Industrial Estate, New Delhi, Delhi 110020",
           "coordinates": {
             "lat": 28.5429247,
@@ -3530,6 +3682,7 @@
         {
           "place_id": "xEuPGXP52kODWlkayeHfHQ%3d%3d",
           "name": "Jasola-Apollo",
+          "native_name": "जसोला-अपोलो",
           "address": "Pedestrian Opas, Jasola, New Delhi, Delhi 110025",
           "coordinates": {
             "lat": 28.5381347,
@@ -3550,6 +3703,7 @@
         {
           "place_id": "D47iq097ikehD%2fG8xL5fQg%3d%3d",
           "name": "Sarita Vihar",
+          "native_name": "सरिता विहार",
           "address": "Pocket C, Saidabad, New Delhi, Delhi 110076",
           "coordinates": {
             "lat": 28.5287347,
@@ -3570,6 +3724,7 @@
         {
           "place_id": "yK6C%2fTC83EOAYVDXEKgy8A%3d%3d",
           "name": "Mohan Estate",
+          "native_name": "मोहन एस्टेट",
           "address": "Block B, Mohan Cooperative Industrial Estate, Badarpur, New Delhi, Delhi 110076",
           "coordinates": {
             "lat": 28.5195247,
@@ -3590,6 +3745,7 @@
         {
           "place_id": "H58bbPNLl0aeidiv%2fK9eZw%3d%3d",
           "name": "Tughlakabad Station",
+          "native_name": "तुग़लकाबाद स्टेशन",
           "address": "Balmiki Mohalla, Block E, Mohan Cooperative Industrial Estate, Tughlakabad, New Delhi, Delhi 110044",
           "coordinates": {
             "lat": 28.5025447,
@@ -3610,6 +3766,7 @@
         {
           "place_id": "2DI27nQCt0uaX%2fck4MdRYQ%3d%3d",
           "name": "Badarpur Border",
+          "native_name": "बदरपुर बॉर्डर",
           "address": "Block B, Block E, Mohan Cooperative Industrial Estate, Badarpur, New Delhi, Delhi 110044",
           "coordinates": {
             "lat": 28.4932547,
@@ -3630,6 +3787,7 @@
         {
           "place_id": "u1WVdLQYO0uGx7K9F5TUOQ%3d%3d",
           "name": "Sarai",
+          "native_name": "सराय",
           "address": "Sector 27D, Faridabad, Haryana 121003",
           "coordinates": {
             "lat": 28.4780747,
@@ -3650,6 +3808,7 @@
         {
           "place_id": "QndefRKNhka%2bMpOAz36DCA%3d%3d",
           "name": "NHPC Chowk",
+          "native_name": "एनएचपीसी चौक",
           "address": "Block A, DLF Industrial Area, Sector 32, Faridabad, Haryana 121003",
           "coordinates": {
             "lat": 28.4577061,
@@ -3670,6 +3829,7 @@
         {
           "place_id": "48HRUG6qUE2gFgU2kxwrmw%3d%3d",
           "name": "Mewala Maharajpur",
+          "native_name": "मेवला महाराजपुर",
           "address": "Mathura Rd, Sector 31, Faridabad, Haryana 121003",
           "coordinates": {
             "lat": 28.4485707,
@@ -3690,6 +3850,7 @@
         {
           "place_id": "HRsRIJ5pOkSVjuz60ZULGg%3d%3d",
           "name": "Sector-28",
+          "native_name": "सेक्टर-28",
           "address": "Mathura Rd, HBH Colony, Sector 28, Faridabad, Haryana 121008",
           "coordinates": {
             "lat": 28.4383847,
@@ -3710,6 +3871,7 @@
         {
           "place_id": "iD1dl27f9UWE4Nu3zMAnWA%3d%3d",
           "name": "Badkal Mor",
+          "native_name": "बड़कल मोड़",
           "address": "Sector 19, Faridabad, Haryana 121002",
           "coordinates": {
             "lat": 28.4227579,
@@ -3730,6 +3892,7 @@
         {
           "place_id": "CTyfP3FMUEeILhoHoKOGUQ%3d%3d",
           "name": "Old Faridabad",
+          "native_name": "ओल्ड फरीदाबाद",
           "address": "Sector 16A, Faridabad, Haryana 121002",
           "coordinates": {
             "lat": 28.4107759,
@@ -3750,6 +3913,7 @@
         {
           "place_id": "vVknTkKI1Uu0kMTvQGiXfQ%3d%3d",
           "name": "Neelam Chowk Ajronda",
+          "native_name": "नीलम चौक अजरौंदा",
           "address": "Mathura Road, Sector 15A, Faridabad, Haryana 121013",
           "coordinates": {
             "lat": 28.3976727,
@@ -3770,6 +3934,7 @@
         {
           "place_id": "t4Azje9rKUawVYZVOYFksQ%3d%3d",
           "name": "Bata Chowk",
+          "native_name": "बाटा चौक",
           "address": "Mathura Rd, Sector 12, Faridabad, Haryana 121007",
           "coordinates": {
             "lat": 28.3859947,
@@ -3790,6 +3955,7 @@
         {
           "place_id": "tvQqkc%2biq0imQZOCiOtU7A%3d%3d",
           "name": "Escorts Mujesar",
+          "native_name": "एस्कॉर्ट्स मुजेसर",
           "address": "Mathura Rd, Sector 11, Pocket A, Sector 11, Faridabad, Haryana 121006",
           "coordinates": {
             "lat": 28.3701647,
@@ -3810,6 +3976,7 @@
         {
           "place_id": "zSGIi1fCcECZ08LABC0atA%3d%3d",
           "name": "Sant Surdas (SIHI)",
+          "native_name": "संत सूरदास (सीही)",
           "address": "Sector 6, Faridabad, Haryana 121006",
           "coordinates": {
             "lat": 28.3546777,
@@ -3830,6 +3997,7 @@
         {
           "place_id": "gK5uYrtV%2fUitc4qXDgWh2g%3d%3d",
           "name": "Raja Nahar Singh (Ballabhgarh)",
+          "native_name": "राजा नाहर सिंह (बल्लभगढ़)",
           "address": "Ballabhgarh, Faridabad, Haryana 121004",
           "coordinates": {
             "lat": 28.3398057,
@@ -3851,11 +4019,13 @@
     },
     "line_7":{
       "name":"Pink Line",
+      "native_name": "पिंक लाइन",
       "colour_code":"d63384",
       "stations":[
         {
           "place_id": "h2BYKu5z4UO%2bm%2fZ%2bJJbvWQ%3d%3d",
           "name": "Majlis Park",
+          "native_name": "मजलिस पार्क",
           "address": "Block EE, Jahangirpuri, Delhi, 110033",
           "coordinates": {
             "lat": 28.7243231,
@@ -3876,6 +4046,7 @@
         {
           "place_id": "BT0Cg5xk3UuVH3AAUNLhYw%3d%3d",
           "name": "Azadpur",
+          "native_name": "आज़ादपुर",
           "address": "G, 85, Sector 23 Rd, Vijay vihar Phase I, Pocket 5, Sector-24, Rohini, Delhi, 110085",
           "coordinates": {
             "lat": 28.70702,
@@ -3900,6 +4071,7 @@
         {
           "place_id": "Ywn7clDD60SnIZMSTzwMgg%3d%3d",
           "name": "Shalimar Bagh",
+          "native_name": "शालीमार बाग़",
           "address": "Wazirpur Industrial Area, Wazirpur, Delhi, 110052",
           "coordinates": {
             "lat": 28.7020227,
@@ -3920,6 +4092,7 @@
         {
           "place_id": "BPjUOA0ErE6M%2bkZ6WMI5eQ%3d%3d",
           "name": "Netaji Subhash Place",
+          "native_name": "नेताजी सुभाष प्लेस",
           "address": "Guru Govind Singh College, Pitampura, New Delhi, Delhi 110034",
           "coordinates": {
             "lat": 28.6960547,
@@ -3944,6 +4117,7 @@
         {
           "place_id": "vbhgziH4GUih%2fNTrWnkYIQ%3d%3d",
           "name": "Shakurpur",
+          "native_name": "शकूरपुर",
           "address": "JJ Colony, Shakurpur Colony, Shakurpur, Delhi, 110034",
           "coordinates": {
             "lat": 28.6857837,
@@ -3964,6 +4138,7 @@
         {
           "place_id": "Yz445Ojx3U22P1rC1Tpmxw%3d%3d",
           "name": "Punjabi Bagh West",
+          "native_name": "पंजाबी बाग़ पश्चिम",
           "address": "Punjabi Bagh Chowk, West Punjabi Bagh, Punjabi Bagh, New Delhi, Delhi 110026",
           "coordinates": {
             "lat": 28.6727447,
@@ -3988,6 +4163,7 @@
         {
           "place_id": "uGH%2ftws420mcHH7MqvgJjA%3d%3d",
           "name": "ESI-Basaidarapur",
+          "native_name": "ईएसआई - बसईदारापुर",
           "address": "Shivaji Enclave, Tagore Garden Extension, Delhi, 110027",
           "coordinates": {
             "lat": 28.6581647,
@@ -4008,6 +4184,7 @@
         {
           "place_id": "K48ReY%2f1HUOt3xtOPpYaZA%3d%3d",
           "name": "Rajouri Garden",
+          "native_name": "राजौरी गार्डन",
           "address": "Najafgarh Rd, Shivaji Place, Vishal Enclave, Tagore Garden Extension, New Delhi, Delhi 110018",
           "coordinates": {
             "lat": 28.649019,
@@ -4032,6 +4209,7 @@
         {
           "place_id": "TG7j8ahjo02FP0P2U%2bCwnQ%3d%3d",
           "name": "Mayapuri",
+          "native_name": "मायापुरी",
           "address": "Block WH, Mayapuri Industrial Area Phase I, Mayapuri, Delhi, 110064",
           "coordinates": {
             "lat": 28.6371037,
@@ -4052,6 +4230,7 @@
         {
           "place_id": "3wHOx05MOkKE7lxkj1HMSg%3d%3d",
           "name": "Naraina Vihar",
+          "native_name": "नारायणा विहार",
           "address": "Shindi Colony, Naraina Village, Naraina, New Delhi, Delhi 110028",
           "coordinates": {
             "lat": 28.624125,
@@ -4072,6 +4251,7 @@
         {
           "place_id": "U5O0orL9E0GrmEJzLHtTng%3d%3d",
           "name": "Delhi Cantt.",
+          "native_name": "दिल्ली कैंट",
           "address": "Brar Square, Delhi Cantonment, New Delhi, Delhi 110010",
           "coordinates": {
             "lat": 28.6087847,
@@ -4092,6 +4272,7 @@
         {
           "place_id": "aefqK2z7bEGWtWACkTsm6Q%3d%3d",
           "name": "Durgabai Deshmukh South Campus",
+          "native_name": "दुर्गाबाई देशमुख साउथ कैंपस",
           "address": "near University of Delhi, Satya Niketan, South Moti Bagh, New Delhi, Delhi 110021",
           "coordinates": {
             "lat": 28.5893847,
@@ -4117,6 +4298,7 @@
         {
           "place_id": "l0nncMLG2E%2bRB263sWEnvg%3d%3d",
           "name": "Sir M. Vishweshwaraiah Moti Bagh",
+          "native_name": "सर एम. विश्वेश्वरैया मोती बाग़",
           "address": "Sector 12, Rama Krishna Puram, New Delhi, Delhi 110021",
           "coordinates": {
             "lat": 28.5785087,
@@ -4137,6 +4319,7 @@
         {
           "place_id": "hqG71zFcF0ij3DsTd8Tmvg%3d%3d",
           "name": "Bhikaji Cama Place",
+          "native_name": "भीकाजी कामा प्लेस",
           "address": "Block A, Netaji Nagar, New Delhi, Delhi 110023",
           "coordinates": {
             "lat": 28.5702157,
@@ -4157,6 +4340,7 @@
         {
           "place_id": "AoNYhdAUEEObxz8r8bX2ww%3d%3d",
           "name": "Sarojini Nagar",
+          "native_name": "सरोजिनी नगर",
           "address": "Block C, Sarojini Nagar, New Delhi, Delhi 110023",
           "coordinates": {
             "lat": 28.5758117,
@@ -4177,6 +4361,7 @@
         {
           "place_id": "FtnTWPRinUyuiV4223jQ4Q%3d%3d",
           "name": "Dilli Haat - INA",
+          "native_name": "दिल्ली हाट-आईएनए",
           "address": "Sri Aurobindo Marg, Aviation Colony, INA Colony, New Delhi, Delhi 110023",
           "coordinates": {
             "lat": 28.5744541,
@@ -4201,6 +4386,7 @@
         {
           "place_id": "7hzTJTQk9keJsu3OH9yIpw%3d%3d",
           "name": "South Extension",
+          "native_name": "साउथ एक्सटेंशन",
           "address": "Block E, New Delhi, Delhi 110049",
           "coordinates": {
             "lat": 28.568611,
@@ -4221,6 +4407,7 @@
         {
           "place_id": "ZQ9kO8Kx5Emf8vsFldvjEg%3d%3d",
           "name": "Lajpat Nagar",
+          "native_name": "लाजपत नगर",
           "address": "Lala Lajpat Rai Rd, Block A, Lajpat Nagar II, Lajpat Nagar, New Delhi, Delhi 110024",
           "coordinates": {
             "lat": 28.5707181,
@@ -4245,6 +4432,7 @@
         {
           "place_id": "Md7lnEXmJEiGtQEdHnNADg%3d%3d",
           "name": "Vinobapuri",
+          "native_name": "विनोबापुरी",
           "address": "Nehru Nagar, Lajpat Nagar, New Delhi, Delhi 110065",
           "coordinates": {
             "lat": 28.5659487,
@@ -4265,6 +4453,7 @@
         {
           "place_id": "YnNBoNUacUKd4j3hWvCtIQ%3d%3d",
           "name": "Ashram",
+          "native_name": "आश्रम",
           "address": "Ashram metro station, Delhi Metro Pink Line, Block A, Friends Colony East, New Friends Colony, New Delhi, Delhi 110065",
           "coordinates": {
             "lat": 28.57217,
@@ -4285,6 +4474,7 @@
         {
           "place_id": "YLx9XIVWukSAQtt5hKsHNw%3d%3d",
           "name": "Sarai Kale Khan - Nizamuddin",
+          "native_name": "सराय काले खां – निज़ामुद्दीन",
           "address": "Block A, Ganga Vihar, Sarai Kale Khan, New Delhi, Delhi 110013",
           "coordinates": {
             "lat": 28.5887223,
@@ -4305,6 +4495,7 @@
         {
           "place_id": "My0UtHGYEE28bvins%2bcWyA%3d%3d",
           "name": "Mayur Vihar - 1",
+          "native_name": "मयूर विहार -1",
           "address": "Pocket 4, Mayur Vihar, New Delhi, Delhi 110091",
           "coordinates": {
             "lat": 28.6042306,
@@ -4329,6 +4520,7 @@
         {
           "place_id": "k2bVudrVRE27rcCXmFemeg%3d%3d",
           "name": "Mayur Vihar Pocket-1",
+          "native_name": "मयूर विहार पॉकेट-1",
           "address": "Mayur Vihar Phase I, Pocket 3, Delhi, 110091",
           "coordinates": {
             "lat": 28.6057991,
@@ -4349,6 +4541,7 @@
         {
           "place_id": "pcr%2fqTv2e02X2TVlCINDug%3d%3d",
           "name": "Trilokpuri-Sanjay Lake",
+          "native_name": "त्रिलोकपुरी-संजय लेक",
           "address": "Vasundhara Rd, Pocket D, Trilokpuri, New Delhi, Delhi 110091",
           "coordinates": {
             "lat": 28.6135947,
@@ -4369,6 +4562,7 @@
         {
           "place_id": "eHUOwlVNzUmAJUNIodkgvw%3d%3d",
           "name": "East Vinod Nagar-Mayur Vihar -II",
+          "native_name": "ईस्ट विनोद नगर-मयूर विहार II",
           "address": "Block E, Vinod Nagar East, Delhi, 110091",
           "coordinates": {
             "lat": 28.6200617,
@@ -4389,6 +4583,7 @@
         {
           "place_id": "cjJ0pj2CHUqEAamOeLDLtg%3d%3d",
           "name": "Mandawali - West Vinod Nagar",
+          "native_name": "मंडावली – वेस्ट विनोद नगर",
           "address": "I.P.Extension, Patparganj, Delhi, 110092",
           "coordinates": {
             "lat": 28.6248817,
@@ -4409,6 +4604,7 @@
         {
           "place_id": "ABpQ4rDXMEWurC7B79KS4Q%3d%3d",
           "name": "I.P. Extension",
+          "native_name": "आई.पी. एक्सटेंशन",
           "address": "I.P.Extension, Patparganj, Delhi, 110092",
           "coordinates": {
             "lat": 28.6319403,
@@ -4429,6 +4625,7 @@
         {
           "place_id": "7fAkkcUDVEeQwSTFij7sbw%3d%3d",
           "name": "Anand Vihar ISBT",
+          "native_name": "आनंद विहार आईएसबीटी",
           "address": "Isbt Anand Vihar, Anand Vihar, New Delhi, Delhi 110092",
           "coordinates": {
             "lat": 28.6469574,
@@ -4453,6 +4650,7 @@
         {
           "place_id": "6bTiPwtf9E%2beLFP9XkKetg%3d%3d",
           "name": "Karkarduma",
+          "native_name": "कड़कड़डुमा",
           "address": "J8X4+96W, Vikash Marg Rd, Arya Nagar, C Block, Preet Vihar, Delhi, 110092",
           "coordinates": {
             "lat": 28.6484843,
@@ -4477,6 +4675,7 @@
         {
           "place_id": "piVBEfdTBUOvT5Kqsv%2f4kg%3d%3d",
           "name": "Karkarduma Court",
+          "native_name": "कड़कड़डुमा कोर्ट",
           "address": "Arjun Gali, A G C R Enclave, Anand Vihar, Delhi, 110092",
           "coordinates": {
             "lat": 28.6535947,
@@ -4497,6 +4696,7 @@
         {
           "place_id": "dn7cjKo7oUenzecpNhK2dw%3d%3d",
           "name": "Krishna Nagar",
+          "native_name": "कृष्णा नगर",
           "address": "Vishwas Nagar Extension, Vishwas Nagar, Shahdara, Delhi, 110051",
           "coordinates": {
             "lat": 28.6585359,
@@ -4517,6 +4717,7 @@
         {
           "place_id": "ciKbc534sEGk3WheXO5HDg%3d%3d",
           "name": "East Azad Nagar",
+          "native_name": "ईस्ट आज़ाद नगर",
           "address": "East Azad Nagar, East Old Seelampur, Shahdara, Delhi, 110051",
           "coordinates": {
             "lat": 28.6647947,
@@ -4537,6 +4738,7 @@
         {
           "place_id": "cium3yogaUaT2jnQecwgpQ%3d%3d",
           "name": "Welcome",
+          "native_name": "वेलकम",
           "address": "North Kanti Nagar, Block A, Silampur, Shahdara, New Delhi, Delhi 110031",
           "coordinates": {
             "lat": 28.6717662,
@@ -4561,6 +4763,7 @@
         {
           "place_id": "H7Dhj6I5xUyCt%2bV3xSUBwQ%3d%3d",
           "name": "Jafrabad",
+          "native_name": "जाफराबाद",
           "address": "Jafrabad, Shahdara, Delhi, 110053",
           "coordinates": {
             "lat": 28.6830072,
@@ -4581,6 +4784,7 @@
         {
           "place_id": "1ZrNfDLZd0qvzuWSAFNi5w%3d%3d",
           "name": "Maujpur-Babarpur",
+          "native_name": "मौजपुर-बाबरपुर",
           "address": "Shahadara Drain New Delhi, Delhi, Uttar Pradesh 110001",
           "coordinates": {
             "lat": 28.6921078,
@@ -4601,6 +4805,7 @@
         {
           "place_id": "dYqUHcwRckWcs0BjXX0EgQ%3d%3d",
           "name": "Gokulpuri",
+          "native_name": "गोकुलपुरी",
           "address": "Sanjay Colony, Gokalpur, Delhi, 110094",
           "coordinates": {
             "lat": 28.7024147,
@@ -4621,6 +4826,7 @@
         {
           "place_id": "PCWB6l0isEaG8RasgtXOVA%3d%3d",
           "name": "Johri Enclave",
+          "native_name": "जौहरी एन्क्लेव",
           "address": "Gulab Vatika, Jawahar Nagar, Uttar Pradesh 201102",
           "coordinates": {
             "lat": 28.7131847,
@@ -4641,6 +4847,7 @@
         {
           "place_id": "87simbG00EGDoDsu9K75Hw%3d%3d",
           "name": "Shiv Vihar",
+          "native_name": "शिव विहार",
           "address": "Jeewanpur, Jawahar Nagar, Delhi, 110094",
           "coordinates": {
             "lat": 28.7216169,
@@ -4664,11 +4871,13 @@
     },
     "line_8":{
       "name":"Magenta Line",
+      "native_name": "जेंटा लाइन",
       "colour_code":"FF00FF",
       "stations":[
         {
           "place_id": "1oImZJcTYUGvhWrEgUvNZg%3d%3d",
           "name": "Janak Puri West",
+          "native_name": "जनकपुरी पश्चिम",
           "address": "Janakpuri District Center, Janakpuri, Delhi, 110018",
           "coordinates": {
             "lat": 28.6297207,
@@ -4693,6 +4902,7 @@
         {
           "place_id": "EjwZwRD1F0C70vrt8d%2f86w%3d%3d",
           "name": "Dabri Mor - Janakpuri South",
+          "native_name": "डाबड़ी मोड़- जनकपुरी दक्षिण",
           "address": "Block C 2D, Janakpuri, Delhi, 110058",
           "coordinates": {
             "lat": 28.6159107,
@@ -4713,6 +4923,7 @@
         {
           "place_id": "FaG9Uj0q6UOB9HL6ra7oew%3d%3d",
           "name": "Dashrathpuri",
+          "native_name": "दशरथपुरी",
           "address": "Ch Harphool Singh Market, Sector 1A Dwarka, Mahavir Enclave, Delhi, 110045",
           "coordinates": {
             "lat": 28.6023547,
@@ -4733,6 +4944,7 @@
         {
           "place_id": "Dwp90mqUXkyQlIXY5YbZug%3d%3d",
           "name": "Palam",
+          "native_name": "पालम",
           "address": "Block J, Palam, Delhi, 110045",
           "coordinates": {
             "lat": 28.588485,
@@ -4753,6 +4965,7 @@
         {
           "place_id": "TeZPRO01rEuUW1FeHPjDQw%3d%3d",
           "name": "Sadar Bazar Cantonment",
+          "native_name": "सदर बाज़ार छावनी",
           "address": "Shekhawati Lines, Delhi Cantonment, New Delhi, Delhi 110010",
           "coordinates": {
             "lat": 28.5771147,
@@ -4773,6 +4986,7 @@
         {
           "place_id": "DtUmB2c9uEOIE6ys6GNHyg%3d%3d",
           "name": "Terminal 1-IGI Airport Station",
+          "native_name": "टर्मिनल 1-आईजीआई एयरपोर्ट",
           "address": "New Delhi, Delhi 110037",
           "coordinates": {
             "lat": 28.5653047,
@@ -4793,6 +5007,7 @@
         {
           "place_id": "ZnWZW6%2frvUuQIRay%2bF%2fq8Q%3d%3d",
           "name": "Shankar Vihar",
+          "native_name": "शंकर विहार",
           "address": "Shankar Vihar, New Delhi, Delhi 110037",
           "coordinates": {
             "lat": 28.5608173,
@@ -4813,6 +5028,7 @@
         {
           "place_id": "aBxYBoU6%2f02txM%2b%2bMa7JjA%3d%3d",
           "name": "Vasant Vihar",
+          "native_name": "वसंत विहार",
           "address": "CGHS Colony, Vasant Vihar, New Delhi, Delhi 110057",
           "coordinates": {
             "lat": 28.5578337,
@@ -4833,26 +5049,7 @@
         {
           "place_id": "RAzGNugZA0SYPbVsa76bxg%3d%3d",
           "name": "Munirka",
-          "address": "Palam Flyover, Sector 4, Munirka, New Delhi, Delhi 110022",
-          "coordinates": {
-            "lat": 28.5578991,
-            "lng": 77.1713931
-          },
-          "platforms":{
-            "line_8":{
-              "towards_start":"Platform 2",
-              "towards_end":"Platform 1"
-            }
-          },
-          "is_interchange": false,
-          "interchange_data": {
-            "count": 1,
-            "lines": ["line_8"]
-          }
-        },
-        {
-          "place_id": "DvSWpfymB064pHxc3RRYLA%3d%3d",
-          "name": "Munirka",
+          "native_name": "मुनिरका",
           "address": "Palam Flyover, Sector 4, Munirka, New Delhi, Delhi 110022",
           "coordinates": {
             "lat": 28.5578991,
@@ -4873,6 +5070,7 @@
         {
           "place_id": "bPY7WozNe0qJIUvGefKhbQ%3d%3d",
           "name": "R.K.Puram",
+          "native_name": "आर.के.पुरम",
           "address": "Deer Park, Hauz Khas, New Delhi, Delhi 110016",
           "coordinates": {
             "lat": 28.5503497,
@@ -4893,6 +5091,7 @@
         {
           "place_id": "UhMx9VbvZk6WnuisGzoXJw%3d%3d",
           "name": "IIT",
+          "native_name": "आईआईटी",
           "address": "Deer Park, Hauz Khas, New Delhi, Delhi 110016",
           "coordinates": {
             "lat": 28.5462846,
@@ -4913,6 +5112,7 @@
         {
           "place_id": "WJvE6WYkd0KNJjQMAxorig%3d%3d",
           "name": "Hauz Khas",
+          "native_name": "हौज़ ख़ास",
           "address": "Jia Sarai, Gamal Abdel Nasser Marg, Block F, Deer Park, Hauz Khas, New Delhi, Delhi 110016",
           "coordinates": {
             "lat": 28.5439551,
@@ -4937,6 +5137,7 @@
         {
           "place_id": "6yyYLM7RUU2uD1TXTpLTZw%3d%3d",
           "name": "Panchsheel Park",
+          "native_name": "पंचशील पार्क",
           "address": "Block B, Soami Nagar South, Soami Nagar, New Delhi, Delhi 110017",
           "coordinates": {
             "lat": 28.5423427,
@@ -4957,6 +5158,7 @@
         {
           "place_id": "fxZxrPR30kuVh1Kp6MI5HQ%3d%3d",
           "name": "Chirag Delhi",
+          "native_name": "चिराग दिल्ली",
           "address": "Chirag Dilli, New Delhi, Delhi 110017",
           "coordinates": {
             "lat": 28.5412269,
@@ -4977,6 +5179,7 @@
         {
           "place_id": "O279L%2ber6EqIRqCokX36dQ%3d%3d",
           "name": "Greater Kailash",
+          "native_name": "ग्रेटर कैलाश",
           "address": "Masjid Moth, Greater Kailash, New Delhi, Delhi 110048",
           "coordinates": {
             "lat": 28.5418367,
@@ -4997,6 +5200,7 @@
         {
           "place_id": "4kOXva1eyUiYi%2flFpMGu7Q%3d%3d",
           "name": "Nehru Enclave",
+          "native_name": "नेहरू एन्क्लेव",
           "address": "Block C, Kalkaji, New Delhi, Delhi 110019",
           "coordinates": {
             "lat": 28.5458561,
@@ -5017,6 +5221,7 @@
         {
           "place_id": "My4Z5CzzT0e8gBQ3PCAUNA%3d%3d",
           "name": "Kalkaji Mandir",
+          "native_name": "कालकाजी मंदिर",
           "address": "Block 9, Kalkaji, New Delhi, Delhi 110019",
           "coordinates": {
             "lat": 28.5494547,
@@ -5041,6 +5246,7 @@
         {
           "place_id": "vvpE5oq1MUWD7ZtL9AwGhg%3d%3d",
           "name": "Okhla NSIC",
+          "native_name": "ओखला एनएसआईसी",
           "address": "Shambhu Dayal Bagh, Kalkaji, New Delhi, Delhi 110065",
           "coordinates": {
             "lat": 28.5458969,
@@ -5061,6 +5267,7 @@
         {
           "place_id": "g6tA2W%2bju0KyBuU6emERaQ%3d%3d",
           "name": "Sukhdev Vihar",
+          "native_name": "सुखदेव विहार",
           "address": "Masihgarh, Okhla, New Delhi, Delhi 110025",
           "coordinates": {
             "lat": 28.5597791,
@@ -5081,6 +5288,7 @@
         {
           "place_id": "UMtpBSdDoke%2f%2bcTCsoZ2bg%3d%3d",
           "name": "Jamia Milia Islamiya",
+          "native_name": "जामिया मिल्लिया इस्लामिया",
           "address": "Jamia Nagar, Okhla, New Delhi, Delhi 110025",
           "coordinates": {
             "lat": 28.5629547,
@@ -5101,6 +5309,7 @@
         {
           "place_id": "pgZh5Dc2Ok27ds83mdCSeQ%3d%3d",
           "name": "Okhla Vihar",
+          "native_name": "ओखला विहार",
           "address": "Jamia Nagar, Okhla, New Delhi, Delhi 110025",
           "coordinates": {
             "lat": 28.5610947,
@@ -5121,6 +5330,7 @@
         {
           "place_id": "FWW213Lxo02P%2fwPE8XnLNQ%3d%3d",
           "name": "Jasola Vihar Shaheen Bagh",
+          "native_name":"जसोला विहार शाहीन बाग़",
           "address": "Shaheen Bagh, Jasola Vihar, New Delhi, Delhi 110025",
           "coordinates": {
             "lat": 28.545983,
@@ -5141,6 +5351,7 @@
         {
           "place_id": "X65oVQbYOkKe7TmdhJfIpw%3d%3d",
           "name": "Kalindi Kunj",
+          "native_name": "कालिंदी कुंज",
           "address": "Madanpur Khadar, New Delhi, Delhi 110076",
           "coordinates": {
             "lat": 28.5428397,
@@ -5161,6 +5372,7 @@
         {
           "place_id": "OG5QDc6udEKVlLzmCLkmJg%3d%3d",
           "name": "Okhla Bird Sanctuary",
+          "native_name": "ओखला बर्ड सैंक्चुरी",
           "address": "Sector 94, Noida, Uttar Pradesh 201313",
           "coordinates": {
             "lat": 28.5528682,
@@ -5181,6 +5393,7 @@
         {
           "place_id": "M76MynA8VUKJtPhlKCvgbg%3d%3d",
           "name": "Botanical Garden",
+          "native_name": "बॉटेनिकल गार्डन",
           "address": "Captain Vijyant Thapar Marg, Sector 38, Noida, Uttar Pradesh 201301",
           "coordinates": {
             "lat": 28.5640378,
@@ -5207,11 +5420,13 @@
     },
     "line_9":{
       "name":"Grey Line",
+      "native_name": "ग्रे लाइन",
       "colour_code":"6c757d",
       "stations":[
         {
           "place_id": "OK8doXUQpEKkOUroK4uqLQ%3d%3d",
           "name": "Dwarka",
+          "native_name": "द्वारका",
           "address": "Nand Vihar, Sector 16A, Dwarka, New Delhi, Delhi 110078",
           "coordinates": {
             "lat": 28.6149247,
@@ -5236,6 +5451,7 @@
         {
           "place_id": "2oWbj0kLiU28AnX1kkE2Ww%3d%3d",
           "name": "Nangli",
+          "native_name": "नंगली",
           "address": "Ranaji Enclave, Masudabad, Najafgarh, Delhi, 110043",
           "coordinates": {
             "lat": 28.6172437,
@@ -5256,6 +5472,7 @@
         {
           "place_id": "a830wzC12k%2bybub7DhB%2f1g%3d%3d",
           "name": "Najafgarh",
+          "native_name": "नज़फगढ़",
           "address": "Najafgarh Extension, Najafgarh, Delhi, 110043",
           "coordinates": {
             "lat": 28.6127527,
@@ -5276,6 +5493,7 @@
         {
           "place_id": "vJ1IKPTlvE2vqzwt8weAgw%3d%3d",
           "name": "Dhansa Bus Stand",
+          "native_name": "ढाँसा बस स्टैंड",
           "address": "Najafgarh Village, Najafgarh, Delhi, 110043",
           "coordinates": {
             "lat": 28.6119047,
@@ -5296,12 +5514,14 @@
       ]
     },
     "line_10":{
-      "name":"Airport Express",
+      "name":"Airport Express - Orange Line",
+      "native_name": "एयरपोर्ट एक्सप्रेस - ऑरेंज लाइन",
       "colour_code":"fd7e14",
       "stations":[
         {
           "place_id": "sQAlAUDZJUy%2fo4UkmRHrMg%3d%3d",
           "name": "New Delhi",
+          "native_name": "नई दिल्ली",
           "address": "Ajmeri Gate, New Delhi, Delhi 110006",
           "coordinates": {
             "lat": 28.6437255,
@@ -5326,6 +5546,7 @@
         {
           "place_id": "H33GTNYZoUySzFDoDeaZuQ%3d%3d",
           "name": "Shivaji Stadium",
+          "native_name": "शिवाजी स्टेडियम",
           "address": "Hanuman Road Area, Connaught Place, New Delhi, Delhi 110001",
           "coordinates": {
             "lat": 28.6288929,
@@ -5346,6 +5567,7 @@
         {
           "place_id": "aefqK2z7bEGWtWACkTsm6Q%3d%3d",
           "name": "Dhaula Kuan",
+          "native_name": "धौला कुआँ",
           "address": "Dhaula Kuan Enclave I, Dhaula Kuan, New Delhi, Delhi 110010",
           "coordinates": {
             "lat": 28.5918947,
@@ -5371,6 +5593,7 @@
         {
           "place_id": "BjIDDlKaKUSBK%2bX6h038WQ%3d%3d",
           "name": "Delhi Aerocity",
+          "native_name": "दिल्ली एयरोसिटी",
           "address": "B-block Rd no. 6mahipalpur, village, New Delhi, Delhi 110037",
           "coordinates": {
             "lat": 28.54888,
@@ -5391,6 +5614,7 @@
         {
           "place_id": "3cEMi6bS3ESsVOCGHHmSlg%3d%3d",
           "name": "Airport (T-3)",
+          "native_name": "यरपोर्ट (टी-3)",
           "address": "Indira Gandhi International Airport, Terminal 2B Rd, हवाईअड्डा, Delhi 110037",
           "coordinates": {
             "lat": 28.5570947,
@@ -5411,6 +5635,7 @@
         {
           "place_id": "BRiyD1FtX0GQrnPoWQog9Q",
           "name": "Dwarka Sector - 21",
+          "native_name": "द्वारका सेक्टर-21",
           "address": "Metro Station-Dwarka Sector 21, Sector 21, Dwarka, New Delhi, Delhi 110077",
           "coordinates": {
             "lat": 28.5522057,
@@ -5431,17 +5656,40 @@
             "count": 2,
             "lines": ["line_3", "line_10"]
           }
+        },
+        {
+          "place_id": "ChIJ6zBrc1AaDTkROV4Ij3SoQlo",
+          "name": "Yashobhoomi Dwarka Sector-25",
+          "native_name": "यशोभूमि द्वारका सेक्टर - 25",
+          "address": "Sector 25 Dwarka, Dwarka, Delhi",
+          "coordinates": {
+            "lat": 28.55105,
+            "lng": 77.04537
+          },
+          "platforms":{
+            "line_10":{
+              "towards_start":"Platform 2",
+              "towards_end":"Platform 1"
+            }
+          },
+          "is_interchange": false,
+          "interchange_data": {
+            "count": 1,
+            "lines": ["line_10"]
+          }
         }
 
       ]
     },
     "line_11":{
       "name":"Rapid Metro - RMGL",
+      "native_name": "रैपिड मेट्रो - आरएमजीएल",
       "colour_code":"20c997",
       "stations":[
         {
           "place_id": "yjDu0FdbZU66jwkAdkKwJg%3d%3d",
           "name": "Sector 55-56",
+          "native_name": "सेक्टर 55-56",
           "address": "Sector 56, Ghata, Haryana 122011",
           "coordinates": {
             "lat": 28.42341,
@@ -5462,6 +5710,7 @@
         {
           "place_id": "f3sVgByJckeAvWBhG2RmBg%3d%3d",
           "name": "Sector-54 Chowk",
+          "native_name": "सेक्टर-54 चौक",
           "address": "Suncity, Sector 54, Gurugram, Haryana 122022",
           "coordinates": {
             "lat": 28.4326527,
@@ -5482,6 +5731,7 @@
         {
           "place_id": "vkzzj%2bQzO0KSPOFLEVxLmQ%3d%3d",
           "name": "Sector-53-54",
+          "native_name": "सेक्टर-53-54",
           "address": "DLF Phase 5, Sector 54, Gurugram, Haryana 122022",
           "platforms":{
             "line_11":{
@@ -5502,6 +5752,7 @@
         {
           "place_id": "fitQzd9sF0SJqlXD84XxtQ%3d%3d",
           "name": "Sector-42-43",
+          "native_name": "सेक्टर-42-43",
           "address": "Sector 42, Gurugram, Haryana 122002",
           "coordinates": {
             "lat": 28.4574347,
@@ -5522,6 +5773,7 @@
         {
           "place_id": "Ece3a%2f0890WPGDhVav286g%3d%3d",
           "name": "Phase-1",
+          "native_name": "फेज-1",
           "address": "Chakkarpur, Sector 28, Gurugram, Haryana 122022",
           "coordinates": {
             "lat": 28.4713,
@@ -5542,6 +5794,7 @@
         {
           "place_id": "VRuIB1RxoU2XwqE7HBc94w%3d%3d",
           "name": "Sikanderpur",
+          "native_name": "सिकंदरपुर",
           "address": "A Block, DLF Phase 1, Sector 28, Gurugram, Haryana 122022",
           "coordinates": {
             "lat": 28.4813147,
@@ -5566,6 +5819,7 @@
         {
           "place_id": "OMJko3qWKE2osMLYwOI4Zg%3d%3d",
           "name": "Phase-2",
+          "native_name": "फेज-2",
           "address": "U Block, DLF Phase 2, Sector 25, Gurugram, Haryana 122002",
           "coordinates": {
             "lat": 28.4876147,
@@ -5586,6 +5840,7 @@
         {
           "place_id": "sAo6ZDB4cUeU%2fo89cQI2DQ%3d%3d",
           "name": "Belvedere Towers",
+          "native_name": "बेलवेडरे टावर्स",
           "address": "DLF Cyber City, DLF Phase 2, Sector 25, Gurugram, Haryana 122002",
           "coordinates": {
             "lat": 28.4916447,
@@ -5606,6 +5861,7 @@
         {
           "place_id": "m1jTjjf1eUCXfsMfD5SJ2Q%3d%3d",
           "name": "Cyber City",
+          "native_name": "साइबर सिटी",
           "address": "DLF Cyber City, DLF Phase 2, Sector 24, Gurugram, Haryana 122022",
           "coordinates": {
             "lat": 28.4979747,
@@ -5626,6 +5882,7 @@
         {
           "place_id": "TfraSp4tKkCztM7X%2bnsYrw%3d%3d",
           "name": "Moulsari Avenue",
+          "native_name": "मॉलसरी एवेन्यू",
           "address": "Ambience Island, DLF Phase 3, Sector 24, Gurugram, Haryana 122010",
           "coordinates": {
             "lat": 28.5008233,
@@ -5646,6 +5903,7 @@
         {
           "place_id": "AheGlzbUPEahikBRj6lZ9g%3d%3d",
           "name": "Phase-3",
+          "native_name": "फेज-3",
           "address": "Cyber City, Road Number 19, U bLock ,DLF, DLF Phase 3, Sector 24, Gurugram, Haryana 122002",
           "coordinates": {
             "lat": 28.4936847,
@@ -5672,6 +5930,7 @@
         {
           "place_id": "SW0yoD9BfU6Vs%2bC8jbz5Fw%3d%3d",
           "name": "Noida Sector 51",
+          "native_name": "नोएडा सेक्टर 51",
           "address": "Block E, Sector 51, Noida, Uttar Pradesh 201301",
           "coordinates": {
             "lat": 28.58559,
@@ -5697,6 +5956,7 @@
         {
           "place_id": "7QbipTsbm0iaK%2bO9K2x9Dg%3d%3d",
           "name": "Noida Sector 50",
+          "native_name": "नोएडा सेक्टर 50",
           "address": "Gardenia Gateway, Sector 75, Noida, Uttar Pradesh",
           "coordinates": {
             "lat": 28.5745487,
@@ -5721,6 +5981,7 @@
         {
           "place_id": "CbqTR95npkKSOfrJZicHtg%3d%3d",
           "name": "Noida Sector 76",
+          "native_name": "नोएडा सेक्टर 76",
           "address": "Amrapali Princely Estate, Sector 76, Noida, Uttar Pradesh",
           "coordinates": {
             "lat": 28.5654527,
@@ -5741,6 +6002,7 @@
         {
           "place_id": "lstuVPzGFEGEsiSyuwRTzA%3d%3d",
           "name": "Noida Sector 101",
+          "native_name": "नोएडा सेक्टर 101",
           "address": "Sector 79, Noida, Uttar Pradesh 201305",
           "coordinates": {
             "lat": 28.5560747,
@@ -5761,6 +6023,7 @@
         {
           "place_id": "MFwg1F3GNEGNYgP7x943gQ%3d%3d",
           "name": "Noida Sector 81",
+          "native_name": "नोएडा सेक्टर 81",
           "address": "Block C, Sector 81, Noida, Uttar Pradesh 201305",
           "coordinates": {
             "lat": 28.5492637,
@@ -5781,6 +6044,7 @@
         {
           "place_id": "I6cLY%2b5xiUiDJ8YfZLGIaw%3d%3d",
           "name": "NSEZ",
+          "native_name": "एन एस ई ज़ेड",
           "address": "Block A, Yakubpur, Noida, Uttar Pradesh 201305",
           "coordinates": {
             "lat": 28.532238,
@@ -5801,6 +6065,7 @@
         {
           "place_id": "Dwul9PhV7UeN4JXYNgWp3g%3d%3d",
           "name": "Noida Sector 83",
+          "native_name": "नोएडा सेक्टर 83",
           "address": "Yakubpur, Noida, Uttar Pradesh 201305",
           "coordinates": {
             "lat": 28.5222887,
@@ -5821,6 +6086,7 @@
         {
           "place_id": "I1pu5AOydUeh%2fmp%2fcdA5cA%3d%3d",
           "name": "Noida Sector 137",
+          "native_name": "नोएडा सेक्टर 137",
           "address": "Sector 137, Noida, Uttar Pradesh 201305",
           "coordinates": {
             "lat": 28.510812,
@@ -5841,6 +6107,7 @@
         {
           "place_id": "XqtUyXvZBUi7TYOd1fg3pw%3d%3d",
           "name": "Noida Sector 142",
+          "native_name": "नोएडा सेक्टर 142",
           "address": "Sector 142, Noida, Uttar Pradesh 201305",
           "coordinates": {
             "lat": 28.499029,
@@ -5855,6 +6122,7 @@
         {
           "place_id": "GuWjMp%2f9gkaiJVr5mvfafw%3d%3d",
           "name": "Noida Sector 143",
+          "native_name": "नोएडा सेक्टर 143",
           "address": "Sector 143B, Noida, Uttar Pradesh 201306",
           "coordinates": {
             "lat": 28.4942531,
@@ -5869,6 +6137,7 @@
         {
           "place_id": "Iswn%2bsiT%2fkahI3r%2fJC4h0Q%3d%3d",
           "name": "Noida Sector 144",
+          "native_name": "नोएडा सेक्टर 144",
           "address": "Sector 144, Noida, Uttar Pradesh 201306",
           "coordinates": {
             "lat": 28.4863757,
@@ -5883,6 +6152,7 @@
         {
           "place_id": "E6kOveHU7kyTPCGkW%2bfGGw%3d%3d",
           "name": "Noida Sector 145",
+          "native_name": "नोएडा सेक्टर 145",
           "address": "Sector 145, Gohiyapur, Uttar Pradesh 201306",
           "coordinates": {
             "lat": 28.4791277,
@@ -5897,6 +6167,7 @@
         {
           "place_id": "BTWMXbIo7EqVipMpVT%2fEXA%3d%3d",
           "name": "Noida Sector 146",
+          "native_name": "नोएडा सेक्टर 146",
           "address": "Sector 146, Noida, Uttar Pradesh 201310",
           "coordinates": {
             "lat": 28.4688287,
@@ -5917,6 +6188,7 @@
         {
           "place_id": "doVtxk7gjUesOTFWvQfxvw%3d%3d",
           "name": "Noida Sector 147",
+          "native_name": "नोएडा सेक्टर 147",
           "address": "Sector 154, Noida, Uttar Pradesh 201310",
           "coordinates": {
             "lat": 28.4594297,
@@ -5937,6 +6209,7 @@
         {
           "place_id": "CCmKqJd8FEaswv%2fXIyqS8w%3d%3d",
           "name": "Noida Sector 148",
+          "native_name": "नोएडा सेक्टर 148",
           "address": "Kondli Khadar, Uttar Pradesh 201310",
           "coordinates": {
             "lat": 28.4480247,
@@ -5957,6 +6230,7 @@
         {
           "place_id": "kJGsLXTk6U2FgDiG22rdnQ%3d%3d",
           "name": "Knowledge Park II",
+          "native_name": "नॉलेज पार्क",
           "address": "Knowledge Park II, Greater Noida, Uttar Pradesh 201310",
           "coordinates": {
             "lat": 28.4568647,
@@ -5977,6 +6251,7 @@
         {
           "place_id": "x56EUMAHwE2seFsKS13XlA%3d%3d",
           "name": "Pari Chowk",
+          "native_name": "परी चौक",
           "address": "Tugalpur Village, Greater Noida, Uttar Pradesh 201310",
           "coordinates": {
             "lat": 28.4633233,
@@ -5997,6 +6272,7 @@
         {
           "place_id": "74Ax6akS%2bkakxCc5HGlHuQ%3d%3d",
           "name": "Alpha 1",
+          "native_name": "एल्फा 1",
           "address": "Block E, Alpha I, Greater Noida, Uttar Pradesh",
           "coordinates": {
             "lat": 28.4708837,
@@ -6018,6 +6294,7 @@
         {
           "place_id": "clubfQTyiE6R4vqomOQCtg%3d%3d",
           "name": "Delta 1",
+          "native_name": "Delta 1",
           "address": "Block A, Delta I, Brahmpur Rajraula Urf Nawada, Uttar Pradesh",
           "coordinates": {
             "lat": 28.4783737,
@@ -6038,6 +6315,7 @@
         {
           "place_id": "1T98%2fWNQ4UORx8cOsrAt5A%3d%3d",
           "name": "GNIDA Office",
+          "native_name": "ग्रेनो ऑफिस",
           "address": "Knowledge Park IV, Greater Noida, Uttar Pradesh 201310",
           "coordinates": {
             "lat": 28.4845327,
@@ -6057,7 +6335,8 @@
         },
         {
           "place_id": "8RVDWHwfzkehP1o9CnpQUA%3d%3d",
-          "name": "Depot",
+          "name": "Depot Station",
+          "native_name": "डिपो स्टेशन",
           "address": "Sector 34, Greater Noida, Uttar Pradesh 201310",
           "coordinates": {
             "lat": 28.4886567,

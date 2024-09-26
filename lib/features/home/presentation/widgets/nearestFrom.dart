@@ -9,12 +9,11 @@ class FromStation extends StatelessWidget {
   final String address;
   final bool isOffline;
   const FromStation(
-      {Key? key,
+      {super.key,
       required this.isUpdating,
       required this.name,
       required this.address,
-      this.isOffline = false})
-      : super(key: key);
+      this.isOffline = false});
 
   @override
   Widget build(BuildContext context) {
@@ -26,13 +25,13 @@ class FromStation extends StatelessWidget {
         Container(
           width: MediaQuery.of(context).size.width - 30,
           padding: const EdgeInsets.all(15),
-          constraints: BoxConstraints(minHeight: 120),
+          constraints: const BoxConstraints(minHeight: 120),
           decoration: BoxDecoration(
               color: const Color(0xffFF1616),
               borderRadius: BorderRadius.circular(10),
               boxShadow: [
                 BoxShadow(
-                  offset: Offset(0, 4),
+                  offset: const Offset(0, 4),
                   blurRadius: 4,
                   color: Colors.black.withOpacity(0.25),
                 )
@@ -42,7 +41,7 @@ class FromStation extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsets.only(bottom: 5),
+                padding: const EdgeInsets.only(bottom: 5),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -52,12 +51,12 @@ class FromStation extends StatelessWidget {
                             style: GoogleFonts.notoSans(
                                 color: Colors.white, fontSize: 12),
                           )
-                        : Container(
+                        : SizedBox(
                             height: 16,
                             width: MediaQuery.of(context).size.width / 4,
-                            child: LinearProgressIndicator(),
+                            child: const LinearProgressIndicator(),
                           ),
-                    Container(
+                    SizedBox(
                       height: 30,
                       width: 30,
                       child: ElevatedButton(
@@ -70,17 +69,17 @@ class FromStation extends StatelessWidget {
                             ),
                           );
                         },
-                        child: Icon(
-                          Icons.edit,
-                          size: 18,
-                        ),
                         style: ElevatedButton.styleFrom(
                             padding: EdgeInsets.zero,
-                            backgroundColor: Color(0xffFFBB23),
+                            backgroundColor: const Color(0xffFFBB23),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15),
                               //border radius equal to or more than 50% of width
                             )),
+                        child: const Icon(
+                          Icons.edit,
+                          size: 18,
+                        ),
                       ),
                     ),
                   ],
@@ -97,10 +96,10 @@ class FromStation extends StatelessWidget {
                               fontSize: 18,
                               fontWeight: FontWeight.bold),
                         )
-                      : Container(
+                      : SizedBox(
                           height: 28,
                           width: 2 * MediaQuery.of(context).size.width / 3,
-                          child: LinearProgressIndicator(),
+                          child: const LinearProgressIndicator(),
                         ),
                   isUpdating == false
                       ? Text(
@@ -109,10 +108,10 @@ class FromStation extends StatelessWidget {
                               color: Colors.white, fontSize: 16),
                         )
                       : Container(
-                          padding: EdgeInsets.only(top: 10),
+                          padding: const EdgeInsets.only(top: 10),
                           height: 16,
                           width: 2 * MediaQuery.of(context).size.width / 3,
-                          child: LinearProgressIndicator(),
+                          child: const LinearProgressIndicator(),
                         )
                 ],
               )

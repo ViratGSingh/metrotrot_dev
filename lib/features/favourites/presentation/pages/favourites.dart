@@ -9,8 +9,8 @@ import 'package:app/features/favourites/presentation/cubit/favourites_cubit.dart
 
 class FavouritesPage extends StatefulWidget {
   const FavouritesPage({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<FavouritesPage> createState() => _FavouritesPageState();
@@ -42,9 +42,9 @@ class _FavouritesPageState extends State<FavouritesPage> {
         return Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.white,
-            iconTheme: IconThemeData(color: Colors.black),
+            iconTheme: const IconThemeData(color: Colors.black),
             centerTitle: true,
-            title: Text(
+            title: const Text(
               "Favourites",
               style: TextStyle(
                   color: Colors.black,
@@ -52,7 +52,7 @@ class _FavouritesPageState extends State<FavouritesPage> {
                   fontWeight: FontWeight.bold),
             ),
             leading: IconButton(
-              icon: Icon(Icons.arrow_back),
+              icon: const Icon(Icons.arrow_back),
               onPressed: () {
                 Navigator.of(context).pop();
                 //controller.search.close();
@@ -72,7 +72,7 @@ class _FavouritesPageState extends State<FavouritesPage> {
                   title: null,
                   toolbarHeight: 0,
                   bottom: TabBar(
-                      indicatorColor: Color(0xFFFFBB23),
+                      indicatorColor: const Color(0xFFFFBB23),
                       indicatorSize: TabBarIndicatorSize.tab,
                       onTap: (value) {
                         setState(() {
@@ -85,7 +85,7 @@ class _FavouritesPageState extends State<FavouritesPage> {
                             "Sources",
                             style: TextStyle(
                                 color: tabIndex == 0
-                                    ? Color(0xFFFFBB23)
+                                    ? const Color(0xFFFFBB23)
                                     : Colors.black,
                                 fontSize: 14,
                                 fontWeight: FontWeight.bold),
@@ -96,7 +96,7 @@ class _FavouritesPageState extends State<FavouritesPage> {
                           "Destinations",
                           style: TextStyle(
                               color: tabIndex == 1
-                                  ? Color(0xFFFFBB23)
+                                  ? const Color(0xFFFFBB23)
                                   : Colors.black,
                               fontSize: 14,
                               fontWeight: FontWeight.bold),
@@ -108,7 +108,7 @@ class _FavouritesPageState extends State<FavouritesPage> {
                       ? Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: ListView(
-                            physics: NeverScrollableScrollPhysics(),
+                            physics: const NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
                             children: state.fromLocations.map((recom) {
                               String mainAddr;
@@ -136,7 +136,7 @@ class _FavouritesPageState extends State<FavouritesPage> {
                                           //   ),
                                           // );
                                         },
-                                        contentPadding: EdgeInsets.all(5),
+                                        contentPadding: const EdgeInsets.all(5),
                                         leading: const Padding(
                                           padding:
                                               EdgeInsets.only(top: 5, left: 15),
@@ -208,7 +208,7 @@ class _FavouritesPageState extends State<FavouritesPage> {
                       ? Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: ListView(
-                            physics: NeverScrollableScrollPhysics(),
+                            physics: const NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
                             children: favSavedToRecommemdations.map((recom) {
                               String mainAddr;
@@ -236,7 +236,7 @@ class _FavouritesPageState extends State<FavouritesPage> {
                                           //   ),
                                           // );
                                         },
-                                        contentPadding: EdgeInsets.all(5),
+                                        contentPadding: const EdgeInsets.all(5),
                                         leading: const Padding(
                                           padding:
                                               EdgeInsets.only(top: 5, left: 15),

@@ -6,10 +6,8 @@ import 'package:app/features/home/presentation/pages/home.dart';
 import 'package:app/features/to_search/data/models/dest_search_info.dart';
 import 'package:app/features/to_search/data/models/to_fav_recom.dart';
 import 'package:app/models/location.dart';
-import 'package:app/widgets/popups/enable_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
@@ -21,7 +19,6 @@ import 'package:app/features/to_search/data/models/dest_tap_data.dart';
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 import 'dart:math';
 import 'package:flutter/services.dart';
@@ -72,14 +69,14 @@ class ToSearchCubit extends Cubit<ToSearchState> {
     int metroLines = metroData["total_lines"];
     for (var i = 1; i <= metroLines; i++) {
       List lineData = metroData["data"]["line_${i.toString()}"]["stations"];
-      lineData.forEach((element) {
+      for (var element in lineData) {
         Map<String, dynamic> stationData = element;
         if (metroStations.contains(stationData) == false) {
           metroStations.add(stationData);
         } else {
           //print(stationData);
         }
-      });
+      }
       //metroStations.addAll(lineData);
     }
 
@@ -157,15 +154,18 @@ class ToSearchCubit extends Cubit<ToSearchState> {
           }
         });
       }
-    } on PlatformException catch (e) {
+    } on PlatformException {
       // optional error handling
     }
   }
 
   void checkUserPremiumStatus() async {
     await initPlatformState();
-    CustomerInfo purchaserInfo = await Purchases.restorePurchases();
-    _handleCustomerUpdate(purchaserInfo);
+    bool isConfigured = await Purchases.isConfigured;
+    if(isConfigured==true){
+      CustomerInfo purchaserInfo = await Purchases.restorePurchases();
+      _handleCustomerUpdate(purchaserInfo);
+    }
   }
 
   void _handleCustomerUpdate(CustomerInfo purchaserInfo) {
@@ -215,7 +215,7 @@ class ToSearchCubit extends Cubit<ToSearchState> {
     rewardedAd = null;
   }
 
-  Future<bool> checkDestSearchLimit(BuildContext context) async {
+  Future<bool> checkDestSearchLimit() async {
     final dir = await getApplicationDocumentsDirectory();
     Isar isar = Isar.getInstance() ??
         await Isar.open([
@@ -439,10 +439,10 @@ class ToSearchCubit extends Cubit<ToSearchState> {
       List<Map<String, dynamic>> metroStations = [];
       for (var i = 1; i <= metroLines; i++) {
         List lineData = metroData["data"]["line_${i.toString()}"]["stations"];
-        lineData.forEach((element) {
+        for (var element in lineData) {
           Map<String, dynamic> stationData = element;
           metroStations.add(stationData);
-        });
+        }
         //metroStations.addAll(lineData);
       }
       final coordinatesToCheck = metroStations;
@@ -456,13 +456,13 @@ class ToSearchCubit extends Cubit<ToSearchState> {
       List<String> startStations = [];
       List<String> endStations = [];
       List<String> colourCodes = [];
-      lineKeys.forEach((element) {
+      for (var element in lineKeys) {
         Map<String, dynamic> lineData = metroData["data"][element];
         lines.add(lineData["name"]);
         startStations.add(lineData["stations"][0]["name"]);
         endStations.add(lineData["stations"].last["name"]);
         colourCodes.add(lineData["colour_code"]);
-      });
+      }
 
       //Save the destination location info
       SavedDestMetro formattedDestMetro = SavedDestMetro()
@@ -555,10 +555,10 @@ class ToSearchCubit extends Cubit<ToSearchState> {
       List<Map<String, dynamic>> metroStations = [];
       for (var i = 1; i <= metroLines; i++) {
         List lineData = metroData["data"]["line_${i.toString()}"]["stations"];
-        lineData.forEach((element) {
+        for (var element in lineData) {
           Map<String, dynamic> stationData = element;
           metroStations.add(stationData);
-        });
+        }
         //metroStations.addAll(lineData);
       }
       final coordinatesToCheck = metroStations;
@@ -572,13 +572,13 @@ class ToSearchCubit extends Cubit<ToSearchState> {
       List<String> startStations = [];
       List<String> endStations = [];
       List<String> colourCodes = [];
-      lineKeys.forEach((element) {
+      for (var element in lineKeys) {
         Map<String, dynamic> lineData = metroData["data"][element];
         lines.add(lineData["name"]);
         startStations.add(lineData["stations"][0]["name"]);
         endStations.add(lineData["stations"].last["name"]);
         colourCodes.add(lineData["colour_code"]);
-      });
+      }
 
       //Save the destination location info
       SavedDestMetro formattedDestMetro = SavedDestMetro()
@@ -668,7 +668,7 @@ class ToSearchCubit extends Cubit<ToSearchState> {
       if (searchLimitChecked == false) {
         // ignore: use_build_context_synchronously
         print("check limit");
-        reachedLimit = await checkDestSearchLimit(context);
+        reachedLimit = await checkDestSearchLimit();
       }
 
       //Suggested Places
@@ -784,7 +784,7 @@ class ToSearchCubit extends Cubit<ToSearchState> {
         }
       }
 
-      await Future.delayed(Duration(milliseconds: 800));
+      await Future.delayed(const Duration(milliseconds: 800));
       emit(state.copyWith(
           stationStatus: ToSearchStationStatus.loaded,
           placeStatus: ToSearchPlaceStatus.loaded,

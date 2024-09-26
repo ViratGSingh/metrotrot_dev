@@ -90,13 +90,13 @@ class SearchAppBar extends StatelessWidget {
             borderRadius: BorderRadius.circular(30),
             boxShadow: [
               BoxShadow(
-                offset: Offset(0, 4),
+                offset: const Offset(0, 4),
                 blurRadius: 2,
                 color: Colors.black.withOpacity(0.25),
               )
             ]),
         child: Padding(
-          padding: EdgeInsets.only(left: 10),
+          padding: const EdgeInsets.only(left: 10),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -162,7 +162,7 @@ class SearchAppBar extends StatelessWidget {
                 },
               ),
               title != ""
-                  ? Container(
+                  ? SizedBox(
                     width: MediaQuery.of(context).size.width-100,
                     child: Text(
                         title ?? "",

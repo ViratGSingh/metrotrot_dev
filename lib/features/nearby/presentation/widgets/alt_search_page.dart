@@ -2,22 +2,18 @@
 import 'package:app/features/nearby/data/models/recommendation.dart';
 import 'package:app/features/nearby/presentation/pages/nearby.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:app/features/from_search/presentation/cubit/from_search_cubit.dart';
-import 'package:app/features/home/presentation/pages/home.dart';
 
 class AltSearchPage extends StatefulWidget {
   final bool isOffline;
   final String? locationName;
   final Function(String) onChanged;
   const AltSearchPage(
-      {Key? key,
+      {super.key,
       required this.onChanged,
       this.locationName,
-      this.isOffline = false})
-      : super(key: key);
+      this.isOffline = false});
 
   @override
   State<AltSearchPage> createState() => _AltSearchPageState();
@@ -43,7 +39,7 @@ class _AltSearchPageState extends State<AltSearchPage> {
           automaticallyImplyLeading: true,
           titleSpacing: 0,
           backgroundColor: Colors.white,
-          title: Container(
+          title: SizedBox(
             width: MediaQuery.of(context).size.width - 100,
             child: TextFormField(
                 controller: fromSearchController,
@@ -63,7 +59,7 @@ class _AltSearchPageState extends State<AltSearchPage> {
                 decoration: InputDecoration(
                     hintStyle: Theme.of(context).inputDecorationTheme.hintStyle,
                     hintText: "Where are you?",
-                    contentPadding: EdgeInsets.fromLTRB(0, 5, 0, 0)),
+                    contentPadding: const EdgeInsets.fromLTRB(0, 5, 0, 0)),
                 style: Theme.of(context).textTheme.bodyMedium,
                 cursorColor: Colors.blue),
           ),
@@ -81,8 +77,8 @@ class _AltSearchPageState extends State<AltSearchPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(10, 10, 0, 0),
+              const Padding(
+                padding: EdgeInsets.fromLTRB(10, 10, 0, 0),
                 child: Text(
                   "Suggested Places",
                   style: TextStyle(color: Colors.grey),
@@ -92,7 +88,7 @@ class _AltSearchPageState extends State<AltSearchPage> {
                   ? Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: ListView(
-                        physics: NeverScrollableScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                         children: recommendations.map((recom) {
                           String mainAddr;
@@ -113,7 +109,7 @@ class _AltSearchPageState extends State<AltSearchPage> {
                                   ),
                                 );
                               },
-                              contentPadding: EdgeInsets.all(5),
+                              contentPadding: const EdgeInsets.all(5),
                               leading: const Padding(
                                 padding: EdgeInsets.only(top: 5, left: 15),
                                 child: Icon(

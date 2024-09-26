@@ -1,9 +1,6 @@
-import 'dart:math';
 import 'package:app/features/directions/presentation/widgets/directions/line.dart';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 class DirectionTransit extends StatelessWidget {
   String platform;
@@ -15,8 +12,9 @@ class DirectionTransit extends StatelessWidget {
   int lineColor;
   List stations;
   int stops;
+  bool isHindi;
   DirectionTransit(
-      {Key? key,
+      {super.key,
       required this.headsign,
       required this.platform,
       required this.departure,
@@ -25,13 +23,14 @@ class DirectionTransit extends StatelessWidget {
       required this.lineColor,
       required this.duration,
       required this.stations,
-      required this.stops})
-      : super(key: key);
+      required this.stops,
+      required this.isHindi
+      });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
       ),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -41,7 +40,7 @@ class DirectionTransit extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                padding: EdgeInsets.only(right: 4),
+                padding: const EdgeInsets.only(right: 4),
                 height: 110,
                 child: Align(
                   alignment: Alignment.topCenter,
@@ -52,7 +51,7 @@ class DirectionTransit extends StatelessWidget {
                       Container(
                         //color: Colors.black,
                         height: 110,
-                        padding: EdgeInsets.only(top: 10),
+                        padding: const EdgeInsets.only(top: 10),
                         child: VerticalDivider(
                           color: Color(lineColor),
                           thickness: 8,
@@ -67,7 +66,7 @@ class DirectionTransit extends StatelessWidget {
                             color: Color(lineColor),
                             //color: Color(lineColor),
                           ),
-                          Icon(
+                          const Icon(
                             Icons.circle,
                             size: 10,
                             color: Colors.white,
@@ -87,9 +86,9 @@ class DirectionTransit extends StatelessWidget {
                     style: GoogleFonts.notoSans(
                         fontSize: 14, fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(height: 2),
+                  const SizedBox(height: 2),
                   Container(
-                    padding: EdgeInsets.all(5),
+                    padding: const EdgeInsets.all(5),
                     //height: 30,
                     decoration: BoxDecoration(
                       color: Color(lineColor),
@@ -101,15 +100,18 @@ class DirectionTransit extends StatelessWidget {
                           GoogleFonts.notoSans(fontSize: 10, color: Colors.white),
                     ),
                   ),
-                  SizedBox(height: 2),
+                  const SizedBox(height: 2),
                   Text(
+                    isHindi?
+                    "$headsign की ओर"
+                    :
                     "Towards $headsign",
                     style: GoogleFonts.notoSans(
                       fontSize: 12,
-                      color: Color.fromARGB(255, 124, 124, 124),
+                      color: const Color.fromARGB(255, 124, 124, 124),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 4,
                   ),
                   Row(
@@ -124,12 +126,12 @@ class DirectionTransit extends StatelessWidget {
                           Text(
                             " ${platform.toString()}",
                             style: GoogleFonts.notoSans(
-                                color: Color.fromARGB(255, 124, 124, 124),
+                                color: const Color.fromARGB(255, 124, 124, 124),
                                 fontSize: 12),
                           ),
                         ],
                       ),
-                      SizedBox(width: 15),
+                      const SizedBox(width: 15),
                       Row(
                         children: [
                           const Icon(
@@ -138,10 +140,10 @@ class DirectionTransit extends StatelessWidget {
                             color: Color.fromARGB(255, 157, 157, 157),
                           ),
                           Text(
-                            " ${stops.toString()} Stops",
+                            " ${stops.toString()} ${isHindi?"स्टॉप":"Stops"}",
                             style: GoogleFonts.notoSans(
                                 //fontWeight: FontWeight.bold,
-                                color: Color.fromARGB(255, 157, 157, 157),
+                                color: const Color.fromARGB(255, 157, 157, 157),
                                 fontSize: 12),
                           ),
                         ],
@@ -155,11 +157,12 @@ class DirectionTransit extends StatelessWidget {
         ),
         stations.isNotEmpty
           ? MetroLine(
+              isHindi: isHindi,
               stationsData: stations,
               lineName: currLine,
               colourCode: lineColor,
-              departure: stations.first["name"],
-              arrival: stations.last["name"],
+              departure: stations.first[isHindi?"native_name":"name"],
+              arrival: stations.last[isHindi?"native_name":"name"],
             ):const SizedBox.shrink()
         ,
         
@@ -169,7 +172,7 @@ class DirectionTransit extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Container(
-                padding: EdgeInsets.only(left: 0, right: 4),
+                padding: const EdgeInsets.only(left: 0, right: 4),
                 height: 40,
                 child: Align(
                   alignment: Alignment.topCenter,
@@ -180,7 +183,7 @@ class DirectionTransit extends StatelessWidget {
                       Container(
                         //color: Colors.black,
                         height: 40,
-                        padding: EdgeInsets.only(bottom: 10),
+                        padding: const EdgeInsets.only(bottom: 10),
                         child: VerticalDivider(
                           color: Color(lineColor),
                           thickness: 8,
@@ -195,7 +198,7 @@ class DirectionTransit extends StatelessWidget {
                             color: Color(lineColor),
                             //color: Color(lineColor),
                           ),
-                          Icon(
+                          const Icon(
                             Icons.circle,
                             size: 10,
                             color: Colors.white,

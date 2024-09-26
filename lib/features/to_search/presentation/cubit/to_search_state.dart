@@ -22,7 +22,7 @@ class ToSearchState extends Equatable {
   List<Object> get props => [locations,stations, isRewardGranted,  stationStatus, placeStatus];
 
   factory ToSearchState.initial() {
-    return ToSearchState(locations: [], stations: [], isRewardGranted: false);
+    return ToSearchState(locations: const [], stations: const [], isRewardGranted: false);
   }
 
   ToSearchState copyWith(

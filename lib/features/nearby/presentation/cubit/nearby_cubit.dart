@@ -49,14 +49,14 @@ class NearbyCubit extends Cubit<NearbyState> {
       List lineKeys = metroStation["interchange_data"]["lines"];
       List<Color> colourCodes = [];
       List<String> lineNames = [];
-      lineKeys.forEach((element) {
+      for (var element in lineKeys) {
         Map<String, dynamic> lineData = metroData["data"][element];
         int hexCode = int.parse("0xFF${lineData["colour_code"]}");
         colourCodes.add(
           Color(hexCode),
         );
         lineNames.add(lineData["name"].split(" ").first);
-      });
+      }
       int index = closestMetros.indexOf(metroStation);
 
       closestMetros[index]["distance"] =
@@ -90,10 +90,10 @@ class NearbyCubit extends Cubit<NearbyState> {
     List<Map<String, dynamic>> metroStations = [];
     for (var i = 1; i <= metroLines; i++) {
       List lineData = metroData["data"]["line_${i.toString()}"]["stations"];
-      lineData.forEach((element) {
+      for (var element in lineData) {
         Map<String, dynamic> stationData = element;
         metroStations.add(stationData);
-      });
+      }
       //metroStations.addAll(lineData);
     }
     final coordinatesToCheck = metroStations;
@@ -144,10 +144,10 @@ class NearbyCubit extends Cubit<NearbyState> {
     List<Map<String, dynamic>> metroStations = [];
     for (var i = 1; i <= metroLines; i++) {
       List lineData = metroData["data"]["line_${i.toString()}"]["stations"];
-      lineData.forEach((element) {
+      for (var element in lineData) {
         Map<String, dynamic> stationData = element;
         metroStations.add(stationData);
-      });
+      }
       //metroStations.addAll(lineData);
     }
     final coordinatesToCheck = metroStations;

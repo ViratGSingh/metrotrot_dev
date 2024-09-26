@@ -18,12 +18,12 @@ class ServiceTile extends StatelessWidget {
         decoration: BoxDecoration(boxShadow: [
           BoxShadow(
               color: Colors.black.withOpacity(0.02),
-              offset: Offset(0, 4),
+              offset: const Offset(0, 4),
               blurRadius: 4)
         ]),
         child: Container(
           decoration: BoxDecoration(
-            color: Color(0xFFFFBB23).withOpacity(0.2),
+            color: const Color(0xFFFFBB23).withOpacity(0.2),
             borderRadius: BorderRadius.circular(8),
           ),
           width: (MediaQuery.of(context).size.width - 80) / 3,
@@ -34,12 +34,12 @@ class ServiceTile extends StatelessWidget {
               Icon(
                 icon,
                 size: 40,
-                shadows: [Shadow(color: Colors.black, blurRadius: 2)],
-                color: Color(0xFFFFBB23),
+                shadows: const [Shadow(color: Colors.black, blurRadius: 2)],
+                color: const Color(0xFFFFBB23),
               ),
               Text(
                 title,
-                style: TextStyle(fontSize: 14, color: Colors.black),
+                style: const TextStyle(fontSize: 14, color: Colors.black),
               )
             ],
           ),

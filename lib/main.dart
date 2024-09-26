@@ -3,7 +3,6 @@ import 'package:app/features/favourites/presentation/cubit/favourites_cubit.dart
 import 'package:app/features/from_search/data/models/from_fav_recom.dart';
 import 'package:app/features/from_search/data/models/from_metro.dart';
 import 'package:app/features/from_search/data/models/from_search_info.dart';
-import 'package:app/features/home/presentation/widgets/onboarding/main.dart';
 import 'package:app/features/nearby/data/datasources/nearby_service.dart';
 import 'package:app/features/nearby/data/repositories/nearby_repository.dart';
 import 'package:app/features/nearby/presentation/cubit/nearby_cubit.dart';
@@ -27,11 +26,9 @@ import 'package:app/features/home/presentation/pages/home.dart';
 import 'package:app/features/to_search/data/datasources/to_search_service.dart';
 import 'package:app/features/to_search/data/repositories/from_search_repository.dart';
 import 'package:app/features/to_search/presentation/cubit/to_search_cubit.dart';
-import 'package:in_app_update/in_app_update.dart';
 import 'package:isar/isar.dart';
 import 'package:app/features/home/data/models/directions.dart';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:path_provider/path_provider.dart';
 
 void main() async {
@@ -164,7 +161,7 @@ class _MyAppState extends State<MyApp> {
             debugShowCheckedModeBanner: false,
             builder: (context, child) {
                   return MediaQuery(
-                    data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+                    data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
                     child: child!,
                   );
                 },

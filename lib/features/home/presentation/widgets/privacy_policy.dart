@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:material_floating_search_bar_2/material_floating_search_bar_2.dart';
-import 'package:app/features/from_search/data/models/from_metro.dart';
-import 'package:app/features/to_search/presentation/pages/to_search.dart';
 // Import for Android features.
-import 'package:webview_flutter_android/webview_flutter_android.dart';
 // Import for iOS features.
 import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
 
@@ -71,7 +67,7 @@ class _WebViewExampleState extends State<WebViewExample> {
               elevation: 3,
               backgroundColor: Colors.white,
               leadingWidth: 40,
-              iconTheme: IconThemeData(color: Colors.black),
+              iconTheme: const IconThemeData(color: Colors.black),
               automaticallyImplyLeading: true,
               // leading: Padding(
               //   padding: EdgeInsets.only(left: 0),

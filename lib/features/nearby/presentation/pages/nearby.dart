@@ -1,5 +1,4 @@
 import 'package:app/features/home/presentation/pages/home.dart';
-import 'package:app/features/home/presentation/widgets/search_appbar.dart';
 import 'package:app/features/nearby/presentation/cubit/nearby_cubit.dart';
 import 'package:app/features/nearby/presentation/widgets/alt_search_bar.dart';
 import 'package:flutter/material.dart';
@@ -43,7 +42,7 @@ class _NearbyPageState extends State<NearbyPage> {
             appBar: AppBar(
               backgroundColor: Colors.white,
               centerTitle: true,
-              title: Text(
+              title: const Text(
                 "Nearby Metros",
                 style: TextStyle(
                     color: Colors.black,
@@ -52,12 +51,12 @@ class _NearbyPageState extends State<NearbyPage> {
               ),
               leading: Builder(builder: (context) {
                 return IconButton(
-                  icon: Icon(Icons.arrow_back, color: Colors.black),
+                  icon: const Icon(Icons.arrow_back, color: Colors.black),
                   onPressed: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute<void>(
-                        builder: (BuildContext context) => HomePage(),
+                        builder: (BuildContext context) => const HomePage(),
                       ),
                     );
                   },
@@ -66,11 +65,11 @@ class _NearbyPageState extends State<NearbyPage> {
             ),
             body: SingleChildScrollView(
               child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 25),
+                padding: const EdgeInsets.symmetric(vertical: 25),
                 child: Column(
                   children: [
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: AltSearchAppBar(
                         title: state.locationName,
                         onChanged: context
@@ -84,9 +83,9 @@ class _NearbyPageState extends State<NearbyPage> {
                     ),
                     state.status == NearbyStatus.loaded
                         ? ListView.separated(
-                            physics: NeverScrollableScrollPhysics(),
+                            physics: const NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
-                            padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                            padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
                             itemCount: state.closestMetros.length,
                             itemBuilder: (context, index) {
                               return Padding(
@@ -99,10 +98,10 @@ class _NearbyPageState extends State<NearbyPage> {
                                     Row(
                                       children: [
                                         Padding(
-                                          padding: EdgeInsets.only(
+                                          padding: const EdgeInsets.only(
                                               top: 0, right: 10),
                                           child: CustomPaint(
-                                            size: Size(36,
+                                            size: const Size(36,
                                                 36), // specify the size of the CustomPaint
                                             painter: MultiColorCirclePainter(
                                                 colors:
@@ -114,7 +113,7 @@ class _NearbyPageState extends State<NearbyPage> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              Container(
+                                              SizedBox(
                                                 width: MediaQuery.of(context)
                                                         .size
                                                         .width /
@@ -126,7 +125,7 @@ class _NearbyPageState extends State<NearbyPage> {
                                                       fontSize: 14),
                                                 ),
                                               ),
-                                              Container(
+                                              SizedBox(
                                                 width: MediaQuery.of(context)
                                                         .size
                                                         .width /
@@ -144,7 +143,7 @@ class _NearbyPageState extends State<NearbyPage> {
                                     ),
                                     Row(
                                       children: [
-                                        Container(
+                                        SizedBox(
                                           width: MediaQuery.of(context).size.width/7,
                                           child: Text(
                                             "${state.closestMetros[index]["distance"]} Km",
@@ -163,13 +162,13 @@ class _NearbyPageState extends State<NearbyPage> {
                                           },
                                           child: Container(
                                             decoration: BoxDecoration(
-                                              color: Color(0xFFFFBB23),
+                                              color: const Color(0xFFFFBB23),
                                               borderRadius:
                                                   BorderRadius.circular(6),
                                             ),
                                             width: 36,
                                             height: 36,
-                                            child: Icon(Icons.directions,
+                                            child: const Icon(Icons.directions,
                                                 color: Colors.white),
                                           ),
                                         ),
@@ -179,20 +178,20 @@ class _NearbyPageState extends State<NearbyPage> {
                                 ),
                               );
                             },
-                            separatorBuilder: (context, index) => Divider(
+                            separatorBuilder: (context, index) => const Divider(
                               thickness: 1,
                               color: Colors.black12,
                             ),
                           )
                         : state.status == NearbyStatus.loading
-                            ? Container(
+                            ? SizedBox(
                                 height:
                                     2 * MediaQuery.of(context).size.height / 3,
                                 child: const Center(
                                   child: CircularProgressIndicator(),
                                 ),
                               )
-                            : SizedBox.shrink(),
+                            : const SizedBox.shrink(),
                   ],
                 ),
               ),

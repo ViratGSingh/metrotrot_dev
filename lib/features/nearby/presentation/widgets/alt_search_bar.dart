@@ -37,13 +37,13 @@ class AltSearchAppBar extends StatelessWidget {
             borderRadius: BorderRadius.circular(30),
             boxShadow: [
               BoxShadow(
-                offset: Offset(0, 4),
+                offset: const Offset(0, 4),
                 blurRadius: 2,
                 color: Colors.black.withOpacity(0.25),
               )
             ]),
         child: Padding(
-          padding: EdgeInsets.only(left: 10, right: 10),
+          padding: const EdgeInsets.only(left: 10, right: 10),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -81,7 +81,7 @@ class AltSearchAppBar extends StatelessWidget {
                         ),
                       );
                     },
-                    child: Container(
+                    child: SizedBox(
                       height: 46,
                       width: MediaQuery.of(context).size.width / 2 + 50,
                       child: Align(

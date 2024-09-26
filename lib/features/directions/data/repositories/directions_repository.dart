@@ -8,11 +8,11 @@ class DirectionsRepository {
 
   const DirectionsRepository({required this.directionsService});
 
-  Future<MetroRoute> fetchRoute(FromMetro fromMetro, DestMetro toMetro,
-      String destName, String destAddress, bool isOffline) async {
-    final MetroRoute route = await directionsService.getDirections(
-        fromMetro, toMetro, destName, destAddress);
+  // Future<MetroRoute> fetchRoute(FromMetro fromMetro, DestMetro toMetro,
+  //     String destName, String destAddress, bool isOffline) async {
+  //   final MetroRoute route = await directionsService.getDirections(
+  //       fromMetro, toMetro, destName, destAddress);
 
-    return route;
-  }
+  //   return route;
+  // }
 }

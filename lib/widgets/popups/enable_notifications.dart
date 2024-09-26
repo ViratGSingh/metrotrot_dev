@@ -124,7 +124,7 @@ class SearchLimitReachedPopup extends StatelessWidget {
           children: [
             Expanded(
               child: TextButton(
-                style: ButtonStyle(
+                style: const ButtonStyle(
                     // minimumSize: MaterialStateProperty.all(
                     //     Size(MediaQuery.of(context).size.width/4, 45)),
                     // maximumSize: MaterialStateProperty.all(
@@ -143,7 +143,7 @@ class SearchLimitReachedPopup extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(width: 10),
+            const SizedBox(width: 10),
             Expanded(
               child: ElevatedButton(
                 style: ButtonStyle(

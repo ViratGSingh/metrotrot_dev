@@ -61,7 +61,7 @@ class MetroDirection extends Equatable {
         arrivalName: "",
         currLineName: "",
         currLineColour: 0,
-        stations: [],
+        stations: const [],
         platform: "",
         interchange: "");
   }

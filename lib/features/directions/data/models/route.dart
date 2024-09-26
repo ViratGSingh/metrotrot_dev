@@ -24,7 +24,7 @@ class MetroRoute extends Equatable {
   List<Object> get props => [routeCost, route, data];
 
   factory MetroRoute.initial() {
-    return MetroRoute(routeCost: "", route: [], data: "", totalStations: 0, totalInterchanges: 0);
+    return MetroRoute(routeCost: "", route: const [], data: "", totalStations: 0, totalInterchanges: 0);
   }
 
   factory MetroRoute.fromMap(Map<String, dynamic> map) {

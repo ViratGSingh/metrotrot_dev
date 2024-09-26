@@ -10,18 +10,18 @@ class InfoTab extends StatelessWidget {
   final int selectedValue;
   final Function selectedFunc;
   // final bool isLoading;
- InfoTab({
-    Key? key,
+ const InfoTab({
+    super.key,
     required this.value,
     required this.selectedValue,
     required this.info,
     required this.selectedFunc
     //required this.isLoading,
-  }) : super(key: key);
+  });
   @override
   Widget build(BuildContext context) {
-  bool _isSelected = value==selectedValue?true:false;
-    print(_isSelected);
+  bool isSelected = value==selectedValue?true:false;
+    print(isSelected);
     return  ElevatedButton(
           onPressed: ()=>selectedFunc(),
           style: ButtonStyle(
@@ -29,13 +29,13 @@ class InfoTab extends StatelessWidget {
           // if (states.contains(MaterialState.pressed)) {
           //    // Change background color to red when button is pressed
           // }
-          return selectedValue==value?Color(0xFFFFBB23):Colors.white; // Default background color
+          return selectedValue==value?const Color(0xFFFFBB23):Colors.white; // Default background color
         }),
               shape: MaterialStateProperty.all(RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               )),
               fixedSize: MaterialStateProperty.all(
-                Size.fromHeight(40),
+                const Size.fromHeight(40),
               )),
           child: Text(
             info,

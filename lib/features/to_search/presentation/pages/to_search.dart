@@ -18,7 +18,7 @@ class ToSearchPage extends StatefulWidget {
   final double lng;
   final String distance;
   final String initialToSearch;
-  ToSearchPage(
+  const ToSearchPage(
       {super.key,
       this.isOffline = false,
       this.userId = "",
@@ -74,11 +74,12 @@ class _ToSearchPageState extends State<ToSearchPage> {
   @override
   void dispose() {
     _cancelTypingTimer();
+    super.dispose();
   }
 
   void _startTypingTimer() {
     _cancelTypingTimer();
-    _typingTimer = Timer(Duration(milliseconds: 400), () {
+    _typingTimer = Timer(const Duration(milliseconds: 400), () {
       _isTyping.value = false;
       context.read<ToSearchCubit>().getSearchRecommendations(
           //widget.userId,
@@ -147,7 +148,7 @@ class _ToSearchPageState extends State<ToSearchPage> {
                   ),
                   child: Row(
                     children: [
-                      SizedBox(width: 8),
+                      const SizedBox(width: 8),
                       IconButton(
                         onPressed: () {
                           Navigator.of(context).pop();
@@ -157,8 +158,8 @@ class _ToSearchPageState extends State<ToSearchPage> {
                           color: Colors.black,
                         ),
                       ),
-                      SizedBox(width: 4),
-                      Container(
+                      const SizedBox(width: 4),
+                      SizedBox(
                         width: MediaQuery.of(context).size.width - 150,
                         height: 52,
                         child: TextFormField(
@@ -182,11 +183,11 @@ class _ToSearchPageState extends State<ToSearchPage> {
                                     .inputDecorationTheme
                                     .hintStyle,
                                 hintText: "Where to?",
-                                contentPadding: EdgeInsets.fromLTRB(0, 5, 0, 0)),
+                                contentPadding: const EdgeInsets.fromLTRB(0, 5, 0, 0)),
                             style: Theme.of(context).textTheme.bodyMedium,
                             cursorColor: Colors.blue),
                       ),
-                      SizedBox(width: 6),
+                      const SizedBox(width: 6),
                       IconButton(
                           onPressed: () {
                             toSearchController.text = "";
@@ -199,7 +200,7 @@ class _ToSearchPageState extends State<ToSearchPage> {
                                 widget.lng,
                                 context);
                           },
-                          icon: Icon(Icons.cancel_outlined, color: Colors.black))
+                          icon: const Icon(Icons.cancel_outlined, color: Colors.black))
                     ],
                   ),
                 ),
@@ -230,7 +231,7 @@ class _ToSearchPageState extends State<ToSearchPage> {
                       ? Padding(
                         padding: const EdgeInsets.fromLTRB(10, 0, 10, 8),
                           child: ListView(
-                            physics: NeverScrollableScrollPhysics(),
+                            physics: const NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
                             children: state.locations.map((recom) {
                               String mainAddr;
@@ -303,7 +304,7 @@ class _ToSearchPageState extends State<ToSearchPage> {
                                             );
                                           
                                         },
-                                        contentPadding: EdgeInsets.all(5),
+                                        contentPadding: const EdgeInsets.all(5),
                                         leading: const Padding(
                                           padding:
                                               EdgeInsets.only(top: 5, left: 15),
@@ -395,7 +396,7 @@ class _ToSearchPageState extends State<ToSearchPage> {
                       ? Padding(
                         padding: const EdgeInsets.fromLTRB(10, 0, 10, 8),
                           child: ListView(
-                            physics: NeverScrollableScrollPhysics(),
+                            physics: const NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
                             children: state.stations.map((recom) {
                               String mainAddr;
@@ -451,7 +452,7 @@ class _ToSearchPageState extends State<ToSearchPage> {
                                       ),
                                     );
                                   },
-                                  contentPadding: EdgeInsets.all(5),
+                                  contentPadding: const EdgeInsets.all(5),
 
                                   leading: const Padding(
                                     padding: EdgeInsets.only(top: 5, left: 15),
@@ -469,7 +470,7 @@ class _ToSearchPageState extends State<ToSearchPage> {
                                   //     //     Color(int.parse("0xff${recom["line_color_code"]}")),
                                   //   ),
                                   // ),
-                                  subtitle: Container(
+                                  subtitle: SizedBox(
                                         width:
                                             MediaQuery.of(context).size.width -
                                                 150,
@@ -500,7 +501,7 @@ class _ToSearchPageState extends State<ToSearchPage> {
                 ],
               ),
             ):Center(
-                        child: Container(
+                        child: SizedBox(
                                   height: MediaQuery.of(context).size.height/2,
                                   child:
                                             Lottie.asset('assets/animations/dest_search_loading.json'),

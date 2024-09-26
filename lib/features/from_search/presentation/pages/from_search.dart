@@ -14,8 +14,7 @@ class FromSearchPage extends StatefulWidget {
   final bool isOffline;
   final String initialFromSearch;
   const FromSearchPage(
-      {Key? key, this.isOffline = false, this.initialFromSearch = ""})
-      : super(key: key);
+      {super.key, this.isOffline = false, this.initialFromSearch = ""});
 
   @override
   State<FromSearchPage> createState() => _FromSearchPageState();
@@ -57,11 +56,12 @@ class _FromSearchPageState extends State<FromSearchPage> {
   @override
   void dispose() {
     _cancelTypingTimer();
+    super.dispose();
   }
 
   void _startTypingTimer() {
     _cancelTypingTimer();
-    _typingTimer = Timer(Duration(milliseconds: 400), () {
+    _typingTimer = Timer(const Duration(milliseconds: 400), () {
       _isTyping.value = false;
       context
           .read<FromSearchCubit>()
@@ -124,7 +124,7 @@ class _FromSearchPageState extends State<FromSearchPage> {
                 ),
                 child: Row(
                   children: [
-                    SizedBox(width: 8),
+                    const SizedBox(width: 8),
                     IconButton(
                       onPressed: () {
                         Navigator.of(context).pop();
@@ -134,11 +134,11 @@ class _FromSearchPageState extends State<FromSearchPage> {
                         color: Colors.black,
                       ),
                     ),
-                    SizedBox(width: 4),
+                    const SizedBox(width: 4),
                     ValueListenableBuilder(
                         valueListenable: _isTyping,
                         builder: (context, value, _) {
-                          return Container(
+                          return SizedBox(
                             width: MediaQuery.of(context).size.width - 150,
                             height: 52,
                             child: TextFormField(
@@ -160,12 +160,12 @@ class _FromSearchPageState extends State<FromSearchPage> {
                                         .hintStyle,
                                     hintText: "Where are you?",
                                     contentPadding:
-                                        EdgeInsets.fromLTRB(0, 5, 0, 0)),
+                                        const EdgeInsets.fromLTRB(0, 5, 0, 0)),
                                 style: Theme.of(context).textTheme.bodyMedium,
                                 cursorColor: Colors.blue),
                           );
                         }),
-                    SizedBox(width: 6),
+                    const SizedBox(width: 6),
                     IconButton(
                         onPressed: () {
                           fromSearchController.text = "";
@@ -174,7 +174,7 @@ class _FromSearchPageState extends State<FromSearchPage> {
                               .getSearchRecommendations(
                                   fromSearchController.text, context);
                         },
-                        icon: Icon(Icons.cancel_outlined, color: Colors.black))
+                        icon: const Icon(Icons.cancel_outlined, color: Colors.black))
                   ],
                 ),
               ),
@@ -206,7 +206,7 @@ class _FromSearchPageState extends State<FromSearchPage> {
                     ? Padding(
                         padding: const EdgeInsets.fromLTRB(10, 0, 10, 8),
                         child: ListView(
-                          physics: NeverScrollableScrollPhysics(),
+                          physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           children: state.locations.map((recom) {
                             String mainAddr;
@@ -254,7 +254,7 @@ class _FromSearchPageState extends State<FromSearchPage> {
                                           ),
                                         );
                                       },
-                                      contentPadding: EdgeInsets.all(5),
+                                      contentPadding: const EdgeInsets.all(5),
                                       leading: const Padding(
                                         padding:
                                             EdgeInsets.only(top: 5, left: 15),
@@ -346,7 +346,7 @@ class _FromSearchPageState extends State<FromSearchPage> {
                     ? Padding(
                         padding: const EdgeInsets.fromLTRB(10, 0, 10, 8),
                         child: ListView(
-                          physics: NeverScrollableScrollPhysics(),
+                          physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           children: state.stations.map((recom) {
                             String mainAddr;
@@ -376,7 +376,7 @@ class _FromSearchPageState extends State<FromSearchPage> {
                                     ),
                                   );
                                 },
-                                contentPadding: EdgeInsets.all(5),
+                                contentPadding: const EdgeInsets.all(5),
 
                                 leading: const Padding(
                                   padding: EdgeInsets.only(top: 5, left: 15),
@@ -404,7 +404,7 @@ class _FromSearchPageState extends State<FromSearchPage> {
                                         color: Colors.grey.shade700),
                                   ),
                                 ),
-                                title: Container(
+                                title: SizedBox(
                                   width:
                                       MediaQuery.of(context).size.width - 150,
                                   child: Text(
@@ -423,7 +423,7 @@ class _FromSearchPageState extends State<FromSearchPage> {
               ],
             ),
           ):Center(
-                        child: Container(
+                        child: SizedBox(
                                   height: MediaQuery.of(context).size.height/2,
                                   child:
                                             Lottie.asset('assets/animations/from_search_loading.json'),

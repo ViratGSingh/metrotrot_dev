@@ -18,7 +18,7 @@ class RequestPermission extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                SizedBox.shrink(),
+                const SizedBox.shrink(),
                 Column(
                   children: [
                     Image.asset(
@@ -26,7 +26,7 @@ class RequestPermission extends StatelessWidget {
                       fit: BoxFit.cover,
                     ),
                     Padding(
-                      padding: EdgeInsets.only(bottom: 10),
+                      padding: const EdgeInsets.only(bottom: 10),
                       child: Text("Where are you?",
                           textAlign: TextAlign.center,
                           style: GoogleFonts.notoSans(
@@ -35,7 +35,7 @@ class RequestPermission extends StatelessWidget {
                               fontWeight: FontWeight.bold)),
                     ),
                     Container(
-                      padding: EdgeInsets.symmetric(horizontal: 0),
+                      padding: const EdgeInsets.symmetric(horizontal: 0),
                       width: MediaQuery.of(context).size.width,
                       child: Text(
                         "Enable precise location to find nearby metro stations automatically and identify your current station while traveling.",
@@ -51,11 +51,11 @@ class RequestPermission extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 0),
+                      padding: const EdgeInsets.symmetric(horizontal: 0),
                       child: ElevatedButton(
                         style: ButtonStyle(
                           padding: MaterialStateProperty.all<EdgeInsets>(
-                            EdgeInsets.all(0),
+                            const EdgeInsets.all(0),
                           ),
                           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
@@ -65,7 +65,7 @@ class RequestPermission extends StatelessWidget {
                           fixedSize: MaterialStateProperty.all(
                               Size(MediaQuery.of(context).size.width/2 , 52)),
                           backgroundColor: MaterialStateProperty.all(
-                            Color(0xffFFBB23),
+                            const Color(0xffFFBB23),
                           ),
                         ),
                         onPressed: () async {
@@ -113,11 +113,11 @@ class RequestPermission extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 0),
+                      padding: const EdgeInsets.symmetric(horizontal: 0),
                       child: ElevatedButton(
                         style: ButtonStyle(
                           padding: MaterialStateProperty.all<EdgeInsets>(
-                            EdgeInsets.all(0),
+                            const EdgeInsets.all(0),
                           ),
                           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
@@ -231,7 +231,7 @@ class RequestPermissionAgain extends StatelessWidget {
               onPressed: () {
                 // Get.back();
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.arrow_back,
                 color: Colors.black,
               ),
@@ -243,7 +243,7 @@ class RequestPermissionAgain extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox.shrink(),
+                const SizedBox.shrink(),
                 Column(
                   children: [
                     Image.asset("assets/images/metrotrot.png", height: 150),
@@ -272,7 +272,7 @@ class RequestPermissionAgain extends StatelessWidget {
                     ElevatedButton(
                       style: ButtonStyle(
                         padding: MaterialStateProperty.all<EdgeInsets>(
-                          EdgeInsets.all(0),
+                          const EdgeInsets.all(0),
                         ),
                         shape:
                             MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -283,7 +283,7 @@ class RequestPermissionAgain extends StatelessWidget {
                         fixedSize: MaterialStateProperty.all(
                             Size(MediaQuery.of(context).size.width - 30, 52)),
                         backgroundColor: MaterialStateProperty.all(
-                          Color(0xffFFBB23),
+                          const Color(0xffFFBB23),
                         ),
                       ),
                       onPressed: () async {

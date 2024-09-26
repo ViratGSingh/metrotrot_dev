@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 
 class InternetStatus extends StatelessWidget {
@@ -11,11 +10,11 @@ class InternetStatus extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(left: 20),
+      padding: const EdgeInsets.only(left: 20),
       child: FlutterSwitch(
           height: 28,
           width: 50,
-          duration: Duration(milliseconds: 300),
+          duration: const Duration(milliseconds: 300),
           value: isOffline == false ? true : false,
           activeColor: Colors.green,
           inactiveColor: Colors.red,

@@ -53,11 +53,11 @@ class ToSearchService {
       final responseBody = json.decode(response.body);
       final List<dynamic> locations = responseBody["predictions"];
       List<ToRecommendation> formattedLocs = [];
-      locations.forEach((element) {
+      for (var element in locations) {
         ToRecommendation formattedLoc =
             ToRecommendation.fromJson(json.encode(element));
         formattedLocs.add(formattedLoc);
-      });
+      }
 
       return formattedLocs;
     } catch (e) {
@@ -89,11 +89,11 @@ class ToSearchService {
       print(responseBody);
       final List<dynamic> locations = responseBody["predictions"];
       List<ToRecommendation> formattedLocs = [];
-      locations.forEach((element) {
+      for (var element in locations) {
         ToRecommendation formattedLoc =
             ToRecommendation.fromJson(json.encode(element));
         formattedLocs.add(formattedLoc);
-      });
+      }
 
       return formattedLocs;
     } catch (e) {

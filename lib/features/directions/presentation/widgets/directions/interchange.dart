@@ -11,8 +11,9 @@ class DirectionInter extends StatelessWidget {
   bool isBridge;
   String newStation;
   bool isBridgeEnd;
+  bool isHindi;
   DirectionInter(
-      {Key? key,
+      {super.key,
       required this.isBridge,
       required this.header,
       required this.interchangeStation,
@@ -21,17 +22,17 @@ class DirectionInter extends StatelessWidget {
       required this.prevLineColor,
       required this.currLine,
       required this.currLineColor,
-      this.isBridgeEnd=false
-      })
-      : super(key: key);
+      this.isBridgeEnd=false,
+      this.isHindi=false
+      });
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: isBridgeEnd==true?[
         Container(
-          padding: EdgeInsets.fromLTRB(10,15,0,15),
-          decoration: BoxDecoration(
+          padding: const EdgeInsets.fromLTRB(10,15,0,15),
+          decoration: const BoxDecoration(
               // image: DecorationImage(
               //     image: isBridge==false?AssetImage("assets/images/interchange.png"):AssetImage("assets/images/nearest.png"),
               //     alignment: Alignment.bottomCenter),
@@ -48,17 +49,17 @@ class DirectionInter extends StatelessWidget {
               ),
           child: Row(
             children: [
-              Icon(Icons.swap_vert),
+              const Icon(Icons.swap_vert),
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                 Text(header, style: GoogleFonts.notoSans(fontSize: 14)),
-                Container(
+                SizedBox(
                   width: 2*MediaQuery.of(context).size.width/3+40,
                   child: isBridge==false?Text(
-                    "Move towards $currLine",
+                    isHindi?"$currLine की ओर चलें":"Move towards $currLine",
                     style:
                         GoogleFonts.notoSans(fontSize: 14, fontWeight: FontWeight.bold),
                   ): Text(
-                    "Move towards $newStation",
+                    isHindi?"$newStation की ओर चलें":"Move towards $newStation",
                     style:
                         GoogleFonts.notoSans(fontSize: 14, fontWeight: FontWeight.bold),
                   ),
@@ -103,7 +104,7 @@ class DirectionInter extends StatelessWidget {
               child: Row(
                 children: [
                   Container(
-                    padding: EdgeInsets.only(right: 4),
+                    padding: const EdgeInsets.only(right: 4),
                     height: 20,
                     child: Stack(
                       alignment: Alignment.center,
@@ -126,7 +127,7 @@ class DirectionInter extends StatelessWidget {
                                 color: Color(prevLineColor),
                                 //color: Color(lineColor),
                               ),
-                              Icon(
+                              const Icon(
                                 Icons.circle,
                                 size: 10,
                                 color: Colors.white,
@@ -159,8 +160,8 @@ class DirectionInter extends StatelessWidget {
             )
       ]:[
         Container(
-          padding: EdgeInsets.fromLTRB(10,15,0,15),
-          decoration: BoxDecoration(
+          padding: const EdgeInsets.fromLTRB(10,15,0,15),
+          decoration: const BoxDecoration(
               // image: DecorationImage(
               //     image: isBridge==false?AssetImage("assets/images/interchange.png"):AssetImage("assets/images/nearest.png"),
               //     alignment: Alignment.bottomCenter),
@@ -177,17 +178,17 @@ class DirectionInter extends StatelessWidget {
               ),
           child: Row(
             children: [
-              Icon(Icons.swap_vert),
+              const Icon(Icons.swap_vert),
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                 Text(header, style: GoogleFonts.notoSans(fontSize: 14)),
-                Container(
+                SizedBox(
                   width: 2*MediaQuery.of(context).size.width/3+40,
                   child: isBridge==false?Text(
-                    "Move towards $currLine",
+                    isHindi?"$currLine की ओर चलें":"Move towards $currLine",
                     style:
                         GoogleFonts.notoSans(fontSize: 14, fontWeight: FontWeight.bold),
                   ): Text(
-                    "Move towards $newStation",
+                    isHindi?"$newStation की ओर चलें":"Move towards $newStation",
                     style:
                         GoogleFonts.notoSans(fontSize: 14, fontWeight: FontWeight.bold),
                   ),

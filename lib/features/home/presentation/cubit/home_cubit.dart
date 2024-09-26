@@ -1,6 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
-import 'dart:io';
 import 'dart:math';
 import 'package:app/features/destination/data/models/dest_metro.dart';
 import 'package:app/features/from_search/data/models/from_fav_recom.dart';
@@ -17,7 +16,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:get/get.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'package:in_app_update/in_app_update.dart';
 import 'package:isar/isar.dart';
@@ -29,7 +27,6 @@ import 'package:app/features/home/data/models/directions.dart';
 import 'package:app/features/home/data/repositories/home_repository.dart';
 import 'package:purchases_ui_flutter/purchases_ui_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:in_app_review/in_app_review.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 part 'home_state.dart';
 
@@ -182,10 +179,10 @@ Future<void> showPremiumPackage() async {
   Offerings offerings = await Purchases.getOfferings();
   if (offerings.getOffering("Premium Access")?.availablePackages!=null) {
     // Display packages for sale
-    Offering? premium_offering = offerings.getOffering("Premium Access");
-    await RevenueCatUI.presentPaywall(offering:premium_offering);
+    Offering? premiumOffering = offerings.getOffering("Premium Access");
+    await RevenueCatUI.presentPaywall(offering:premiumOffering);
   }
-} on PlatformException catch (e) {
+} on PlatformException {
 	// optional error handling
 }
 }
@@ -288,10 +285,10 @@ Future<void> showPremiumPackage() async {
     List<Map<String, dynamic>> metroStations = [];
     for (var i = 1; i <= metroLines; i++) {
       List lineData = metroData["data"]["line_${i.toString()}"]["stations"];
-      lineData.forEach((element) {
+      for (var element in lineData) {
         Map<String, dynamic> stationData = element;
         metroStations.add(stationData);
-      });
+      }
       //metroStations.addAll(lineData);
     }
     final coordinatesToCheck = metroStations;
@@ -305,13 +302,13 @@ Future<void> showPremiumPackage() async {
     List<String> startStations = [];
     List<String> endStations = [];
     List<String> colourCodes = [];
-    lineKeys.forEach((element) {
+    for (var element in lineKeys) {
       Map<String, dynamic> lineData = metroData["data"][element];
       lines.add(lineData["name"]);
       startStations.add(lineData["stations"][0]["name"]);
       endStations.add(lineData["stations"].last["name"]);
       colourCodes.add(lineData["colour_code"]);
-    });
+    }
     // final FromMetro nearbyMetro = await homeRepository.fetchNearestMetro(
     //     accPos.latitude, accPos.longitude);
     // var distance = Geolocator.distanceBetween(
@@ -457,10 +454,10 @@ Future<void> showPremiumPackage() async {
         List<Map<String, dynamic>> metroStations = [];
         for (var i = 1; i <= metroLines; i++) {
           List lineData = metroData["data"]["line_${i.toString()}"]["stations"];
-          lineData.forEach((element) {
+          for (var element in lineData) {
             Map<String, dynamic> stationData = element;
             metroStations.add(stationData);
-          });
+          }
           //metroStations.addAll(lineData);
         }
         final coordinatesToCheck = metroStations;
@@ -474,13 +471,13 @@ Future<void> showPremiumPackage() async {
         List<String> startStations = [];
         List<String> endStations = [];
         List<String> colourCodes = [];
-        lineKeys.forEach((element) {
+        for (var element in lineKeys) {
           Map<String, dynamic> lineData = metroData["data"][element];
           lines.add(lineData["name"]);
           startStations.add(lineData["stations"][0]["name"]);
           endStations.add(lineData["stations"].last["name"]);
           colourCodes.add(lineData["colour_code"]);
-        });
+        }
         // final FromMetro nearbyMetro = await homeRepository.fetchNearestMetro(
         //     accPos.latitude, accPos.longitude);
         nearbyMetro = FromMetro(
@@ -544,12 +541,12 @@ Future<void> showPremiumPackage() async {
       Map<String, dynamic> metroStation = {};
       for (var i = 1; i <= metroLines; i++) {
         List lineData = metroData["data"]["line_${i.toString()}"]["stations"];
-        lineData.forEach((element) {
+        for (var element in lineData) {
           Map<String, dynamic> stationData = element;
           if (stationData["place_id"] == placeId) {
             metroStation = stationData;
           }
-        });
+        }
         //metroStations.addAll(lineData);
       }
 
@@ -558,13 +555,13 @@ Future<void> showPremiumPackage() async {
       List<String> startStations = [];
       List<String> endStations = [];
       List<String> colourCodes = [];
-      lineKeys.forEach((element) {
+      for (var element in lineKeys) {
         Map<String, dynamic> lineData = metroData["data"][element];
         lines.add(lineData["name"]);
         startStations.add(lineData["stations"][0]["name"]);
         endStations.add(lineData["stations"].last["name"]);
         colourCodes.add(lineData["colour_code"]);
-      });
+      }
       fromName = metroStation["name"];
       fromAddress = metroStation["address"];
       nearbyMetro = FromMetro(
@@ -675,7 +672,7 @@ Future<void> showPremiumPackage() async {
         builder: (BuildContext context) {
           return PremiumPopup(
             title: "Premium",
-            popupColor: Color(0xFFFFBB23),
+            popupColor: const Color(0xFFFFBB23),
             message:
                 "Source and Destination metro station is the same, change either of them to get its metro route.",
             action: "Continue",
@@ -845,10 +842,10 @@ Future<void> showPremiumPackage() async {
         List<Map<String, dynamic>> metroStations = [];
         for (var i = 1; i <= metroLines; i++) {
           List lineData = metroData["data"]["line_${i.toString()}"]["stations"];
-          lineData.forEach((element) {
+          for (var element in lineData) {
             Map<String, dynamic> stationData = element;
             metroStations.add(stationData);
-          });
+          }
           //metroStations.addAll(lineData);
         }
         final coordinatesToCheck = metroStations;
@@ -862,13 +859,13 @@ Future<void> showPremiumPackage() async {
         List<String> startStations = [];
         List<String> endStations = [];
         List<String> colourCodes = [];
-        lineKeys.forEach((element) {
+        for (var element in lineKeys) {
           Map<String, dynamic> lineData = metroData["data"][element];
           lines.add(lineData["name"]);
           startStations.add(lineData["stations"][0]["name"]);
           endStations.add(lineData["stations"].last["name"]);
           colourCodes.add(lineData["colour_code"]);
-        });
+        }
         // final FromMetro nearbyMetro = await homeRepository.fetchNearestMetro(
         //     accPos.latitude, accPos.longitude);
         nearbyMetro = DestMetro(
@@ -929,12 +926,12 @@ Future<void> showPremiumPackage() async {
       Map<String, dynamic> metroStation = {};
       for (var i = 1; i <= metroLines; i++) {
         List lineData = metroData["data"]["line_${i.toString()}"]["stations"];
-        lineData.forEach((element) {
+        for (var element in lineData) {
           Map<String, dynamic> stationData = element;
           if (stationData["place_id"] == placeId) {
             metroStation = stationData;
           }
-        });
+        }
         //metroStations.addAll(lineData);
       }
 
@@ -943,13 +940,13 @@ Future<void> showPremiumPackage() async {
       List<String> startStations = [];
       List<String> endStations = [];
       List<String> colourCodes = [];
-      lineKeys.forEach((element) {
+      for (var element in lineKeys) {
         Map<String, dynamic> lineData = metroData["data"][element];
         lines.add(lineData["name"]);
         startStations.add(lineData["stations"][0]["name"]);
         endStations.add(lineData["stations"].last["name"]);
         colourCodes.add(lineData["colour_code"]);
-      });
+      }
 
       destName = metroStation["name"];
       destAddress = metroStation["address"];

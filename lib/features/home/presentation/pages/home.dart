@@ -1,4 +1,3 @@
-import 'package:app/features/favourites/presentation/cubit/favourites_cubit.dart';
 import 'package:app/features/favourites/presentation/pages/favourites.dart';
 import 'package:app/features/home/presentation/widgets/map.dart';
 import 'package:app/features/home/presentation/widgets/service_tile.dart';
@@ -7,13 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:app/features/from_search/presentation/pages/from_search.dart';
 import 'package:app/features/home/presentation/cubit/home_cubit.dart';
-import 'package:app/features/home/presentation/widgets/card.dart';
 import 'package:app/features/home/presentation/widgets/permissions.dart';
-import 'package:app/features/home/presentation/widgets/nearestFrom.dart';
 import 'package:app/features/home/presentation/widgets/search_appbar.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:app/features/directions/presentation/pages/directions.dart';
-import 'package:lottie/lottie.dart';
 
 class HomePage extends StatefulWidget {
   final bool isFromSearch;
@@ -55,7 +50,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
   }
 
-  bool _isSelected = false;
+  final bool _isSelected = false;
 
   @override
   Widget build(BuildContext context) {
@@ -67,13 +62,13 @@ class _HomePageState extends State<HomePage> {
         if (state.status == HomeStatus.locDenied) {
           showGeneralDialog(
             context: context,
-            transitionDuration: Duration(milliseconds: 400),
+            transitionDuration: const Duration(milliseconds: 400),
             pageBuilder: (
               BuildContext context,
               Animation<double> animation,
               Animation<double> secondaryAnimation,
             ) {
-              return RequestPermission();
+              return const RequestPermission();
             },
           );
         }
@@ -82,7 +77,7 @@ class _HomePageState extends State<HomePage> {
           Navigator.push<void>(
             context,
             MaterialPageRoute<void>(
-              builder: (BuildContext context) => FromSearchPage(
+              builder: (BuildContext context) => const FromSearchPage(
                 isOffline: true,
               ),
             ),
@@ -99,10 +94,10 @@ class _HomePageState extends State<HomePage> {
                 context.read<HomeCubit>().callMetroHelpline('tel:155370');
               },
               style: ButtonStyle(
-                  padding: MaterialStatePropertyAll(
+                  padding: const MaterialStatePropertyAll(
                     EdgeInsets.all(5),
                   ),
-                  fixedSize: MaterialStatePropertyAll(
+                  fixedSize: const MaterialStatePropertyAll(
                     Size(80, 80),
                   ),
                   shape: MaterialStatePropertyAll(
@@ -110,10 +105,10 @@ class _HomePageState extends State<HomePage> {
                       borderRadius: BorderRadius.circular(40),
                     ),
                   ),
-                  backgroundColor: MaterialStatePropertyAll(
+                  backgroundColor: const MaterialStatePropertyAll(
                     Color(0xFFFFBB23),
                   )),
-              child: Column(
+              child: const Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(Icons.support_agent, color: Colors.white),
@@ -224,7 +219,7 @@ class _HomePageState extends State<HomePage> {
                       child: Column(
                         children: [
                           //Title
-                          Row(
+                          const Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text("Dilli",
@@ -285,7 +280,7 @@ class _HomePageState extends State<HomePage> {
                                 alignment: Alignment.center,
                                 children: [
                                   Container(
-                                    padding: EdgeInsets.only(left: 0),
+                                    padding: const EdgeInsets.only(left: 0),
                                     width:
                                         1, // Width of the container holding the dots
                                     height: 80, // Height of the dotted line
@@ -306,7 +301,7 @@ class _HomePageState extends State<HomePage> {
                                           .mixpanel
                                           .track("pressedSwapBtn");
                                     },
-                                    style: ButtonStyle(
+                                    style: const ButtonStyle(
                                       padding: MaterialStatePropertyAll(
                                           EdgeInsets.zero),
                                       fixedSize: MaterialStatePropertyAll(
@@ -319,7 +314,7 @@ class _HomePageState extends State<HomePage> {
                                         CircleBorder(),
                                       ),
                                     ),
-                                    child: Icon(Icons.swap_vert,
+                                    child: const Icon(Icons.swap_vert,
                                         color: Colors.white),
                                   ),
                                 ],
@@ -341,7 +336,7 @@ class _HomePageState extends State<HomePage> {
                         ],
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     //Directions Button
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -377,7 +372,7 @@ class _HomePageState extends State<HomePage> {
                           fixedSize: MaterialStatePropertyAll(
                             Size(MediaQuery.of(context).size.width, 52),
                           ),
-                          backgroundColor: MaterialStatePropertyAll(
+                          backgroundColor: const MaterialStatePropertyAll(
                             Color(0xFFFFBB23),
                           ),
                           shape: MaterialStatePropertyAll(
@@ -386,7 +381,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                         ),
-                        child: Row(
+                        child: const Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Icon(Icons.directions, color: Colors.white),
@@ -406,7 +401,7 @@ class _HomePageState extends State<HomePage> {
                     ),
 
                     //Route Section Divider
-                    SizedBox(height: 30),
+                    const SizedBox(height: 30),
                     Divider(
                       thickness: 1,
                       color: Colors.black.withOpacity(0.10),
@@ -425,7 +420,7 @@ class _HomePageState extends State<HomePage> {
                                 fontSize: 14,
                                 fontWeight: FontWeight.bold),
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           Wrap(
                             spacing: 20,
                             runSpacing: 20,

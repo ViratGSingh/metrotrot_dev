@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 import 'dart:math';
 import 'package:app/features/destination/data/models/dest_metro.dart';
 import 'package:app/features/from_search/data/models/from_fav_recom.dart';
@@ -9,8 +8,6 @@ import 'package:app/features/home/presentation/pages/home.dart';
 import 'package:app/features/to_search/data/models/dest_search_info.dart';
 import 'package:app/features/to_search/data/models/to_fav_recom.dart';
 import 'package:app/models/location.dart';
-import 'package:app/widgets/popups/enable_notifications.dart';
-import 'package:app/widgets/popups/success.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -41,14 +38,14 @@ class FromSearchCubit extends Cubit<FromSearchState> {
     int metroLines = metroData["total_lines"];
     for (var i = 1; i <= metroLines; i++) {
       List lineData = metroData["data"]["line_${i.toString()}"]["stations"];
-      lineData.forEach((element) {
+      for (var element in lineData) {
         Map<String, dynamic> stationData = element;
         if (metroStations.contains(stationData) == false) {
           metroStations.add(stationData);
         } else {
           //print(stationData);
         }
-      });
+      }
       //metroStations.addAll(lineData);
     }
 
@@ -121,8 +118,11 @@ class FromSearchCubit extends Cubit<FromSearchState> {
 
   void checkUserPremiumStatus() async {
     await initPlatformState();
-    CustomerInfo purchaserInfo = await Purchases.restorePurchases();
-    _handleCustomerUpdate(purchaserInfo);
+    bool isConfigured = await Purchases.isConfigured;
+    if(isConfigured==true){
+      CustomerInfo purchaserInfo = await Purchases.restorePurchases();
+      _handleCustomerUpdate(purchaserInfo);
+    }
   }
 
   void _handleCustomerUpdate(CustomerInfo purchaserInfo) {
@@ -195,7 +195,7 @@ class FromSearchCubit extends Cubit<FromSearchState> {
     rewardedAd = null;
   }
 
-  Future<bool> checkFromSearchLimit(BuildContext context) async {
+  Future<bool> checkFromSearchLimit() async {
 
   final dir = await getApplicationDocumentsDirectory();
     Isar isar = Isar.getInstance() ??
@@ -287,10 +287,10 @@ class FromSearchCubit extends Cubit<FromSearchState> {
       Offerings offerings = await Purchases.getOfferings();
       if (offerings.getOffering("Premium Access")?.availablePackages != null) {
         // Display packages for sale
-        Offering? premium_offering = offerings.getOffering("Premium Access");
+        Offering? premiumOffering = offerings.getOffering("Premium Access");
 
         await RevenueCatUI.presentPaywall(
-                offering: premium_offering, displayCloseButton: true)
+                offering: premiumOffering, displayCloseButton: true)
             .then((result) {
           if (result == PaywallResult.purchased) {
             updateSearchLimit();
@@ -453,10 +453,10 @@ class FromSearchCubit extends Cubit<FromSearchState> {
       List<Map<String, dynamic>> metroStations = [];
       for (var i = 1; i <= metroLines; i++) {
         List lineData = metroData["data"]["line_${i.toString()}"]["stations"];
-        lineData.forEach((element) {
+        for (var element in lineData) {
           Map<String, dynamic> stationData = element;
           metroStations.add(stationData);
-        });
+        }
         //metroStations.addAll(lineData);
       }
       final coordinatesToCheck = metroStations;
@@ -470,13 +470,13 @@ class FromSearchCubit extends Cubit<FromSearchState> {
       List<String> startStations = [];
       List<String> endStations = [];
       List<String> colourCodes = [];
-      lineKeys.forEach((element) {
+      for (var element in lineKeys) {
         Map<String, dynamic> lineData = metroData["data"][element];
         lines.add(lineData["name"]);
         startStations.add(lineData["stations"][0]["name"]);
         endStations.add(lineData["stations"].last["name"]);
         colourCodes.add(lineData["colour_code"]);
-      });
+      }
 
       //Save the destination location info
       SavedDestMetro formattedDestMetro = SavedDestMetro()
@@ -572,10 +572,10 @@ class FromSearchCubit extends Cubit<FromSearchState> {
       List<Map<String, dynamic>> metroStations = [];
       for (var i = 1; i <= metroLines; i++) {
         List lineData = metroData["data"]["line_${i.toString()}"]["stations"];
-        lineData.forEach((element) {
+        for (var element in lineData) {
           Map<String, dynamic> stationData = element;
           metroStations.add(stationData);
-        });
+        }
         //metroStations.addAll(lineData);
       }
       final coordinatesToCheck = metroStations;
@@ -589,13 +589,13 @@ class FromSearchCubit extends Cubit<FromSearchState> {
       List<String> startStations = [];
       List<String> endStations = [];
       List<String> colourCodes = [];
-      lineKeys.forEach((element) {
+      for (var element in lineKeys) {
         Map<String, dynamic> lineData = metroData["data"][element];
         lines.add(lineData["name"]);
         startStations.add(lineData["stations"][0]["name"]);
         endStations.add(lineData["stations"].last["name"]);
         colourCodes.add(lineData["colour_code"]);
-      });
+      }
 
       //Save the destination location info
       SavedDestMetro formattedDestMetro = SavedDestMetro()
@@ -688,7 +688,7 @@ class FromSearchCubit extends Cubit<FromSearchState> {
         );
     if (searchLimitChecked == false) {
       // ignore: use_build_context_synchronously
-      reachedLimit = await checkFromSearchLimit(context);
+      reachedLimit = await checkFromSearchLimit();
     }
     //Suggested Places
     //Check for saved places
@@ -831,7 +831,7 @@ class FromSearchCubit extends Cubit<FromSearchState> {
             prediction.placeId, prediction.main, prediction.secondary);
         }
     }
-    await Future.delayed(Duration(milliseconds: 800));
+    await Future.delayed(const Duration(milliseconds: 800));
     emit(state.copyWith(
         stationStatus: FromSearchStationStatus.loaded,
         placeStatus: FromSearchPlaceStatus.loaded,

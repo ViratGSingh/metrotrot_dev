@@ -112,10 +112,10 @@ class DestMetro extends Equatable {
         vicinity: map["vicinity"],
         data: json.encode(map),
         metro: "",
-        lines: [],
-        colourCodes: [],
-        startStations: [],
-        endStations: []);
+        lines: const [],
+        colourCodes: const [],
+        startStations: const [],
+        endStations: const []);
   }
 
   factory DestMetro.fromJson(String source) =>

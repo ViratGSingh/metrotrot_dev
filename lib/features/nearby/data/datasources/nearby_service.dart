@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:app/features/from_search/data/models/from_recommendation.dart';
 import 'package:app/features/nearby/data/models/recommendation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
@@ -31,11 +30,11 @@ class NearbyService {
       final responseBody = json.decode(response.body);
       final List<dynamic> locations = responseBody["predictions"];
       List<Recommendation> formattedLocs = [];
-      locations.forEach((element) {
+      for (var element in locations) {
         Recommendation formattedLoc =
             Recommendation.fromJson(json.encode(element));
         formattedLocs.add(formattedLoc);
-      });
+      }
       return formattedLocs;
     } catch (e) {
       rethrow;
