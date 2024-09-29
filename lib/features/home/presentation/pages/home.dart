@@ -29,10 +29,10 @@ class _HomePageState extends State<HomePage> {
   bool isImageError = false;
   @override
   void initState() {
-    //WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
     context.read<HomeCubit>().initPlatformState();
     context.read<HomeCubit>().initMixpanel();
-    //});
+    });
     if (widget.isFromSearch == false && widget.placeId != "") {
       //context.read<HomeCubit>().checkUserLocation(false);
       context

@@ -41,8 +41,8 @@ class _ToSearchPageState extends State<ToSearchPage> {
 
   @override
   void initState() {
-    context.read<ToSearchCubit>().checkUserPremiumStatus();
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<ToSearchCubit>().checkUserPremiumStatus();
       context.read<ToSearchCubit>().initMixpanel();
     });
 

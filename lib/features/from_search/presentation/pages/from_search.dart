@@ -27,8 +27,8 @@ class _FromSearchPageState extends State<FromSearchPage> {
   TextEditingController fromSearchController = TextEditingController();
   @override
   void initState() {
-    context.read<FromSearchCubit>().checkUserPremiumStatus();
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<FromSearchCubit>().checkUserPremiumStatus();
       context.read<FromSearchCubit>().initMixpanel();
     });
     WidgetsBinding.instance.addPostFrameCallback((_) {

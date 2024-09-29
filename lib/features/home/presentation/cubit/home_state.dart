@@ -40,7 +40,6 @@ class HomeState extends Equatable {
         status: HomeStatus.initial,
         fromData: FromMetro.initial(),
         toData: DestMetro.initial(),
-        user: FirebaseAuth.instance.currentUser,
         selectedValue: 1,
         distance: "N/A");
   }
