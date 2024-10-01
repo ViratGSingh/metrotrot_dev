@@ -42,13 +42,13 @@ class _ToSearchPageState extends State<ToSearchPage> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<ToSearchCubit>().checkUserPremiumStatus();
+      //context.read<ToSearchCubit>().checkUserPremiumStatus();
       context.read<ToSearchCubit>().initMixpanel();
     });
 
     toSearchController.text = widget.initialToSearch;
     context.read<ToSearchCubit>().searchLimitChecked = false;
-    context.read<ToSearchCubit>().initialisationAds();
+    //context.read<ToSearchCubit>().initialisationAds();
     context.read<ToSearchCubit>().getSearchRecommendations(
         //widget.userId,
         //widget.fromMetro.placeId,

@@ -30,8 +30,10 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-    context.read<HomeCubit>().initPlatformState();
-    context.read<HomeCubit>().initMixpanel();
+      context.read<HomeCubit>().loadEnv().then((onValue){
+        //context.read<HomeCubit>().initPlatformState();
+        context.read<HomeCubit>().initMixpanel();
+      });
     });
     if (widget.isFromSearch == false && widget.placeId != "") {
       //context.read<HomeCubit>().checkUserLocation(false);

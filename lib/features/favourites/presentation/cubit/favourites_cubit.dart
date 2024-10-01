@@ -117,6 +117,7 @@ class FavouritesCubit extends Cubit<FavouritesState> {
 
   late Mixpanel mixpanel;
   Future<void> initMixpanel() async {
+    await dotenv.load(fileName: '.env');
     mixpanel = await Mixpanel.init(dotenv.env["MIXPANEL_PROJECT_ID"].toString(),
         trackAutomaticEvents: false);
   }

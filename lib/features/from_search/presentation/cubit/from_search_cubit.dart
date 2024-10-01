@@ -70,7 +70,7 @@ class FromSearchCubit extends Cubit<FromSearchState> {
 
   late Mixpanel mixpanel;
   Future<void> initMixpanel() async {
-    mixpanel = await Mixpanel.init(dotenv.env["MIXPANEL_PROJECT_ID"].toString(),
+    mixpanel = await Mixpanel.init(mixpanelProjectId,
         trackAutomaticEvents: false);
     //Track event
     mixpanel.track("openedFromSearchPage");
@@ -117,12 +117,12 @@ class FromSearchCubit extends Cubit<FromSearchState> {
   }
 
   void checkUserPremiumStatus() async {
-    await initPlatformState();
     bool isConfigured = await Purchases.isConfigured;
-    if(isConfigured==true){
-      CustomerInfo purchaserInfo = await Purchases.restorePurchases();
-      _handleCustomerUpdate(purchaserInfo);
+    if(isConfigured==false){
+      await initPlatformState(); 
     }
+    CustomerInfo purchaserInfo = await Purchases.restorePurchases();
+    _handleCustomerUpdate(purchaserInfo);
   }
 
   void _handleCustomerUpdate(CustomerInfo purchaserInfo) {
@@ -275,10 +275,18 @@ class FromSearchCubit extends Cubit<FromSearchState> {
     return reachedLimit;
   }
 
+  String mixpanelProjectId = "";
+  String revenuecatApiKey = "";
+  Future<void> loadEnv() async{
+    await dotenv.load(fileName: '.env');
+    mixpanelProjectId = dotenv.env["MIXPANEL_PROJECT_ID"].toString();
+    revenuecatApiKey = dotenv.env["REVENUECAT_API_KEY"].toString();
+  }
+
   Future<void> initPlatformState() async {
     await Purchases.setDebugLogsEnabled(true);
     PurchasesConfiguration configuration;
-    configuration = PurchasesConfiguration(dotenv.env["REVENUECAT_API_KEY"].toString());
+    configuration = PurchasesConfiguration(revenuecatApiKey);
     await Purchases.configure(configuration);
   }
 
@@ -686,10 +694,10 @@ class FromSearchCubit extends Cubit<FromSearchState> {
         ],
         directory: dir.path
         );
-    if (searchLimitChecked == false) {
-      // ignore: use_build_context_synchronously
-      reachedLimit = await checkFromSearchLimit();
-    }
+    // if (searchLimitChecked == false) {
+    //   // ignore: use_build_context_synchronously
+    //   reachedLimit = await checkFromSearchLimit();
+    // }
     //Suggested Places
     //Check for saved places
 
@@ -736,38 +744,38 @@ class FromSearchCubit extends Cubit<FromSearchState> {
     predictions.addAll(favSavedPredictions);
     predictions.addAll(nonFavSavedPredictions);
 
-    await isar.savedFromRecommendations.count().then((totalRecommendations) {
-      print("search limit checked");
-      print(searchLimitChecked);
-      if (reachedLimit == true && searchLimitChecked == false) {
-        showPremiumPackage();
-        // showDialog(
-        //     // ignore: use_build_context_synchronously
-        //     context: context,
-        //     barrierDismissible: false,
-        //     builder: (BuildContext context) {
-        //       return SearchLimitReachedPopup(
-        //         title: "Warning",
-        //         message:
-        //             "You've reached your limit for searching source locations online. Please watch a 5-second ad to unlock additional searches.", //\n\n Alternatively, you can continue searching from the $totalRecommendations saved recommendations available right now.",
-        //         action: "Back",
-        //         actionFunc: () {
-        //           Navigator.pop(context);
-        //           showRewardedAd(context);
+    // await isar.savedFromRecommendations.count().then((totalRecommendations) {
+    //   print("search limit checked");
+    //   print(searchLimitChecked);
+    //   if (reachedLimit == true && searchLimitChecked == false) {
+    //     showPremiumPackage();
+    //     // showDialog(
+    //     //     // ignore: use_build_context_synchronously
+    //     //     context: context,
+    //     //     barrierDismissible: false,
+    //     //     builder: (BuildContext context) {
+    //     //       return SearchLimitReachedPopup(
+    //     //         title: "Warning",
+    //     //         message:
+    //     //             "You've reached your limit for searching source locations online. Please watch a 5-second ad to unlock additional searches.", //\n\n Alternatively, you can continue searching from the $totalRecommendations saved recommendations available right now.",
+    //     //         action: "Back",
+    //     //         actionFunc: () {
+    //     //           Navigator.pop(context);
+    //     //           showRewardedAd(context);
 
-        //           //launchUrl(Uri.parse("https://www.threads.net/@viratgsingh"));
-        //           // Navigator.push(
-        //           //   context,
-        //           //   MaterialPageRoute<void>(
-        //           //     builder: (BuildContext context) => const HomePa,
-        //           //   ),
-        //           // );
-        //         },
-        //       );
-        //     });
-        searchLimitChecked = true;
-      }
-    });
+    //     //           //launchUrl(Uri.parse("https://www.threads.net/@viratgsingh"));
+    //     //           // Navigator.push(
+    //     //           //   context,
+    //     //           //   MaterialPageRoute<void>(
+    //     //           //     builder: (BuildContext context) => const HomePa,
+    //     //           //   ),
+    //     //           // );
+    //     //         },
+    //     //       );
+    //     //     });
+    //     searchLimitChecked = true;
+    //   }
+    // });
     //Get new places
     if (predictions.isEmpty == true && reachedLimit == false) {
       await fromSearchRepository

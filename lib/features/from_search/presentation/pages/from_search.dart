@@ -28,13 +28,15 @@ class _FromSearchPageState extends State<FromSearchPage> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<FromSearchCubit>().checkUserPremiumStatus();
-      context.read<FromSearchCubit>().initMixpanel();
+      context.read<FromSearchCubit>().loadEnv().then((onValue){
+        //context.read<FromSearchCubit>().checkUserPremiumStatus();
+        context.read<FromSearchCubit>().initMixpanel();
+      });
     });
     WidgetsBinding.instance.addPostFrameCallback((_) {
       fromSearchController.text = widget.initialFromSearch;
       context.read<FromSearchCubit>().searchLimitChecked = false;
-      context.read<FromSearchCubit>().initialisationAds();
+      //context.read<FromSearchCubit>().initialisationAds();
       context
           .read<FromSearchCubit>()
           .getSearchRecommendations(fromSearchController.text, context);

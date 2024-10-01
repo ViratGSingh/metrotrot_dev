@@ -155,7 +155,7 @@ class HomeCubit extends Cubit<HomeState> {
   // }
   late Mixpanel mixpanel;
   Future<void> initMixpanel() async {
-    mixpanel = await Mixpanel.init(dotenv.env["MIXPANEL_PROJECT_ID"].toString(),
+    mixpanel = await Mixpanel.init(mixpanelProjectId,
         trackAutomaticEvents: false);
     mixpanel.track("openedHomePage");
   }
@@ -164,15 +164,22 @@ class HomeCubit extends Cubit<HomeState> {
     final InAppReview inAppReview = InAppReview.instance;
     inAppReview.openStoreListing();
   }
+  String mixpanelProjectId = "";
+  String revenuecatApiKey = "";
+  Future<void> loadEnv() async{
+    await dotenv.load(fileName: '.env');
+    mixpanelProjectId = dotenv.env["MIXPANEL_PROJECT_ID"].toString();
+    revenuecatApiKey = dotenv.env["REVENUECAT_API_KEY"].toString();
+  }
 
 
 
-Future<void> initPlatformState() async {
-  await Purchases.setDebugLogsEnabled(true);
-  PurchasesConfiguration configuration;
-  configuration = PurchasesConfiguration(dotenv.env["REVENUECAT_API_KEY"].toString());
-  await Purchases.configure(configuration);
-}
+// Future<void> initPlatformState() async {
+//   await Purchases.setDebugLogsEnabled(true);
+//   PurchasesConfiguration configuration;
+//   configuration = PurchasesConfiguration(revenuecatApiKey);
+//   await Purchases.configure(configuration);
+// }
 
 Future<void> showPremiumPackage() async {
  try {
